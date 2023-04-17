@@ -1,0 +1,4 @@
+﻿  Globals.cpp
+C:\Users\mariodm1\Documents\GitHub\Project1-Shock-Troopers\Shock_Troopers\Shock_Troopers\src\Globals.cpp(16,31): error C2664: 'void OutputDebugStringW(LPCWSTR)': cannot convert argument 1 from 'char [4096]' to 'LPCWSTR'
+C:\Users\mariodm1\Documents\GitHub\Project1-Shock-Troopers\Shock_Troopers\Shock_Troopers\src\Globals.cpp(16,20): message : Types pointed to are unrelated; conversion requires reinterpret_cast, C-style cast or function-style cast
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\debugapi.h(62,1): message : see declaration of 'OutputDebugStringW'

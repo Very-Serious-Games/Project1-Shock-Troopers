@@ -1,18 +1,1 @@
-﻿  Application.cpp
-  Collider.cpp
-  Globals.cpp
-  Main.cpp
-  Module.cpp
-  ModuleAudio.cpp
-  ModuleCollisions.cpp
-  ModuleInput.cpp
-  ModuleParticles.cpp
-  ModulePlayer.cpp
-  ModuleRender.cpp
-  ModuleScene.cpp
-  ModuleTextures.cpp
-  ModuleWindow.cpp
-  Particle.cpp
-C:\Users\mariodm1\Documents\GitHub\Project1-Shock-Troopers\Shock_Troopers\Shock_Troopers\src\Particle.cpp(39,19): warning C4018: '>=': signed/unsigned mismatch
-  Generating Code...
-x64\Debug\Application.obj : fatal error LNK1112: module machine type 'x64' conflicts with target machine type 'x86'
+﻿x64\Debug\Application.obj : fatal error LNK1112: module machine type 'x64' conflicts with target machine type 'x86'

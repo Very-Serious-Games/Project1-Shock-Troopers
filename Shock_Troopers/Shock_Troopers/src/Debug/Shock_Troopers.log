@@ -1,31 +1,18 @@
 ﻿  Application.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   Collider.cpp
-C:\Users\mariodm1\Documents\GitHub\Project1-Shock-Troopers\Shock_Troopers\Shock_Troopers\lib\SDL\include\SDL_stdinc.h(50,12): fatal error C1083: Cannot open include file: 'stddef.h': No such file or directory
   Globals.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleAudio.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleCollisions.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleParticles.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleScene.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleInput.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModulePlayer.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleRender.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleTextures.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   ModuleWindow.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   Main.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   Module.cpp
-C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
   Particle.cpp
-C:\Users\mariodm1\Documents\GitHub\Project1-Shock-Troopers\Shock_Troopers\Shock_Troopers\lib\SDL\include\SDL_stdinc.h(50,12): fatal error C1083: Cannot open include file: 'stddef.h': No such file or directory
+C:\Users\mariodm1\Documents\GitHub\Project1-Shock-Troopers\Shock_Troopers\Shock_Troopers\src\Particle.cpp(39,19): warning C4018: '>=': signed/unsigned mismatch
   Generating Code...
+  Shock_Troopers.vcxproj -> C:\Users\mariodm1\Documents\GitHub\Project1-Shock-Troopers\Shock_Troopers\Debug\Shock_Troopers.exe

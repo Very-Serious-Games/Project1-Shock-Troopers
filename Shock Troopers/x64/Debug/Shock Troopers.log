@@ -1,0 +1,53 @@
+﻿  Application.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleInput.h(6,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_scancode.h': No such file or directory
+  Collider.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Collider.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_Rect.h': No such file or directory
+  Enemy.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  Enemy_BrownShip.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  Enemy_Mech.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  Enemy_RedBird.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  Globals.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Globals.cpp(16,2): error C2664: 'void OutputDebugStringW(LPCWSTR)': el argumento 1 no puede convertirse de 'char [4096]' a 'LPCWSTR'
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Globals.cpp(16,20): message : Los tipos señalados no están relacionados; la conversión requiere reinterpret_cast, conversión de estilo de C o conversión de estilo de función entre paréntesis
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.22000.0\um\debugapi.h(61,1): message : vea la declaración de 'OutputDebugStringW'
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Globals.cpp(16,2): message : al hacer coincidir la lista de argumentos '(char [4096])'
+  Main.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Main.cpp(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL.h': No such file or directory
+  Module.cpp
+  ModuleAudio.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleAudio.cpp(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL.h': No such file or directory
+  ModuleCollisions.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Collider.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_Rect.h': No such file or directory
+  ModuleEnemies.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleRender.h(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_Rect.h': No such file or directory
+  ModuleFadeToBlack.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleFadeToBlack.h(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL\include\SDL_rect.h': No such file or directory
+  ModuleFonts.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleRender.h(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_Rect.h': No such file or directory
+  ModuleInput.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleInput.h(6,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_scancode.h': No such file or directory
+  ModuleParticles.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  ModulePlayer.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  ModuleRender.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleRender.h(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_Rect.h': No such file or directory
+  ModuleTextures.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleRender.h(5,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_Rect.h': No such file or directory
+  ModuleWindow.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\ModuleWindow.cpp(6,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL.h': No such file or directory
+  Generando código...
+  Compilando...
+  Particle.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  Path.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  SceneIntro.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  SceneLevel1.cpp
+C:\Users\sunsh\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal  error C1083: No se puede abrir el archivo incluir: 'SDL/include/SDL_rect.h': No such file or directory
+  Generando código...

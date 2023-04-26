@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\app">
+      <UniqueIdentifier>{cc190e25-db75-4d62-8c6b-3139194b75cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities">
+      <UniqueIdentifier>{7fa2a9aa-1ec5-4d85-9d6b-6a74e14c0433}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules">
+      <UniqueIdentifier>{ecde2233-74c6-4efb-b0e3-9e45238137a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\utils">
+      <UniqueIdentifier>{99ec8950-4cdd-443f-9d9d-17c7e71e57b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\entities\enemies">
+      <UniqueIdentifier>{f0dd0c07-ce57-4da2-95a1-fba11ec081b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\core">
+      <UniqueIdentifier>{3bfe48a9-c6e7-4911-b408-83842981b87e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\modules\gameplay">
+      <UniqueIdentifier>{14fbb0d1-34b7-46f5-b9ef-40f247b3a8ba}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Application.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MemLeaks.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Globals.h">
+      <Filter>Source Files\app</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Particle.h">
+      <Filter>Source Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_RedBird.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_BrownShip.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_Mech.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleAudio.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleCollisions.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleFadeToBlack.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleFonts.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleInput.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleParticles.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleRender.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleTextures.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleWindow.h">
+      <Filter>Source Files\modules\core</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Module.h">
+      <Filter>Source Files\modules</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleEnemies.h">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModulePlayer.h">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneIntro.h">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SceneLevel1.h">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Animation.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Collider.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\p2Point.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Path.h">
+      <Filter>Source Files\utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Application.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Globals.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp">
+      <Filter>Source Files\app</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_BrownShip.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Mech.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_RedBird.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleAudio.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleCollisions.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleFadeToBlack.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleFonts.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleInput.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleParticles.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleRender.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleTextures.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleWindow.cpp">
+      <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Module.cpp">
+      <Filter>Source Files\modules</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleEnemies.cpp">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModulePlayer.cpp">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneIntro.cpp">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneLevel1.cpp">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Collider.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Path.cpp">
+      <Filter>Source Files\utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

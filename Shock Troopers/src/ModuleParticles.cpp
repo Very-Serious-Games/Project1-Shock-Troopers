@@ -22,6 +22,7 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
+	// Load particles spritesheet
 	texture = App->textures->Load("Assets/Sprites/particles.png");
 
 	// Explosion particle
@@ -34,6 +35,7 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
+	// Laser particle
 	laser.anim.PushBack({ 232, 103, 16, 12 });
 	laser.anim.PushBack({ 249, 103, 16, 12 });
 	laser.speed.x = 5;

@@ -23,7 +23,7 @@ Debug > Shock Troopers Debug Properties > Debugging > Working Directory > $(Solu
 ```
 ## References
 
-![winkawaks](https://www.winkawaks.org/index.html)
+![winkawaks](https://www.winkawaks.org/index.htm)
 
 ## License
 

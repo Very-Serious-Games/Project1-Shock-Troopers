@@ -29,7 +29,12 @@ public:
 
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* bgTexture = nullptr;
+	SDL_Texture* textures = nullptr;
+	SDL_Texture* background = nullptr;
+	Animation milkyAnimation;
+	Animation smokeAnimation;
+	//Animation introAnimation2 = nullptr;
+	//Animation introAnimation3 = nullptr;
 };
 
 #endif

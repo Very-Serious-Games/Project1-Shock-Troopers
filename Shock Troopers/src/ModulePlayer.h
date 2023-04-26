@@ -36,8 +36,14 @@ public:
 	// Position of the player in the map
 	iPoint position;
 
+	iPoint direccion;
+
+	iPoint diferencia;
+
+	bool roll = false;
+
 	// The speed in which we move the player (pixels per frame)
-	int speed = 1;
+	iPoint speed = iPoint(1,1);
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;

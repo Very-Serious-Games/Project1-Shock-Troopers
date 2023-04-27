@@ -1,19 +1,19 @@
-#ifndef __SCENE_INTRO_H__
-#define __SCENE_INTRO_H__
+#ifndef __SCENE_MENU_H__
+#define __SCENE_MENU_H__
 
-#include "Module.h"
-#include "Animation.h"
+#include "../Shock Troopers/src/Module.h"
+#include "../Shock Troopers/src/Animation.h"
 
 struct SDL_Texture;
 
-class SceneIntro : public Module
+class SceneMenu : public Module
 {
 public:
 	//Constructor
-	SceneIntro(bool startEnabled);
+	SceneMenu(bool startEnabled);
 
 	//Destructor
-	~SceneIntro();
+	~SceneMenu();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background
@@ -27,16 +27,9 @@ public:
 	// Performs the render call of all the parts of the scene's background
 	Update_Status PostUpdate() override;
 
-	bool CleanUp();
-
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* textures = nullptr;
-	SDL_Texture* background = nullptr;
-	Animation milkyAnimation;
-	Animation smokeAnimation;
-	//Animation introAnimation2 = nullptr;
-	//Animation introAnimation3 = nullptr;
+	SDL_Texture* sprites = nullptr;
 };
 
 #endif

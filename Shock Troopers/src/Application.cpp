@@ -28,6 +28,7 @@ Application::Application()
 
 	modules[4] =	sceneIntro =	new SceneIntro(true);
 	modules[5] =	sceneLevel_1 =	new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[13] = sceneMenu = new SceneMenu(false);
 	modules[6] =	player =		new ModulePlayer(false);	//Player starts disabled
 	modules[7] =	particles =		new ModuleParticles(true);
 	modules[8] =	enemies =		new ModuleEnemies(false);	//Enemies start disabled

@@ -44,14 +44,27 @@ bool Particle::Update()
 			ret = false;
 
 		// Update the position in the screen
-		position.x += speed.x;
-		position.y += speed.y;
+		if (granada) {
+			position.x += speed.x;
+			position.y += parabole(inicio);
+		}else{
+			position.x += speed.x;
+			position.y += speed.y;
+		}
+
 
 		if (collider != nullptr)
 			collider->SetPos(position.x, position.y);
 	}
 
 	return ret;
+}
+
+int Particle::parabole(int x) {
+	int y = 0;
+	y =  x ^ 2 - 4 * x;
+	inicio++;
+	return -y;
 }
 
 void Particle::SetToDelete()

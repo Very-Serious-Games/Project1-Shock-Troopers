@@ -1,8 +1,8 @@
 #ifndef __SCENE_MENU_H__
 #define __SCENE_MENU_H__
 
-#include "../Shock Troopers/src/Module.h"
-#include "../Shock Troopers/src/Animation.h"
+#include "Module.h"
+#include "Animation.h"
 
 struct SDL_Texture;
 
@@ -30,6 +30,9 @@ public:
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* sprites = nullptr;
+	SDL_Rect background;
+	SDL_Rect playerSelectText;
+	SDL_Rect characterSelector;
 };
 
 #endif

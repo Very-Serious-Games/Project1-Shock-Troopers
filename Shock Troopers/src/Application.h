@@ -2,7 +2,7 @@
 #define __APPLICATION_H__
 
 #include "Globals.h"
-#include "../SceneMenu.h"
+#include "SceneMenu.h"
 
 #define NUM_MODULES 14
 

@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="SceneMenu.h" />
+    <ClInclude Include="src\SceneMenu.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\Application.h" />
     <ClInclude Include="src\Collider.h" />
@@ -48,7 +48,7 @@
     <ClInclude Include="src\SceneLevel1.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="SceneMenu.cpp" />
+    <ClCompile Include="src\SceneMenu.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Collider.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
@@ -85,7 +85,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">

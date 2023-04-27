@@ -21,22 +21,23 @@ Application::Application()
 	// It will define the order in which Pre/Update/Post will be called
 	// Render should always be last, as our last action should be updating the screen
 
-	modules[0] =	window =		new ModuleWindow(true);
-	modules[1] =	input =			new ModuleInput(true);
-	modules[2] =	textures =		new ModuleTextures(true);
-	modules[3] =	audio =			new ModuleAudio(true);
+	modules[0]	=	window			=	new ModuleWindow(true);
+	modules[1]	=	input			=	new ModuleInput(true);
+	modules[2]	=	textures		=	new ModuleTextures(true);
+	modules[3]	=	audio			=	new ModuleAudio(true);
 
-	modules[4] =	sceneIntro =	new SceneIntro(true);
-	modules[5] =	sceneLevel_1 =	new SceneLevel1(false);		//Gameplay scene starts disabled
-	modules[13] = sceneMenu = new SceneMenu(false);
-	modules[6] =	player =		new ModulePlayer(false);	//Player starts disabled
-	modules[7] =	particles =		new ModuleParticles(true);
-	modules[8] =	enemies =		new ModuleEnemies(false);	//Enemies start disabled
+	modules[4]	=	sceneIntro		=	new SceneIntro(true);
+	modules[5]	=	sceneLevel_1	=	new SceneLevel1(false);		//Gameplay scene starts disabled
+	modules[6]	=	sceneMenu		=	new SceneMenu(false);		//Menu scene starts disabled
 
-	modules[9] =	collisions =	new ModuleCollisions(true);
-	modules[10] =	fade =			new ModuleFadeToBlack(true);
-	modules[11] =	fonts =			new ModuleFonts(true);
-	modules[12] =	render =		new ModuleRender(true);
+	modules[7]	=	player			=	new ModulePlayer(false);	//Player starts disabled
+	modules[8]	=	particles		=	new ModuleParticles(true);
+	modules[9]	=	enemies			=	new ModuleEnemies(false);	//Enemies start disabled
+
+	modules[10]	=	collisions		=	new ModuleCollisions(true);
+	modules[11] =	fade			=	new ModuleFadeToBlack(true);
+	modules[12] =	fonts			=	new ModuleFonts(true);
+	modules[13] =	render			=	new ModuleRender(true);
 }
 
 Application::~Application()

@@ -37,10 +37,13 @@ public:
 
 	int currentCharacter = 0;		// 0 = Jackal, 1 = Milky, 2 = Loki, 3 = Southern Cross, 4 = Marie Bee, 5 = Rio, 6 = Maru, 7 = Big Mama
 	SDL_Rect characterSelected;
-	int characterPositions[8][2];	// 8 characters, 2 positions
 
 	Animation selectionAnimation;
 	int animationPositions[8][2];	// 8 characters, 2 positions
+
+	SDL_Rect gunSelected;
+
+	SDL_Rect availableCharacterMiky;
 };
 
 #endif

@@ -39,6 +39,18 @@ SceneMenu::SceneMenu(bool startEnabled) : Module(startEnabled)
 	characterSelected.w = 59;
 	characterSelected.h = 59;
 
+	// gun selected default
+	gunSelected.x = 159;
+	gunSelected.y = 264;
+	gunSelected.w = 27;
+	gunSelected.h = 31;
+
+	// available character Miky
+	availableCharacterMiky.x = 30;
+	availableCharacterMiky.y = 301;
+	availableCharacterMiky.w = 29;
+	availableCharacterMiky.h = 29;
+
 	// Selection animation
 	int selectionWidht = 32, selectioHeight = 32;
 
@@ -98,7 +110,8 @@ Update_Status SceneMenu::Update()
 {
 	selectionAnimation.Update();
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+	// Pressing SPACE goes to the level 1 if current character is Milky
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN and currentCharacter == 1)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
 	}
@@ -122,56 +135,81 @@ Update_Status SceneMenu::PostUpdate()
 	App->render->Blit(sprites, 40, 40, &characterSelector, 1.0f);
 	App->render->Blit(sprites, 65, 15, &playerSelectText, 1.0f);
 	App->render->Blit(sprites, 156, 47, &charactersAvatar, 1.0f);
+	App->render->Blit(sprites, 186, 47, &availableCharacterMiky, 1.0f);
 
 	// Menu selection logic
 	switch (currentCharacter) {
 		case 0:
 			characterSelected.x = 262;
 			characterSelected.y = 239;
+			gunSelected.x = 128;
+			gunSelected.y = 264;
 			App->render->Blit(sprites, animationPositions[0][0], animationPositions[0][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 122, 54, &gunSelected, 1.0f);
 			break;
 		case 1:
 			characterSelected.x = 327;
 			characterSelected.y = 239;
+			gunSelected.x = 159;
+			gunSelected.y = 264;
 			App->render->Blit(sprites, animationPositions[1][0], animationPositions[1][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 122, 54, &gunSelected, 1.0f);
 			break;
 		case 2:
 			characterSelected.x = 392;
 			characterSelected.y = 239;
+			gunSelected.x = 187;
+			gunSelected.y = 264;
 			App->render->Blit(sprites, animationPositions[2][0], animationPositions[2][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 122, 55, &gunSelected, 1.0f);
 			break;
 		case 3:
 			characterSelected.x = 457;
 			characterSelected.y = 239;
+			gunSelected.x = 215;
+			gunSelected.y = 264;
 			App->render->Blit(sprites, animationPositions[3][0], animationPositions[3][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 122, 55, &gunSelected, 1.0f);
 			break;
 		case 4:
 			characterSelected.x = 262;
 			characterSelected.y = 304;
+			gunSelected.x = 128;
+			gunSelected.y = 299;
 			App->render->Blit(sprites, animationPositions[4][0], animationPositions[4][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 120, 54, &gunSelected, 1.0f);
 			break;
 		case 5:
 			characterSelected.x = 327;
 			characterSelected.y = 304;
+			gunSelected.x = 159;
+			gunSelected.y = 299;
 			App->render->Blit(sprites, animationPositions[5][0], animationPositions[5][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 120, 54, &gunSelected, 1.0f);
 			break;
 		case 6:
 			characterSelected.x = 392;
 			characterSelected.y = 304;
+			gunSelected.x = 189;
+			gunSelected.y = 299;
 			App->render->Blit(sprites, animationPositions[6][0], animationPositions[6][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 122, 52, &gunSelected, 1.0f);
 			break;
 		case 7:
 			characterSelected.x = 457;
 			characterSelected.y = 304;
+			gunSelected.x = 215;
+			gunSelected.y = 299;
 			App->render->Blit(sprites, animationPositions[7][0], animationPositions[7][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
+			App->render->Blit(sprites, 120, 54, &gunSelected, 1.0f);
 			break;
 	default:
 		if (currentCharacter > 7) {

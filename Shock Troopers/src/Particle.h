@@ -26,7 +26,7 @@ public:
 	// Sets flag for deletion and for the collider aswell
 	void SetToDelete();
 
-	int parabole(int x);
+	int parabole(int x, int direction_x);
 
 public:
 	// Defines the position in the screen

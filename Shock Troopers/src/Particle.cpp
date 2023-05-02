@@ -45,8 +45,10 @@ bool Particle::Update()
 
 		// Update the position in the screen
 		if (granada) {
-			position.x += speed.x;
-			position.y += parabole(inicio);
+			position.x += speed.x * 2;
+			int test = parabole(inicio, 1);
+			//TODO añadir direccion
+			position.y += test;
 		}else{
 			position.x += speed.x;
 			position.y += speed.y;
@@ -60,11 +62,17 @@ bool Particle::Update()
 	return ret;
 }
 
-int Particle::parabole(int x) {
-	int y = 0;
-	y =  x ^ 2 - 4 * x;
+int Particle::parabole(int x, int direction_x) {
+	const float a = 1.0f / 32.0f;  // Coeficiente de la parábola
+	const int b = 3;              // Ajuste de la altura de la parábola
+	const int c = 2;              // Ajuste de la distancia de la parábola
+	int y = -a * (x - c) * (x - c) + b;
+	if (direction_x == 1) {
+		// Si el movimiento es hacia la derecha, ajustamos el signo de la parábola
+		y = -y;
+	}
 	inicio++;
-	return -y;
+	return y;
 }
 
 void Particle::SetToDelete()

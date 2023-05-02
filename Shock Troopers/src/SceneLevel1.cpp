@@ -9,12 +9,10 @@
 #include "ModulePlayer.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
-{
-}
+{}
 
 SceneLevel1::~SceneLevel1()
-{
-}
+{}
 
 bool SceneLevel1::Start()
 {

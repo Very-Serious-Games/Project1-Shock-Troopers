@@ -44,6 +44,8 @@ public:
 	SDL_Rect gunSelected;
 
 	SDL_Rect availableCharacterMiky;
+
+	SDL_Rect characterName;
 };
 
 #endif

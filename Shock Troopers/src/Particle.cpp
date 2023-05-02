@@ -63,12 +63,11 @@ bool Particle::Update()
 }
 
 int Particle::parabole(int x, int direction_x) {
-	const float a = 1.0f / 32.0f;  // Coeficiente de la parábola
-	const int b = 3;              // Ajuste de la altura de la parábola
-	const int c = 2;              // Ajuste de la distancia de la parábola
+	const float a = 1.0f / 32.0f;  
+	const int b = 3;              
+	const int c = 1;              
 	int y = -a * (x - c) * (x - c) + b;
 	if (direction_x == 1) {
-		// Si el movimiento es hacia la derecha, ajustamos el signo de la parábola
 		y = -y;
 	}
 	inicio++;

@@ -25,15 +25,15 @@ bool SceneLevel1::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/background.png");
+	bgTexture = App->textures->Load("Assets/Sprites/background_mountain.png");
 	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
 	//Bottomside collider
-	App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
 
 	//First two columns colliders
-	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 0, 0, 11, 1909 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 493-11, 0, 11, 1909 }, Collider::Type::WALL);
 
 	// Enemies ---
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 600, 80);
@@ -64,7 +64,9 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	App->render->camera.x += 3;
+
+	App->render->camera.x = App->player->position.x *3 - 400;
+	App->render->camera.y = App->player->position.y * 3 - 300;
 
 	return Update_Status::UPDATE_CONTINUE;
 }

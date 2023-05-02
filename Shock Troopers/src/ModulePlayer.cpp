@@ -47,8 +47,8 @@ bool ModulePlayer::Start()
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
-	position.x = 150;
-	position.y = 120;
+	position.x = 220;
+	position.y = 1870;
 
 	destroyed = false;
 
@@ -69,10 +69,6 @@ Update_Status ModulePlayer::Update()
 {
 	int initialX = position.x;
 	int initialY = position.y;
-
-	// Moving the player with the camera scroll
-
-	position.x += 1;
 
 	if (roll) {
 		position.x += direccion.x * 3;
@@ -117,7 +113,7 @@ Update_Status ModulePlayer::Update()
 		roll = true;
 	}
 
-	direccion.x = -(initialX + 1 - position.x);
+	direccion.x = -(initialX - position.x);
 	direccion.y = -(initialY - position.y);
 
 	diferencia.x = position.x;

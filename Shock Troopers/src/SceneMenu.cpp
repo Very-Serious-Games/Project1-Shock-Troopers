@@ -33,11 +33,11 @@ SceneMenu::SceneMenu(bool startEnabled) : Module(startEnabled)
 	charactersAvatar.w = 121;
 	charactersAvatar.h = 60;
 
-	// character selected Milky
-	characterSelectedMilky.x = 327;
-	characterSelectedMilky.y = 239;
-	characterSelectedMilky.w = 59;
-	characterSelectedMilky.h = 59;
+	// character selected default
+	characterSelected.x = 262;
+	characterSelected.y = 239;
+	characterSelected.w = 59;
+	characterSelected.h = 59;
 
 	// Selection animation
 	int selectionWidht = 32, selectioHeight = 32;
@@ -53,8 +53,6 @@ SceneMenu::SceneMenu(bool startEnabled) : Module(startEnabled)
 	selectionAnimation.speed = 0.06f;
 
 	// store the animation positions
-	
-
 	animationPositions[0][0] = 153;
 	animationPositions[0][1] = 45;
 	animationPositions[1][0] = 185;
@@ -72,7 +70,6 @@ SceneMenu::SceneMenu(bool startEnabled) : Module(startEnabled)
 	animationPositions[7][0] = 249;
 	animationPositions[7][1] = 77;
 
-
 }
 
 SceneMenu::~SceneMenu()
@@ -86,6 +83,8 @@ bool SceneMenu::Start()
 	LOG("Loading menu assets");
 
 	bool ret = true;
+
+	currentCharacter = 0; // reset the selected character to Jackal
 
 	sprites = App->textures->Load("Assets/Sprites/characterSelection.png");
 
@@ -123,56 +122,56 @@ Update_Status SceneMenu::PostUpdate()
 	App->render->Blit(sprites, 40, 40, &characterSelector, 1.0f);
 	App->render->Blit(sprites, 65, 15, &playerSelectText, 1.0f);
 	App->render->Blit(sprites, 156, 47, &charactersAvatar, 1.0f);
-	App->render->Blit(sprites, 59, 56, &characterSelectedMilky, 1.0f);
 
-	// character 1
-	//App->render->Blit(sprites, 153, 45, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
-	// character 2
-	//App->render->Blit(sprites, 185, 45, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
-	// character 3
-	//App->render->Blit(sprites, 217, 45, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
-	// character 4
-	//App->render->Blit(sprites, 249, 45, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
-	// character 5
-	//App->render->Blit(sprites, 153, 77, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
-	// character 6
-	//App->render->Blit(sprites, 185, 77, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
-	// character 7
-	//App->render->Blit(sprites, 217, 77, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
-	// character 8
-	//App->render->Blit(sprites, 249, 77, &(selectionAnimation.GetCurrentFrame()), 1.0f);
-
+	// Menu selection logic
 	switch (currentCharacter) {
 		case 0:
+			characterSelected.x = 262;
+			characterSelected.y = 239;
 			App->render->Blit(sprites, animationPositions[0][0], animationPositions[0][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 		case 1:
+			characterSelected.x = 327;
+			characterSelected.y = 239;
 			App->render->Blit(sprites, animationPositions[1][0], animationPositions[1][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 		case 2:
+			characterSelected.x = 392;
+			characterSelected.y = 239;
 			App->render->Blit(sprites, animationPositions[2][0], animationPositions[2][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 		case 3:
+			characterSelected.x = 457;
+			characterSelected.y = 239;
 			App->render->Blit(sprites, animationPositions[3][0], animationPositions[3][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 		case 4:
+			characterSelected.x = 262;
+			characterSelected.y = 304;
 			App->render->Blit(sprites, animationPositions[4][0], animationPositions[4][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 		case 5:
+			characterSelected.x = 327;
+			characterSelected.y = 304;
 			App->render->Blit(sprites, animationPositions[5][0], animationPositions[5][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 		case 6:
+			characterSelected.x = 392;
+			characterSelected.y = 304;
 			App->render->Blit(sprites, animationPositions[6][0], animationPositions[6][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 		case 7:
+			characterSelected.x = 457;
+			characterSelected.y = 304;
 			App->render->Blit(sprites, animationPositions[7][0], animationPositions[7][1], &(selectionAnimation.GetCurrentFrame()), 1.0f);
+			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f);
 			break;
 	default:
 		if (currentCharacter > 7) {

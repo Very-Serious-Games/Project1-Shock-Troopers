@@ -143,6 +143,14 @@ Update_Status ModulePlayer::Update()
 
 	}
 
+	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
+
+		Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+		newParticle->granada = true;
+		newParticle->collider->AddListener(this);
+		App->audio->PlayFx(laserFx);
+	}
+
 	collider->SetPos(position.x, position.y);
 
 	currentAnimation->Update();

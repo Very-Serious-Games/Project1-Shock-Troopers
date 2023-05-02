@@ -1,0 +1,51 @@
+﻿  Application.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Collider.cpp
+C:\Users\miquelar3\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Collider.h(4,10): fatal error C1083: Cannot open include file: 'SDL/include/SDL_Rect.h': No such file or directory
+  Enemy.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Enemy_BrownShip.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Enemy_Mech.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Enemy_RedBird.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Globals.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Main.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Module.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleAudio.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleCollisions.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleEnemies.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleFadeToBlack.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleFonts.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleInput.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleParticles.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModulePlayer.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleRender.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleTextures.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  ModuleWindow.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Generating Code...
+  Compiling...
+  Particle.cpp
+C:\Users\miquelar3\Documents\GitHub\Project1-Shock-Troopers\Shock Troopers\src\Animation.h(4,10): fatal error C1083: Cannot open include file: 'SDL/include/SDL_rect.h': No such file or directory
+  Path.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  SceneIntro.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  SceneLevel1.cpp
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\winnt.h(34,10): fatal error C1083: Cannot open include file: 'ctype.h': No such file or directory
+  Generating Code...

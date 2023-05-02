@@ -33,6 +33,14 @@ public:
 	SDL_Rect background;
 	SDL_Rect playerSelectText;
 	SDL_Rect characterSelector;
+	SDL_Rect charactersAvatar;
+
+	SDL_Rect characterSelectedMilky;
+
+	Animation selectionAnimation;
+
+	int currentCharacter = 0;
+	int animationPositions[8][8];
 };
 
 #endif

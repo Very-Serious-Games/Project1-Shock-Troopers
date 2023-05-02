@@ -47,9 +47,9 @@ SceneMenu::SceneMenu(bool startEnabled) : Module(startEnabled)
 
 	// character name default
 	characterName.x = 0;
-	characterName.y = 667;
-	characterName.w = 63;
-	characterName.h = 15;
+	characterName.y = 0;
+	characterName.w = 0;
+	characterName.h = 0;
 
 	// available character Miky
 	availableCharacterMiky.x = 30;
@@ -147,7 +147,7 @@ Update_Status SceneMenu::PostUpdate()
 	switch (currentCharacter) {
 		case 0:
 			characterName.x = 0;
-			characterName.y = 667;
+			characterName.y = 0;
 			characterSelected.x = 262;
 			characterSelected.y = 239;
 			gunSelected.x = 128;
@@ -155,11 +155,9 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[0][0], animationPositions[0][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 122, 54, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
+			App->render->Blit(sprites, 0, 0, &characterName, 1.0f); // draw the character name
 			break;
 		case 1:
-			characterName.x = 69;
-			characterName.y = 667;
 			characterSelected.x = 327;
 			characterSelected.y = 239;
 			gunSelected.x = 159;
@@ -167,11 +165,8 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[1][0], animationPositions[1][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 122, 54, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
 			break;
 		case 2:
-			characterName.x = 138;
-			characterName.y = 667;
 			characterSelected.x = 392;
 			characterSelected.y = 239;
 			gunSelected.x = 187;
@@ -179,11 +174,8 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[2][0], animationPositions[2][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 122, 55, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
 			break;
 		case 3:
-			characterName.x = 207;
-			characterName.y = 667;
 			characterSelected.x = 457;
 			characterSelected.y = 239;
 			gunSelected.x = 215;
@@ -191,11 +183,8 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[3][0], animationPositions[3][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 122, 55, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
 			break;
 		case 4:
-			characterName.x = 0;
-			characterName.y = 688;
 			characterSelected.x = 262;
 			characterSelected.y = 304;
 			gunSelected.x = 128;
@@ -203,11 +192,8 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[4][0], animationPositions[4][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 120, 54, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
 			break; 
 		case 5:
-			characterName.x = 69;
-			characterName.y = 688;
 			characterSelected.x = 327;
 			characterSelected.y = 304;
 			gunSelected.x = 159;
@@ -215,11 +201,8 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[5][0], animationPositions[5][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 120, 54, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
 			break;
 		case 6:
-			characterName.x = 138;
-			characterName.y = 688;
 			characterSelected.x = 392;
 			characterSelected.y = 304;
 			gunSelected.x = 189;
@@ -227,11 +210,8 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[6][0], animationPositions[6][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 122, 52, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
 			break;
 		case 7:
-			characterName.x = 207;
-			characterName.y = 688;
 			characterSelected.x = 457;
 			characterSelected.y = 304;
 			gunSelected.x = 215;
@@ -239,7 +219,6 @@ Update_Status SceneMenu::PostUpdate()
 			App->render->Blit(sprites, animationPositions[7][0], animationPositions[7][1], &(selectionAnimation.GetCurrentFrame()), 1.0f); // draw the selection animation
 			App->render->Blit(sprites, 59, 56, &characterSelected, 1.0f); // draw the character selected
 			App->render->Blit(sprites, 120, 54, &gunSelected, 1.0f); // draw the gun selected
-			App->render->Blit(sprites, 90, 105, &characterName, 1.0f); // draw the character name
 			break;
 	default:
 		// handle the jump between the last and the first characters  

@@ -10,15 +10,12 @@
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {
-
 }
 
 SceneLevel1::~SceneLevel1()
 {
-
 }
 
-// Load assets
 bool SceneLevel1::Start()
 {
 	LOG("Loading background assets");
@@ -28,14 +25,11 @@ bool SceneLevel1::Start()
 	bgTexture = App->textures->Load("Assets/Sprites/background_mountain.png");
 	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
-	//Bottomside collider
 	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
 
-	//First two columns colliders
-	App->collisions->AddCollider({ 0, 0, 11, 1909 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 493-11, 0, 11, 1909 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 493-11, 0, 1, 1909 }, Collider::Type::WALL);
 
-	// Enemies ---
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 600, 80);
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 625, 80);
 	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 640, 80);
@@ -53,8 +47,8 @@ bool SceneLevel1::Start()
 
 	App->enemies->AddEnemy(Enemy_Type::MECH, 900, 195);
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
+	App->render->camera.x = 515/2;
+	App->render->camera.y = 5058;
 
 	App->player->Enable();
 	App->enemies->Enable();
@@ -64,17 +58,21 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
+	int newCamX = App->player->position.x * 3 - 400;
+	int newCamY = App->player->position.y * 3 - 300;
 
-	App->render->camera.x = App->player->position.x *3 - 400;
-	App->render->camera.y = App->player->position.y * 3 - 300;
+	if (newCamX < 515 && newCamX > 0) {
+		App->render->camera.x = newCamX;
+	}
+	if (newCamY < 5058 && newCamY > -342) {
+		App->render->camera.y = newCamY;
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-// Update: draw background
 Update_Status SceneLevel1::PostUpdate()
 {
-	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -85,7 +83,6 @@ bool SceneLevel1::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 
-	// TODO 5 (old): Remove All Memory Leaks - no solution here guys ;)
 
 	return true;
 }

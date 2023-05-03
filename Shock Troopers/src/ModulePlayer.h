@@ -79,6 +79,7 @@ public:
 	Animation downleftAnimLegs;		// Movement animation (legs)
 	Animation downrightAnimLegs;	// Movement animation (legs)
 
+		// Roll animation (whole body)
 	Animation rollAnimUp;			// Roll animation
 	Animation rollAnimDown;			// Roll animation
 	Animation rollAnimLeft;			// Roll animation	
@@ -87,8 +88,6 @@ public:
 	Animation rollAnimUpRight;		// Roll animation
 	Animation rollAnimDownLeft;		// Roll animation
 	Animation rollAnimDownRight;	// Roll animation
-
-	Animation deathAnim;			// Death animation
 
 		// Shoot animation (only for the torso)
 	Animation shootAnimUp;			// Shoot animation
@@ -99,6 +98,8 @@ public:
 	Animation shootAnimUpRight;		// Shoot animation
 	Animation shootAnimDownLeft;	// Shoot animation
 	Animation shootAnimDownRight;	// Shoot animation
+
+	Animation deathAnim;			// Death animation
 
 	// legacy
 	Animation upAnim;

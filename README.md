@@ -15,6 +15,15 @@ Description
 
 Insert gif or link to demo
 
+## Setup
+
+```bash
+# Setup Game directory
+Debug > Shock Troopers Debug Properties > Debugging > Working Directory > $(SolutionDir)/game
+```
+## References
+
+![winkawaks](https://www.winkawaks.org/index.htm)
 
 ## License
 

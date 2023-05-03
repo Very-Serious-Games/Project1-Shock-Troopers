@@ -50,64 +50,58 @@ public:
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
-	Animation* currentAnimation = nullptr;
+	Animation* currentAnimationTorso = nullptr;
+	Animation* currentAnimationLegs = nullptr;
 
 	// A set of animations
-	Animation idleAnimUp;			// Idle animation
-	Animation idleAnimDown;			// Idle animation
-	Animation idleAnimLeft;			// Idle animation
-	Animation idleAnimRight;		// Idle animation
-	Animation idleAnimUpLeft;		// Idle animation
-	Animation idleAnimUpRight;		// Idle animation
-	Animation idleAnimDownLeft;		// Idle animation
-	Animation idleAnimDownRight;	// Idle animation
+	float animSpeed = 0.01f;
+	Animation idleAnimUpTorso;			// Idle animation (torso)
+	Animation idleAnimDownTorso;		// Idle animation (torso)
+	Animation idleAnimLeftTorso;		// Idle animation (torso)
+	Animation idleAnimRightTorso;		// Idle animation (torso)
+	Animation idleAnimUpLeftTorso;		// Idle animation (torso)
+	Animation idleAnimUpRightTorso;		// Idle animation (torso)
+	Animation idleAnimDownLeftTorso;	// Idle animation (torso)
+	Animation idleAnimDownRightTorso;	// Idle animation (torso)
+	Animation idleAnimUpLegs;			// Idle animation (legs)
+	Animation idleAnimDownLegs;			// Idle animation (legs)
+	Animation idleAnimLeftLegs;			// Idle animation (legs)
+	Animation idleAnimRightLegs;		// Idle animation (legs)
+	Animation idleAnimUpLeftLegs;		// Idle animation (legs)
+	Animation idleAnimUpRightLegs;		// Idle animation (legs)
+	Animation idleAnimDownLeftLegs;		// Idle animation (legs)
+	Animation idleAnimDownRightLegs;	// Idle animation (legs)
 
-	Animation upAnimTorso;			// Movement animation (torso)
-	Animation downAnimTorso;		// Movement animation (torso)
-	Animation leftAnimTorso;		// Movement animation (torso)
-	Animation rightAnimTorso;		// Movement animation (torso)
-	Animation upleftAnimTorso;		// Movement animation (torso)
-	Animation uprightAnimTorso;		// Movement animation (torso)
-	Animation downleftAnimTorso;	// Movement animation (torso)
-	Animation downrightAnimTorso;	// Movement animation (torso)
-	Animation upAnimLegs;			// Movement animation (legs)
-	Animation downAnimLegs;			// Movement animation (legs)
-	Animation leftAnimLegs;			// Movement animation (legs)
-	Animation rightAnimLegs;		// Movement animation (legs)
-	Animation upleftAnimLegs;		// Movement animation (legs)
-	Animation uprightAnimLegs;		// Movement animation (legs)
-	Animation downleftAnimLegs;		// Movement animation (legs)
-	Animation downrightAnimLegs;	// Movement animation (legs)
+	Animation upAnimLegs;				// Movement animation (legs)
+	Animation downAnimLegs;				// Movement animation (legs)
+	Animation leftAnimLegs;				// Movement animation (legs)
+	Animation rightAnimLegs;			// Movement animation (legs)
+	Animation upLeftAnimLegs;			// Movement animation (legs)
+	Animation upRightAnimLegs;			// Movement animation (legs)
+	Animation downLeftAnimLegs;			// Movement animation (legs)
+	Animation downRightAnimLegs;		// Movement animation (legs)
 
 		// Roll animation (whole body)
-	Animation rollAnimUp;			// Roll animation
-	Animation rollAnimDown;			// Roll animation
-	Animation rollAnimLeft;			// Roll animation	
-	Animation rollAnimRight;		// Roll animation
-	Animation rollAnimUpLeft;		// Roll animation
-	Animation rollAnimUpRight;		// Roll animation
-	Animation rollAnimDownLeft;		// Roll animation
-	Animation rollAnimDownRight;	// Roll animation
+	Animation rollAnimUp;				// Roll animation
+	Animation rollAnimDown;				// Roll animation
+	Animation rollAnimLeft;				// Roll animation	
+	Animation rollAnimRight;			// Roll animation
+	Animation rollAnimUpLeft;			// Roll animation
+	Animation rollAnimUpRight;			// Roll animation
+	Animation rollAnimDownLeft;			// Roll animation
+	Animation rollAnimDownRight;		// Roll animation
 
 		// Shoot animation (only for the torso)
-	Animation shootAnimUp;			// Shoot animation
-	Animation shootAnimDown;		// Shoot animation
-	Animation shootAnimLeft;		// Shoot animation
-	Animation shootAnimRight;		// Shoot animation
-	Animation shootAnimUpLeft;		// Shoot animation
-	Animation shootAnimUpRight;		// Shoot animation
-	Animation shootAnimDownLeft;	// Shoot animation
-	Animation shootAnimDownRight;	// Shoot animation
+	Animation shootAnimUp;				// Shoot animation
+	Animation shootAnimDown;			// Shoot animation
+	Animation shootAnimLeft;			// Shoot animation
+	Animation shootAnimRight;			// Shoot animation
+	Animation shootAnimUpLeft;			// Shoot animation
+	Animation shootAnimUpRight;			// Shoot animation
+	Animation shootAnimDownLeft;		// Shoot animation
+	Animation shootAnimDownRight;		// Shoot animation
 
-	Animation deathAnim;			// Death animation
-
-	// legacy
-	Animation upAnim;
-	Animation downAnim;
-
-
-
-
+	Animation deathAnim;				// Death animation
 
 	// Sound effects indices
 	uint laserFx = 0;

@@ -81,3 +81,44 @@ void Particle::SetToDelete()
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
 }
+
+void Particle::setDirection(int direction) {
+	switch (direction)
+	{
+	case 1: //UR
+		speed.x = 5;
+		speed.y = -5;
+		break;
+	case 2: //UL
+		speed.x = -5;
+		speed.y = -5;
+		break;
+	case 3: //DR
+		speed.x = 5;
+		speed.y = 5;
+		break;
+	case 4: //DL
+		speed.x = -5;
+		speed.y = 5;
+		break;
+	case 5: //R
+		speed.x = 5;
+		speed.y = 0;
+		break;
+	case 6: //L
+		speed.x = -5;
+		speed.y = 0;
+		break;
+	case 7: //D
+		speed.x = 0;
+		speed.y = 5;
+		break;
+	case 8: //U
+		speed.x = 0;
+		speed.y = -5;
+		break;
+	default:
+
+		break;
+	}
+}

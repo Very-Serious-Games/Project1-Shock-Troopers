@@ -26,6 +26,8 @@ public:
 	// Sets flag for deletion and for the collider aswell
 	void SetToDelete();
 
+	void setDirection(int direction);
+
 	int parabole(int x, int direction_x);
 
 public:

@@ -114,6 +114,9 @@
     <ClInclude Include="src\Path.h">
       <Filter>Source Files\utils</Filter>
     </ClInclude>
+    <ClInclude Include="src\SceneMenu.h">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -187,6 +190,9 @@
     </ClCompile>
     <ClCompile Include="src\Path.cpp">
       <Filter>Source Files\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SceneMenu.cpp">
+      <Filter>Source Files\modules\gameplay</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

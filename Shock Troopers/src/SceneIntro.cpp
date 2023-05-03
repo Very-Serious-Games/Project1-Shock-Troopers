@@ -60,7 +60,7 @@ Update_Status SceneIntro::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
+		App->fade->FadeToBlack(this, (Module*)App->sceneMenu, 90);
 	}
 
 	milkyAnimation.Update();
@@ -78,4 +78,12 @@ Update_Status SceneIntro::PostUpdate()
 	App->render->Blit(textures, 120, 2, &(smokeAnimation.GetCurrentFrame()), 1.0f);
 
 	return Update_Status::UPDATE_CONTINUE;
+}
+
+bool SceneIntro::CleanUp()
+{
+	// TODO Remove All Memory Leaks
+	App->sceneIntro->Disable();
+
+	return true;
 }

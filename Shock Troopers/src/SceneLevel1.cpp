@@ -80,6 +80,7 @@ bool SceneLevel1::CleanUp()
 {
 	App->player->Disable();
 	App->enemies->Disable();
+	App->sceneLevel_1->Disable();
 
 
 	return true;

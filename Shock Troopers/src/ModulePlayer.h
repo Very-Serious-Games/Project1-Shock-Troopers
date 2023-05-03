@@ -32,7 +32,6 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-
 public:
 	// Position of the player in the map
 	iPoint position;
@@ -54,19 +53,71 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
+	Animation idleAnimUp;			// Idle animation
+	Animation idleAnimDown;			// Idle animation
+	Animation idleAnimLeft;			// Idle animation
+	Animation idleAnimRight;		// Idle animation
+	Animation idleAnimUpLeft;		// Idle animation
+	Animation idleAnimUpRight;		// Idle animation
+	Animation idleAnimDownLeft;		// Idle animation
+	Animation idleAnimDownRight;	// Idle animation
+
+	Animation upAnimTorso;			// Movement animation (torso)
+	Animation downAnimTorso;		// Movement animation (torso)
+	Animation leftAnimTorso;		// Movement animation (torso)
+	Animation rightAnimTorso;		// Movement animation (torso)
+	Animation upleftAnimTorso;		// Movement animation (torso)
+	Animation uprightAnimTorso;		// Movement animation (torso)
+	Animation downleftAnimTorso;	// Movement animation (torso)
+	Animation downrightAnimTorso;	// Movement animation (torso)
+	Animation upAnimLegs;			// Movement animation (legs)
+	Animation downAnimLegs;			// Movement animation (legs)
+	Animation leftAnimLegs;			// Movement animation (legs)
+	Animation rightAnimLegs;		// Movement animation (legs)
+	Animation upleftAnimLegs;		// Movement animation (legs)
+	Animation uprightAnimLegs;		// Movement animation (legs)
+	Animation downleftAnimLegs;		// Movement animation (legs)
+	Animation downrightAnimLegs;	// Movement animation (legs)
+
+		// Roll animation (whole body)
+	Animation rollAnimUp;			// Roll animation
+	Animation rollAnimDown;			// Roll animation
+	Animation rollAnimLeft;			// Roll animation	
+	Animation rollAnimRight;		// Roll animation
+	Animation rollAnimUpLeft;		// Roll animation
+	Animation rollAnimUpRight;		// Roll animation
+	Animation rollAnimDownLeft;		// Roll animation
+	Animation rollAnimDownRight;	// Roll animation
+
+		// Shoot animation (only for the torso)
+	Animation shootAnimUp;			// Shoot animation
+	Animation shootAnimDown;		// Shoot animation
+	Animation shootAnimLeft;		// Shoot animation
+	Animation shootAnimRight;		// Shoot animation
+	Animation shootAnimUpLeft;		// Shoot animation
+	Animation shootAnimUpRight;		// Shoot animation
+	Animation shootAnimDownLeft;	// Shoot animation
+	Animation shootAnimDownRight;	// Shoot animation
+
+	Animation deathAnim;			// Death animation
+
+	// legacy
 	Animation upAnim;
 	Animation downAnim;
+
+
+
+
+
+	// Sound effects indices
+	uint laserFx = 0;
+	uint explosionFx = 0;
 
 	// The player's collider
 	Collider* collider = nullptr;
 
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
-
-	// Sound effects indices
-	uint laserFx = 0;
-	uint explosionFx = 0;
 
 	// Font score index
 	uint score = 000;

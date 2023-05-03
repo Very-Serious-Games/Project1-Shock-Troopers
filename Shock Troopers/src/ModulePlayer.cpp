@@ -15,19 +15,32 @@
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// idle animation - just one sprite
+	// TODO idle animation
 	idleAnim.PushBack({ 66, 1, 32, 14 });
 
 	// move upwards
+	// TODO up animation
 	upAnim.PushBack({ 100, 1, 32, 14 });
 	upAnim.PushBack({ 132, 0, 32, 14 });
 	upAnim.loop = false;
 	upAnim.speed = 0.1f;
 
 	// Move down
+	// TODO down animation
 	downAnim.PushBack({ 33, 1, 32, 14 });
 	downAnim.PushBack({ 0, 1, 32, 14 });
 	downAnim.loop = false;
 	downAnim.speed = 0.1f;
+
+	// TODO left animation
+
+	// TODO right animation
+
+	// TODO destroy animation
+
+	// TODO shoot animation (every direction)
+
+	// TODO dodge animation
 }
 
 ModulePlayer::~ModulePlayer()
@@ -139,14 +152,6 @@ Update_Status ModulePlayer::Update()
 
 	}
 
-	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
-
-		Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
-		newParticle->granada = true;
-		newParticle->collider->AddListener(this);
-		App->audio->PlayFx(laserFx);
-	}
-
 	collider->SetPos(position.x, position.y);
 
 	currentAnimation->Update();
@@ -184,7 +189,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);
 
 		App->audio->PlayFx(explosionFx);
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneIntro, 60);
+		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 
 		destroyed = true;
 	}

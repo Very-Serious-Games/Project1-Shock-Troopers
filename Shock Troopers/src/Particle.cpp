@@ -54,6 +54,18 @@ bool Particle::Update()
 	return ret;
 }
 
+int Particle::parabole(int x, int direction_x) {
+	const float a = 1.0f / 32.0f;  
+	const int b = 3;              
+	const int c = 1;              
+	int y = -a * (x - c) * (x - c) + b;
+	if (direction_x == 1) {
+		y = -y;
+	}
+	inicio++;
+	return y;
+}
+
 void Particle::SetToDelete()
 {
 	pendingToDelete = true;

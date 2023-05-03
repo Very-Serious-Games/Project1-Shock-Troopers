@@ -20,13 +20,18 @@ bool SceneLevel1::Start()
 
 	bool ret = true;
 
+	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background_mountain.png");
 	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
+	// Add colliders
 	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
-
 	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 493-11, 0, 1, 1909 }, Collider::Type::WALL);
+
+	// Add enemies
+	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 100, 100);
+	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 200, 100);
 
 	App->render->camera.x = 515/2;
 	App->render->camera.y = 5058;
@@ -65,6 +70,7 @@ bool SceneLevel1::CleanUp()
 	App->enemies->Disable();
 	App->sceneLevel_1->Disable();
 
+	// TODO remove all memory leaks
 
 	return true;
 }

@@ -16,11 +16,37 @@ public:
 	void Update() override;
 
 private:
+	
+
 	// The path that will define the position in the world
 	Path path;
 
 	// Enemy animations
-	Animation front, back;
+	Animation spawnAnimRight;
+	Animation spawnAnimLeft;
+
+	Animation upAnim;
+	Animation downAnim;
+	Animation leftAnim;
+	Animation rightAnim;
+	Animation upLeftAnim;
+	Animation upRightAnim;
+	Animation downLeftAnim;
+	Animation downRightAnim;
+
+	Animation deathAnim;
+
+	Animation idleUpAnim;
+	Animation idleDownAnim;
+	Animation idleLeftAnim;
+	Animation idleRightAnim;
+	Animation idleUpLeftAnim;
+	Animation idleUpRightAnim;
+	Animation idleDownLeftAnim;
+	Animation idleDownRightAnim;
+
+	Animation* currentAnim = nullptr;
+
 };
 
 #endif // __ENEMY_INFANTRYSOLDIER_H__

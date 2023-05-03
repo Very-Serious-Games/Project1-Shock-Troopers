@@ -154,9 +154,7 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/Sprites/Milky_Spritesheet.png");
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
-	
-	// TODO add torso animations
-	// currentAnimationTorso = &idleAnimUpTorso;
+
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
@@ -168,11 +166,7 @@ bool ModulePlayer::Start()
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
 
-	// TODO 0: Notice how a font is loaded and the meaning of all its arguments 
-	//char lookupTable[] = { "!  ,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz" };
-	//scoreFont = App->fonts->Load("Assets/Fonts/rtype_font.png", "! @,_./0123456789$;<&?abcdefghijklmnopqrstuvwxyz", 1);
 
-	// TODO 4: Try loading "rtype_font3.png" that has two rows to test if all calculations are correct
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
 	scoreFont = App->fonts->Load("Assets/Fonts/rtype_font3.png", lookupTable, 2);
 
@@ -181,95 +175,68 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
-	int initialX = position.x;
-	int initialY = position.y;
-
 	if (roll) {
-		position.x += direccion.x * 3;
-		position.y += direccion.y * 3;
-		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50)) {
+		speed = 3;
+		move();
+		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
 			roll = false;
 		}
-	}
-	else {
+	}else {
+		speed = 1;
 
-		if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT)
-		{
-			position.x -= speed.x;
-			if (currentAnimationLegs != &leftAnimLegs)
-			{
-				//leftAnimLegs.Reset();
-				currentAnimationLegs = &idleAnimLeftLegs;
-				currentAnimationTorso = &idleAnimLeftTorso;
-			}
+		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 1;
+		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 2;
+		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 3;
+		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 4;
+		}else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT){
+			currentDirection = 5;
+		}else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT){
+			currentDirection = 6;
+		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT){
+			currentDirection = 7;
+		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT){
+			currentDirection = 8;
+		}else {
+			currentDirection = 0;
 		}
 
-		if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
-		{
-			position.x += speed.x;
-			if (currentAnimationLegs != &rightAnimLegs)
-			{
-				rightAnimLegs.Reset();
-				currentAnimationLegs = &idleAnimRightLegs;
-				currentAnimationTorso = &idleAnimRightTorso;
-			}
-		}
+		move();
+		setAnimations();
 
-		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT)
-		{
-			position.y += speed.y;
-			if (currentAnimationLegs != &downAnimLegs)
-			{
-				downAnimLegs.Reset();
-				currentAnimationLegs = &idleAnimDownLegs;
-				currentAnimationTorso = &idleAnimDownTorso;
-			}
-		}
 
-		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT)
-		{
-			position.y -= speed.y;
-			if (currentAnimationLegs != &upAnimLegs)
-			{
-				upAnimLegs.Reset();
-				currentAnimationLegs = &idleAnimUpLegs;		// TESTING ANIMATIONS
-				currentAnimationTorso = &idleAnimUpTorso;
-			}
+		diferencia.x = position.x;
+		diferencia.y = position.y;
+
+		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
+			App->particles->laser.setDirection(lastDirection);
+			//TODO añadir direccion
+			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			newParticle->granada = true;
+			App->audio->PlayFx(laserFx);
 		}
 
 		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN)
 		{
 			roll = true;
 		}
-
-		direccion.x = -(initialX - position.x);
-		direccion.y = -(initialY - position.y);
-
-		diferencia.x = position.x;
-		diferencia.y = position.y;
-
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+		
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
 		{
-			App->particles->laser.speed.x = direccion.x * 5;
-			App->particles->laser.speed.y = direccion.y * 5;
-			if (App->particles->laser.speed.x == 0 && App->particles->laser.speed.y == 0) {
-				App->particles->laser.speed.x = 5;
-				App->particles->laser.speed.y = 0;
-			}
+
+			App->particles->laser.setDirection(lastDirection);
 			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
 			newParticle->collider->AddListener(this);
 			App->audio->PlayFx(laserFx);
 		}
-
-		// If no up/down movement detected, set the current animation back to idle
-		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE && App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) {
-			// TODO revisar esto, si lo descomentas jodes las animaciones
-			//currentAnimationLegs = &idleAnimUpLegs;
-			//currentAnimationTorso = &idleAnimUpTorso;
-		}
 	}
-
-
+	if (currentDirection != 0) {
+		lastDirection = currentDirection;
+	}
 
 	collider->SetPos(position.x, position.y);
 
@@ -319,5 +286,146 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
 	{
 		score += 23;
+	}
+}
+
+
+void ModulePlayer::setIdleAnimations() {
+	switch (lastDirection)
+	{
+	case 1: //UR
+		currentAnimationTorso = &idleAnimUpRightTorso;
+		currentAnimationLegs = &idleAnimUpRightLegs;
+		break;
+	case 2: //UL
+		currentAnimationTorso = &idleAnimUpLeftTorso;
+		currentAnimationLegs = &idleAnimUpLeftLegs;
+		break;
+	case 3: //DR
+		currentAnimationTorso = &idleAnimDownRightTorso;
+		currentAnimationLegs = &idleAnimDownRightLegs;
+		break;
+	case 4: //DL
+		currentAnimationTorso = &idleAnimDownLeftTorso;
+		currentAnimationLegs = &idleAnimDownLeftLegs;
+		break;
+	case 5: //R
+		currentAnimationTorso = &idleAnimRightTorso;
+		currentAnimationLegs = &idleAnimRightLegs;
+		break;
+	case 6: //L
+		currentAnimationTorso = &idleAnimLeftTorso;
+		currentAnimationLegs = &idleAnimLeftLegs;
+		break;
+	case 7: //D
+		currentAnimationTorso = &idleAnimDownTorso;
+		currentAnimationLegs = &idleAnimDownLegs;
+		break;
+	case 8: //U
+		currentAnimationTorso = &idleAnimUpTorso;
+		currentAnimationLegs = &idleAnimUpLegs;
+		break;
+	default:
+		currentAnimationTorso = &idleAnimUpTorso;
+		currentAnimationLegs = &idleAnimUpLegs;
+		break;
+	}
+}
+
+void ModulePlayer::setAnimations()
+{
+	switch (currentDirection)
+	{
+	case 1: //UR
+		currentAnimationLegs = &upRightAnimLegs;
+		currentAnimationTorso = &idleAnimUpRightTorso;
+		break;
+	case 2: //UL
+		currentAnimationLegs = &upLeftAnimLegs;
+		currentAnimationTorso = &idleAnimUpLeftTorso;
+		break;
+	case 3: //DR
+		currentAnimationLegs = &downRightAnimLegs;
+		currentAnimationTorso = &idleAnimDownRightTorso;
+		break;
+	case 4: //DL
+		currentAnimationLegs = &downLeftAnimLegs;
+		currentAnimationTorso = &idleAnimDownLeftTorso;
+		break;
+	case 5: //R
+		currentAnimationLegs = &rightAnimLegs;
+		currentAnimationTorso = &idleAnimRightTorso;
+		break;
+	case 6: //L
+		currentAnimationLegs = &leftAnimLegs;
+		currentAnimationTorso = &idleAnimLeftTorso;
+		break;
+	case 7: //D
+		currentAnimationLegs = &downAnimLegs;
+		currentAnimationTorso = &idleAnimDownTorso;
+		break;
+	case 8: //U
+		currentAnimationLegs = &upAnimLegs;
+		currentAnimationTorso = &idleAnimUpTorso;
+		break;
+	default:
+		setIdleAnimations();
+		break;
+	}
+}
+
+float* ModulePlayer::normalize(float normV[]) {
+	float norm = 0.0f;
+	norm += position.x * position.x;
+	norm += position.y * position.y;
+	norm = std::sqrt(norm);
+	normV[0] = position.x / norm;
+	normV[1] = position.y / norm;
+
+	return normV;
+}
+
+void ModulePlayer::move() {
+
+	switch (currentDirection)
+	{
+		case 1: //UR
+			position.x += speed;
+			position.y -= speed;
+			//position.x *= normalize()[0];
+			//position.y *= normalize()[1];
+		break;
+		case 2: //UL
+			position.x -= speed;
+			position.y -= speed;
+			//position.x *= normalize()[0];
+			//position.y *= normalize()[1];
+		break;
+		case 3: //DR
+			position.x += speed;
+			position.y += speed;
+			//position.x *= normalize()[0];
+			//position.y *= normalize()[1];
+		break;
+		case 4: //DL
+			position.x -= speed;
+			position.y += speed;
+			//position.x *= normalize()[0];
+			//position.y *= normalize()[1];
+		break;
+		case 5: //R
+			position.x += speed;
+		break;
+		case 6: //L
+			position.x -= speed;
+		break;
+		case 7: //D
+			position.y += speed;
+		break;
+		case 8: //U
+			position.y -= speed;
+		break;
+	default:
+		break;
 	}
 }

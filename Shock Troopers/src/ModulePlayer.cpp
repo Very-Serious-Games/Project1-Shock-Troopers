@@ -15,19 +15,32 @@
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// idle animation - just one sprite
+	// TODO idle animation
 	idleAnim.PushBack({ 66, 1, 32, 14 });
 
 	// move upwards
+	// TODO up animation
 	upAnim.PushBack({ 100, 1, 32, 14 });
 	upAnim.PushBack({ 132, 0, 32, 14 });
 	upAnim.loop = false;
 	upAnim.speed = 0.1f;
 
 	// Move down
+	// TODO down animation
 	downAnim.PushBack({ 33, 1, 32, 14 });
 	downAnim.PushBack({ 0, 1, 32, 14 });
 	downAnim.loop = false;
 	downAnim.speed = 0.1f;
+
+	// TODO left animation
+
+	// TODO right animation
+
+	// TODO destroy animation
+
+	// TODO shoot animation (every direction)
+
+	// TODO dodge animation
 }
 
 ModulePlayer::~ModulePlayer()

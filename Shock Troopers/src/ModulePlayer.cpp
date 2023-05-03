@@ -184,7 +184,7 @@ Update_Status ModulePlayer::Update()
 	if (roll) {
 		speed = 3;
 		move();
-		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50)) {
+		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
 			roll = false;
 		}
 	}else {
@@ -217,8 +217,12 @@ Update_Status ModulePlayer::Update()
 		diferencia.x = position.x;
 		diferencia.y = position.y;
 
-		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT) {
-			//TODO  AÑADIR GRANADA
+		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
+			App->particles->laser.setDirection(lastDirection);
+			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			newParticle->granada = true;
+			App->audio->PlayFx(laserFx);
 		}
 
 		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN)
@@ -226,7 +230,7 @@ Update_Status ModulePlayer::Update()
 			roll = true;
 		}
 		
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
 		{
 
 			App->particles->laser.setDirection(lastDirection);
@@ -399,7 +403,7 @@ void ModulePlayer::move() {
 	{
 		case 1: //UR
 			position.x += speed;
-			position.y += speed;
+			position.y -= speed;
 			//position.x *= normalize()[0];
 			//position.y *= normalize()[1];
 		break;

@@ -9,7 +9,7 @@ Particle::Particle()
 }
 
 Particle::Particle(const Particle& p) : anim(p.anim), position(p.position), speed(p.speed),
-										frameCount(p.frameCount), lifetime(p.lifetime)
+frameCount(p.frameCount), lifetime(p.lifetime)
 {
 
 }
@@ -44,8 +44,17 @@ bool Particle::Update()
 			ret = false;
 
 		// Update the position in the screen
-		position.x += speed.x;
-		position.y += speed.y;
+		if (granada) {
+			position.x += speed.x * 2;
+			int test = parabole(inicio, 1);
+			//TODO añadir direccion
+			position.y += test;
+		}
+		else {
+			position.x += speed.x;
+			position.y += speed.y;
+		}
+
 
 		if (collider != nullptr)
 			collider->SetPos(position.x, position.y);
@@ -55,9 +64,9 @@ bool Particle::Update()
 }
 
 int Particle::parabole(int x, int direction_x) {
-	const float a = 1.0f / 32.0f;  
-	const int b = 3;              
-	const int c = 1;              
+	const float a = 1.0f / 32.0f;
+	const int b = 3;
+	const int c = 1;
 	int y = -a * (x - c) * (x - c) + b;
 	if (direction_x == 1) {
 		y = -y;

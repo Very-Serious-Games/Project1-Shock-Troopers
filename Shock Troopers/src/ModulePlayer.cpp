@@ -238,13 +238,6 @@ Update_Status ModulePlayer::Update()
 			newParticle->collider->AddListener(this);
 			App->audio->PlayFx(laserFx);
 		}
-
-		// If no up/down movement detected, set the current animation back to idle
-		if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_IDLE && App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_IDLE) {
-			// TODO revisar esto, si lo descomentas jodes las animaciones
-			//currentAnimationLegs = &idleAnimUpLegs;
-			//currentAnimationTorso = &idleAnimUpTorso;
-		}
 	}
 	if (currentDirection != 0) {
 		lastDirection = currentDirection;

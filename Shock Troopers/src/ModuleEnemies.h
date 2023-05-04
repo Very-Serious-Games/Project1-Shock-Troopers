@@ -12,34 +12,6 @@ enum class Enemy_Type
 	FLYING_BATTLESHIP,
 };
 
-// TODO revisar estados de enemigo
-enum class Enemy_State
-{
-	SPAWN,
-	IDLE,
-	MOVE,
-	DEATH,
-};
-
-// TODO revisar direcciones de enemigo
-enum class Enemy_Direction
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	UP_LEFT,
-	UP_RIGHT,
-	DOWN_LEFT,
-	DOWN_RIGHT,
-};
-
-// TODO revisar metodos de spawn de enemigo
-enum class EnemySpawnMethod {
-	DROP,
-	APPEAR,
-};
-
 struct EnemySpawnpoint
 {
 	Enemy_Type type = Enemy_Type::NO_TYPE;

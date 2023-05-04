@@ -29,6 +29,40 @@ void Enemy::Update()
 
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
+
+    switch (state) {
+        case Enemy_State::SPAWN:
+            // Handle spawn state logic
+            if (/* some condition for idle */true) {
+                state = Enemy_State::IDLE;
+                LOG("state changed to IDLE");
+            }
+            break;
+        case Enemy_State::IDLE:
+            // Handle idle state logic
+            if (/* some condition for attacking */true) {
+                state = Enemy_State::ATTACK;
+                LOG("state changed to ATTACK");
+            }
+            break;
+        case Enemy_State::ATTACK:
+            // Handle attack state logic
+            if (this->health == 0) {
+                LOG("state changed to ATTACK");
+                state = Enemy_State::DEATH;
+            }
+            break;
+        case Enemy_State::DEATH:
+            // Handle death state logic
+            LOG("state changed to DEATH");
+            //if (/* some condition for despawning */true) {
+                //pendingToDelete = true;
+            //}
+            break;
+        default:
+            // Handle default state logic
+            break;
+    }
 }
 
 void Enemy::Draw()

@@ -4,7 +4,7 @@
 #include "ModuleCollisions.h"
 
 Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
-
+	
 	spawnAnim.PushBack({0, 0, 121, 124});
 	spawnAnim.PushBack({128, 0, 121, 124});
 	spawnAnim.pingpong = true;

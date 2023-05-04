@@ -19,8 +19,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ModulePickUp.h" />
+    <ClInclude Include="PickUp.h" />
     <ClInclude Include="src\Enemy_FlyingBattleship.h" />
     <ClInclude Include="src\Enemy_InfantrySoldier.h" />
+    <ClInclude Include="src\ModulePickUp.h" />
+    <ClInclude Include="src\PickUp.h" />
     <ClInclude Include="src\SceneMenu.h" />
     <ClInclude Include="src\Animation.h" />
     <ClInclude Include="src\Application.h" />
@@ -49,6 +53,8 @@
   <ItemGroup>
     <ClCompile Include="src\Enemy_FlyingBattleship.cpp" />
     <ClCompile Include="src\Enemy_InfantrySoldier.cpp" />
+    <ClCompile Include="src\ModulePickUp.cpp" />
+    <ClCompile Include="src\PickUp.cpp" />
     <ClCompile Include="src\SceneMenu.cpp" />
     <ClCompile Include="src\Application.cpp" />
     <ClCompile Include="src\Collider.cpp" />

@@ -40,7 +40,7 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 100, 100);
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 200, 100);
 
-	App->render->camera.x = 515/2;
+	App->render->camera.x = 220;
 	App->render->camera.y = 5058;
 
 	App->player->Enable();

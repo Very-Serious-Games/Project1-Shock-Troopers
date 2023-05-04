@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleTextures.h"
+#include "ModulePickUp.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
 #include "ModuleParticles.h"
@@ -145,6 +146,47 @@ ModulePlayer::~ModulePlayer()
 
 }
 
+void ModulePlayer::updateHp() {
+	switch (hp) {
+	case 100:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_100.png");
+		break;
+	case 90:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_90.png");
+		break;
+	case 80:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_80.png");
+		break;
+	case 70:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_70.png");
+		break;
+	case 60:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_60.png");
+		break;
+	case 50:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_50.png");
+		break;
+	case 40:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_40.png");
+		break;
+	case 30:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_30.png");
+		break;
+	case 20:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_20.png");
+		break;
+	case 10:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_10.png");
+		break;
+	case 0:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_00.png");
+		break;
+	default:
+		textureHp = App->textures->Load("Assets/Sprites/HpBar_00.png");
+		break;
+	}
+}
+
 bool ModulePlayer::Start()
 {
 	LOG("Loading player textures");
@@ -175,6 +217,7 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	updateHp();
 	if (roll) {
 		speed = 3;
 		move();
@@ -203,7 +246,13 @@ Update_Status ModulePlayer::Update()
 		}else {
 			currentDirection = 0;
 		}
-
+		if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN) {
+			hp -= 10;
+		}
+		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
+			App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::HEAL);
+		//	ModulePickUp::SpawnPickUp({ PickUp_Type::HP,position.x, position.y});
+		}
 		move();
 		setAnimations();
 
@@ -250,10 +299,15 @@ Update_Status ModulePlayer::PostUpdate()
 {
 	if (!destroyed)
 	{
+		int x, y;
 		SDL_Rect rectLegs = currentAnimationLegs->GetCurrentFrame();
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rectLegs);
 		App->render->Blit(texture, position.x+3, position.y-18, &rectTorso);
+		
+		x = (position.x > 302) ? 202 : (position.x < 132) ? 32 : position.x - 100;
+		y = (position.y > 1786) ? 1740 : (position.y < 100) ? 50 : position.y - 50;
+		App->render->Blit(textureHp,x, y, NULL);
 	}
 
 	// Draw UI (score) --------------------------------------
@@ -269,7 +323,7 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider && destroyed == false && c2->type != 0)
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY)
 	{
 		
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
@@ -286,7 +340,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	//Crea las condiciones necesarias para que el jugador no pueda atravesar las paredes
 
-	if (c1 == collider && destroyed == false && c2->type == 0) {
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::WALL) {
 
 		if (c1->rect.y < c2->rect.y) {
 			position.y -= 1;
@@ -301,7 +355,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		}
 
 	}
-
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
+		hp += 10;
+	}
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
 	{
 		score += 23;

@@ -31,7 +31,7 @@ bool SceneLevel1::Start()
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 482, 0, 1, 1909 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 493, 0, 1, 1909 }, Collider::Type::WALL);
 
 
 	createMargenes();

@@ -269,8 +269,9 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider && destroyed == false)
+	if (c1 == collider && destroyed == false && c2->type != 0)
 	{
+		
 		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
 		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
@@ -281,6 +282,24 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 
 		destroyed = true;
+	}
+
+	//Crea las condiciones necesarias para que el jugador no pueda atravesar las paredes
+
+	if (c1 == collider && destroyed == false && c2->type == 0) {
+
+		if (c1->rect.y < c2->rect.y) {
+			position.y -= 1;
+		}
+		else if (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h) {
+			position.y += 1;
+		}else if (c1->rect.x < c2->rect.x) {
+			position.x -= 1;
+		}
+		else if (c1->rect.x + c1->rect.w > c2->rect.x + c2->rect.w ) {
+			position.x += 1;
+		}
+
 	}
 
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)

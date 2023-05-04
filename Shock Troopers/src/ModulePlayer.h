@@ -61,6 +61,8 @@ public:
 
 	bool roll = false;
 
+	bool godMode = false;
+
 	// The speed in which we move the player (pixels per frame)
 	int speed = 1;
 

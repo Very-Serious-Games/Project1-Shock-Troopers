@@ -153,14 +153,12 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 
 	SDL_Rect dstRect { rect.x * SCREEN_SIZE, rect.y * SCREEN_SIZE, rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
 
-	if (useCamera)
-	{
+	if (useCamera) {
 		dstRect.x -= (camera.x * speed);
 		dstRect.y -= (camera.y * speed);
 	}
 
-	if (SDL_RenderFillRect(renderer, &dstRect) != 0)
-	{
+	if (SDL_RenderFillRect(renderer, &dstRect) != 0) {
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}

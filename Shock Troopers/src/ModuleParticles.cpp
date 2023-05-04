@@ -25,6 +25,8 @@ bool ModuleParticles::Start()
 	// Load particles spritesheet
 	texture = App->textures->Load("Assets/Sprites/particles.png");
 
+	textureTest = App->textures->Load("Assets/Sprites/normal_bullets.png");
+
 	// Explosion particle
 	explosion.anim.PushBack({274, 296, 33, 30});
 	explosion.anim.PushBack({313, 296, 33, 30});
@@ -35,9 +37,8 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
-	// Laser particle
-	laser.anim.PushBack({ 232, 103, 16, 12 });
-	laser.anim.PushBack({ 249, 103, 16, 12 });
+	laser.currentAnimation = &laser.bullet_R;
+
 	laser.speed.x = 5;
 	laser.lifetime = 180;
 	laser.anim.speed = 0.2f;
@@ -99,6 +100,9 @@ Update_Status ModuleParticles::Update()
 
 		if(particle == nullptr)	continue;
 
+
+		particle->currentAnimation->Update();
+
 		// Call particle Update. If it has reached its lifetime, destroy it
 		if(particle->Update() == false)
 		{
@@ -115,17 +119,16 @@ Update_Status ModuleParticles::PostUpdate()
 	for (uint i = 0; i < MAX_ACTIVE_PARTICLES; ++i)
 	{
 		Particle* particle = particles[i];
-
 		if (particle != nullptr && particle->isAlive)
 		{
-			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+   			App->render->Blit(textureTest, particle->position.x, particle->position.y, &(particle->currentAnimation->GetCurrentFrame()));
 		}
 	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType, uint delay)
+Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, int direction, Collider::Type colliderType, uint delay)
 {
 	Particle* newParticle = nullptr;
 
@@ -135,14 +138,14 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, C
 		if (particles[i] == nullptr)
 		{
 			newParticle = new Particle(particle);
-			newParticle->frameCount = -(int)delay;			// We start the frameCount as the negative delay
-			newParticle->position.x = x;						// so when frameCount reaches 0 the particle will be activated
+			newParticle->frameCount = -(int)delay;
+			newParticle->position.x = x;
 			newParticle->position.y = y;
-
+			newParticle->currentAnimation = &laser.bullet_R;
 			//Adding the particle's collider
 			if (colliderType != Collider::Type::NONE)
-				newParticle->collider = App->collisions->AddCollider(newParticle->anim.GetCurrentFrame(), colliderType, this);
-
+				newParticle->collider = App->collisions->AddCollider(newParticle->currentAnimation->GetCurrentFrame(), colliderType, this);
+			newParticle->setDirection(direction);
 			particles[i] = newParticle;
 			break;
 		}

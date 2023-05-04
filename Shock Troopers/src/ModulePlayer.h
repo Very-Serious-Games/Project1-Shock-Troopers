@@ -70,6 +70,8 @@ public:
 	SDL_Texture* texture = nullptr;
 
 	SDL_Texture* textureHp = nullptr;
+	SDL_Texture* textureP1 = nullptr;
+	SDL_Texture* textureWeapon = nullptr;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -137,7 +139,7 @@ public:
 	bool destroyed = false;
 
 	// Font score index
-	uint score = 000;
+	uint score = 010;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 

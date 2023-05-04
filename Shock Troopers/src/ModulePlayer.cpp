@@ -199,6 +199,8 @@ bool ModulePlayer::Start()
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
+	textureP1 = App->textures->Load("Assets/Sprites/Player1_Milky.png");
+	textureWeapon = App->textures->Load("Assets/Sprites/Weapon_Normal.png");
 
 	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
@@ -286,8 +288,8 @@ Update_Status ModulePlayer::Update()
 		{
 			delay--;
 			if (delay == 0) {
-				App->particles->laser.setDirection(lastDirection);
-				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+				//App->particles->laser.setDirection(lastDirection);
+ 				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 				newParticle->collider->AddListener(this);
 				App->audio->PlayFx(laserFx);
 
@@ -323,27 +325,25 @@ Update_Status ModulePlayer::Update()
 
 Update_Status ModulePlayer::PostUpdate()
 {
+		int x, y;
 	if (!destroyed)
 	{
-		int x, y;
 		SDL_Rect rectLegs = currentAnimationLegs->GetCurrentFrame();
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
 		//TODO arreglar lumbago
 		App->render->Blit(texture, position.x, position.y, &rectLegs);
 		App->render->Blit(texture, position.x+3, position.y-18, &rectTorso);
 		
-		x = (position.x > 302) ? 202 : (position.x < 132) ? 32 : position.x - 100;
-		y = (position.y > 1786) ? 1740 : (position.y < 60) ? 50 : position.y - 50;
-		App->render->Blit(textureHp,x, y, NULL);
+		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
+		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
+		App->render->Blit(textureHp,x - 10, y, NULL);
+		App->render->Blit(textureP1, x - 20, y - 50, NULL);
+		App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
 	}
 
-	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
 
-	// TODO 3: Blit the text of the score in at the bottom of the screen
-	App->fonts->BlitText(position.x, position.y, scoreFont, scoreText);
-
-	App->fonts->BlitText(position.x, position.y, scoreFont, "this is just a font test");
+	App->fonts->BlitText(30, 5, scoreFont, scoreText);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -366,14 +366,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::WALL) {
 
 		if (c1->rect.y < c2->rect.y) {
+			speed = 0;
 			position.y -= 1;
 		}
 		else if (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h) {
+			speed = 0;
 			position.y += 1;
 		}else if (c1->rect.x < c2->rect.x) {
+			speed = 0;
 			position.x -= 1;
 		}
 		else if (c1->rect.x + c1->rect.w > c2->rect.x + c2->rect.w ) {
+			speed = 0;
 			position.x += 1;
 		}
 

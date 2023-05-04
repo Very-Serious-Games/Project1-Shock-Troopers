@@ -34,14 +34,28 @@ public:
 	// Defines the position in the screen
 	iPoint position;
 
+
 	bool granada = false;
 	int inicio = 0;
+
+	int direccion;
 
 	// Defines the speed at which the particle will move (pixels per second)
 	iPoint speed;
 
 	// A set of rectangle sprites
 	Animation anim;
+
+	Animation* currentAnimation;
+
+	Animation bullet_U;
+	Animation bullet_D;
+	Animation bullet_L;
+	Animation bullet_R;
+	Animation bullet_U_R;
+	Animation bullet_U_L;
+	Animation bullet_D_R;
+	Animation bullet_D_L;
 
 	// Defines wether the particle is alive or not
 	// Particles will be set to not alive until "spawnTime" is reached

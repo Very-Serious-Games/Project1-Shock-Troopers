@@ -145,7 +145,7 @@ void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1)
+		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER)
 		{
 			pickUp[i]->OnCollision(c2);
 			break;

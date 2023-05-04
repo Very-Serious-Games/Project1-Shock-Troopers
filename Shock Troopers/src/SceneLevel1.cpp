@@ -9,6 +9,7 @@ using namespace std;
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
+#include "ModulePickUp.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 
@@ -45,6 +46,8 @@ bool SceneLevel1::Start()
 
 	App->player->Enable();
 	App->enemies->Enable();
+	App->collisions->Enable();
+	App->pickUps->Enable();
 
 	return ret;
 }
@@ -76,6 +79,8 @@ bool SceneLevel1::CleanUp()
 	App->player->Disable();
 	App->enemies->Disable();
 	App->sceneLevel_1->Disable();
+	App->pickUps->Disable();
+	App->collisions->Disable();
 
 	// TODO remove all memory leaks
 

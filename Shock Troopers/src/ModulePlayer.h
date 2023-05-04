@@ -51,6 +51,8 @@ public:
 
 	int lastDirection;
 
+	int delay = 10;
+
 	int hp = 100;
 
 	int currentDirection;

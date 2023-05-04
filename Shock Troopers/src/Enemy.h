@@ -43,6 +43,9 @@ public:
 	// Sets flag for deletion and for the collider aswell
 	virtual void SetToDelete();
 
+	// Check if the player is near
+	bool PlayerIsNear();
+
 public:
 	Enemy_State state = Enemy_State::SPAWN;
 
@@ -69,6 +72,9 @@ protected:
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
+
+	// Trigger area
+	Collider* triggerArea = nullptr;
 };
 
 #endif // __ENEMY_H__

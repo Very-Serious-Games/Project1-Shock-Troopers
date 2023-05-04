@@ -56,7 +56,7 @@ void Enemy::Update()
             // Handle death state logic
             LOG("state changed to DEATH");
             //if (/* some condition for despawning */true) {
-                //pendingToDelete = true;
+            pendingToDelete = true;
             //}
             break;
         default:
@@ -73,15 +73,17 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
-	App->audio->PlayFx(destroyedFx);
-
-	SetToDelete();
+    this->health = health - 10; // TODO : change this to the damage of the bullet
+    if (health <= 0) {
+        App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+        App->audio->PlayFx(destroyedFx);
+        SetToDelete();
+    }
 }
 
 void Enemy::SetToDelete()
 {
-	pendingToDelete = true;
+    this->state = Enemy_State::DEATH;
 	if (collider != nullptr)
-		collider->pendingToDelete = true;
+		collider->pendingToDelete = true; // TODO : colliders doesn't have an state machine
 }

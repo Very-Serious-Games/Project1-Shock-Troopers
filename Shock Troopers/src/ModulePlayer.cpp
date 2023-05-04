@@ -249,8 +249,12 @@ Update_Status ModulePlayer::Update()
 		}else {
 			currentDirection = 0;
 		}
-		if (App->input->keys[SDL_SCANCODE_C] == Key_State::KEY_DOWN) {
+		if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
 			hp -= 10;
+		}if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN) {
+			hp += 10;
+		}if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
+			hp = 0;
 		}
 		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
 			position.x = 58;
@@ -299,6 +303,20 @@ Update_Status ModulePlayer::Update()
 
 	currentAnimationLegs->Update();
 	currentAnimationTorso->Update();
+
+	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN)
+	{
+		godMode = !godMode;
+	}
+	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN)
+	{
+		App->player->position.x = 232;
+		App->player->position.y = 190;
+	}
+	if (godMode)
+	{
+		hp = 100;
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

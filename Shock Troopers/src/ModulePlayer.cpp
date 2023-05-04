@@ -17,43 +17,43 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	// the loop parameter is set to true by default
 
-	// idle animations
-	// legs 
-	idleAnimUpLegs.PushBack({101, 152, 30, 25});
-	idleAnimDownLegs.PushBack({5, 151, 28, 25});
-	idleAnimLeftLegs.PushBack({158, 149, 12, 28});
-	idleAnimRightLegs.PushBack({62, 149, 12, 28});
-	idleAnimDownLeftLegs.PushBack({174, 149, 22, 28});
-	idleAnimDownRightLegs.PushBack({36, 149, 22, 28});
-	idleAnimUpLeftLegs.PushBack({134, 150, 21, 27});
-	idleAnimUpRightLegs.PushBack({77, 150, 21, 27});
+		// idle animations
+		// legs 
+	idleAnimUpLegs.PushBack({ 282, 52, 47, 52 }); // 
+	idleAnimDownLegs.PushBack({ 94, 52, 47, 52 }); // 
+	idleAnimLeftLegs.PushBack({ 0, 52, 47, 52 });
+	idleAnimRightLegs.PushBack({ 188, 52, 47, 52 }); //
+	idleAnimDownLeftLegs.PushBack({ 47, 52, 47, 52 });
+	idleAnimDownRightLegs.PushBack({ 141, 52, 47, 52 });
+	idleAnimUpLeftLegs.PushBack({ 329, 52, 47, 52 }); // 376, 52, 47, 52
+	idleAnimUpRightLegs.PushBack({ 235, 52, 47, 52 }); //
 	// no need to set speed since this animation only has one frame
 
 	// torso 
-	idleAnimUpTorso.PushBack({5, 5, 22, 23});
-	idleAnimUpTorso.PushBack({28, 5, 22, 23});
-	idleAnimUpTorso.PushBack({51, 5, 22, 23});
-	idleAnimDownTorso.PushBack({5, 473, 23, 30});
-	idleAnimDownTorso.PushBack({29, 473, 23, 30});
-	idleAnimDownTorso.PushBack({53, 473, 23, 30});
-	idleAnimLeftTorso.PushBack({5, 513, 18, 32});						// TODO check if this animation shows as intended
-	idleAnimLeftTorso.PushBack({24, 513, 18, 32});
-	idleAnimLeftTorso.PushBack({43, 513, 18, 32});
-	idleAnimRightTorso.PushBack({5, 188, 20, 28});
-	idleAnimRightTorso.PushBack({26, 188, 20, 28});
-	idleAnimRightTorso.PushBack({47, 188, 20, 28});
-	idleAnimDownLeftTorso.PushBack({5, 556, 17, 32});
-	idleAnimDownLeftTorso.PushBack({23, 556, 17, 32});
-	idleAnimDownLeftTorso.PushBack({41, 556, 17, 32});
-	idleAnimDownRightTorso.PushBack({5, 75, 27, 30});
-	idleAnimDownRightTorso.PushBack({33, 75, 27, 30});
-	idleAnimDownRightTorso.PushBack({61, 75, 27, 30});
-	idleAnimUpLeftTorso.PushBack({5, 111, 21, 27});
-	idleAnimUpLeftTorso.PushBack({27, 111, 21, 27});
-	idleAnimUpLeftTorso.PushBack({49, 111, 21, 27});
-	idleAnimUpRightTorso.PushBack({5 ,39, 15, 25});
-	idleAnimUpRightTorso.PushBack({21 ,39, 15, 25});
-	idleAnimUpRightTorso.PushBack({37 ,39, 15, 25});
+	idleAnimUpTorso.PushBack({ 423, 520, 47, 52 });
+	idleAnimUpTorso.PushBack({ 470, 520, 47, 52 });
+	idleAnimUpTorso.PushBack({ 517, 520, 47, 52 });
+	idleAnimDownTorso.PushBack({ 282, 520, 47, 52 });
+	idleAnimDownTorso.PushBack({ 329, 520, 47, 52 });
+	idleAnimDownTorso.PushBack({ 376, 520, 47, 52 });
+	idleAnimLeftTorso.PushBack({ 282, 416, 47, 52 });						// TODO check if this animation shows as intended
+	idleAnimLeftTorso.PushBack({ 329, 416, 47, 52 });
+	idleAnimLeftTorso.PushBack({ 376, 416, 47, 52 });
+	idleAnimRightTorso.PushBack({ 282, 364, 47, 52 });
+	idleAnimRightTorso.PushBack({ 329, 364, 47, 52 });
+	idleAnimRightTorso.PushBack({ 376, 364, 47, 52 });
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
 
 	idleAnimUpTorso.speed = animSpeed;
 	idleAnimDownTorso.speed = animSpeed;
@@ -66,24 +66,41 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 
 	// running animations
 	// legs
-	upAnimLegs.PushBack({5, 268, 22, 30});
-	upAnimLegs.PushBack({28, 268, 22, 30});
-	upAnimLegs.PushBack({51, 268, 22, 30});
-	upAnimLegs.PushBack({74, 268, 22, 30});
-	upAnimLegs.PushBack({97, 268, 22, 30});
-	upAnimLegs.PushBack({120, 268, 22, 30});
-	upAnimLegs.PushBack({143, 268, 22, 30});
-	upAnimLegs.PushBack({166, 268, 22, 30});
-	downAnimLegs.PushBack({5, 227, 22, 30});
-	downAnimLegs.PushBack({28, 227, 22, 30});
-	downAnimLegs.PushBack({51, 227, 22, 30});
-	downAnimLegs.PushBack({74, 227, 22, 30});
-	downAnimLegs.PushBack({97, 227, 22, 30});
-	downAnimLegs.PushBack({120, 227, 22, 30});
-	downAnimLegs.PushBack({143, 227, 22, 30});
-	downAnimLegs.PushBack({166, 227, 22, 30});
-	leftAnimLegs.PushBack({});
-	rightAnimLegs.PushBack({});
+	upAnimLegs.PushBack({ 0, 312, 47, 52 });
+	upAnimLegs.PushBack({ 47, 312, 47, 52 });
+	upAnimLegs.PushBack({ 94, 312, 47, 52 });
+	upAnimLegs.PushBack({ 141, 312, 47, 52 });
+	upAnimLegs.PushBack({ 188, 312, 47, 52 });
+	upAnimLegs.PushBack({ 235, 312, 47, 52 });
+	upAnimLegs.PushBack({ 282, 312, 47, 52 });
+	upAnimLegs.PushBack({ 329, 312, 47, 52 });
+
+	downAnimLegs.PushBack({ 376, 0, 47, 52 });
+	downAnimLegs.PushBack({ 423, 0, 47, 52 });
+	downAnimLegs.PushBack({ 470, 0, 47, 52 });
+	downAnimLegs.PushBack({ 517, 0, 47, 52 });
+	downAnimLegs.PushBack({ 564, 0, 47, 52 });
+	downAnimLegs.PushBack({ 611, 0, 47, 52 });
+	downAnimLegs.PushBack({ 658, 0, 47, 52 });
+	downAnimLegs.PushBack({ 705, 0, 47, 52 });
+
+	leftAnimLegs.PushBack({ 376, 52, 47, 52 });
+	leftAnimLegs.PushBack({ 423, 52, 47, 52 });
+	leftAnimLegs.PushBack({ 470, 52, 47, 52 });
+	leftAnimLegs.PushBack({ 517, 52, 47, 52 });
+	leftAnimLegs.PushBack({ 564, 52, 47, 52 });
+	leftAnimLegs.PushBack({ 611, 52, 47, 52 });
+	leftAnimLegs.PushBack({ 658, 52, 47, 52 });
+	leftAnimLegs.PushBack({ 705, 52, 47, 52 });
+
+	rightAnimLegs.PushBack({ 0, 0, 47, 52 });
+	rightAnimLegs.PushBack({ 47, 0, 47, 52 });
+	rightAnimLegs.PushBack({ 94, 0, 47, 52 });
+	rightAnimLegs.PushBack({ 141, 0, 47, 52 });
+	rightAnimLegs.PushBack({ 188, 0, 47, 52 });
+	rightAnimLegs.PushBack({ 235, 0, 47, 52 });
+	rightAnimLegs.PushBack({ 282, 0, 47, 52 });
+	rightAnimLegs.PushBack({ 329, 0, 47, 52 });
 	downLeftAnimLegs.PushBack({});
 	downRightAnimLegs.PushBack({});
 	upLeftAnimLegs.PushBack({});
@@ -195,7 +212,7 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
-	texture = App->textures->Load("Assets/Sprites/Milky_Spritesheet.png");
+	texture = App->textures->Load("Assets/Sprites/Milky/milkySpritesheet.png");
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
@@ -333,7 +350,7 @@ Update_Status ModulePlayer::PostUpdate()
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
 		//TODO arreglar lumbago
 		App->render->Blit(texture, position.x, position.y, &rectLegs);
-		App->render->Blit(texture, position.x+3, position.y-18, &rectTorso);
+		App->render->Blit(texture, position.x, position.y-4, &rectTorso);
 		
 		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
 		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;

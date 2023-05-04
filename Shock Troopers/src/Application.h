@@ -2,8 +2,9 @@
 #define __APPLICATION_H__
 
 #include "Globals.h"
+#include "SceneMenu.h"
 
-#define NUM_MODULES 13
+#define NUM_MODULES 15
 
 class Module;
 class ModuleWindow;
@@ -14,6 +15,7 @@ class ModulePlayer;
 class SceneIntro;
 class SceneLevel1;
 class ModuleParticles;
+class ModulePickUp;
 class ModuleCollisions;
 class ModuleEnemies;
 class ModuleFadeToBlack;
@@ -54,9 +56,11 @@ public:
 
 	SceneIntro* sceneIntro = nullptr;
 	SceneLevel1* sceneLevel_1 = nullptr;
+	SceneMenu* sceneMenu = nullptr;
 
 	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;
+	ModulePickUp* pickUps = nullptr;
 
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* fade = nullptr;

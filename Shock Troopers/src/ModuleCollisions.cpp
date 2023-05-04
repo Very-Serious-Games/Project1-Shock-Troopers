@@ -137,6 +137,8 @@ void ModuleCollisions::DebugDraw()
 			break;
 			case Collider::Type::ENEMY_SHOT: // magenta
 			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+			case Collider::Type::HEAL: // magenta
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 			break;
 		}
 	}

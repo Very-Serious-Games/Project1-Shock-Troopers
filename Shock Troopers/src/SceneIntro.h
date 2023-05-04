@@ -27,9 +27,16 @@ public:
 	// Performs the render call of all the parts of the scene's background
 	Update_Status PostUpdate() override;
 
+	bool CleanUp();
+
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* bgTexture = nullptr;
+	SDL_Texture* textures = nullptr;
+	SDL_Texture* background = nullptr;
+	Animation milkyAnimation;
+	Animation smokeAnimation;
+	//Animation introAnimation2 = nullptr;
+	//Animation introAnimation3 = nullptr;
 };
 
 #endif

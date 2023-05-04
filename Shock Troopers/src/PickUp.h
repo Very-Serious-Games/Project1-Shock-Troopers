@@ -1,5 +1,5 @@
-#ifndef __ENEMY_H__
-#define __ENEMY_H__
+#ifndef __PICKUP_H__
+#define __PICKUP_H__
 
 #include "p2Point.h"
 #include "Animation.h"
@@ -7,25 +7,15 @@
 struct SDL_Texture;
 struct Collider;
 
-// TODO revisar estados de enemigo
-enum class Enemy_State
-{
-	SPAWN,
-	IDLE,
-	ATTACK,
-	MOVE,
-	DEATH,
-};
-
-class Enemy
+class PickUp
 {
 public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
-	Enemy(int x, int y);
+	PickUp(int x, int y);
 
 	// Destructor
-	virtual ~Enemy();
+	virtual ~PickUp();
 
 	// Returns the enemy's collider
 	const Collider* GetCollider() const;
@@ -44,8 +34,6 @@ public:
 	virtual void SetToDelete();
 
 public:
-	Enemy_State state = Enemy_State::IDLE;
-
 	// The current position in the world
 	iPoint position;
 
@@ -58,17 +46,15 @@ public:
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
-	int health = 100;
+	// The pickUp collider
+	Collider* collider = nullptr;
 
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
-	// The enemy's collider
-	Collider* collider = nullptr;
-
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;
 };
 
-#endif // __ENEMY_H__
+#endif 

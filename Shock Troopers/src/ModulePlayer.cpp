@@ -307,7 +307,7 @@ Update_Status ModulePlayer::Update()
 			delay--;
 			if (delay == 0) {
 				//App->particles->laser.setDirection(lastDirection);
- 				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
+ 				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x+5, position.y+20, lastDirection, Collider::Type::PLAYER_SHOT);
 				newParticle->collider->AddListener(this);
   				App->audio->PlayFx(laserFx);
 

@@ -19,8 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ModulePickUp.h" />
-    <ClInclude Include="PickUp.h" />
     <ClInclude Include="src\Enemy_FlyingBattleship.h" />
     <ClInclude Include="src\Enemy_InfantrySoldier.h" />
     <ClInclude Include="src\ModulePickUp.h" />

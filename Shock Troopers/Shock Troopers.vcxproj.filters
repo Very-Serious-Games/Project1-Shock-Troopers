@@ -108,23 +108,17 @@
     <ClInclude Include="src\SceneMenu.h">
       <Filter>Source Files\modules\gameplay</Filter>
     </ClInclude>
-    <ClInclude Include="ModulePickUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PickUp.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Enemy_FlyingBattleship.h">
-      <Filter>Header Files</Filter>
+      <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy_InfantrySoldier.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PickUp.h">
-      <Filter>Source Files\entities</Filter>
+      <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\ModulePickUp.h">
       <Filter>Source Files\modules\gameplay</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PickUp.h">
+      <Filter>Source Files\entities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -194,17 +188,17 @@
     <ClCompile Include="src\SceneMenu.cpp">
       <Filter>Source Files\modules\gameplay</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy_FlyingBattleship.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Enemy_InfantrySoldier.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="src\PickUp.cpp">
-      <Filter>Source Files\entities</Filter>
+    <ClCompile Include="src\Enemy_FlyingBattleship.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\ModulePickUp.cpp">
       <Filter>Source Files\modules\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PickUp.cpp">
+      <Filter>Source Files\entities</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

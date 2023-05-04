@@ -45,8 +45,6 @@ private:
 	Animation idleDownLeftAnim;
 	Animation idleDownRightAnim;
 
-	Animation* currentAnim = nullptr;
-
 };
 
 #endif // __ENEMY_INFANTRYSOLDIER_H__

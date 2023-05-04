@@ -7,6 +7,16 @@
 struct SDL_Texture;
 struct Collider;
 
+// TODO revisar estados de enemigo
+enum class Enemy_State
+{
+	SPAWN,
+	IDLE,
+	ATTACK,
+	MOVE,
+	DEATH,
+};
+
 class Enemy
 {
 public:
@@ -34,6 +44,8 @@ public:
 	virtual void SetToDelete();
 
 public:
+	Enemy_State state = Enemy_State::SPAWN;
+
 	// The current position in the world
 	iPoint position;
 
@@ -45,6 +57,8 @@ public:
 
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
+
+	int health = 100;
 
 protected:
 	// A ptr to the current animation

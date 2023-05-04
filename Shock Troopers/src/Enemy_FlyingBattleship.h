@@ -25,8 +25,6 @@ private:
 	Animation idleAnim;
 	Animation deathAnim;
 
-	Animation* currentAnim = nullptr;
-
 };
 
 #endif // __ENEMY_FLYINGBATTLESHIP_H__

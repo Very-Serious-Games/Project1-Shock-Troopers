@@ -159,9 +159,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			{
 				case Enemy_Type::INFANTRY_SOLDIER:
 					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
 					break;
 				case Enemy_Type::FLYING_BATTLESHIP:
 					enemies[i] = new Enemy_FlyingBattleship(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
 					break;
 			}
 			enemies[i]->texture = texture;

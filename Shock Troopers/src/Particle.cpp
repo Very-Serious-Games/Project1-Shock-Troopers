@@ -46,7 +46,7 @@ bool Particle::Update()
 		// Update the position in the screen
 		if (granada) {
 			position.x += speed.x * 2;
-			int test = parabole(inicio, 1);
+			int test = parabole(inicio, speed.x);
 			//TODO añadir direccion
 			position.y += test;
 		}
@@ -56,7 +56,7 @@ bool Particle::Update()
 		}
 
 
-		if (collider != nullptr)
+ 		if (collider != nullptr)
 			collider->SetPos(position.x, position.y);
 	}
 
@@ -80,4 +80,45 @@ void Particle::SetToDelete()
 	pendingToDelete = true;
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
+}
+
+void Particle::setDirection(int direction) {
+	switch (direction)
+	{
+	case 1: //UR
+		speed.x = 5;
+		speed.y = -5;
+		break;
+	case 2: //UL
+		speed.x = -5;
+		speed.y = -5;
+		break;
+	case 3: //DR
+		speed.x = 5;
+		speed.y = 5;
+		break;
+	case 4: //DL
+		speed.x = -5;
+		speed.y = 5;
+		break;
+	case 5: //R
+		speed.x = 5;
+		speed.y = 0;
+		break;
+	case 6: //L
+		speed.x = -5;
+		speed.y = 0;
+		break;
+	case 7: //D
+		speed.x = 0;
+		speed.y = 5;
+		break;
+	case 8: //U
+		speed.x = 0;
+		speed.y = -5;
+		break;
+	default:
+
+		break;
+	}
 }

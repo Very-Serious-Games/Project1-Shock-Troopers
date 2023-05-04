@@ -1,55 +1,14 @@
-#ifndef __MODULE_ENEMIES_H__
-#define __MODULE_ENEMIES_H__
+#ifndef __MODULE_PICKUP_H__
+#define __MODULE_PICKUP_H__
 
 #include "Module.h"
 
 #define MAX_ENEMIES 100
 
-enum class Enemy_Type
-{
-	NO_TYPE,
-	INFANTRY_SOLDIER,
-	FLYING_BATTLESHIP,
-};
-
-// TODO revisar estados de enemigo
-enum class Enemy_State
-{
-	SPAWN,
-	IDLE,
-	MOVE,
-	DEATH,
-};
-
-// TODO revisar direcciones de enemigo
-enum class Enemy_Direction
-{
-	UP,
-	DOWN,
-	LEFT,
-	RIGHT,
-	UP_LEFT,
-	UP_RIGHT,
-	DOWN_LEFT,
-	DOWN_RIGHT,
-};
-
-// TODO revisar metodos de spawn de enemigo
-enum class EnemySpawnMethod {
-	DROP,
-	APPEAR,
-};
-
-struct EnemySpawnpoint
-{
-	Enemy_Type type = Enemy_Type::NO_TYPE;
-	int x, y;
-};
-
-class Enemy;
+class PickUp;
 struct SDL_Texture;
 
-class ModuleEnemies : public Module
+class ModulePickUp : public Module
 {
 public:
 	// Constructor
@@ -109,4 +68,4 @@ private:
 	int enemyDestroyedFx = 0;
 };
 
-#endif // __MODULE_ENEMIES_H__
+#endif // __MODULE_ENEMIES_H#pragma once

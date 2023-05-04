@@ -7,9 +7,8 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "Enemy_RedBird.h"
-#include "Enemy_BrownShip.h"
-#include "Enemy_Mech.h"
+#include "Enemy_InfantrySoldier.h"
+#include "Enemy_FlyingBattleship.h"
 
 #define SPAWN_MARGIN 50
 
@@ -27,7 +26,8 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/Sprites/enemies.png");
+	// TODO cargar texturas y fx enemigos
+	texture = App->textures->Load("Assets/Sprites/jet_boss.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -157,14 +157,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case Enemy_Type::REDBIRD:
-					enemies[i] = new Enemy_RedBird(info.x, info.y);
+				case Enemy_Type::INFANTRY_SOLDIER:
+					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y);
 					break;
-				case Enemy_Type::BROWNSHIP:
-					enemies[i] = new Enemy_BrownShip(info.x, info.y);
-					break;
-				case Enemy_Type::MECH:
-					enemies[i] = new Enemy_Mech(info.x, info.y);
+				case Enemy_Type::FLYING_BATTLESHIP:
+					enemies[i] = new Enemy_FlyingBattleship(info.x, info.y);
 					break;
 			}
 			enemies[i]->texture = texture;

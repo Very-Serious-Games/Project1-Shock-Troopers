@@ -19,6 +19,8 @@ public:
 	// Loads the necessary textures for the map background
 	bool Start() override;
 
+	void createMargenes();
+
 	// Called at the middle of the application loop
 	// Updates the scene's background animations
 	Update_Status Update() override;

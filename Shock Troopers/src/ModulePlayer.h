@@ -1,6 +1,9 @@
 #ifndef __MODULE_PLAYER_H__
 #define __MODULE_PLAYER_H__
 
+#include <string>
+#include <cmath>
+using namespace std;
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
@@ -32,21 +35,39 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	void setAnimations();
+
+	void updateHp();
+
+	void setIdleAnimations();
+
+	void move();
+
+	float* normalize(float normV[]);
+
 public:
 	// Position of the player in the map
 	iPoint position;
 
-	iPoint direccion;
+	int lastDirection;
+
+	int delay = 10;
+
+	int hp = 100;
+
+	int currentDirection;
 
 	iPoint diferencia;
 
 	bool roll = false;
 
 	// The speed in which we move the player (pixels per frame)
-	iPoint speed = iPoint(1,1);
+	int speed = 1;
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
+
+	SDL_Texture* textureHp = nullptr;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction

@@ -2,6 +2,7 @@
 
 #include "Module.h"
 #include "ModuleWindow.h"
+#include "ModulePickUp.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
@@ -33,11 +34,12 @@ Application::Application()
 	modules[7]	=	player			=	new ModulePlayer(false);	//Player starts disabled
 	modules[8]	=	particles		=	new ModuleParticles(true);
 	modules[9]	=	enemies			=	new ModuleEnemies(false);	//Enemies start disabled
+	modules[10] =	pickUps		    =   new ModulePickUp(true); 	//Enemies start disabled
 
-	modules[10]	=	collisions		=	new ModuleCollisions(true);
-	modules[11] =	fade			=	new ModuleFadeToBlack(true);
-	modules[12] =	fonts			=	new ModuleFonts(true);
-	modules[13] =	render			=	new ModuleRender(true);
+	modules[11]	=	collisions		=	new ModuleCollisions(true);
+	modules[12] =	fade			=	new ModuleFadeToBlack(true);
+	modules[13] =	fonts			=	new ModuleFonts(true);
+	modules[14] =	render			=	new ModuleRender(true);
 }
 
 Application::~Application()

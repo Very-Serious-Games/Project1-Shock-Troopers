@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include "SceneMenu.h"
 
-#define NUM_MODULES 14
+#define NUM_MODULES 15
 
 class Module;
 class ModuleWindow;
@@ -15,6 +15,7 @@ class ModulePlayer;
 class SceneIntro;
 class SceneLevel1;
 class ModuleParticles;
+class ModulePickUp;
 class ModuleCollisions;
 class ModuleEnemies;
 class ModuleFadeToBlack;
@@ -59,6 +60,7 @@ public:
 
 	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;
+	ModulePickUp* pickUps = nullptr;
 
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* fade = nullptr;

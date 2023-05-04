@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
+#include "ModulePlayer.h"
 
 SceneMenu::SceneMenu(bool startEnabled) : Module(startEnabled)
 {
@@ -128,6 +129,10 @@ Update_Status SceneMenu::Update()
 
 	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
 		currentCharacter--;
+	}
+
+	if (App->player->godMode == true) {
+		App->player->godMode = false;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

@@ -251,9 +251,10 @@ Update_Status ModulePlayer::Update()
 		}
 		if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
 			hp -= 10;
-		}if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN) {
+		}if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
 			hp += 10;
 		}if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
+			godMode = false;
 			hp = 0;
 		}
 		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {

@@ -4,6 +4,7 @@
 
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
+#include "ModulePlayer.h"
 #include "ModuleInput.h"
 
 #include "SDL/include/SDL_render.h"
@@ -54,13 +55,26 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
+
+
+	int newCamX = App->player->position.x * 3 - 400;
+	int newCamY = App->player->position.y * 3 - 300;
+
+	if (newCamX < 515 && newCamX > 0) {
+		App->render->camera.x = newCamX;
+	}
+	if (newCamY < 5058 && newCamY > -342) {
+		App->render->camera.y = newCamY;
+	}
+
 	//Handle positive vertical movement
+
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
-		camera.y -= cameraSpeed;
+		camera.y -= cameraSpeed * SCREEN_HEIGHT;
 
 	//Handle negative vertical movement
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
-		camera.y += cameraSpeed;
+		camera.y += cameraSpeed * SCREEN_HEIGHT;
 
 	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
 		camera.x -= cameraSpeed;
@@ -139,14 +153,12 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 
 	SDL_Rect dstRect { rect.x * SCREEN_SIZE, rect.y * SCREEN_SIZE, rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
 
-	if (useCamera)
-	{
+	if (useCamera) {
 		dstRect.x -= (camera.x * speed);
 		dstRect.y -= (camera.y * speed);
 	}
 
-	if (SDL_RenderFillRect(renderer, &dstRect) != 0)
-	{
+	if (SDL_RenderFillRect(renderer, &dstRect) != 0) {
 		LOG("Cannot draw quad to screen. SDL_RenderFillRect error: %s", SDL_GetError());
 		ret = false;
 	}

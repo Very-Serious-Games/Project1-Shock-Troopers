@@ -27,7 +27,7 @@ bool SceneLevel1::Start()
 
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background_mountain.png");
-	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
@@ -55,15 +55,6 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	int newCamX = App->player->position.x * 3 - 400;
-	int newCamY = App->player->position.y * 3 - 300;
-
-	if (newCamX < 515 && newCamX > 0) {
-		App->render->camera.x = newCamX;
-	}
-	if (newCamY < 5058 && newCamY > -342) {
-		App->render->camera.y = newCamY;
-	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

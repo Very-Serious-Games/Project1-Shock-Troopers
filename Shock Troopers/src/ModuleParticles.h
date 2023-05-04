@@ -46,11 +46,12 @@ public:
 	// Called when a particle collider hits another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+
 	// Creates a new particle and adds it to the array
 	// Param particle	- A template particle from which the new particle will be created
 	// Param x, y		- Position x,y in the screen (upper left axis)
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
-	Particle* AddParticle(const Particle& particle, int x, int y, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
+	Particle* AddParticle(const Particle& particle, int x, int y, int direction, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
 public:
 	//Template particle for an explosion
@@ -62,6 +63,7 @@ public:
 private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture = nullptr;
+	SDL_Texture* textureTest = nullptr;
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };

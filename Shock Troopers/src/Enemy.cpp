@@ -73,7 +73,7 @@ void Enemy::OnCollision(Collider* collider)
 {
     this->health = health - 10; // TODO : change this to the damage of the bullet
     if (health <= 0) {
-        App->particles->AddParticle(App->particles->explosion, position.x, position.y);
+        App->particles->AddParticle(App->particles->explosion, position.x, position.y,0);
         App->audio->PlayFx(destroyedFx);
         SetToDelete();
     }

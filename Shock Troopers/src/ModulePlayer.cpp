@@ -199,9 +199,11 @@ bool ModulePlayer::Start()
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
+	textureP1 = App->textures->Load("Assets/Sprites/Player1_Milky.png");
+	textureWeapon = App->textures->Load("Assets/Sprites/Weapon_Normal.png");
 
-	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");
+	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
 
 	position.x = 220;
 	position.y = 1870;
@@ -213,7 +215,7 @@ bool ModulePlayer::Start()
 
 
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/Fonts/rtype_font3.png", lookupTable, 2);
+	scoreFont = App->fonts->Load("Assets/fonts/rtype_font3.png", lookupTable, 2);
 
 	return ret;
 }
@@ -258,6 +260,8 @@ Update_Status ModulePlayer::Update()
 			hp = 0;
 		}
 		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
+			position.x = 58;
+			position.y = 248;
 			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y });
 		}
 		move();
@@ -270,7 +274,7 @@ Update_Status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
 			App->particles->laser.setDirection(lastDirection);
 			//TODO añadir direccion
-			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 			newParticle->collider->AddListener(this);
 			newParticle->granada = true;
 			App->audio->PlayFx(laserFx);
@@ -285,10 +289,10 @@ Update_Status ModulePlayer::Update()
 		{
 			delay--;
 			if (delay == 0) {
-				App->particles->laser.setDirection(lastDirection);
-				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+				//App->particles->laser.setDirection(lastDirection);
+ 				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 				newParticle->collider->AddListener(this);
-				App->audio->PlayFx(laserFx);
+  				App->audio->PlayFx(laserFx);
 
 				delay = 10;
 			}
@@ -322,25 +326,25 @@ Update_Status ModulePlayer::Update()
 
 Update_Status ModulePlayer::PostUpdate()
 {
+		int x, y;
 	if (!destroyed)
 	{
-		int x, y;
 		SDL_Rect rectLegs = currentAnimationLegs->GetCurrentFrame();
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
 		//TODO arreglar lumbago
 		App->render->Blit(texture, position.x, position.y, &rectLegs);
 		App->render->Blit(texture, position.x+3, position.y-18, &rectTorso);
-		//TODO solucionar bug al rodar y bibrasao rara esa
-		x = (position.x > 302) ? 202 : (position.x < 132) ? 32 : position.x - 100;
-		y = (position.y > 1786) ? 1740 : (position.y < 100) ? 50 : position.y - 50;
-		App->render->Blit(textureHp,x, y, NULL);
+		
+		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
+		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
+		App->render->Blit(textureHp,x - 10, y, NULL);
+		App->render->Blit(textureP1, x - 20, y - 50, NULL);
+		App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
 	}
 
 	sprintf_s(scoreText, 10, "%7d", score);
-	//TODO Añadir score a la pantalla
-	App->fonts->BlitText(58, 248, scoreFont, scoreText);
 
-	App->fonts->BlitText(150, 248, scoreFont, "this is just a font test");
+	App->fonts->BlitText(30, 5, scoreFont, scoreText);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -363,14 +367,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::WALL) {
 
 		if (c1->rect.y < c2->rect.y) {
+			speed = 0;
 			position.y -= 1;
 		}
 		else if (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h) {
+			speed = 0;
 			position.y += 1;
 		}else if (c1->rect.x < c2->rect.x) {
+			speed = 0;
 			position.x -= 1;
 		}
 		else if (c1->rect.x + c1->rect.w > c2->rect.x + c2->rect.w ) {
+			speed = 0;
 			position.x += 1;
 		}
 

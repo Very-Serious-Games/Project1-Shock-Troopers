@@ -1,78 +1,74 @@
 #include "SceneLevel1.h"
+#include <fstream>
+#include <iostream>
+#include <string>
 
+using namespace std;
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
+#include "ModulePickUp.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
-{
-
-}
+{}
 
 SceneLevel1::~SceneLevel1()
-{
+{}
 
-}
-
-// Load assets
 bool SceneLevel1::Start()
 {
 	LOG("Loading background assets");
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Sprites/background.png");
+	// Load textures and fx
+	bgTexture = App->textures->Load("Assets/Sprites/background_mountain.png");
 	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
 
-	//Bottomside collider
-	App->collisions->AddCollider({ 0, 224, 3930, 16 }, Collider::Type::WALL);
+	// Add colliders
+	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 493, 0, 1, 1909 }, Collider::Type::WALL);
 
-	//First two columns colliders
-	App->collisions->AddCollider({ 1375, 0, 111, 96 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 1375, 145, 111, 96 }, Collider::Type::WALL);
 
-	// Enemies ---
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 600, 80);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 625, 80);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 640, 80);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 665, 80);
+	createMargenes();
 
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 735, 120);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 750, 120);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 775, 120);
-	App->enemies->AddEnemy(Enemy_Type::REDBIRD, 790, 120);
+	// Add enemies
+	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 100, 100);
+	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 200, 100);
 
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 830, 100);
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 850, 100);
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 870, 100);
-	App->enemies->AddEnemy(Enemy_Type::BROWNSHIP, 890, 100);
-
-	App->enemies->AddEnemy(Enemy_Type::MECH, 900, 195);
-
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
+	App->render->camera.x = 220;
+	App->render->camera.y = 5058;
 
 	App->player->Enable();
 	App->enemies->Enable();
+	App->collisions->Enable();
+	App->pickUps->Enable();
 
 	return ret;
 }
 
 Update_Status SceneLevel1::Update()
 {
-	App->render->camera.x += 3;
+	int newCamX = App->player->position.x * 3 - 400;
+	int newCamY = App->player->position.y * 3 - 300;
+
+	if (newCamX < 515 && newCamX > 0) {
+		App->render->camera.x = newCamX;
+	}
+	if (newCamY < 5058 && newCamY > -342) {
+		App->render->camera.y = newCamY;
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-// Update: draw background
 Update_Status SceneLevel1::PostUpdate()
 {
-	// Draw everything --------------------------------------
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -82,8 +78,40 @@ bool SceneLevel1::CleanUp()
 {
 	App->player->Disable();
 	App->enemies->Disable();
+	App->sceneLevel_1->Disable();
+	App->pickUps->Disable();
+	App->collisions->Disable();
 
-	// TODO 5 (old): Remove All Memory Leaks - no solution here guys ;)
+	// TODO remove all memory leaks
 
 	return true;
+}
+
+void SceneLevel1::createMargenes() {
+	ifstream file("Assets/Sprites/colisionesMapa.csv");
+	string line;
+
+	while (getline(file, line)) {
+		int values[4];
+		int pos = 0;
+		string value;
+
+		for (int i = 0; i < line.size(); i++) {
+			if (line[i] == ';') {
+				values[pos] = stoi(value);
+				pos++;
+				value = "";
+			}
+			else {
+				value += line[i];
+			}
+		}
+
+		values[pos] = stoi(value);
+		App->collisions->AddCollider({ values[0], values[1], values[2], values[3] }, Collider::Type::WALL);
+
+		cout << endl;
+	}
+
+	file.close();
 }

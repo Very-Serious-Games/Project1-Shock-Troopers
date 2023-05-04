@@ -54,15 +54,6 @@ bool SceneLevel1::Start()
 
 Update_Status SceneLevel1::Update()
 {
-	int newCamX = App->player->position.x * 3 - 400;
-	int newCamY = App->player->position.y * 3 - 300;
-
-	if (newCamX < 515 && newCamX > 0) {
-		App->render->camera.x = newCamX;
-	}
-	if (newCamY < 5058 && newCamY > -342) {
-		App->render->camera.y = newCamY;
-	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

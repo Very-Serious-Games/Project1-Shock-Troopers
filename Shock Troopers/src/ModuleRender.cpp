@@ -4,6 +4,7 @@
 
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
+#include "ModulePlayer.h"
 #include "ModuleInput.h"
 
 #include "SDL/include/SDL_render.h"
@@ -54,13 +55,26 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
+
+
+	int newCamX = App->player->position.x * 3 - 400;
+	int newCamY = App->player->position.y * 3 - 300;
+
+	if (newCamX < 515 && newCamX > 0) {
+		App->render->camera.x = newCamX;
+	}
+	if (newCamY < 5058 && newCamY > -342) {
+		App->render->camera.y = newCamY;
+	}
+
 	//Handle positive vertical movement
+
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
-		camera.y -= cameraSpeed;
+		camera.y -= cameraSpeed * SCREEN_HEIGHT;
 
 	//Handle negative vertical movement
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
-		camera.y += cameraSpeed;
+		camera.y += cameraSpeed * SCREEN_HEIGHT;
 
 	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
 		camera.x -= cameraSpeed;

@@ -213,7 +213,7 @@ bool ModulePlayer::Start()
 
 
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/Fonts/rtype_font3.png", lookupTable, 2);
+	scoreFont = App->fonts->Load("Assets/fonts/rtype_font3.png", lookupTable, 2);
 
 	return ret;
 }
@@ -253,6 +253,8 @@ Update_Status ModulePlayer::Update()
 			hp -= 10;
 		}
 		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
+			position.x = 58;
+			position.y = 248;
 			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y });
 		}
 		move();
@@ -311,17 +313,19 @@ Update_Status ModulePlayer::PostUpdate()
 		//TODO arreglar lumbago
 		App->render->Blit(texture, position.x, position.y, &rectLegs);
 		App->render->Blit(texture, position.x+3, position.y-18, &rectTorso);
-		//TODO solucionar bug al rodar y bibrasao rara esa
+		
 		x = (position.x > 302) ? 202 : (position.x < 132) ? 32 : position.x - 100;
-		y = (position.y > 1786) ? 1740 : (position.y < 100) ? 50 : position.y - 50;
+		y = (position.y > 1786) ? 1740 : (position.y < 60) ? 50 : position.y - 50;
 		App->render->Blit(textureHp,x, y, NULL);
 	}
 
+	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%7d", score);
-	//TODO Añadir score a la pantalla
-	App->fonts->BlitText(58, 248, scoreFont, scoreText);
 
-	App->fonts->BlitText(150, 248, scoreFont, "this is just a font test");
+	// TODO 3: Blit the text of the score in at the bottom of the screen
+	App->fonts->BlitText(position.x, position.y, scoreFont, scoreText);
+
+	App->fonts->BlitText(position.x, position.y, scoreFont, "this is just a font test");
 
 	return Update_Status::UPDATE_CONTINUE;
 }

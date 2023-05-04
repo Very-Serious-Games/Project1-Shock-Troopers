@@ -37,6 +37,8 @@ public:
 
 	void setAnimations();
 
+	void updateHp();
+
 	void setIdleAnimations();
 
 	void move();
@@ -49,6 +51,10 @@ public:
 
 	int lastDirection;
 
+	int delay = 10;
+
+	int hp = 100;
+
 	int currentDirection;
 
 	iPoint diferencia;
@@ -60,6 +66,8 @@ public:
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
+
+	SDL_Texture* textureHp = nullptr;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction

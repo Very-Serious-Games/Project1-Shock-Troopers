@@ -46,7 +46,7 @@ bool Particle::Update()
 		// Update the position in the screen
 		if (granada) {
 			position.x += speed.x * 2;
-			int test = parabole(inicio, 1);
+			int test = parabole(inicio, speed.x);
 			//TODO añadir direccion
 			position.y += test;
 		}
@@ -56,7 +56,7 @@ bool Particle::Update()
 		}
 
 
-		if (collider != nullptr)
+ 		if (collider != nullptr)
 			collider->SetPos(position.x, position.y);
 	}
 

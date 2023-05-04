@@ -48,16 +48,7 @@
     <ClInclude Include="src\Particle.h">
       <Filter>Source Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enemy_RedBird.h">
-      <Filter>Source Files\entities\enemies</Filter>
-    </ClInclude>
     <ClInclude Include="src\Enemy.h">
-      <Filter>Source Files\entities\enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Enemy_BrownShip.h">
-      <Filter>Source Files\entities\enemies</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Enemy_Mech.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\ModuleAudio.h">
@@ -117,6 +108,12 @@
     <ClInclude Include="src\SceneMenu.h">
       <Filter>Source Files\modules\gameplay</Filter>
     </ClInclude>
+    <ClInclude Include="src\Enemy_FlyingBattleship.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_InfantrySoldier.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -132,15 +129,6 @@
       <Filter>Source Files\entities</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy.cpp">
-      <Filter>Source Files\entities\enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Enemy_BrownShip.cpp">
-      <Filter>Source Files\entities\enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Enemy_Mech.cpp">
-      <Filter>Source Files\entities\enemies</Filter>
-    </ClCompile>
-    <ClCompile Include="src\Enemy_RedBird.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\ModuleAudio.cpp">
@@ -193,6 +181,12 @@
     </ClCompile>
     <ClCompile Include="src\SceneMenu.cpp">
       <Filter>Source Files\modules\gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_InfantrySoldier.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_FlyingBattleship.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

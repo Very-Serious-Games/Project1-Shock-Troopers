@@ -44,7 +44,7 @@ public:
 	virtual void SetToDelete();
 
 public:
-	Enemy_State state = Enemy_State::IDLE;
+	Enemy_State state = Enemy_State::SPAWN;
 
 	// The current position in the world
 	iPoint position;

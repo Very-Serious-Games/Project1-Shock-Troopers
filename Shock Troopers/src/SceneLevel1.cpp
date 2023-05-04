@@ -27,7 +27,7 @@ bool SceneLevel1::Start()
 
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background_mountain.png");
-	App->audio->PlayMusic("Assets/Music/stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);

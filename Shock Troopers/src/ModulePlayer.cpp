@@ -202,8 +202,8 @@ bool ModulePlayer::Start()
 	textureP1 = App->textures->Load("Assets/Sprites/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/Sprites/Weapon_Normal.png");
 
-	laserFx = App->audio->LoadFx("Assets/Fx/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
+	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");
+	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
 
 	position.x = 220;
 	position.y = 1870;
@@ -273,7 +273,7 @@ Update_Status ModulePlayer::Update()
 		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
 			App->particles->laser.setDirection(lastDirection);
 			//TODO añadir direccion
-			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x + 20, position.y, Collider::Type::PLAYER_SHOT);
+			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 			newParticle->collider->AddListener(this);
 			newParticle->granada = true;
 			App->audio->PlayFx(laserFx);
@@ -291,7 +291,7 @@ Update_Status ModulePlayer::Update()
 				//App->particles->laser.setDirection(lastDirection);
  				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 				newParticle->collider->AddListener(this);
-				App->audio->PlayFx(laserFx);
+  				App->audio->PlayFx(laserFx);
 
 				delay = 10;
 			}

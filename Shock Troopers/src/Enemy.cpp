@@ -10,6 +10,7 @@
 Enemy::Enemy(int x, int y) : position(x, y)
 {
 	spawnPos = position;
+    // TODO revisar añadir triggerArea a enemy
     //triggerArea = App->collisions->AddCollider({ position.x, position.y, 1, 1 }, Collider::Type::TRIGGERAREA);
 }
 
@@ -47,14 +48,18 @@ void Enemy::Update()
             }
             break;
         case Enemy_State::ATTACK:
+            if (!PlayerIsNear()) {
+                state = Enemy_State::IDLE;
+                LOG("state changed to IDLE");
+            }
             if (this->health == 0) {
-                LOG("state changed to ATTACK");
                 state = Enemy_State::DEATH;
+                LOG("state changed to DEATH");
             }
             break;
         case Enemy_State::DEATH:
-            LOG("state changed to DEATH");
             pendingToDelete = true;
+            LOG("pendingToDelete enemy");
             break;
         default:
             // Handle default state logic
@@ -90,6 +95,13 @@ bool Enemy::PlayerIsNear() {
 
     int detectionDistance = 200; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
     int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
+    
+
+    // TODO print debug mode detection zone
+    /*
+    SDL_Rect rect = { position.x, position.y, detectionDistance, detectionDistance };
+    App->collisions->AddCollider(rect, Collider::Type::DETECTION_ZONE);
+    */
 
     if (distance <= detectionDistance) {
         return true;

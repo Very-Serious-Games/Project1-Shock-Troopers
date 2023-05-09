@@ -78,15 +78,21 @@ Update_Status ModuleCollisions::PreUpdate()
 			if(colliders[k] == nullptr)
 				continue;
 
+
 			c2 = colliders[k];
 
-			if(matrix[c1->type][c2->type] && c1->Intersects(c2->rect))
-			{
-				for (uint i = 0; i < MAX_LISTENERS; ++i)
-					if (c1->listeners[i] != nullptr) c1->listeners[i]->OnCollision(c1, c2);
+			if(matrix[c1->type][c2->type] && c1->Intersects(c2->rect)) {
+				for (uint i = 0; i < MAX_LISTENERS; ++i) {
+					if (c1->listeners[i] != nullptr) {
+						c1->listeners[i]->OnCollision(c1, c2);
+					}
+				}
 				
-				for (uint i = 0; i < MAX_LISTENERS; ++i)
-					if (c2->listeners[i] != nullptr) c2->listeners[i]->OnCollision(c2, c1);
+				for (uint i = 0; i < MAX_LISTENERS; ++i) {
+					if (c2->listeners[i] != nullptr) {
+						c2->listeners[i]->OnCollision(c2, c1);
+					}
+				}
 			}
 		}
 	}
@@ -121,25 +127,32 @@ void ModuleCollisions::DebugDraw()
 		switch(colliders[i]->type)
 		{
 			case Collider::Type::NONE: // white
-			App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
-			break;
+				App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+				break;
 			case Collider::Type::WALL: // blue
-			App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
-			break;
+				App->render->DrawQuad(colliders[i]->rect, 0, 0, 255, alpha);
+				break;
 			case Collider::Type::PLAYER: // green
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
-			break;
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+				break;
 			case Collider::Type::ENEMY: // red
-			App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
-			break;
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+				break;
 			case Collider::Type::PLAYER_SHOT: // yellow
-			App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
-			break;
+				App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
+				break;
 			case Collider::Type::ENEMY_SHOT: // magenta
-			App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+				break;
 			case Collider::Type::HEAL: // magenta
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
-			break;
+				break;
+			case Collider::Type::DETECTION_ZONE: // orange
+				App->render->DrawQuad(colliders[i]->rect, 255, 165, 0, alpha);
+				break;
+
+			default:
+				break;
 		}
 	}
 }

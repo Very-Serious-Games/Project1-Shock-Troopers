@@ -18,6 +18,7 @@ struct Collider
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 		HEAL,
+		DETECTION_ZONE,
 
 		MAX
 	};

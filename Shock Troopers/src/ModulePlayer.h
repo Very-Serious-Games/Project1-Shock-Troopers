@@ -43,6 +43,8 @@ public:
 
 	void move();
 
+	void colideWall(int direction);
+
 	float* normalize(float normV[]);
 
 public:

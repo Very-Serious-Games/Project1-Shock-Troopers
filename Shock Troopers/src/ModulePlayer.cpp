@@ -364,23 +364,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::WALL) {
-
-		if (c1->rect.y < c2->rect.y) {
-			speed = 0;
-			position.y -= 1;
-		}
-		else if (c1->rect.y + c1->rect.h > c2->rect.y + c2->rect.h) {
-			speed = 0;
-			position.y += 1;
-		}else if (c1->rect.x < c2->rect.x) {
-			speed = 0;
-			position.x -= 1;
-		}
-		else if (c1->rect.x + c1->rect.w > c2->rect.x + c2->rect.w ) {
-			speed = 0;
-			position.x += 1;
-		}
-
+		roll = false;
+		colideWall(currentDirection);
 	}
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
 		//TODO añadir animacion c muere jugador
@@ -393,6 +378,42 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 }
 
+void ModulePlayer::colideWall(int direction) {
+	switch (direction) {
+
+	case 1: //UR
+		position.x -= 1;
+		position.y += 1;
+		break;
+	case 2: //UL
+		position.x += 1;
+		position.y += 1;
+		break;
+	case 3: //DR
+		position.x -= 1;
+		position.y -= 1;
+		break;
+	case 4: //DL
+		position.x += 1;
+		position.y -= 1;
+		break;
+	case 5: //R
+		position.x -= 1;
+		break;
+	case 6: //L
+		position.x += 1;
+		break;
+	case 7: //D
+		position.y -= 1;
+		break;
+	case 8: //U
+		position.y += 1;
+		break;
+	default:
+		colideWall(lastDirection);
+		break;
+	}
+}
 
 void ModulePlayer::setIdleAnimations() {
 	switch (lastDirection)

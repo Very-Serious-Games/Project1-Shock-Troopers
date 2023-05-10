@@ -3,6 +3,7 @@
 
 #include "Enemy.h"
 #include "Path.h"
+#include "Module.h"
 
 class Enemy_FlyingBattleship : public Enemy {
 public:

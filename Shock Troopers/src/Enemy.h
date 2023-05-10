@@ -3,6 +3,10 @@
 
 #include "p2Point.h"
 #include "Animation.h"
+#include "Application.h"
+#include "Particle.h"
+#include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -36,6 +40,9 @@ public:
 
 	virtual void StateMachine();
 
+	virtual void Attack();
+	virtual void SpecialAttack();
+
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
 
@@ -64,6 +71,8 @@ public:
 	bool pendingToDelete = false;
 
 	int health = 100;
+
+	int delay = 15;
 
 protected:
 	// A ptr to the current animation

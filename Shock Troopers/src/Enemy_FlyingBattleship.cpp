@@ -2,9 +2,12 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "Particle.h"
 
 Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 	
+
+
 	spawnAnim.PushBack({0, 0, 121, 124});
 	spawnAnim.PushBack({128, 0, 121, 124});
 	spawnAnim.pingpong = true;
@@ -35,6 +38,23 @@ void Enemy_FlyingBattleship::Update() {
 	Enemy::Update();
 }
 
+void Enemy::Attack() {
+        delay--;
+        if (delay == 0) {
+            // TODO add explosion when shooting
+            Particle* shot1 = App->particles->AddParticle(App->particles->laser, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            shot1->collider->AddListener(NULL);
+            Particle* shot2 = App->particles->AddParticle(App->particles->laser, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            shot2->collider->AddListener(NULL);
+            App->audio->PlayFx(/*sound effect*/NULL);
+            delay = 15;
+        }
+}
+
+void Enemy::SpecialAttack() {
+
+}
+
 void Enemy::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
@@ -51,6 +71,9 @@ void Enemy::StateMachine() {
         }
         break;
     case Enemy_State::ATTACK:
+        
+        Attack();
+
         if (!PlayerIsNear()) {
             state = Enemy_State::IDLE;
             LOG("state changed to IDLE");

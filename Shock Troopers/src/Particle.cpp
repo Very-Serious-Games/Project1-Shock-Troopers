@@ -113,6 +113,7 @@ void Particle::SetToDelete()
 		collider->pendingToDelete = true;
 }
 
+// TODO cambiar esto a codigo mas legible
 void Particle::setDirection(int direction) {
 	switch (direction)
 	{

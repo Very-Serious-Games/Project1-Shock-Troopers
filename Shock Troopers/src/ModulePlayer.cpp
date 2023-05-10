@@ -212,13 +212,16 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
+	// Animation
 	texture = App->textures->Load("Assets/Sprites/Milky/milkySpritesheet.png");
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
+	// UI TEXTURES
 	textureP1 = App->textures->Load("Assets/Sprites/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/Sprites/Weapon_Normal.png");
 
+	// Spund effects
 	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
 
@@ -268,19 +271,30 @@ Update_Status ModulePlayer::Update()
 		}else {
 			currentDirection = 0;
 		}
+
+
+
 		if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
 			hp -= 10;
-		}if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
+
+		}
+		
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
 			hp += 10;
-		}if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
+
+		}
+		
+		if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
 			godMode = false;
 			hp = 0;
 		}
+
 		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
 			position.x = 58;
 			position.y = 248;
 			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y });
 		}
+
 		move();
 		setAnimations();
 
@@ -289,9 +303,9 @@ Update_Status ModulePlayer::Update()
 		diferencia.y = position.y;
 
 		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
-			App->particles->laser.setDirection(lastDirection);
+			App->particles->playerShot.setDirection(lastDirection);
 			//TODO añadir direccion
-			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
+			Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 			newParticle->collider->AddListener(this);
 			newParticle->granada = true;
 			App->audio->PlayFx(laserFx);
@@ -307,7 +321,7 @@ Update_Status ModulePlayer::Update()
 			delay--;
 			if (delay == 0) {
 				//App->particles->laser.setDirection(lastDirection);
- 				Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x+5, position.y+20, lastDirection, Collider::Type::PLAYER_SHOT);
+ 				Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x+5, position.y+20, lastDirection, Collider::Type::PLAYER_SHOT);
 				newParticle->collider->AddListener(this);
   				App->audio->PlayFx(laserFx);
 
@@ -349,8 +363,9 @@ Update_Status ModulePlayer::PostUpdate()
 		SDL_Rect rectLegs = currentAnimationLegs->GetCurrentFrame();
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
 		//TODO arreglar lumbago
-		App->render->Blit(texture, position.x, position.y, &rectLegs);
-		App->render->Blit(texture, position.x, position.y-4, &rectTorso);
+		App->render->Blit(texture, position.x+1, position.y+3, &rectLegs);
+		App->render->Blit(texture, position.x, position.y, &rectTorso);
+		
 		
 		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
 		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;

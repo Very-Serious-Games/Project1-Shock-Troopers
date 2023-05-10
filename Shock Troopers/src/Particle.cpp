@@ -106,6 +106,7 @@ int Particle::parabole(int x, int direction_x) {
 	return y;
 }
 
+
 void Particle::SetToDelete()
 {
 	pendingToDelete = true;
@@ -114,6 +115,7 @@ void Particle::SetToDelete()
 }
 
 // TODO cambiar esto a codigo mas legible
+
 void Particle::setDirection(int direction) {
 	switch (direction)
 	{

@@ -37,11 +37,20 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
+
+	flyingbattleshipShop.anim.PushBack({0, 0, 3, 3});
+	flyingbattleshipShop.anim.PushBack({5, 0, 3, 3});
+	flyingbattleshipShop.anim.speed = 0.2f;
+
+	playerShot.anim.PushBack({});
+
+	/*
 	laser.currentAnimation = &laser.bullet_R;
 
 	laser.speed.x = 5;
 	laser.lifetime = 180;
 	laser.anim.speed = 0.2f;
+	*/
 
 	return true;
 }
@@ -141,7 +150,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
 			newParticle->frameCount = -(int)delay;
 			newParticle->position.x = x;
 			newParticle->position.y = y;
-			newParticle->currentAnimation = &laser.bullet_R;
+			newParticle->currentAnimation = &playerShot.bullet_U;
 			//Adding the particle's collider
 			if (colliderType != Collider::Type::NONE)
 				newParticle->collider = App->collisions->AddCollider(newParticle->currentAnimation->GetCurrentFrame(), colliderType, this);

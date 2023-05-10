@@ -33,39 +33,7 @@ void Enemy::Update()
 	if (collider != nullptr)
 		collider->SetPos(position.x, position.y);
 
-    switch (state) {
-        case Enemy_State::SPAWN:
-            // Handle spawn state logic
-            if (/* some condition for idle */true) {
-                state = Enemy_State::IDLE;
-                LOG("state changed to IDLE");
-            }
-            break;
-        case Enemy_State::IDLE:
-            if (PlayerIsNear()) {
-                state = Enemy_State::ATTACK;
-                LOG("state changed to ATTACK");
-            }
-            break;
-        case Enemy_State::ATTACK:
-            if (!PlayerIsNear()) {
-                state = Enemy_State::IDLE;
-                LOG("state changed to IDLE");
-            }
-            if (this->health == 0) {
-                state = Enemy_State::DEATH;
-                LOG("state changed to DEATH");
-            }
-            break;
-        case Enemy_State::DEATH:
-            pendingToDelete = true;
-            LOG("pendingToDelete enemy");
-            break;
-        default:
-            // Handle default state logic
-            LOG("ERROR STATE");
-            break;
-    }
+    StateMachine();
 }
 
 void Enemy::Draw()

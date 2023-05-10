@@ -34,6 +34,8 @@ public:
 	// Updates animation and collider position
 	virtual void Update();
 
+	virtual void StateMachine();
+
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
 

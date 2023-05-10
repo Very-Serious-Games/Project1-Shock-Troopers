@@ -42,9 +42,10 @@ void Enemy::Attack() {
         delay--;
         if (delay == 0) {
             // TODO add explosion when shooting
-            Particle* shot1 = App->particles->AddParticle(App->particles->flyingbattleshipShop, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            // TODO change particle used to the correct one
+            Particle* shot1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
             shot1->collider->AddListener(NULL);
-            Particle* shot2 = App->particles->AddParticle(App->particles->flyingbattleshipShop, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            Particle* shot2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
             shot2->collider->AddListener(NULL);
             App->audio->PlayFx(/*sound effect*/NULL);
             delay = 15;

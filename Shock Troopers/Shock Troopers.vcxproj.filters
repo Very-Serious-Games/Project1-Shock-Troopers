@@ -120,6 +120,9 @@
     <ClInclude Include="src\PickUp.h">
       <Filter>Source Files\entities</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -200,5 +203,10 @@
     <ClCompile Include="src\PickUp.cpp">
       <Filter>Source Files\entities</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Shock Troopers.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

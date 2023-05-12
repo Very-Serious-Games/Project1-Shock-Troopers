@@ -25,6 +25,8 @@ private:
 	Animation spawnAnimRight;
 	Animation spawnAnimLeft;
 
+	Animation deathAnim;
+
 	Animation upAnim;
 	Animation downAnim;
 	Animation leftAnim;
@@ -34,8 +36,6 @@ private:
 	Animation downLeftAnim;
 	Animation downRightAnim;
 
-	Animation deathAnim;
-
 	Animation idleUpAnim;
 	Animation idleDownAnim;
 	Animation idleLeftAnim;
@@ -44,6 +44,45 @@ private:
 	Animation idleUpRightAnim;
 	Animation idleDownLeftAnim;
 	Animation idleDownRightAnim;
+
+	//Gun
+	Animation gunUpAnim;
+	Animation gunDownAnim;
+	Animation gunLeftAnim;
+	Animation gunRightAnim;
+	Animation gunUpLeftAnim;
+	Animation gunUpRightAnim;
+	Animation gunDownLeftAnim;
+	Animation gunDownRightAnim;
+
+	Animation gunIdleUpAnim;
+	Animation gunIdleDownAnim;
+	Animation gunIdleLeftAnim;
+	Animation gunIdleRightAnim;
+	Animation gunIdleUpLeftAnim;
+	Animation gunIdleUpRightAnim;
+	Animation gunIdleDownLeftAnim;
+	Animation gunIdleDownRightAnim;
+
+	//knife
+	Animation knifeUpAnim;
+	Animation knifeDownAnim;
+	Animation knifeLeftAnim;
+	Animation knifeRightAnim;
+	Animation knifeUpLeftAnim;
+	Animation knifeUpRightAnim;
+	Animation knifeDownLeftAnim;
+	Animation knifeDownRightAnim;
+
+	Animation knifeIdleUpAnim;
+	Animation knifeIdleDownAnim;
+	Animation knifeIdleLeftAnim;
+	Animation knifeIdleRightAnim;
+	Animation knifeIdleUpLeftAnim;
+	Animation knifeIdleUpRightAnim;
+	Animation knifeIdleDownLeftAnim;
+	Animation knifeIdleDownRightAnim;
+	
 
 };
 

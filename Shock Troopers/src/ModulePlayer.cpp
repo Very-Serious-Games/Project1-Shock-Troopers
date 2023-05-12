@@ -222,6 +222,26 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
+	GamePad& pad = App->input->pads[0];
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_1] == Key_State::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 12, 0.33f);
+	}
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_2] == Key_State::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 36, 0.66f);
+	}
+
+	//Debug key for gamepad rumble testing purposes
+	if (App->input->keys[SDL_SCANCODE_3] == Key_State::KEY_DOWN)
+	{
+		App->input->ShakeController(0, 60, 1.0f);
+	}
+
 	updateHp();
 	if (roll) {
 		speed = 3;
@@ -232,21 +252,21 @@ Update_Status ModulePlayer::Update()
 	}else {
 		speed = 1;
 
-		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_y < 0 && pad.l_x > 0) {
 			currentDirection = 1;
-		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_y < 0 && pad.l_x < 0) {
 			currentDirection = 2;
-		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_y > 0 && pad.l_x > 0) {
 			currentDirection = 3;
-		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_y > 0 && pad.l_x < 0) {
 			currentDirection = 4;
-		}else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT){
+		}else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_x > 0){
 			currentDirection = 5;
-		}else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT){
+		}else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_x < 0){
 			currentDirection = 6;
-		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT){
+		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || pad.l_y > 0){
 			currentDirection = 7;
-		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT){
+		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || pad.l_y < 0){
 			currentDirection = 8;
 		}else {
 			currentDirection = 0;
@@ -271,7 +291,7 @@ Update_Status ModulePlayer::Update()
 		diferencia.x = position.x;
 		diferencia.y = position.y;
 
-		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
+		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN || pad.y == true) {
 			App->particles->laser.setDirection(lastDirection);
 			//TODO añadir direccion
 			Particle* newParticle = App->particles->AddParticle(App->particles->laser, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
@@ -280,12 +300,12 @@ Update_Status ModulePlayer::Update()
 			App->audio->PlayFx(laserFx);
 		}
 
-		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN)
+		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN || pad.b == true)
 		{
 			roll = true;
 		}
 		
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT || pad.x == true)
 		{
 			delay--;
 			if (delay == 0) {

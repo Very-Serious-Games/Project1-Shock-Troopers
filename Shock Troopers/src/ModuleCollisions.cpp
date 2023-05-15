@@ -1,10 +1,11 @@
 #include "ModuleCollisions.h"
 
+#include <iostream>
 #include "Application.h"
-
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL_Scancode.h"
+using namespace std;
 
 ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
@@ -16,30 +17,41 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::WALL][Collider::Type::LASER] = true;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::LASER] = false;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::LASER] = false;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::LASER] = false;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::LASER] = false;
+
+	matrix[Collider::Type::LASER][Collider::Type::WALL] = true;
+	matrix[Collider::Type::LASER][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::LASER][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::LASER][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::LASER][Collider::Type::LASER] = false;
 }
 
 // Destructor
@@ -71,7 +83,7 @@ Update_Status ModuleCollisions::PreUpdate()
 
 		c1 = colliders[i];
 
-		// avoid checking collisions already checked
+		// avoid checking collisions already checkedn
 		for(uint k = i+1; k < MAX_COLLIDERS; ++k)
 		{
 			// skip empty colliders
@@ -80,7 +92,6 @@ Update_Status ModuleCollisions::PreUpdate()
 
 
 			c2 = colliders[k];
-
 			if(matrix[c1->type][c2->type] && c1->Intersects(c2->rect)) {
 				for (uint i = 0; i < MAX_LISTENERS; ++i) {
 					if (c1->listeners[i] != nullptr) {
@@ -149,6 +160,9 @@ void ModuleCollisions::DebugDraw()
 				break;
 			case Collider::Type::DETECTION_ZONE: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 165, 0, alpha);
+				break;
+			case Collider::Type::LASER: // orange
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 				break;
 
 			default:

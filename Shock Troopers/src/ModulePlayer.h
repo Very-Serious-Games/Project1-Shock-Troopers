@@ -43,6 +43,8 @@ public:
 
 	void move();
 
+	bool intersect(SDL_Rect a, SDL_Rect b);
+
 	void colideWall(int direction);
 
 	float* normalize(float normV[]);
@@ -136,7 +138,15 @@ public:
 
 	// The player's collider
 	Collider* collider = nullptr;
+	Collider* colliderU = nullptr;
+	Collider* colliderD = nullptr;
+	Collider* colliderR = nullptr;
+	Collider* colliderL = nullptr;
 
+	bool lockR = false;
+	bool lockU = false;
+	bool lockD = false;
+	bool lockL = false;
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
 

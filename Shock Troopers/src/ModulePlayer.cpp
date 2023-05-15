@@ -232,6 +232,10 @@ bool ModulePlayer::Start()
 	destroyed = false;
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+	colliderL = App->collisions->AddCollider({ position.x + 5, position.y + 2, 2, 43 }, Collider::Type::LASER, this);
+	colliderU = App->collisions->AddCollider({ position.x+5, position.y + 8, 22, 2 }, Collider::Type::LASER, this);
+	colliderD = App->collisions->AddCollider({ position.x + 5, position.y+51, 22, 2 }, Collider::Type::LASER, this);
+	colliderR = App->collisions->AddCollider({ position.x + 32, position.y +2, 2,43}, Collider::Type::LASER, this);
 
 
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
@@ -334,6 +338,10 @@ Update_Status ModulePlayer::Update()
 	}
 
 	collider->SetPos(position.x, position.y);
+	colliderU->SetPos(position.x + 12, position.y+8);
+	colliderR->SetPos(position.x + 34, position.y + 10);
+	colliderD->SetPos(position.x + 12, position.y + 53);
+	colliderL->SetPos(position.x + 10, position.y + 10);
 
 	currentAnimationLegs->Update();
 	currentAnimationTorso->Update();
@@ -347,10 +355,10 @@ Update_Status ModulePlayer::Update()
 		App->player->position.x = 232;
 		App->player->position.y = 190;
 	}
-	if (godMode)
-	{
-		hp = 100;
-	}
+	lockR = false;
+	lockU = false;
+	lockD = false;
+	lockL = false;
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -383,22 +391,50 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && roll == false)
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && roll == false && !godMode)
 	{
 		//TODO AÑADIR ANIMACION SA EXO PUPA
 		if(hp < 0)
 		hp -= 10;
 	}
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && roll == false)
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && roll == false && !godMode)
 	{
 		//TODO AÑADIR ANIMACION SA EXO PUPA
 		if (hp < 0)
 		hp -= 10;
 	}
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::WALL) {
+
+	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockR = true;
 		roll = false;
-		colideWall(currentDirection);
+	}
+	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockU = true;
+		roll = false;
+	}
+	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockD = true;
+		roll = false;
+	}
+	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockL = true;
+		roll = false;
+	}
+
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+
+
+		//(c1->rect.x >= c2->rect.x + c2->rect.w)
+		//(c1->rect.x + c1.rect.w <= c2->rect.x)
+		//(c1->rect.y + c1->recth <= c2->rect.y)
+		//(c1->rect.y >= c2->rect.y + c2->rect.h)
+
+
+		//(c1->rect.x <= c2->rect.x + c2->rect.w) && ((c1->rect.y <= c2->rect.y + c2->rect.h) && (c1->rect.y >= c2->rect.y) || (c1->rect.y >= c2->rect.y + c2->rect.h) || (c1->rect.y + c1->rect.w <= c2->rect.y)) position += 1;
+		//(c1->rect.x + c1.rect.w >= c2->rect.x) && (c1->rect.y <= c2->rect.y + c2->rect.h) && (c1->rect.y >= c2->rect.y) position -= 1;
+		//roll = false;
+		//colideWall(currentDirection);
 	}
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
 		//TODO añadir animacion c muere jugador
@@ -410,7 +446,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		score += 23;
 	}
 }
-
 void ModulePlayer::colideWall(int direction) {
 	switch (direction) {
 
@@ -545,43 +580,59 @@ float* ModulePlayer::normalize(float normV[]) {
 
 void ModulePlayer::move() {
 
+
 	switch (currentDirection)
 	{
 		case 1: //UR
-			position.x += speed;
-			position.y -= speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+
+			if (!lockR) { 
+				position.x += speed; 
+			}
+			if (!lockU) { 
+				position.y -= speed; 
+			}
 		break;
 		case 2: //UL
-			position.x -= speed;
-			position.y -= speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+			if (!lockU) {
+				position.y -= speed;
+			}
+			if (!lockL) {
+				position.x -= speed;
+			}
 		break;
 		case 3: //DR
-			position.x += speed;
-			position.y += speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+
+
+			if(!lockR) position.x += speed;
+			if(!lockD) position.y += speed;
 		break;
 		case 4: //DL
-			position.x -= speed;
-			position.y += speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+			if (!lockL) {
+				position.x -= speed;
+			}
+			if (!lockD) {
+				position.y += speed;
+			}
 		break;
 		case 5: //R
-			position.x += speed;
+			if (!lockR) { 
+				position.x += speed; 
+			}
 		break;
 		case 6: //L
-			position.x -= speed;
+			if (!lockL) {
+				position.x -= speed;
+			}
 		break;
 		case 7: //D
-			position.y += speed;
+			if (!lockD) {
+				position.y += speed;
+			}
 		break;
 		case 8: //U
-			position.y -= speed;
+			if (!lockU) {
+				position.y -= speed;
+			}
 		break;
 	default:
 		break;

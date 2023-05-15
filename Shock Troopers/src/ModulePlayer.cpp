@@ -1,6 +1,4 @@
 #include "ModulePlayer.h"
-#include <iostream>
-using namespace std;
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePickUp.h"
@@ -11,6 +9,8 @@ using namespace std;
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+#include <iostream>
+using namespace std;
 
 #include <stdio.h>
 
@@ -305,10 +305,12 @@ Update_Status ModulePlayer::Update()
 		}
 
 		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y });
+			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y , true});
 		}
+
 		//Player movement
 		move();
+
 		//Player animation update
 		setAnimations();
 

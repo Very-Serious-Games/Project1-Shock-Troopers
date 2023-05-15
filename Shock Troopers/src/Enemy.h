@@ -41,7 +41,8 @@ public:
 	virtual void StateMachine();
 
 	virtual void Attack();
-	virtual void SpecialAttack();
+
+	virtual void deathAnimation();
 
 	// Called from ModuleEnemies' Update
 	virtual void Draw();

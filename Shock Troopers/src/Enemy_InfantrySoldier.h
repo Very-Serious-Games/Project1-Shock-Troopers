@@ -15,6 +15,8 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
+	void Attack() override;
+
 private:
 	
 

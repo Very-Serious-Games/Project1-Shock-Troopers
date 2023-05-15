@@ -18,7 +18,8 @@ Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 	deathAnim.PushBack({384, 0, 121, 124});
 
 	//path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
-	path.PushBack({ 0.0f, 0.0f }, 100, &idleAnim);
+	path.PushBack({ 1.0f, 0.0f }, 150, &idleAnim);
+	path.PushBack({ -1.0f, 0.0f }, 150, &idleAnim);
 	//path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
 	
 

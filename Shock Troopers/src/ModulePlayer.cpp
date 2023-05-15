@@ -1,5 +1,6 @@
 #include "ModulePlayer.h"
-
+#include <iostream>
+using namespace std;
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePickUp.h"
@@ -247,6 +248,9 @@ bool ModulePlayer::Start()
 Update_Status ModulePlayer::Update()
 {
 	updateHp();
+
+	cout << App->render->camera.x;
+	cout << App->render->camera.y;
 
 	if (roll) {
 

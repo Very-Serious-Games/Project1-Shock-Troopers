@@ -17,10 +17,10 @@ Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 
 	deathAnim.PushBack({384, 0, 121, 124});
 
-	path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
-	
-	path.PushBack({ 0.0f, 0.0f }, 100, &idleAnim);
-	path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
+	//path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
+	path.PushBack({ 1.0f, 0.0f }, 150, &idleAnim);
+	path.PushBack({ -1.0f, 0.0f }, 150, &idleAnim);
+	//path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
 	
 
 	// TODO cambiar tamaño collider
@@ -31,7 +31,8 @@ void Enemy_FlyingBattleship::Update() {
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
-	currentAnim = path.GetCurrentAnimation();
+	//currentAnim = path.GetCurrentAnimation();
+	currentAnim = &spawnAnim;
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
@@ -39,8 +40,41 @@ void Enemy_FlyingBattleship::Update() {
 }
 
 void Enemy::Attack() {
+                                    // get random number between with 10%, 30, 60% chance to happen
+    int attackType = rand() % 100 + 1;
+
+    //LOG("Random attack type: %d", attackType);
+
+    if (attackType <= 10) {           // 10% chance to do a not attack
         delay--;
         if (delay == 0) {
+            LOG("No attack");
+            // do nothing   
+            delay = 15;
+        }
+        
+    } else if (attackType <= 30) {    // 30% chance to do a rocket attack
+        delay--;
+        if (delay == 0) {
+            LOG("Rocket attack");
+            // TODO add rocket attack
+            // TODO add explosion when shooting
+            // TODO change particle used to the correct one
+            /*
+            Particle* rocket1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            rocket1->collider->AddListener(NULL);
+            Particle* rocket2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            rocket2->collider->AddListener(NULL);
+            App->audio->PlayFx(/*sound effectNULL);
+            */
+            
+            delay = 15;
+        }
+
+    } else {                       // 60% chance to do a normal attack
+        delay--;
+        if (delay == 0) {
+            LOG("Normal attack");
             // TODO add explosion when shooting
             // TODO change particle used to the correct one
             Particle* shot1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
@@ -50,15 +84,26 @@ void Enemy::Attack() {
             App->audio->PlayFx(/*sound effect*/NULL);
             delay = 15;
         }
+    }
+        
 }
 
-void Enemy::SpecialAttack() {
+void Enemy::deathAnimation() {
+    currentAnim = &deathAnim;
+}
 
+void Enemy::spawnAnimation() {
+    currentAnim = &spawnAnim;
+}
+
+void Enemy::idleAnimation() {
+    currentAnim = &idleAnim;
 }
 
 void Enemy::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
+        spawnAnimation();
         // Handle spawn state logic
         if (/* some condition for idle */true) {
             state = Enemy_State::IDLE;
@@ -66,15 +111,15 @@ void Enemy::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
+        idleAnimation();
         if (PlayerIsNear()) {
             state = Enemy_State::ATTACK;
             LOG("state changed to ATTACK");
         }
         break;
     case Enemy_State::ATTACK:
-        
+        idleAnimation();
         Attack();
-
         if (!PlayerIsNear()) {
             state = Enemy_State::IDLE;
             LOG("state changed to IDLE");
@@ -85,9 +130,16 @@ void Enemy::StateMachine() {
         }
         break;
     case Enemy_State::DEATH:
-        pendingToDelete = true;
-        LOG("pendingToDelete enemy");
+        deathAnimation();
+
+        if (deathAnimDelay == 0) {
+            pendingToDelete = true;
+            LOG("pendingToDelete enemy");
+        }
+        deathAnimDelay--;
+        
         break;
+
     default:
         // Handle default state logic
         LOG("ERROR STATE");

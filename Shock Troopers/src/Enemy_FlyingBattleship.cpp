@@ -40,9 +40,37 @@ void Enemy_FlyingBattleship::Update() {
 
 void Enemy::Attack() {
                                     // get random number between with 10%, 30, 60% chance to happen
-    int attackType = rand() % 10;   // generate a random number between 0 and 9
+    int attackType = rand() % 100 + 1;
 
-    if (attackType < 6) {           // 60% chance to do a normal attack
+    //LOG("Random attack type: %d", attackType);
+
+    if (attackType <= 10) {           // 10% chance to do a not attack
+        delay--;
+        if (delay == 0) {
+            LOG("No attack");
+            // do nothing   
+            delay = 15;
+        }
+        
+    } else if (attackType <= 30) {    // 30% chance to do a rocket attack
+        delay--;
+        if (delay == 0) {
+            LOG("Rocket attack");
+            // TODO add rocket attack
+            // TODO add explosion when shooting
+            // TODO change particle used to the correct one
+            /*
+            Particle* rocket1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            rocket1->collider->AddListener(NULL);
+            Particle* rocket2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            rocket2->collider->AddListener(NULL);
+            App->audio->PlayFx(/*sound effectNULL);
+            */
+            
+            delay = 15;
+        }
+
+    } else {                       // 60% chance to do a normal attack
         delay--;
         if (delay == 0) {
             LOG("Normal attack");
@@ -55,29 +83,6 @@ void Enemy::Attack() {
             App->audio->PlayFx(/*sound effect*/NULL);
             delay = 15;
         }
-        
-    } else if (attackType < 4) {    // 30% chance to do a rocket attack
-        delay--;
-        if (delay == 0) {
-            LOG("Rocket attack");
-            // TODO add rocket attack
-            // TODO add explosion when shooting
-            // TODO change particle used to the correct one
-            Particle* rocket1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            rocket1->collider->AddListener(NULL);
-            Particle* rocket2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            rocket2->collider->AddListener(NULL);
-            App->audio->PlayFx(/*sound effect*/NULL);
-            delay = 15;
-        }
-
-    } else {                       // 10% chance to not attack
-        delay--;
-        if (delay == 0) {
-            LOG("No attack");
-            // do nothing   
-            delay = 15;
-        }
     }
         
 }
@@ -85,6 +90,11 @@ void Enemy::Attack() {
 void Enemy::deathAnimation() {
     // TODO set current anim to death anim
     LOG("Death animation");
+}
+
+void Enemy::spawnAnimation() {
+    // TODO set current anim to spawn anim
+    LOG("Spawn animation");
 }
 
 void Enemy::StateMachine() {
@@ -120,6 +130,7 @@ void Enemy::StateMachine() {
         pendingToDelete = true;
         LOG("pendingToDelete enemy");
         break;
+
     default:
         // Handle default state logic
         LOG("ERROR STATE");

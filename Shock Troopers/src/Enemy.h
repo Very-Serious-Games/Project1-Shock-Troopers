@@ -44,6 +44,8 @@ public:
 
 	virtual void deathAnimation();
 
+	virtual void spawnAnimation();
+
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
 

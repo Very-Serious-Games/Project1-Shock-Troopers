@@ -7,8 +7,8 @@
 #include "ModuleInput.h"
 #include "ModuleFadeToBlack.h"
 
-SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
-{
+SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled) {
+	/*
 	// intro animation
 	int milkyWidht = 173;
 	int milkyHeight = 209;
@@ -32,10 +32,49 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled)
 	smokeAnimation.PushBack({ 116, 210, smokeWidht, smokeHeight });
 	smokeAnimation.PushBack({ 145, 210, smokeWidht, smokeHeight });
 	smokeAnimation.speed = 0.06f;
+	*/
+
+
+	
+	
+
+	// iterate the animation, that have 23 frames per row and 6 rows
+	for (int row = 0; row < 6; row++) {
+		for (int col = 0; col < 23; col++) {
+			int frameX = col * SCREEN_WIDTH;
+			int frameY = row * SCREEN_HEIGHT;
+			introAnimation.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
+		}
+	}
+
+	introAnimation.speed = 0.1f;
+	
+
+	/*
+	introAnimation.PushBack({ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 304, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 608, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 912, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 1216, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 1520, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 1824, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 2128, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 2432, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 2736, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 3040, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 3344, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 3648, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 3952, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 4256, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 4560, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	introAnimation.PushBack({ 4864, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
+	*/
+
+	path.PushBack({ 0.0f, 0.0f }, 1000, &introAnimation);
+
 }
 
-SceneIntro::~SceneIntro()
-{
+SceneIntro::~SceneIntro() {
 
 }
 
@@ -46,8 +85,8 @@ bool SceneIntro::Start()
 
 	bool ret = true;
 
-	textures = App->textures->Load("assets/sprites/screenIntroSprites.png");
-	background = App->textures->Load("assets/sprites/screenIntroBackground.png");
+	textures = App->textures->Load("assets/sprites/intro.png");
+	//background = App->textures->Load("assets/sprites/screenIntroBackground.png");
 	App->audio->PlayMusic("assets/music/01_Shock_Troopers.ogg", 1.0f);
 
 	App->render->camera.x = 0;
@@ -63,8 +102,10 @@ Update_Status SceneIntro::Update()
 		App->fade->FadeToBlack(this, (Module*)App->sceneMenu, 90);
 	}
 
-	milkyAnimation.Update();
-	smokeAnimation.Update();
+	//milkyAnimation.Update();
+	//smokeAnimation.Update();
+	path.Update();
+	introAnimation.Update();
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -73,9 +114,10 @@ Update_Status SceneIntro::Update()
 Update_Status SceneIntro::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(background, 0, 0, NULL, 1.0f);
-	App->render->Blit(textures, (SCREEN_WIDTH/4), 15, &(milkyAnimation.GetCurrentFrame()), 1.0f);
-	App->render->Blit(textures, 120, 2, &(smokeAnimation.GetCurrentFrame()), 1.0f);
+	//App->render->Blit(background, 0, 0, NULL, 1.0f);
+	//App->render->Blit(textures, (SCREEN_WIDTH/4), 15, &(milkyAnimation.GetCurrentFrame()), 1.0f);
+	//App->render->Blit(textures, 120, 2, &(smokeAnimation.GetCurrentFrame()), 1.0f);
+	App->render->Blit(textures, 0, 0, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

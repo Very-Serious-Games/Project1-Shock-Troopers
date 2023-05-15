@@ -123,6 +123,12 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object.h">
+      <Filter>Source Files\entities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ModuleObject.h">
+      <Filter>Source Files\modules\gameplay</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -202,6 +208,12 @@
     </ClCompile>
     <ClCompile Include="src\PickUp.cpp">
       <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object.cpp">
+      <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ModuleObject.cpp">
+      <Filter>Source Files\modules\gameplay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

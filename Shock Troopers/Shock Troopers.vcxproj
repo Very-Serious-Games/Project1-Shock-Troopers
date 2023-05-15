@@ -22,7 +22,9 @@
     <ClInclude Include="resource.h" />
     <ClInclude Include="src\Enemy_FlyingBattleship.h" />
     <ClInclude Include="src\Enemy_InfantrySoldier.h" />
+    <ClInclude Include="src\ModuleObject.h" />
     <ClInclude Include="src\ModulePickUp.h" />
+    <ClInclude Include="src\Object.h" />
     <ClInclude Include="src\PickUp.h" />
     <ClInclude Include="src\SceneMenu.h" />
     <ClInclude Include="src\Animation.h" />
@@ -52,7 +54,9 @@
   <ItemGroup>
     <ClCompile Include="src\Enemy_FlyingBattleship.cpp" />
     <ClCompile Include="src\Enemy_InfantrySoldier.cpp" />
+    <ClCompile Include="src\ModuleObject.cpp" />
     <ClCompile Include="src\ModulePickUp.cpp" />
+    <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\PickUp.cpp" />
     <ClCompile Include="src\SceneMenu.cpp" />
     <ClCompile Include="src\Application.cpp" />

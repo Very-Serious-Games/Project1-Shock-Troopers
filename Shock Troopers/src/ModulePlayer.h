@@ -43,12 +43,6 @@ public:
 
 	void move();
 
-	bool intersect(SDL_Rect a, SDL_Rect b);
-
-	void colideWall(int direction);
-
-	float* normalize(float normV[]);
-
 public:
 	// Position of the player in the map
 	iPoint position;

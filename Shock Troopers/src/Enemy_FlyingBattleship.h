@@ -21,11 +21,6 @@ private:
 
 	SDL_Texture* texture = nullptr;
 
-	// Enemy animations
-	Animation spawnAnim;
-	Animation idleAnim;
-	Animation deathAnim;
-
 };
 
 #endif // __ENEMY_FLYINGBATTLESHIP_H__

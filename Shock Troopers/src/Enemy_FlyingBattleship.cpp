@@ -17,10 +17,9 @@ Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 
 	deathAnim.PushBack({384, 0, 121, 124});
 
-	path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
-	
+	//path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
 	path.PushBack({ 0.0f, 0.0f }, 100, &idleAnim);
-	path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
+	//path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
 	
 
 	// TODO cambiar tamaño collider
@@ -31,7 +30,8 @@ void Enemy_FlyingBattleship::Update() {
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
-	currentAnim = path.GetCurrentAnimation();
+	//currentAnim = path.GetCurrentAnimation();
+	currentAnim = &spawnAnim;
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
@@ -88,18 +88,21 @@ void Enemy::Attack() {
 }
 
 void Enemy::deathAnimation() {
-    // TODO set current anim to death anim
-    LOG("Death animation");
+    currentAnim = &deathAnim;
 }
 
 void Enemy::spawnAnimation() {
-    // TODO set current anim to spawn anim
-    LOG("Spawn animation");
+    currentAnim = &spawnAnim;
+}
+
+void Enemy::idleAnimation() {
+    currentAnim = &idleAnim;
 }
 
 void Enemy::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
+        spawnAnimation();
         // Handle spawn state logic
         if (/* some condition for idle */true) {
             state = Enemy_State::IDLE;
@@ -107,15 +110,15 @@ void Enemy::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
+        idleAnimation();
         if (PlayerIsNear()) {
             state = Enemy_State::ATTACK;
             LOG("state changed to ATTACK");
         }
         break;
     case Enemy_State::ATTACK:
-        
+        idleAnimation();
         Attack();
-
         if (!PlayerIsNear()) {
             state = Enemy_State::IDLE;
             LOG("state changed to IDLE");
@@ -127,8 +130,13 @@ void Enemy::StateMachine() {
         break;
     case Enemy_State::DEATH:
         deathAnimation();
-        pendingToDelete = true;
-        LOG("pendingToDelete enemy");
+
+        if (deathAnimDelay == 0) {
+            pendingToDelete = true;
+            LOG("pendingToDelete enemy");
+        }
+        deathAnimDelay--;
+        
         break;
 
     default:

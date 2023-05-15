@@ -28,27 +28,17 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	idleAnimUpTorso.PushBack({ 423, 520, 47, 52 });
 	idleAnimUpTorso.PushBack({ 470, 520, 47, 52 });
 	idleAnimUpTorso.PushBack({ 517, 520, 47, 52 });
+
 	idleAnimDownTorso.PushBack({ 282, 520, 47, 52 });
 	idleAnimDownTorso.PushBack({ 329, 520, 47, 52 });
 	idleAnimDownTorso.PushBack({ 376, 520, 47, 52 });
 	idleAnimLeftTorso.PushBack({ 282, 416, 47, 52 });						
 	idleAnimLeftTorso.PushBack({ 329, 416, 47, 52 });
 	idleAnimLeftTorso.PushBack({ 376, 416, 47, 52 });
+
 	idleAnimRightTorso.PushBack({ 282, 364, 47, 52 });
 	idleAnimRightTorso.PushBack({ 329, 364, 47, 52 });
 	idleAnimRightTorso.PushBack({ 376, 364, 47, 52 });
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
 
 	upAnimLegs.PushBack({ 0, 312, 47, 52 });
 	upAnimLegs.PushBack({ 47, 312, 47, 52 });
@@ -108,6 +98,20 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	shootAnimDownRight.PushBack({});
 	shootAnimUpLeft.PushBack({});
 	shootAnimUpRight.PushBack({});
+
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
 
 
 	idleAnimUpTorso.speed = animSpeed;

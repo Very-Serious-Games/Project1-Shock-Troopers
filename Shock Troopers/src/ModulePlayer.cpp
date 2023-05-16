@@ -1,5 +1,4 @@
 #include "ModulePlayer.h"
-
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePickUp.h"
@@ -10,62 +9,38 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+#include <iostream>
+using namespace std;
 
 #include <stdio.h>
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
-	// the loop parameter is set to true by default
-
-		// idle animations
-		// legs 
-	idleAnimUpLegs.PushBack({ 282, 52, 47, 52 }); // 
-	idleAnimDownLegs.PushBack({ 94, 52, 47, 52 }); // 
+	//Setting up the player animations
+	idleAnimUpLegs.PushBack({ 282, 52, 47, 52 }); 
+	idleAnimDownLegs.PushBack({ 94, 52, 47, 52 }); 
 	idleAnimLeftLegs.PushBack({ 0, 52, 47, 52 });
-	idleAnimRightLegs.PushBack({ 188, 52, 47, 52 }); //
+	idleAnimRightLegs.PushBack({ 188, 52, 47, 52 });
 	idleAnimDownLeftLegs.PushBack({ 47, 52, 47, 52 });
 	idleAnimDownRightLegs.PushBack({ 141, 52, 47, 52 });
-	idleAnimUpLeftLegs.PushBack({ 329, 52, 47, 52 }); // 376, 52, 47, 52
-	idleAnimUpRightLegs.PushBack({ 235, 52, 47, 52 }); //
-	// no need to set speed since this animation only has one frame
+	idleAnimUpLeftLegs.PushBack({ 329, 52, 47, 52 }); 
+	idleAnimUpRightLegs.PushBack({ 235, 52, 47, 52 });
 
-	// torso 
 	idleAnimUpTorso.PushBack({ 423, 520, 47, 52 });
 	idleAnimUpTorso.PushBack({ 470, 520, 47, 52 });
 	idleAnimUpTorso.PushBack({ 517, 520, 47, 52 });
+
 	idleAnimDownTorso.PushBack({ 282, 520, 47, 52 });
 	idleAnimDownTorso.PushBack({ 329, 520, 47, 52 });
 	idleAnimDownTorso.PushBack({ 376, 520, 47, 52 });
-	idleAnimLeftTorso.PushBack({ 282, 416, 47, 52 });						// TODO check if this animation shows as intended
+	idleAnimLeftTorso.PushBack({ 282, 416, 47, 52 });						
 	idleAnimLeftTorso.PushBack({ 329, 416, 47, 52 });
 	idleAnimLeftTorso.PushBack({ 376, 416, 47, 52 });
+
 	idleAnimRightTorso.PushBack({ 282, 364, 47, 52 });
 	idleAnimRightTorso.PushBack({ 329, 364, 47, 52 });
 	idleAnimRightTorso.PushBack({ 376, 364, 47, 52 });
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
 
-	idleAnimUpTorso.speed = animSpeed;
-	idleAnimDownTorso.speed = animSpeed;
-	idleAnimLeftTorso.speed = animSpeed;
-	idleAnimRightTorso.speed = animSpeed;
-	idleAnimDownLeftTorso.speed = animSpeed;
-	idleAnimDownRightTorso.speed = animSpeed;
-	idleAnimUpLeftTorso.speed = animSpeed;
-	idleAnimUpRightTorso.speed = animSpeed;
-
-	// running animations
-	// legs
 	upAnimLegs.PushBack({ 0, 312, 47, 52 });
 	upAnimLegs.PushBack({ 47, 312, 47, 52 });
 	upAnimLegs.PushBack({ 94, 312, 47, 52 });
@@ -101,21 +76,12 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	rightAnimLegs.PushBack({ 235, 0, 47, 52 });
 	rightAnimLegs.PushBack({ 282, 0, 47, 52 });
 	rightAnimLegs.PushBack({ 329, 0, 47, 52 });
+
 	downLeftAnimLegs.PushBack({});
 	downRightAnimLegs.PushBack({});
 	upLeftAnimLegs.PushBack({});
 	upRightAnimLegs.PushBack({});
 
-	upAnimLegs.speed = animSpeed;
-	downAnimLegs.speed = animSpeed;
-	leftAnimLegs.speed = animSpeed;
-	rightAnimLegs.speed = animSpeed;
-	downLeftAnimLegs.speed = animSpeed;
-	downRightAnimLegs.speed = animSpeed;
-	upLeftAnimLegs.speed = animSpeed;
-	upRightAnimLegs.speed = animSpeed;
-
-	// roll animations
 	rollAnimUp.PushBack({});
 	rollAnimDown.PushBack({});
 	rollAnimLeft.PushBack({});
@@ -125,16 +91,6 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	rollAnimUpLeft.PushBack({});
 	rollAnimUpRight.PushBack({});
 
-	rollAnimUp.speed = animSpeed;
-	rollAnimDown.speed = animSpeed;
-	rollAnimLeft.speed = animSpeed;
-	rollAnimRight.speed = animSpeed;
-	rollAnimDownLeft.speed = animSpeed;
-	rollAnimDownRight.speed = animSpeed;
-	rollAnimUpLeft.speed = animSpeed;
-	rollAnimUpRight.speed = animSpeed;
-
-	// shooting animations
 	shootAnimUp.PushBack({});
 	shootAnimDown.PushBack({});
 	shootAnimLeft.PushBack({});
@@ -143,6 +99,48 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	shootAnimDownRight.PushBack({});
 	shootAnimUpLeft.PushBack({});
 	shootAnimUpRight.PushBack({});
+
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpLeftTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+	idleAnimUpRightTorso.PushBack({});
+
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownLeftTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+	idleAnimDownRightTorso.PushBack({});
+
+
+	idleAnimUpTorso.speed = animSpeed;
+	idleAnimDownTorso.speed = animSpeed;
+	idleAnimLeftTorso.speed = animSpeed;
+	idleAnimRightTorso.speed = animSpeed;
+	idleAnimDownLeftTorso.speed = animSpeed;
+	idleAnimDownRightTorso.speed = animSpeed;
+	idleAnimUpLeftTorso.speed = animSpeed;
+	idleAnimUpRightTorso.speed = animSpeed;
+
+	downAnimLegs.speed = animSpeed;
+	leftAnimLegs.speed = animSpeed;
+	rightAnimLegs.speed = animSpeed;
+	downLeftAnimLegs.speed = animSpeed;
+	downRightAnimLegs.speed = animSpeed;
+	upLeftAnimLegs.speed = animSpeed;
+	upRightAnimLegs.speed = animSpeed;
+	upAnimLegs.speed = animSpeed;
+
+	rollAnimUp.speed = animSpeed;
+	rollAnimDown.speed = animSpeed;
+	rollAnimLeft.speed = animSpeed;
+	rollAnimRight.speed = animSpeed;
+	rollAnimDownLeft.speed = animSpeed;
+	rollAnimDownRight.speed = animSpeed;
+	rollAnimUpLeft.speed = animSpeed;
+	rollAnimUpRight.speed = animSpeed;
 
 	shootAnimUp.speed = animSpeed;
 	shootAnimDown.speed = animSpeed;
@@ -164,6 +162,7 @@ ModulePlayer::~ModulePlayer()
 }
 
 void ModulePlayer::updateHp() {
+	//Carga sprite en base a la vida del jugador
 	switch (hp) {
 	case 100:
 		textureHp = App->textures->Load("Assets/Sprites/HpBar_100.png");
@@ -198,6 +197,7 @@ void ModulePlayer::updateHp() {
 	case 0:
 		textureHp = App->textures->Load("Assets/Sprites/HpBar_00.png");
 		destroyed = true;
+		//TODO  poner esto donde toque
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 		break;
 	default:
@@ -217,7 +217,7 @@ bool ModulePlayer::Start()
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
-	// UI TEXTURES
+	// Starting sprite
 	textureP1 = App->textures->Load("Assets/Sprites/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/Sprites/Weapon_Normal.png");
 
@@ -225,13 +225,18 @@ bool ModulePlayer::Start()
 	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
 
+	//Setting up player position
 	position.x = 220;
-	position.y = 1870;
-	hp = 100;
+	position.y = 1820;
+	
+	//Setting up player wall coliders
+	colliderL = App->collisions->AddCollider({ position.x + 5, position.y + 2, 2, 43 }, Collider::Type::LASER, this);
+	colliderU = App->collisions->AddCollider({ position.x + 5, position.y + 8, 22, 2 }, Collider::Type::LASER, this);
+	colliderD = App->collisions->AddCollider({ position.x + 5, position.y + 51, 22, 2 }, Collider::Type::LASER, this);
+	colliderR = App->collisions->AddCollider({ position.x + 32, position.y + 2, 2,43 }, Collider::Type::LASER, this);
 
-	destroyed = false;
-
-	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+	//Setting up player hitbox
+	collider = App->collisions->AddCollider({ position.x + 5,position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
 
 
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
@@ -243,15 +248,25 @@ bool ModulePlayer::Start()
 Update_Status ModulePlayer::Update()
 {
 	updateHp();
+
+	cout << App->render->camera.x;
+	cout << App->render->camera.y;
+
 	if (roll) {
+
+		//If the player is rolling, the speed is increased
 		speed = 3;
+
+		//then the player moves
 		move();
+
+		//and when the player has moved 50 pixels, the roll ends
 		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
 			roll = false;
 		}
 	}else {
-		speed = 1;
 
+		//Map controls
 		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
 			currentDirection = 1;
 		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
@@ -290,18 +305,16 @@ Update_Status ModulePlayer::Update()
 		}
 
 		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-			position.x = 58;
-			position.y = 248;
-			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y });
+			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y , true});
 		}
 
+		//Player movement
 		move();
+
+		//Player animation update
 		setAnimations();
 
-
-		diferencia.x = position.x;
-		diferencia.y = position.y;
-
+		//Granade
 		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
 			App->particles->playerShot.setDirection(lastDirection);
 			//TODO añadir direccion
@@ -310,12 +323,15 @@ Update_Status ModulePlayer::Update()
 			newParticle->granada = true;
 			App->audio->PlayFx(laserFx);
 		}
-
+		//Roll
 		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN)
 		{
 			roll = true;
+			diferencia.x = position.x;
+			diferencia.y = position.y;
 		}
-		
+
+		//Player shooting
 		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
 		{
 			delay--;
@@ -329,12 +345,20 @@ Update_Status ModulePlayer::Update()
 			}
 		}
 	}
+
+	//We save the current direction if there is a new one
 	if (currentDirection != 0) {
 		lastDirection = currentDirection;
 	}
 
-	collider->SetPos(position.x, position.y);
+	//Collider update
+	collider->SetPos(position.x + 12, position.y + 10);
+	colliderU->SetPos(position.x + 12, position.y + 8);
+	colliderR->SetPos(position.x + 34, position.y + 10);
+	colliderD->SetPos(position.x + 12, position.y + 53);
+	colliderL->SetPos(position.x + 10, position.y + 10);
 
+	//We update the current animation
 	currentAnimationLegs->Update();
 	currentAnimationTorso->Update();
 
@@ -347,10 +371,13 @@ Update_Status ModulePlayer::Update()
 		App->player->position.x = 232;
 		App->player->position.y = 190;
 	}
-	if (godMode)
-	{
-		hp = 100;
-	}
+
+	//Reset variables
+	lockR = false;
+	lockU = false;
+	lockD = false;
+	lockL = false;
+	speed = 1;
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -360,22 +387,26 @@ Update_Status ModulePlayer::PostUpdate()
 		int x, y;
 	if (!destroyed)
 	{
+		//Obtenemos el rectangulo actual de la animacion
 		SDL_Rect rectLegs = currentAnimationLegs->GetCurrentFrame();
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
 		//TODO arreglar lumbago
+		//Mostramos por pantalla el frame de la animacion
 		App->render->Blit(texture, position.x+1, position.y+3, &rectLegs);
 		App->render->Blit(texture, position.x, position.y, &rectTorso);
 		
-		
+		//Obtenemos position de las diferentes partes de la UI en base al jugador y la camara
 		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
 		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
+
+		//Mostramos por pantalla la UI
 		App->render->Blit(textureHp,x - 10, y, NULL);
 		App->render->Blit(textureP1, x - 20, y - 50, NULL);
 		App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
 	}
 
+	//Mostramos por pantalla el score
 	sprintf_s(scoreText, 10, "%7d", score);
-
 	App->fonts->BlitText(30, 5, scoreFont, scoreText);
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -383,68 +414,44 @@ Update_Status ModulePlayer::PostUpdate()
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && roll == false)
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && roll == false && !godMode)
 	{
 		//TODO AÑADIR ANIMACION SA EXO PUPA
 		if(hp < 0)
 		hp -= 10;
 	}
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && roll == false)
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && roll == false && !godMode)
 	{
 		//TODO AÑADIR ANIMACION SA EXO PUPA
 		if (hp < 0)
 		hp -= 10;
 	}
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::WALL) {
+
+	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockR = true;
 		roll = false;
-		colideWall(currentDirection);
 	}
+	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockU = true;
+		roll = false;
+	}
+	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockD = true;
+		roll = false;
+	}
+	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+		lockL = true;
+		roll = false;
+	}
+
+
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
-		//TODO añadir animacion c muere jugador
-		if (hp > 100)
 		hp += 10;
 	}
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
 	{
 		score += 23;
-	}
-}
-
-void ModulePlayer::colideWall(int direction) {
-	switch (direction) {
-
-	case 1: //UR
-		position.x -= 1;
-		position.y += 1;
-		break;
-	case 2: //UL
-		position.x += 1;
-		position.y += 1;
-		break;
-	case 3: //DR
-		position.x -= 1;
-		position.y -= 1;
-		break;
-	case 4: //DL
-		position.x += 1;
-		position.y -= 1;
-		break;
-	case 5: //R
-		position.x -= 1;
-		break;
-	case 6: //L
-		position.x += 1;
-		break;
-	case 7: //D
-		position.y -= 1;
-		break;
-	case 8: //U
-		position.y += 1;
-		break;
-	default:
-		colideWall(lastDirection);
-		break;
 	}
 }
 
@@ -532,56 +539,59 @@ void ModulePlayer::setAnimations()
 	}
 }
 
-float* ModulePlayer::normalize(float normV[]) {
-	float norm = 0.0f;
-	norm += position.x * position.x;
-	norm += position.y * position.y;
-	norm = std::sqrt(norm);
-	normV[0] = position.x / norm;
-	normV[1] = position.y / norm;
-
-	return normV;
-}
-
 void ModulePlayer::move() {
+
 
 	switch (currentDirection)
 	{
 		case 1: //UR
-			position.x += speed;
-			position.y -= speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+
+			if (!lockR) { 
+				position.x += speed; 
+			}
+			if (!lockU) { 
+				position.y -= speed; 
+			}
 		break;
 		case 2: //UL
-			position.x -= speed;
-			position.y -= speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+			if (!lockU) {
+				position.y -= speed;
+			}
+			if (!lockL) {
+				position.x -= speed;
+			}
 		break;
 		case 3: //DR
-			position.x += speed;
-			position.y += speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+			if(!lockR) position.x += speed;
+			if(!lockD) position.y += speed;
 		break;
 		case 4: //DL
-			position.x -= speed;
-			position.y += speed;
-			//position.x *= normalize()[0];
-			//position.y *= normalize()[1];
+			if (!lockL) {
+				position.x -= speed;
+			}
+			if (!lockD) {
+				position.y += speed;
+			}
 		break;
 		case 5: //R
-			position.x += speed;
+			if (!lockR) { 
+				position.x += speed; 
+			}
 		break;
 		case 6: //L
-			position.x -= speed;
+			if (!lockL) {
+				position.x -= speed;
+			}
 		break;
 		case 7: //D
-			position.y += speed;
+			if (!lockD) {
+				position.y += speed;
+			}
 		break;
 		case 8: //U
-			position.y -= speed;
+			if (!lockU) {
+				position.y -= speed;
+			}
 		break;
 	default:
 		break;

@@ -8,6 +8,10 @@
 
 Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 
+	//Spawn animations
+	spawnAnimLeft.PushBack({});
+	spawnAnimRight.PushBack({});
+
 	//Idle animations
 	idleUpAnim.PushBack({ 267, 102, 20, 20 });
 	idleDownAnim.PushBack({});
@@ -19,19 +23,56 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	idleDownRightAnim.PushBack({});
 	//no need to speed bc this animation has only one frame
 
-	//Spawn animations
-	spawnAnimLeft.PushBack({});
-	spawnAnimRight.PushBack({});
-
-	//Death Animation
-	deathAnim.PushBack({});
-
 	//Movement
 	upAnim.PushBack({});
 	downAnim.PushBack({});
 	leftAnim.PushBack({});
 	rightAnim.PushBack({});
+	upLeftAnim.PushBack({});
+	upRightAnim.PushBack({});
+	downLeftAnim.PushBack({});
+	downRightAnim.PushBack({});
 
+	//Death Animation
+	deathAnim.PushBack({});
+
+	//Gun movement
+	gunUpAnim.PushBack({});
+	gunDownAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunRightAnim.PushBack({});
+	gunUpLeftAnim.PushBack({});
+	gunUpRightAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
+	//Gun Idle
+	gunIdleUpAnim.PushBack({});
+	gunIdleDownAnim.PushBack({});
+	gunIdleLeftAnim.PushBack({});
+	gunIdleRightAnim.PushBack({});
+	gunIdleUpLeftAnim.PushBack({});
+	gunIdleUpRightAnim.PushBack({});
+	gunIdleDownLeftAnim.PushBack({});
+	gunIdleDownRightAnim.PushBack({});
+
+	//Knife movement
+	knifeUpAnim.PushBack({});
+	knifeDownAnim.PushBack({});
+	knifeLeftAnim.PushBack({});
+	knifeRightAnim.PushBack({});
+	knifeUpLeftAnim.PushBack({});
+	knifeUpRightAnim.PushBack({});
+	knifeDownLeftAnim.PushBack({});
+	knifeDownRightAnim.PushBack({});
+	//knife Idle
+	knifeIdleUpAnim.PushBack({});
+	knifeIdleDownAnim.PushBack({});
+	knifeIdleLeftAnim.PushBack({});
+	knifeIdleRightAnim.PushBack({});
+	knifeIdleUpLeftAnim.PushBack({});
+	knifeIdleUpRightAnim.PushBack({});
+	knifeIdleDownLeftAnim.PushBack({});
+	knifeIdleDownRightAnim.PushBack({});
 
 
 

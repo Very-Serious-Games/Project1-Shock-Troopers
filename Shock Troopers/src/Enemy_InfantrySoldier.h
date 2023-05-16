@@ -3,7 +3,7 @@
 
 #include "Enemy.h"
 #include "Path.h"
-
+		
 #pragma once
 class Enemy_InfantrySoldier : public Enemy {
 public:
@@ -82,6 +82,16 @@ private:
 	Animation knifeIdleUpRightAnim;
 	Animation knifeIdleDownLeftAnim;
 	Animation knifeIdleDownRightAnim;
+
+	//falling soldiers
+	Animation fallRightAnim;
+	Animation fallLeftAnim;
+
+	//Hiding half body soldier
+	Animation hidingAnim;
+
+	//Hands in the head soldier
+	Animation headHandsAnim;
 	
 
 };

@@ -48,27 +48,6 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled) {
 	}
 
 	introAnimation.speed = 0.1f;
-	
-
-	/*
-	introAnimation.PushBack({ 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 304, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 608, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 912, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 1216, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 1520, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 1824, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 2128, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 2432, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 2736, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 3040, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 3344, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 3648, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 3952, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 4256, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 4560, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	introAnimation.PushBack({ 4864, 0, SCREEN_WIDTH, SCREEN_HEIGHT });
-	*/
 
 	path.PushBack({ 0.0f, 0.0f }, 1000, &introAnimation);
 

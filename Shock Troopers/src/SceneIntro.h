@@ -35,13 +35,6 @@ public:
 	SDL_Texture* textures = nullptr;
 	Animation introAnimation;
 	Path path;
-
-	//SDL_Texture* background = nullptr;
-	//Animation milkyAnimation;
-	//Animation smokeAnimation;
-	//Animation introAnimation2 = nullptr;
-	//Animation introAnimation3 = nullptr;
-
 	
 };
 

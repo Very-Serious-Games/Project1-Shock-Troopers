@@ -65,6 +65,8 @@ public:
 	void SpawnObject(const ObjectSpawnpoint& info);
 
 private:
+	// A queue with all spawn points information
+	ObjectSpawnpoint spawnQueue[MAX_OBJECT];
 
 	// All spawned Object in the scene
 	Object* object[MAX_OBJECT] = { nullptr };

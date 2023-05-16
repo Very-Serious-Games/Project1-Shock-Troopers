@@ -10,6 +10,7 @@ using namespace std;
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModulePickUp.h"
+#include "ModuleObject.h"
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 
@@ -41,6 +42,8 @@ bool SceneLevel1::Start()
 	//App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 100, 100);
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 220, 20);
 
+	//Add objects
+	//App->objects->AddObject(Object_Type::NO_TYPE, 100, 100);
 
 	App->render->camera.x = 220;
 	App->render->camera.y = 5058;

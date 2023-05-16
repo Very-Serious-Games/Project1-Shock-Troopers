@@ -87,3 +87,68 @@ bool ModuleObject::CleanUp()
 
 	return true;
 }
+
+void ModuleObject::OnCollision(Collider* c1, Collider* c2){
+	for (uint i = 0; i < MAX_OBJECT; ++i)
+	{
+		if (object[i] != nullptr && object[i]->GetCollider() == c1)
+		{
+			object[i]->OnCollision(c2);
+			break;
+		}
+	}
+}
+
+bool ModuleObject::AddObject(Object_Type type, int x, int y)
+{
+	bool ret = false;
+
+	for (uint i = 0; i < MAX_OBJECT; ++i)
+	{
+		if (spawnQueue[i].type == Object_Type::NO_TYPE)
+		{
+			spawnQueue[i].type = type;
+			spawnQueue[i].x = x;
+			spawnQueue[i].y = y;
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
+}
+
+void ModuleObject::HandleObjectSpawn() {
+	for (uint i = 0; i < MAX_OBJECT; ++i)
+	{
+		if (spawnQueue[i].type != Object_Type::NO_TYPE)
+		{
+			if (spawnQueue[i].x * SCREEN_SIZE < App->render->camera.x + (App->render->camera.w * SCREEN_SIZE) + SPAWN_MARGIN)
+			{
+				LOG("Spawning enemy at %d", spawnQueue[i].x * SCREEN_SIZE);
+
+				SpawnObject(spawnQueue[i]);
+				spawnQueue[i].type = Object_Type::NO_TYPE;
+			}
+		}
+	}
+}
+
+void ModuleObject::HandleObjectDespawn() {
+	for (uint i = 0; i < MAX_OBJECT; ++i)
+	{
+		if (object[i] != nullptr)
+		{
+			if (object[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+			{
+				LOG("DeSpawning enemy at %d", object[i]->position.x * SCREEN_SIZE);
+
+				object[i]->SetToDelete();
+			}
+		}
+	}
+}
+
+void ModuleObject::SpawnObject(const ObjectSpawnpoint& info) {
+
+}

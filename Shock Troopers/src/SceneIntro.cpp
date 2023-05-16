@@ -36,7 +36,7 @@ bool SceneIntro::Start()
 	bool ret = true;
 
 	// load sprite sheet
-	textures = App->textures->Load("assets/sprites/intro.png");
+	textures = App->textures->Load("assets/sprites/background/intro/intro.png");
 	// load audio resources
 	App->audio->PlayMusic("assets/music/01_Shock_Troopers.ogg", 1.0f);
 

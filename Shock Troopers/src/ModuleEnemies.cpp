@@ -27,7 +27,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// TODO cargar texturas y fx enemigos
-	texture = App->textures->Load("Assets/Sprites/jet_boss.png");
+	texture = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;

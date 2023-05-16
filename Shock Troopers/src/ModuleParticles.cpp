@@ -24,7 +24,7 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	// Load particles spritesheet
 
-	texture = App->textures->Load("Assets/Sprites/normal_bullets.png");
+	texture = App->textures->Load("Assets/Sprites/particles/normal_bullets.png");
 
 	// Explosion particle
 	explosion.anim.PushBack({274, 296, 33, 30});

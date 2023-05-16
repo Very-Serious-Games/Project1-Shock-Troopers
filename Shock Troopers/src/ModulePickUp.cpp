@@ -27,7 +27,7 @@ ModulePickUp::~ModulePickUp()
 bool ModulePickUp::Start()
 {
 
-	texture = App->textures->Load("Assets/Sprites/miniboss1_muzzle_flash.png");
+	texture = App->textures->Load("Assets/Sprites/particles/miniboss1_muzzle_flash.png");
 
 	SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
 	return true;

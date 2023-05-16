@@ -165,43 +165,43 @@ void ModulePlayer::updateHp() {
 	//Carga sprite en base a la vida del jugador
 	switch (hp) {
 	case 100:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_100.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
 		break;
 	case 90:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_90.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
 		break;
 	case 80:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_80.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
 		break;
 	case 70:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_70.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
 		break;
 	case 60:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_60.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
 		break;
 	case 50:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_50.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
 		break;
 	case 40:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_40.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
 		break;
 	case 30:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_30.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
 		break;
 	case 20:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_20.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
 		break;
 	case 10:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_10.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
 		break;
 	case 0:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_00.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
 		destroyed = true;
 		//TODO  poner esto donde toque
 		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 		break;
 	default:
-		textureHp = App->textures->Load("Assets/Sprites/HpBar_00.png");
+		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
 		break;
 	}
 }
@@ -213,13 +213,13 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	// Animation
-	texture = App->textures->Load("Assets/Sprites/Milky/milkySpritesheet.png");
+	texture = App->textures->Load("Assets/Sprites/characters/milky_spritesheet2.png");
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
 	// Starting sprite
-	textureP1 = App->textures->Load("Assets/Sprites/Player1_Milky.png");
-	textureWeapon = App->textures->Load("Assets/Sprites/Weapon_Normal.png");
+	textureP1 = App->textures->Load("Assets/Sprites/ui/Player1_Milky.png");
+	textureWeapon = App->textures->Load("Assets/Sprites/ui/Weapon_Normal.png");
 
 	// Spund effects
 	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");

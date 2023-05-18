@@ -13,6 +13,14 @@ public:
 
 	void Update() override;
 
+	void deathAnimation() override;
+
+	void idleAnimation() override;
+
+	void spawnAnimation() override;
+
+	void StateMachine() override;
+
 private:
 
 	Path path;

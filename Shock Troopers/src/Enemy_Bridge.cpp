@@ -31,19 +31,19 @@ void Enemy_Bridge::Update() {
     Enemy::Update();
 }
 
-void Enemy::deathAnimation() {
+void Enemy_Bridge::deathAnimation() {
     currentAnim = &deathAnim;
 }
 
-void Enemy::spawnAnimation() {
+void Enemy_Bridge::spawnAnimation() {
     currentAnim = &spawnAnim;
 }
 
-void Enemy::idleAnimation() {
+void Enemy_Bridge::idleAnimation() {
     currentAnim = &idleAnim;
 }
 
-void Enemy::StateMachine() {
+void Enemy_Bridge::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
         spawnAnimation();

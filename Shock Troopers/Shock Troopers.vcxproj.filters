@@ -120,6 +120,9 @@
     <ClInclude Include="src\PickUp.h">
       <Filter>Source Files\entities</Filter>
     </ClInclude>
+    <ClInclude Include="src\Enemy_Bridge.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -199,6 +202,9 @@
     </ClCompile>
     <ClCompile Include="src\PickUp.cpp">
       <Filter>Source Files\entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Bridge.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

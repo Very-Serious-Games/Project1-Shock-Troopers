@@ -36,6 +36,26 @@ void Enemy::Update()
     StateMachine();
 }
 
+void Enemy::StateMachine()
+{
+}
+
+void Enemy::Attack()
+{
+}
+
+void Enemy::deathAnimation()
+{
+}
+
+void Enemy::spawnAnimation()
+{
+}
+
+void Enemy::idleAnimation()
+{
+}
+
 void Enemy::Draw()
 {
 	if (currentAnim != nullptr)

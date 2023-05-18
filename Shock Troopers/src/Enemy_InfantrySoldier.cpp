@@ -23,6 +23,22 @@ void Enemy_InfantrySoldier::Update() {
 	Enemy::Update();
 }
 
+void Enemy_InfantrySoldier::deathAnimation()
+{
+}
+
+void Enemy_InfantrySoldier::idleAnimation()
+{
+}
+
+void Enemy_InfantrySoldier::spawnAnimation()
+{
+}
+
+void Enemy_InfantrySoldier::StateMachine()
+{
+}
+
 // 3 diferent states for attack with diferent percentages of chance to happen
 // 1. normal attack
 // 2. mele attack

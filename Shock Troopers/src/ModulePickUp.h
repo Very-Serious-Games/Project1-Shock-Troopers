@@ -16,6 +16,7 @@ struct PickUpSpawnpoint
 {
 	PickUp_Type type = PickUp_Type::NO_TYPE;
 	int x, y;
+	bool despawn;
 };
 
 class PickUp;

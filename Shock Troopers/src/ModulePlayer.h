@@ -43,8 +43,6 @@ public:
 
 	void move();
 
-	float* normalize(float normV[]);
-
 public:
 	// Position of the player in the map
 	iPoint position;
@@ -134,7 +132,15 @@ public:
 
 	// The player's collider
 	Collider* collider = nullptr;
+	Collider* colliderU = nullptr;
+	Collider* colliderD = nullptr;
+	Collider* colliderR = nullptr;
+	Collider* colliderL = nullptr;
 
+	bool lockR = false;
+	bool lockU = false;
+	bool lockD = false;
+	bool lockL = false;
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
 

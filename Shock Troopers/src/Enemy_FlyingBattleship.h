@@ -3,6 +3,7 @@
 
 #include "Enemy.h"
 #include "Path.h"
+#include "Module.h"
 
 class Enemy_FlyingBattleship : public Enemy {
 public:
@@ -19,11 +20,6 @@ private:
 	Path path;
 
 	SDL_Texture* texture = nullptr;
-
-	// Enemy animations
-	Animation spawnAnim;
-	Animation idleAnim;
-	Animation deathAnim;
 
 };
 

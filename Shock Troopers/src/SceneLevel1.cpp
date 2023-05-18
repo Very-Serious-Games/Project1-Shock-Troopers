@@ -27,20 +27,21 @@ bool SceneLevel1::Start()
 	bool ret = true;
 
 	// Load textures and fx
-	bgTexture = App->textures->Load("Assets/Sprites/background_mountain.png");
+	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain.png");
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 493, 0, 1, 1909 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 490, 0, 1, 1909 }, Collider::Type::WALL);
 
 
 	createMargenes();
 
 	// Add enemies
 	//App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 100, 100);
-	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 220, 20);
+								
+	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20); // (493 / 2) - (128 / 2) = 183
 
 	//Add objects
 	//App->objects->AddObject(Object_Type::NO_TYPE, 100, 100);

@@ -3,7 +3,7 @@
 
 #include "SDL/include/SDL_Rect.h"
 
-#define MAX_LISTENERS 50
+#define MAX_LISTENERS 500
 
 class Module;
 
@@ -13,11 +13,13 @@ struct Collider
 	{
 		NONE = -1,
 		WALL,
+		LASER,
 		PLAYER,
 		ENEMY,
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 		HEAL,
+		DETECTION_ZONE,
 
 		MAX
 	};

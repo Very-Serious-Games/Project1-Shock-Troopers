@@ -46,6 +46,8 @@ public:
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 
+	bool despawn = false;
+
 	// The pickUp collider
 	Collider* collider = nullptr;
 

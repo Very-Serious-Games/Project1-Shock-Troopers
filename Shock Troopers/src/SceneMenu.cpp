@@ -105,7 +105,7 @@ bool SceneMenu::Start()
 
 	currentCharacter = 0; // reset the selected character to Jackal
 
-	sprites = App->textures->Load("Assets/Sprites/characterSelection.png");
+	sprites = App->textures->Load("Assets/Sprites/ui/characterSelection.png");
 
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;

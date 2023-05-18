@@ -15,6 +15,14 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
+	void deathAnimation() override;
+
+	void idleAnimation() override;
+
+	void spawnAnimation() override;
+
+	void StateMachine() override;
+
 	void Attack() override;
 
 private:

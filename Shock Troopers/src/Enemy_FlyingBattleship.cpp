@@ -39,7 +39,7 @@ void Enemy_FlyingBattleship::Update() {
 	Enemy::Update();
 }
 
-void Enemy::Attack() {
+void Enemy_FlyingBattleship::Attack() {
                                     // get random number between with 10%, 30, 60% chance to happen
     int attackType = rand() % 100 + 1;
 
@@ -88,19 +88,19 @@ void Enemy::Attack() {
         
 }
 
-void Enemy::deathAnimation() {
+void Enemy_FlyingBattleship::deathAnimation() {
     currentAnim = &deathAnim;
 }
 
-void Enemy::spawnAnimation() {
+void Enemy_FlyingBattleship::spawnAnimation() {
     currentAnim = &spawnAnim;
 }
 
-void Enemy::idleAnimation() {
+void Enemy_FlyingBattleship::idleAnimation() {
     currentAnim = &idleAnim;
 }
 
-void Enemy::StateMachine() {
+void Enemy_FlyingBattleship::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
         spawnAnimation();

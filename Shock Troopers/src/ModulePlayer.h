@@ -77,7 +77,7 @@ public:
 	Animation* currentAnimationLegs = nullptr;
 
 	// A set of animations
-	float animSpeed = 0.01f;
+	float animSpeed = 0.1f;
 	Animation idleAnimUpTorso;			// Idle animation (torso)
 	Animation idleAnimDownTorso;		// Idle animation (torso)
 	Animation idleAnimLeftTorso;		// Idle animation (torso)
@@ -124,7 +124,18 @@ public:
 	Animation shootAnimDownLeft;		// Shoot animation
 	Animation shootAnimDownRight;		// Shoot animation
 
+	Animation grenadeAnimUp;			// Grenade animation
+	Animation grenadeAnimDown;			// Grenade animation
+	Animation grenadeAnimLeft;			// Grenade animation
+	Animation grenadeAnimRight;			// Grenade animation
+	Animation grenadeAnimUpLeft;		// Grenade animation
+	Animation grenadeAnimUpRight;		// Grenade animation
+	Animation grenadeAnimDownLeft;		// Grenade animation
+	Animation grenadeAnimDownRight;		// Grenade animation
+
 	Animation deathAnim;				// Death animation
+
+	Animation damageAnim;				// Damage animation
 
 	// Sound effects indices
 	uint laserFx = 0;

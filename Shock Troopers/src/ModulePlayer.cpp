@@ -17,103 +17,298 @@ using namespace std;
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 {
 	//Setting up the player animations
-	idleAnimUpLegs.PushBack({ 282, 52, 47, 52 }); 
-	idleAnimDownLegs.PushBack({ 94, 52, 47, 52 }); 
-	idleAnimLeftLegs.PushBack({ 0, 52, 47, 52 });
-	idleAnimRightLegs.PushBack({ 188, 52, 47, 52 });
-	idleAnimDownLeftLegs.PushBack({ 47, 52, 47, 52 });
-	idleAnimDownRightLegs.PushBack({ 141, 52, 47, 52 });
-	idleAnimUpLeftLegs.PushBack({ 329, 52, 47, 52 }); 
-	idleAnimUpRightLegs.PushBack({ 235, 52, 47, 52 });
 
-	idleAnimUpTorso.PushBack({ 423, 520, 47, 52 });
-	idleAnimUpTorso.PushBack({ 470, 520, 47, 52 });
-	idleAnimUpTorso.PushBack({ 517, 520, 47, 52 });
+	// Idle torso animations
+	idleAnimUpTorso.PushBack({ 0,   676, 54, 52 });
+	idleAnimUpTorso.PushBack({ 54,  676, 54, 52 });
+	idleAnimUpTorso.PushBack({ 108, 676, 54, 52 });
 
-	idleAnimDownTorso.PushBack({ 282, 520, 47, 52 });
-	idleAnimDownTorso.PushBack({ 329, 520, 47, 52 });
-	idleAnimDownTorso.PushBack({ 376, 520, 47, 52 });
-	idleAnimLeftTorso.PushBack({ 282, 416, 47, 52 });						
-	idleAnimLeftTorso.PushBack({ 329, 416, 47, 52 });
-	idleAnimLeftTorso.PushBack({ 376, 416, 47, 52 });
+	idleAnimDownTorso.PushBack({ 162, 676, 54, 52 });
+	idleAnimDownTorso.PushBack({ 216, 676, 54, 52 });
+	idleAnimDownTorso.PushBack({ 270, 676, 54, 52 });
 
-	idleAnimRightTorso.PushBack({ 282, 364, 47, 52 });
-	idleAnimRightTorso.PushBack({ 329, 364, 47, 52 });
-	idleAnimRightTorso.PushBack({ 376, 364, 47, 52 });
+	idleAnimLeftTorso.PushBack({ 486, 624, 54, 52 });
+	idleAnimLeftTorso.PushBack({ 540, 624, 54, 52 });
+	idleAnimLeftTorso.PushBack({ 594, 624, 54, 52 });
 
-	upAnimLegs.PushBack({ 0, 312, 47, 52 });
-	upAnimLegs.PushBack({ 47, 312, 47, 52 });
-	upAnimLegs.PushBack({ 94, 312, 47, 52 });
-	upAnimLegs.PushBack({ 141, 312, 47, 52 });
-	upAnimLegs.PushBack({ 188, 312, 47, 52 });
-	upAnimLegs.PushBack({ 235, 312, 47, 52 });
-	upAnimLegs.PushBack({ 282, 312, 47, 52 });
-	upAnimLegs.PushBack({ 329, 312, 47, 52 });
+	idleAnimRightTorso.PushBack({ 648, 624, 54, 52 });
+	idleAnimRightTorso.PushBack({ 702, 624, 54, 52 });
+	idleAnimRightTorso.PushBack({ 756, 624, 54, 52 });
 
-	downAnimLegs.PushBack({ 376, 0, 47, 52 });
-	downAnimLegs.PushBack({ 423, 0, 47, 52 });
-	downAnimLegs.PushBack({ 470, 0, 47, 52 });
-	downAnimLegs.PushBack({ 517, 0, 47, 52 });
-	downAnimLegs.PushBack({ 564, 0, 47, 52 });
-	downAnimLegs.PushBack({ 611, 0, 47, 52 });
-	downAnimLegs.PushBack({ 658, 0, 47, 52 });
-	downAnimLegs.PushBack({ 705, 0, 47, 52 });
+	idleAnimUpLeftTorso.PushBack({ 0,   624, 54, 52 });
+	idleAnimUpLeftTorso.PushBack({ 54,  624, 54, 52 });
+	idleAnimUpLeftTorso.PushBack({ 108, 624, 54, 52 });
 
-	leftAnimLegs.PushBack({ 376, 52, 47, 52 });
-	leftAnimLegs.PushBack({ 423, 52, 47, 52 });
-	leftAnimLegs.PushBack({ 470, 52, 47, 52 });
-	leftAnimLegs.PushBack({ 517, 52, 47, 52 });
-	leftAnimLegs.PushBack({ 564, 52, 47, 52 });
-	leftAnimLegs.PushBack({ 611, 52, 47, 52 });
-	leftAnimLegs.PushBack({ 658, 52, 47, 52 });
-	leftAnimLegs.PushBack({ 705, 52, 47, 52 });
+	idleAnimUpRightTorso.PushBack({ 324, 624, 54, 52 });
+	idleAnimUpRightTorso.PushBack({ 378, 624, 54, 52 });
+	idleAnimUpRightTorso.PushBack({ 432, 624, 54, 52 });
 
-	rightAnimLegs.PushBack({ 0, 0, 47, 52 });
-	rightAnimLegs.PushBack({ 47, 0, 47, 52 });
-	rightAnimLegs.PushBack({ 94, 0, 47, 52 });
-	rightAnimLegs.PushBack({ 141, 0, 47, 52 });
-	rightAnimLegs.PushBack({ 188, 0, 47, 52 });
-	rightAnimLegs.PushBack({ 235, 0, 47, 52 });
-	rightAnimLegs.PushBack({ 282, 0, 47, 52 });
-	rightAnimLegs.PushBack({ 329, 0, 47, 52 });
+	idleAnimDownLeftTorso.PushBack({ 756, 572, 54, 52 });
+	idleAnimDownLeftTorso.PushBack({ 810, 572, 54, 52 });
+	idleAnimDownLeftTorso.PushBack({ 864, 572, 54, 52 });
 
-	downLeftAnimLegs.PushBack({});
-	downRightAnimLegs.PushBack({});
-	upLeftAnimLegs.PushBack({});
-	upRightAnimLegs.PushBack({});
+	idleAnimDownRightTorso.PushBack({ 162, 624, 54, 52 });
+	idleAnimDownRightTorso.PushBack({ 216, 624, 54, 52 });
+	idleAnimDownRightTorso.PushBack({ 270, 624, 54, 52 });
 
-	rollAnimUp.PushBack({});
-	rollAnimDown.PushBack({});
-	rollAnimLeft.PushBack({});
-	rollAnimRight.PushBack({});
-	rollAnimDownLeft.PushBack({});
-	rollAnimDownRight.PushBack({});
-	rollAnimUpLeft.PushBack({});
-	rollAnimUpRight.PushBack({});
+	// Idle legs animations
+	idleAnimUpLegs.PushBack({ 864, 52, 54, 52 });
+	idleAnimDownLegs.PushBack({ 648, 52, 54, 52 });
+	idleAnimLeftLegs.PushBack({ 756, 52, 54, 52 });
+	idleAnimRightLegs.PushBack({ 540, 52, 54, 52 });
+	idleAnimDownLeftLegs.PushBack({ 702, 52, 54, 52 });
+	idleAnimDownRightLegs.PushBack({ 594, 52, 54, 52 });
+	idleAnimUpLeftLegs.PushBack({ 810, 52, 54, 52 });
+	idleAnimUpRightLegs.PushBack({ 486, 52, 54, 52 });
+	
+	// Legs animations
+	upAnimLegs.PushBack({ 378, 312, 54, 52 });
+	upAnimLegs.PushBack({ 324, 312, 54, 52 });
+	upAnimLegs.PushBack({ 270, 312, 54, 52 });
+	upAnimLegs.PushBack({ 216, 312, 54, 52 });
+	upAnimLegs.PushBack({ 162, 312, 54, 52 });
+	upAnimLegs.PushBack({ 108, 312, 54, 52 });
+	upAnimLegs.PushBack({ 54,  312, 54, 52 });
+	upAnimLegs.PushBack({ 0,   312, 54, 52 });
 
-	shootAnimUp.PushBack({});
-	shootAnimDown.PushBack({});
-	shootAnimLeft.PushBack({});
-	shootAnimRight.PushBack({});
-	shootAnimDownLeft.PushBack({});
-	shootAnimDownRight.PushBack({});
-	shootAnimUpLeft.PushBack({});
-	shootAnimUpRight.PushBack({});
+	downAnimLegs.PushBack({ 378, 364, 54, 52 });
+	downAnimLegs.PushBack({ 324, 364, 54, 52 });
+	downAnimLegs.PushBack({ 270, 364, 54, 52 });
+	downAnimLegs.PushBack({ 216, 364, 54, 52 });
+	downAnimLegs.PushBack({ 162, 364, 54, 52 });
+	downAnimLegs.PushBack({ 108, 364, 54, 52 });
+	downAnimLegs.PushBack({ 54,  364, 54, 52 });
+	downAnimLegs.PushBack({ 0,   364, 54, 52 });
 
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpLeftTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
-	idleAnimUpRightTorso.PushBack({});
+	leftAnimLegs.PushBack({ 378, 416, 54, 52 });
+	leftAnimLegs.PushBack({ 324, 416, 54, 52 });
+	leftAnimLegs.PushBack({ 270, 416, 54, 52 });
+	leftAnimLegs.PushBack({ 216, 416, 54, 52 });
+	leftAnimLegs.PushBack({ 162, 416, 54, 52 });
+	leftAnimLegs.PushBack({ 108, 416, 54, 52 });
+	leftAnimLegs.PushBack({ 54,  416, 54, 52 });
+	leftAnimLegs.PushBack({ 0,   416, 54, 52 });
 
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownLeftTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
-	idleAnimDownRightTorso.PushBack({});
+	rightAnimLegs.PushBack({ 864, 0, 54, 52 });
+	rightAnimLegs.PushBack({ 810, 0, 54, 52 });
+	rightAnimLegs.PushBack({ 756, 0, 54, 52 });
+	rightAnimLegs.PushBack({ 702, 0, 54, 52 });
+	rightAnimLegs.PushBack({ 648, 0, 54, 52 });
+	rightAnimLegs.PushBack({ 594, 0, 54, 52 });
+	rightAnimLegs.PushBack({ 540, 0, 54, 52 });
+	rightAnimLegs.PushBack({ 486, 0, 54, 52 });
 
+	downLeftAnimLegs.PushBack({ 378, 260, 54, 52 });
+	downLeftAnimLegs.PushBack({ 324, 260, 54, 52 });
+	downLeftAnimLegs.PushBack({ 270, 260, 54, 52 });
+	downLeftAnimLegs.PushBack({ 216, 260, 54, 52 });
+	downLeftAnimLegs.PushBack({ 162, 260, 54, 52 });
+	downLeftAnimLegs.PushBack({ 108, 260, 54, 52 });
+	downLeftAnimLegs.PushBack({ 54,  260, 54, 52 });
+	downLeftAnimLegs.PushBack({ 0,   260, 54, 52 });
+	
+	downRightAnimLegs.PushBack({ 864, 156, 54, 52 });
+	downRightAnimLegs.PushBack({ 810, 156, 54, 52 });
+	downRightAnimLegs.PushBack({ 756, 156, 54, 52 });
+	downRightAnimLegs.PushBack({ 702, 156, 54, 52 });
+	downRightAnimLegs.PushBack({ 648, 156, 54, 52 });
+	downRightAnimLegs.PushBack({ 594, 156, 54, 52 });
+	downRightAnimLegs.PushBack({ 540, 156, 54, 52 });
+	downRightAnimLegs.PushBack({ 486, 156, 54, 52 });
+
+	upLeftAnimLegs.PushBack({ 864, 208, 54, 52 });
+	upLeftAnimLegs.PushBack({ 810, 208, 54, 52 });
+	upLeftAnimLegs.PushBack({ 756, 208, 54, 52 });
+	upLeftAnimLegs.PushBack({ 702, 208, 54, 52 });
+	upLeftAnimLegs.PushBack({ 648, 208, 54, 52 });
+	upLeftAnimLegs.PushBack({ 594, 208, 54, 52 });
+	upLeftAnimLegs.PushBack({ 540, 208, 54, 52 });
+	upLeftAnimLegs.PushBack({ 486, 208, 54, 52 });
+
+	upRightAnimLegs.PushBack({ 864, 104, 54, 52 });
+	upRightAnimLegs.PushBack({ 810, 104, 54, 52 });
+	upRightAnimLegs.PushBack({ 756, 104, 54, 52 });
+	upRightAnimLegs.PushBack({ 702, 104, 54, 52 });
+	upRightAnimLegs.PushBack({ 648, 104, 54, 52 });
+	upRightAnimLegs.PushBack({ 594, 104, 54, 52 });
+	upRightAnimLegs.PushBack({ 540, 104, 54, 52 });
+	upRightAnimLegs.PushBack({ 486, 104, 54, 52 });
+
+	// Roll Animations
+	rollAnimUp.PushBack({ 0,   0, 54, 52 });
+	rollAnimUp.PushBack({ 54,  0, 54, 52 });
+	rollAnimUp.PushBack({ 108, 0, 54, 52 });
+	rollAnimUp.PushBack({ 162, 0, 54, 52 });
+	rollAnimUp.PushBack({ 216, 0, 54, 52 });
+	rollAnimUp.PushBack({ 270, 0, 54, 52 });
+	rollAnimUp.PushBack({ 324, 0, 54, 52 });
+	rollAnimUp.PushBack({ 378, 0, 54, 52 });
+	rollAnimUp.PushBack({ 432, 0, 54, 52 });
+
+	rollAnimDown.PushBack({ 0,   52, 54, 52 });
+	rollAnimDown.PushBack({ 54,  52, 54, 52 });
+	rollAnimDown.PushBack({ 108, 52, 54, 52 });
+	rollAnimDown.PushBack({ 162, 52, 54, 52 });
+	rollAnimDown.PushBack({ 216, 52, 54, 52 });
+	rollAnimDown.PushBack({ 270, 52, 54, 52 });
+	rollAnimDown.PushBack({ 324, 52, 54, 52 });
+	rollAnimDown.PushBack({ 378, 52, 54, 52 });
+	rollAnimDown.PushBack({ 432, 52, 54, 52 });
+
+	rollAnimLeft.PushBack({ 486, 312, 54, 52 });
+	rollAnimLeft.PushBack({ 540, 312, 54, 52 });
+	rollAnimLeft.PushBack({ 594, 312, 54, 52 });
+	rollAnimLeft.PushBack({ 648, 312, 54, 52 });
+	rollAnimLeft.PushBack({ 702, 312, 54, 52 });
+	rollAnimLeft.PushBack({ 756, 312, 54, 52 });
+	rollAnimLeft.PushBack({ 810, 312, 54, 52 });
+	rollAnimLeft.PushBack({ 864, 312, 54, 52 });
+
+	rollAnimRight.PushBack({ 486, 364, 54, 52 });
+	rollAnimRight.PushBack({ 540, 364, 54, 52 });
+	rollAnimRight.PushBack({ 594, 364, 54, 52 });
+	rollAnimRight.PushBack({ 648, 364, 54, 52 });
+	rollAnimRight.PushBack({ 702, 364, 54, 52 });
+	rollAnimRight.PushBack({ 756, 364, 54, 52 });
+	rollAnimRight.PushBack({ 810, 364, 54, 52 });
+	rollAnimRight.PushBack({ 864, 364, 54, 52 });
+
+	rollAnimDownLeft.PushBack({ 0,   208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 54,  208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 108, 208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 162, 208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 216, 208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 270, 208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 324, 208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 378, 208, 54, 52 });
+	rollAnimDownLeft.PushBack({ 432, 208, 54, 52 });
+
+	rollAnimDownRight.PushBack({ 486, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 540, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 594, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 648, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 702, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 756, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 810, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 864, 416, 54, 52 });
+
+	rollAnimUpLeft.PushBack({ 0,   156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 54,  156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 108, 156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 162, 156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 216, 156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 270, 156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 324, 156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 378, 156, 54, 52 });
+	rollAnimUpLeft.PushBack({ 432, 156, 54, 52 });
+
+	rollAnimUpRight.PushBack({ 0,   104, 54, 52 });
+	rollAnimUpRight.PushBack({ 54,  104, 54, 52 });
+	rollAnimUpRight.PushBack({ 108, 104, 54, 52 });
+	rollAnimUpRight.PushBack({ 162, 104, 54, 52 });
+	rollAnimUpRight.PushBack({ 216, 104, 54, 52 });
+	rollAnimUpRight.PushBack({ 270, 104, 54, 52 });
+	rollAnimUpRight.PushBack({ 324, 104, 54, 52 });
+	rollAnimUpRight.PushBack({ 378, 104, 54, 52 });
+	rollAnimUpRight.PushBack({ 432, 104, 54, 52 });
+
+	// Shoot Animations
+	shootAnimUp.PushBack({ 648, 676, 54, 52 });
+	shootAnimUp.PushBack({ 702, 676, 54, 52 });
+	shootAnimUp.PushBack({ 756, 676, 54, 52 });
+
+	shootAnimDown.PushBack({ 0  , 728, 54, 52 });
+	shootAnimDown.PushBack({ 54 , 728, 54, 52 });
+	shootAnimDown.PushBack({ 108, 728, 54, 52 });
+
+	shootAnimLeft.PushBack({ 486, 676, 54, 52 });
+	shootAnimLeft.PushBack({ 540, 676, 54, 52 });
+	shootAnimLeft.PushBack({ 594, 676, 54, 52 });
+
+	shootAnimRight.PushBack({ 324, 676, 54, 52 });
+	shootAnimRight.PushBack({ 378, 676, 54, 52 });
+	shootAnimRight.PushBack({ 432, 676, 54, 52 });
+
+	shootAnimDownLeft.PushBack({ 156, 728, 54, 52 });
+	shootAnimDownLeft.PushBack({ 210, 728, 54, 52 });
+	shootAnimDownLeft.PushBack({ 264, 728, 54, 52 });
+
+	shootAnimDownRight.PushBack({ 486, 728, 54, 52 });
+	shootAnimDownRight.PushBack({ 540, 728, 54, 52 });
+	shootAnimDownRight.PushBack({ 594, 728, 54, 52 });
+
+	shootAnimUpLeft.PushBack({ 324, 728, 54, 52 });
+	shootAnimUpLeft.PushBack({ 378, 728, 54, 52 });
+	shootAnimUpLeft.PushBack({ 432, 728, 54, 52 });
+
+	shootAnimUpRight.PushBack({ 648, 728, 54, 52 });
+	shootAnimUpRight.PushBack({ 702, 728, 54, 52 });
+	shootAnimUpRight.PushBack({ 756, 728, 54, 52 });
+
+	// Grenade Animations
+	grenadeAnimUp.PushBack({ 752, 520, 54, 52 });
+	grenadeAnimUp.PushBack({ 702, 520, 54, 52 });
+	grenadeAnimUp.PushBack({ 648, 520, 54, 52 });
+	grenadeAnimUp.PushBack({ 594, 520, 54, 52 });
+	grenadeAnimUp.PushBack({ 540, 520, 54, 52 });
+
+	grenadeAnimDown.PushBack({ 270, 520, 54, 52 });
+	grenadeAnimDown.PushBack({ 486, 520, 54, 52 });
+	grenadeAnimDown.PushBack({ 432, 520, 54, 52 });
+	grenadeAnimDown.PushBack({ 378, 520, 54, 52 });
+	grenadeAnimDown.PushBack({ 324, 520, 54, 52 });
+
+	grenadeAnimLeft.PushBack({ 216, 572, 54, 52 });
+	grenadeAnimLeft.PushBack({ 162, 572, 54, 52 });
+	grenadeAnimLeft.PushBack({ 108, 572, 54, 52 });
+	grenadeAnimLeft.PushBack({ 54 , 572, 54, 52 });
+	grenadeAnimLeft.PushBack({ 0  , 572, 54, 52 });
+
+	grenadeAnimRight.PushBack({ 270, 572, 54, 52 });
+	grenadeAnimRight.PushBack({ 324, 572, 54, 52 });
+	grenadeAnimRight.PushBack({ 378, 572, 54, 52 });
+	grenadeAnimRight.PushBack({ 432, 572, 54, 52 });
+	grenadeAnimRight.PushBack({ 486, 572, 54, 52 });
+
+	grenadeAnimDownLeft.PushBack({ 216, 468, 54, 52 });
+	grenadeAnimDownLeft.PushBack({ 162, 468, 54, 52 });
+	grenadeAnimDownLeft.PushBack({ 108, 468, 54, 52 });
+	grenadeAnimDownLeft.PushBack({ 54 , 468, 54, 52 });
+	grenadeAnimDownLeft.PushBack({ 0  , 468, 54, 52 });
+
+	grenadeAnimDownRight.PushBack({ 756, 468, 54, 52 });
+	grenadeAnimDownRight.PushBack({ 702, 468, 54, 52 });
+	grenadeAnimDownRight.PushBack({ 648, 468, 54, 52 });
+	grenadeAnimDownRight.PushBack({ 594, 468, 54, 52 });
+	grenadeAnimDownRight.PushBack({ 540, 468, 54, 52 });
+
+	grenadeAnimUpLeft.PushBack({ 486, 468, 54, 52 });
+	grenadeAnimUpLeft.PushBack({ 432, 468, 54, 52 });
+	grenadeAnimUpLeft.PushBack({ 378, 468, 54, 52 });
+	grenadeAnimUpLeft.PushBack({ 324, 468, 54, 52 });
+	grenadeAnimUpLeft.PushBack({ 270, 468, 54, 52 });
+
+	grenadeAnimUpRight.PushBack({ 216, 520, 54, 52 });
+	grenadeAnimUpRight.PushBack({ 162, 520, 54, 52 });
+	grenadeAnimUpRight.PushBack({ 108, 520, 54, 52 });
+	grenadeAnimUpRight.PushBack({ 54 , 520, 54, 52 });
+	grenadeAnimUpRight.PushBack({ 0  , 520, 54, 52 });
+
+	// Damage Animations
+	damageAnim.PushBack({ 540, 572, 54, 52 });
+	damageAnim.PushBack({ 594, 572, 54, 52 });
+	damageAnim.PushBack({ 648, 572, 54, 52 });
+	damageAnim.PushBack({ 702, 572, 54, 52 });
+
+	// Death Animations
+	deathAnim.PushBack({ 486, 416, 54, 52 });
+	deathAnim.PushBack({ 540, 416, 54, 52 });
+	deathAnim.PushBack({ 594, 416, 54, 52 });
+	deathAnim.PushBack({ 648, 416, 54, 52 });
+	deathAnim.PushBack({ 702, 416, 54, 52 });
+	deathAnim.PushBack({ 756, 416, 54, 52 });
+	deathAnim.PushBack({ 810, 416, 54, 52 });
+	deathAnim.PushBack({ 864, 416, 54, 52 });
 
 	idleAnimUpTorso.speed = animSpeed;
 	idleAnimDownTorso.speed = animSpeed;
@@ -151,9 +346,9 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	shootAnimUpLeft.speed = animSpeed;
 	shootAnimUpRight.speed = animSpeed;
 
-	// death animation
-	deathAnim.PushBack({});
 	deathAnim.speed = animSpeed;
+
+	damageAnim.speed = animSpeed;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -213,7 +408,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	// Animation
-	texture = App->textures->Load("Assets/Sprites/characters/milky_spritesheet2.png");
+	texture = App->textures->Load("Assets/Sprites/characters/milky_spritesheet.png");
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
@@ -392,7 +587,7 @@ Update_Status ModulePlayer::PostUpdate()
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
 		//TODO arreglar lumbago
 		//Mostramos por pantalla el frame de la animacion
-		App->render->Blit(texture, position.x+1, position.y+3, &rectLegs);
+		App->render->Blit(texture, position.x, position.y, &rectLegs);
 		App->render->Blit(texture, position.x, position.y, &rectTorso);
 		
 		//Obtenemos position de las diferentes partes de la UI en base al jugador y la camara

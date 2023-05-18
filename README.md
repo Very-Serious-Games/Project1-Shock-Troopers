@@ -21,6 +21,10 @@ Insert gif or link to demo
 # Setup Game directory
 Debug > Shock Troopers Debug Properties > Debugging > Working Directory > $(SolutionDir)/game
 ```
+## Statistics
+
+![](https://repobeats.axiom.co/api/embed/d3d1751bea9039e40a6f95b617683a2f5f5be899.svg)
+
 ## References
 
 ![winkawaks](https://www.winkawaks.org/index.htm)

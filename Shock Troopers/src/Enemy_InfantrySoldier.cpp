@@ -18,7 +18,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	rightDeathAnim.PushBack({});
 
 	//Idle animations
-	idleUpAnim.PushBack({ 267, 102, 20, 20 });
+	idleUpAnim.PushBack({});
 	idleDownAnim.PushBack({});
 	idleLeftAnim.PushBack({});
 	idleRightAnim.PushBack({});
@@ -79,13 +79,17 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeIdleUpRightAnim.PushBack({});
 	knifeIdleDownLeftAnim.PushBack({});
 	knifeIdleDownRightAnim.PushBack({});
+	//knife hit
+	knifeHitRightAnim.PushBack({});
+	knifeHitLeftAnim.PushBack({});
 
 	//falling soldiers
 	fallRightAnim.PushBack({});
 	fallLeftAnim.PushBack({});
 
 	//Hiding half body sodier
-	hidingIdleAnim.PushBack({});
+	hidingIdleRightAnim.PushBack({});
+	hidingIdleLeftAnim.PushBack({});
 	hidingDownAnim.PushBack({});
 	hidingHalfLeftAnim.PushBack({});
 	hidingHalfRightAnim.PushBack({});
@@ -95,8 +99,31 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	//Hands in the head soldier
 	headHandsAnim.PushBack({});
 
+	//General soldier with binoculars
+	generalAnim.PushBack({});
 
+	//Flying soldiers
+	flyingSoldiersLeftAnim.PushBack({});
+	flyingSoldiersRightAnim.PushBack({});
 
+	//Bazooka soldiers
+	bazookaDownAnim.PushBack({});
+	bazookaRightAnim.PushBack({});
+	bazookaLeftAnim.PushBack({});
+	bazookaUpLeftAnim.PushBack({});
+	bazookaUpRightAnim.PushBack({});
+	bazookaHalfRightAnim.PushBack({});
+	bazookaHalfLeftAnim.PushBack({});
+
+	//Throwing grenade soldiers
+	grenadeSoldierLeftAnim.PushBack({});
+	grenadeSoldierRightAnim.PushBack({});
+
+	//Final boss soldier
+	headBossSoldierAnim.PushBack({});
+	grenadeBossSoldierAnim.PushBack({});
+	bossSoldierIdleAnim.PushBack({});
+	upBossSoldierAnim.PushBack({});
 
 
 	// TODO cambiar tamaño collider

@@ -11,8 +11,20 @@ using namespace std;
 struct SDL_Texture;
 struct Collider;
 
-class ModulePlayer : public Module
-{
+// Define the player states
+enum class PlayerState {
+	Idle,
+	Moving,
+	Shooting,
+	Grenade,
+	Roll,
+	Win,
+	Spawn,
+	Death,
+	Damage
+};
+
+class ModulePlayer : public Module {
 public:
 	// Constructor
 	ModulePlayer(bool startEnabled);
@@ -35,17 +47,38 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	void setAnimations();
-
 	void updateHp();
 
 	void setIdleAnimations();
+	void setMovingAnimations();
+	void setShootingAnimations();
+	void setGrenadeAnimations();
+	void setRollAnimations();
+	void setWinAnimations();
+	void setSpawnAnimations();
+	void setDeathAnimations();
+	void setDamageAnimations();
+
+	bool isMoving();
+
+	bool isShooting();
+
+	bool isGrenade();
+
+	bool isRoll();
 
 	void move();
+
+	void roll();
+
+	void stateMachine();
 
 public:
 	// Position of the player in the map
 	iPoint position;
+
+	// Player current state
+	PlayerState currentState;
 
 	int lastDirection;
 
@@ -57,7 +90,7 @@ public:
 
 	iPoint diferencia;
 
-	bool roll = false;
+	bool isRolling = false;
 
 	bool godMode = false;
 
@@ -78,6 +111,9 @@ public:
 
 	// A set of animations
 	float animSpeed = 0.1f;
+
+	Animation emptyAnimation;
+
 	Animation idleAnimUpTorso;			// Idle animation (torso)
 	Animation idleAnimDownTorso;		// Idle animation (torso)
 	Animation idleAnimLeftTorso;		// Idle animation (torso)

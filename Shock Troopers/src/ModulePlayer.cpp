@@ -10,13 +10,15 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 #include <iostream>
-using namespace std;
-
 #include <stdio.h>
 
-ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
-{
+using namespace std;
+
+ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
+
 	//Setting up the player animations
+	// Empty animation
+	emptyAnimation.PushBack({ 0,0,0,0 });
 
 	// Idle torso animations
 	idleAnimUpTorso.PushBack({ 0,   676, 54, 52 });
@@ -351,12 +353,12 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled)
 	damageAnim.speed = animSpeed;
 }
 
-ModulePlayer::~ModulePlayer()
-{
+ModulePlayer::~ModulePlayer() {
 
 }
 
 void ModulePlayer::updateHp() {
+
 	//Carga sprite en base a la vida del jugador
 	switch (hp) {
 	case 100:
@@ -401,22 +403,24 @@ void ModulePlayer::updateHp() {
 	}
 }
 
-bool ModulePlayer::Start()
-{
+bool ModulePlayer::Start() {
+
+	// Setup current state to spawn
+	currentState = PlayerState::Spawn;
+	setSpawnAnimations(); // TODO revisar esto, debería entrar al estado de spawn y cargar las animaciones de spawn
+
 	LOG("Loading player textures");
 
 	bool ret = true;
 
-	// Animation
+	// Load milky textures
 	texture = App->textures->Load("Assets/Sprites/characters/milky_spritesheet.png");
-	currentAnimationLegs = &idleAnimUpLegs;
-	currentAnimationTorso = &idleAnimUpTorso;
 
-	// Starting sprite
+	// Load UI textures
 	textureP1 = App->textures->Load("Assets/Sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/Sprites/ui/Weapon_Normal.png");
 
-	// Spund effects
+	// Load sound effects
 	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
 
@@ -440,111 +444,13 @@ bool ModulePlayer::Start()
 	return ret;
 }
 
-Update_Status ModulePlayer::Update()
-{
-	updateHp();
+Update_Status ModulePlayer::Update() {
+
+	// Update the state machine
+	stateMachine();
 
 	cout << App->render->camera.x;
 	cout << App->render->camera.y;
-
-	if (roll) {
-
-		//If the player is rolling, the speed is increased
-		speed = 3;
-
-		//then the player moves
-		move();
-
-		//and when the player has moved 50 pixels, the roll ends
-		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
-			roll = false;
-		}
-	}else {
-
-		//Map controls
-		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
-			currentDirection = 1;
-		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
-			currentDirection = 2;
-		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
-			currentDirection = 3;
-		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
-			currentDirection = 4;
-		}else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT){
-			currentDirection = 5;
-		}else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT){
-			currentDirection = 6;
-		}else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT){
-			currentDirection = 7;
-		}else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT){
-			currentDirection = 8;
-		}else {
-			currentDirection = 0;
-		}
-
-
-
-		if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
-			hp -= 10;
-
-		}
-		
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
-			hp += 10;
-
-		}
-		
-		if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
-			godMode = false;
-			hp = 0;
-		}
-
-		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x-90, position.y , true});
-		}
-
-		//Player movement
-		move();
-
-		//Player animation update
-		setAnimations();
-
-		//Granade
-		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
-			App->particles->playerShot.setDirection(lastDirection);
-			//TODO añadir direccion
-			Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticle->collider->AddListener(this);
-			newParticle->granada = true;
-			App->audio->PlayFx(laserFx);
-		}
-		//Roll
-		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN)
-		{
-			roll = true;
-			diferencia.x = position.x;
-			diferencia.y = position.y;
-		}
-
-		//Player shooting
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
-		{
-			delay--;
-			if (delay == 0) {
-				//App->particles->laser.setDirection(lastDirection);
- 				Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x+5, position.y+20, lastDirection, Collider::Type::PLAYER_SHOT);
-				newParticle->collider->AddListener(this);
-  				App->audio->PlayFx(laserFx);
-
-				delay = 10;
-			}
-		}
-	}
-
-	//We save the current direction if there is a new one
-	if (currentDirection != 0) {
-		lastDirection = currentDirection;
-	}
 
 	//Collider update
 	collider->SetPos(position.x + 12, position.y + 10);
@@ -557,12 +463,10 @@ Update_Status ModulePlayer::Update()
 	currentAnimationLegs->Update();
 	currentAnimationTorso->Update();
 
-	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN)
-	{
+	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN) {
 		godMode = !godMode;
 	}
-	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN)
-	{
+	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
 		App->player->position.x = 232;
 		App->player->position.y = 190;
 	}
@@ -577,15 +481,16 @@ Update_Status ModulePlayer::Update()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-Update_Status ModulePlayer::PostUpdate()
-{
-		int x, y;
-	if (!destroyed)
-	{
+Update_Status ModulePlayer::PostUpdate() {
+
+	int x, y;
+
+	if (!destroyed) {
+
 		//Obtenemos el rectangulo actual de la animacion
 		SDL_Rect rectLegs = currentAnimationLegs->GetCurrentFrame();
 		SDL_Rect rectTorso = currentAnimationTorso->GetCurrentFrame();
-		//TODO arreglar lumbago
+
 		//Mostramos por pantalla el frame de la animacion
 		App->render->Blit(texture, position.x, position.y, &rectLegs);
 		App->render->Blit(texture, position.x, position.y, &rectTorso);
@@ -607,15 +512,15 @@ Update_Status ModulePlayer::PostUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
-{
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && roll == false && !godMode)
+void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
+
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !godMode)
 	{
 		//TODO AÑADIR ANIMACION SA EXO PUPA
 		if(hp < 0)
 		hp -= 10;
 	}
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && roll == false && !godMode)
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !godMode)
 	{
 		//TODO AÑADIR ANIMACION SA EXO PUPA
 		if (hp < 0)
@@ -625,19 +530,19 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockR = true;
-		roll = false;
+		isRolling = false;
 	}
 	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockU = true;
-		roll = false;
+		isRolling = false;
 	}
 	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockD = true;
-		roll = false;
+		isRolling = false;
 	}
 	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockL = true;
-		roll = false;
+		isRolling = false;
 	}
 
 
@@ -651,103 +556,273 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 }
 
 void ModulePlayer::setIdleAnimations() {
-	switch (lastDirection)
-	{
-	case 1: //UR
-		currentAnimationTorso = &idleAnimUpRightTorso;
-		currentAnimationLegs = &idleAnimUpRightLegs;
-		break;
-	case 2: //UL
-		currentAnimationTorso = &idleAnimUpLeftTorso;
-		currentAnimationLegs = &idleAnimUpLeftLegs;
-		break;
-	case 3: //DR
-		currentAnimationTorso = &idleAnimDownRightTorso;
-		currentAnimationLegs = &idleAnimDownRightLegs;
-		break;
-	case 4: //DL
-		currentAnimationTorso = &idleAnimDownLeftTorso;
-		currentAnimationLegs = &idleAnimDownLeftLegs;
-		break;
-	case 5: //R
-		currentAnimationTorso = &idleAnimRightTorso;
-		currentAnimationLegs = &idleAnimRightLegs;
-		break;
-	case 6: //L
-		currentAnimationTorso = &idleAnimLeftTorso;
-		currentAnimationLegs = &idleAnimLeftLegs;
-		break;
-	case 7: //D
-		currentAnimationTorso = &idleAnimDownTorso;
-		currentAnimationLegs = &idleAnimDownLegs;
-		break;
-	case 8: //U
-		currentAnimationTorso = &idleAnimUpTorso;
-		currentAnimationLegs = &idleAnimUpLegs;
-		break;
-	default:
-		currentAnimationTorso = &idleAnimUpTorso;
-		currentAnimationLegs = &idleAnimUpLegs;
+	switch (lastDirection) {
+		case 1: //UR
+			currentAnimationTorso = &idleAnimUpRightTorso;
+			currentAnimationLegs = &idleAnimUpRightLegs;
+			break;
+		case 2: //UL
+			currentAnimationTorso = &idleAnimUpLeftTorso;
+			currentAnimationLegs = &idleAnimUpLeftLegs;
+			break;
+		case 3: //DR
+			currentAnimationTorso = &idleAnimDownRightTorso;
+			currentAnimationLegs = &idleAnimDownRightLegs;
+			break;
+		case 4: //DL
+			currentAnimationTorso = &idleAnimDownLeftTorso;
+			currentAnimationLegs = &idleAnimDownLeftLegs;
+			break;
+		case 5: //R
+			currentAnimationTorso = &idleAnimRightTorso;
+			currentAnimationLegs = &idleAnimRightLegs;
+			break;
+		case 6: //L
+			currentAnimationTorso = &idleAnimLeftTorso;
+			currentAnimationLegs = &idleAnimLeftLegs;
+			break;
+		case 7: //D
+			currentAnimationTorso = &idleAnimDownTorso;
+			currentAnimationLegs = &idleAnimDownLegs;
+			break;
+		case 8: //U
+			currentAnimationTorso = &idleAnimUpTorso;
+			currentAnimationLegs = &idleAnimUpLegs;
+			break;
+		default:
+			currentAnimationTorso = &idleAnimUpTorso;
+			currentAnimationLegs = &idleAnimUpLegs;
 		break;
 	}
 }
 
-void ModulePlayer::setAnimations()
-{
-	switch (currentDirection)
-	{
+void ModulePlayer::setMovingAnimations() {
+	switch (lastDirection) {
+		case 1: //UR
+			currentAnimationTorso = &idleAnimUpRightTorso;
+			currentAnimationLegs = &upRightAnimLegs;
+			break;
+		case 2: //UL
+			currentAnimationTorso = &idleAnimUpLeftTorso;
+			currentAnimationLegs = &upLeftAnimLegs;
+			break;
+		case 3: //DR
+			currentAnimationTorso = &idleAnimDownRightTorso;
+			currentAnimationLegs = &downRightAnimLegs;
+			break;
+		case 4: //DL
+			currentAnimationTorso = &idleAnimDownLeftTorso;
+			currentAnimationLegs = &downLeftAnimLegs;
+			break;
+		case 5: //R
+			currentAnimationTorso = &idleAnimRightTorso;
+			currentAnimationLegs = &rightAnimLegs;
+			break;
+		case 6: //L
+			currentAnimationTorso = &idleAnimLeftTorso;
+			currentAnimationLegs = &leftAnimLegs;
+			break;
+		case 7: //D
+			currentAnimationTorso = &idleAnimDownTorso;
+			currentAnimationLegs = &downAnimLegs;
+			break;
+		case 8: //U
+			currentAnimationTorso = &idleAnimUpTorso;
+			currentAnimationLegs = &upAnimLegs;
+			break;
+	}
+}
+
+void ModulePlayer::setShootingAnimations() {
+	switch (lastDirection) {
 	case 1: //UR
+		currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &upRightAnimLegs;
-		currentAnimationTorso = &idleAnimUpRightTorso;
 		break;
 	case 2: //UL
+		currentAnimationTorso = &shootAnimUpLeft;
 		currentAnimationLegs = &upLeftAnimLegs;
-		currentAnimationTorso = &idleAnimUpLeftTorso;
 		break;
 	case 3: //DR
+		currentAnimationTorso = &shootAnimDownRight;
 		currentAnimationLegs = &downRightAnimLegs;
-		currentAnimationTorso = &idleAnimDownRightTorso;
 		break;
 	case 4: //DL
+		currentAnimationTorso = &shootAnimDownLeft;
 		currentAnimationLegs = &downLeftAnimLegs;
-		currentAnimationTorso = &idleAnimDownLeftTorso;
 		break;
 	case 5: //R
+		currentAnimationTorso = &shootAnimRight;
 		currentAnimationLegs = &rightAnimLegs;
-		currentAnimationTorso = &idleAnimRightTorso;
 		break;
 	case 6: //L
+		currentAnimationTorso = &shootAnimLeft;
 		currentAnimationLegs = &leftAnimLegs;
-		currentAnimationTorso = &idleAnimLeftTorso;
 		break;
 	case 7: //D
+		currentAnimationTorso = &shootAnimDown;
 		currentAnimationLegs = &downAnimLegs;
-		currentAnimationTorso = &idleAnimDownTorso;
 		break;
 	case 8: //U
+		currentAnimationTorso = &shootAnimUp;
 		currentAnimationLegs = &upAnimLegs;
-		currentAnimationTorso = &idleAnimUpTorso;
 		break;
-	default:
-		setIdleAnimations();
-		break;
+	}
+}
+
+void ModulePlayer::setGrenadeAnimations() {
+	// revisar
+	switch (lastDirection) {
+		case 1: //UR
+			currentAnimationTorso = &grenadeAnimUpRight;
+			currentAnimationLegs = &upRightAnimLegs;
+			break;
+		case 2: //UL
+			currentAnimationTorso = &grenadeAnimUpLeft;
+			currentAnimationLegs = &upLeftAnimLegs;
+			break;
+		case 3: //DR
+			currentAnimationTorso = &grenadeAnimDownRight;
+			currentAnimationLegs = &downRightAnimLegs;
+			break;
+		case 4: //DL
+			currentAnimationTorso = &grenadeAnimDownLeft;
+			currentAnimationLegs = &downLeftAnimLegs;
+			break;
+		case 5: //R
+			currentAnimationTorso = &grenadeAnimRight;
+			currentAnimationLegs = &rightAnimLegs;
+			break;
+		case 6: //L
+			currentAnimationTorso = &grenadeAnimLeft;
+			currentAnimationLegs = &leftAnimLegs;
+			break;
+		case 7: //D
+			currentAnimationTorso = &grenadeAnimDown;
+			currentAnimationLegs = &downAnimLegs;
+			break;
+		case 8: //U
+			currentAnimationTorso = &grenadeAnimUp;
+			currentAnimationLegs = &upAnimLegs;
+			break;
+	}
+}
+
+void ModulePlayer::setRollAnimations() {
+	currentAnimationTorso = nullptr;
+	switch (lastDirection) {
+		case 1: //UR
+			currentAnimationLegs = &rollAnimUpRight;
+			break;
+		case 2: //UL
+			currentAnimationLegs = &rollAnimUpLeft;
+			break;
+		case 3: //DR
+			currentAnimationLegs = &rollAnimDownRight;
+			break;
+		case 4: //DL
+			currentAnimationLegs = &rollAnimDownLeft;
+			break;
+		case 5: //R
+			currentAnimationLegs = &rollAnimRight;
+			break;
+		case 6: //L
+			currentAnimationLegs = &rollAnimLeft;
+			break;
+		case 7: //D
+			currentAnimationLegs = &rollAnimDown;
+			break;
+		case 8: //U
+			currentAnimationLegs = &rollAnimUp;
+			break;
+	}
+}
+
+void ModulePlayer::setWinAnimations() {
+	// TODO
+}
+
+void ModulePlayer::setSpawnAnimations() {
+	currentAnimationLegs = &idleAnimUpLegs;
+	currentAnimationTorso = &idleAnimUpTorso;
+}
+
+void ModulePlayer::setDeathAnimations() {
+	currentAnimationTorso = nullptr;
+	currentAnimationLegs = &deathAnim;
+}
+
+void ModulePlayer::setDamageAnimations() {
+	currentAnimationTorso = nullptr;
+	currentAnimationLegs = &damageAnim;
+}
+
+bool ModulePlayer::isMoving() {
+
+	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or 
+		App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT or
+		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
+		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+
+		return true;
+	
+	} else {
+
+		return false;
+
+	}
+}
+
+bool ModulePlayer::isShooting() {
+
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT) {
+
+		return true;
+
+	} else {
+
+		return false;
+
+	}
+}
+
+bool ModulePlayer::isGrenade() {
+
+	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT) {
+
+		return true;
+
+	} else {
+
+		return false;
+
+	}
+}
+
+bool ModulePlayer::isRoll()
+{
+	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_REPEAT) {
+
+		return true;
+
+	} else {
+
+		return false;
+
 	}
 }
 
 void ModulePlayer::move() {
-
-
 	switch (currentDirection)
 	{
 		case 1: //UR
-
 			if (!lockR) { 
 				position.x += speed; 
 			}
 			if (!lockU) { 
 				position.y -= speed; 
 			}
-		break;
+			break;
 		case 2: //UL
 			if (!lockU) {
 				position.y -= speed;
@@ -755,11 +830,11 @@ void ModulePlayer::move() {
 			if (!lockL) {
 				position.x -= speed;
 			}
-		break;
+			break;
 		case 3: //DR
 			if(!lockR) position.x += speed;
 			if(!lockD) position.y += speed;
-		break;
+			break;
 		case 4: //DL
 			if (!lockL) {
 				position.x -= speed;
@@ -767,28 +842,340 @@ void ModulePlayer::move() {
 			if (!lockD) {
 				position.y += speed;
 			}
-		break;
+			break;
 		case 5: //R
 			if (!lockR) { 
 				position.x += speed; 
 			}
-		break;
+			break;
 		case 6: //L
 			if (!lockL) {
 				position.x -= speed;
 			}
-		break;
+			break;
 		case 7: //D
 			if (!lockD) {
 				position.y += speed;
 			}
-		break;
+			break;
 		case 8: //U
 			if (!lockU) {
 				position.y -= speed;
 			}
-		break;
-	default:
-		break;
+			break;
+		default:
+			break;
+	}
+}
+
+void ModulePlayer::roll() {
+
+	if (isRolling) {
+
+		//If the player is rolling, the speed is increased
+		speed = 3;
+
+		//then the player moves
+		move();
+
+		//and when the player has moved 50 pixels, the roll ends
+		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
+			isRolling = false;
+		}
+
+	}
+	else {
+
+		//Map controls
+		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 1;
+		}
+		else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 2;
+		}
+		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 3;
+		}
+		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 4;
+		}
+		else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 5;
+		}
+		else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 6;
+		}
+		else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) {
+			currentDirection = 7;
+		}
+		else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) {
+			currentDirection = 8;
+		}
+		else {
+			currentDirection = 0;
+		}
+
+
+
+		if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
+			hp -= 10;
+
+		}
+
+		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
+			hp += 10;
+
+		}
+
+		if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
+			godMode = false;
+			hp = 0;
+		}
+
+		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
+			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x - 90, position.y , true });
+		}
+
+
+	}
+
+	//We save the current direction if there is a new one
+	if (currentDirection != 0) {
+		lastDirection = currentDirection;
+	}
+}
+
+void ModulePlayer::stateMachine() {
+	switch (currentState) {
+
+		case PlayerState::Idle:
+
+			setIdleAnimations();
+
+			if (isMoving()) {
+				currentState = PlayerState::Moving;
+			}
+
+			if (false/*player got hitted*/) {
+				currentState = PlayerState::Damage;
+			}
+
+			if (isShooting()) {
+				currentState = PlayerState::Shooting;
+			}
+
+			if (hp == 0) {
+				currentState = PlayerState::Death;
+			}
+
+			if (false/*win condition*/) {
+				currentState = PlayerState::Win;
+			}
+
+			if (isRoll()) {
+				currentState = PlayerState::Roll;
+			}
+
+			if (isGrenade()) {
+				currentState = PlayerState::Grenade;
+			}
+
+			LOG("idle state");
+
+			break;
+
+		case PlayerState::Moving:
+
+			setMovingAnimations();
+
+			if (false/*player got hitted*/) {
+				currentState = PlayerState::Damage;
+			}
+
+			if (isShooting()) {
+				currentState = PlayerState::Shooting;
+			}
+
+			if (hp == 0) {
+				currentState = PlayerState::Death;
+			}
+
+			if (isRoll()) {
+				currentState = PlayerState::Roll;
+			}
+
+			if (isGrenade()) {
+				currentState = PlayerState::Grenade;
+			}
+
+			currentState = PlayerState::Idle;
+
+			LOG("moving state");
+
+			break;
+
+		case PlayerState::Shooting:
+
+			setShootingAnimations();
+			
+			// Shoot logic
+			if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT) {
+				delay--;
+				if (delay == 0) {
+					//App->particles->laser.setDirection(lastDirection);
+					Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+					newParticle->collider->AddListener(this);
+					App->audio->PlayFx(laserFx);
+
+					delay = 10;
+				}
+			}
+
+			if (isMoving()) {
+				currentState = PlayerState::Moving;
+			}
+
+			if (false/*player got hitted*/) {
+				currentState = PlayerState::Damage;
+			}
+
+			if (hp == 0) {
+				currentState = PlayerState::Death;
+			}
+
+			if (isRoll()) {
+				currentState = PlayerState::Roll;
+			}
+
+			if (isGrenade()) {
+				currentState = PlayerState::Grenade;
+			}
+
+			//if (currentDirection == lastDirection) {
+				currentState = PlayerState::Idle;
+			//}
+
+			LOG("shooting state");
+
+			break;
+
+		case PlayerState::Grenade:
+
+			setGrenadeAnimations();
+			
+			// Grenade logic
+			if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
+				App->particles->playerShot.setDirection(lastDirection);
+				//TODO añadir direccion
+				Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
+				newParticle->collider->AddListener(this);
+				newParticle->granada = true;
+				App->audio->PlayFx(laserFx);
+			}
+
+			// probar si es posible mandar granada a idle directamente y usar los estados de idle para ahorrar comprobaciones
+			// sino hay que comprobar todos los estados comentados abajo
+
+			/*
+			if (isMoving()) {
+				PlayerState::Moving;
+			}
+
+			if (false/*player got hitted/) {
+				PlayerState::Damage;
+			}
+
+			if (hp == 0) {
+				PlayerState::Death;
+			}
+
+			if (isRoll()) {
+				PlayerState::Roll;
+			}
+
+			if (isShooting()) {
+				PlayerState::Shooting;
+			}
+			*/
+
+			currentState = PlayerState::Idle;
+
+			LOG("grenade state");
+
+			break;
+
+		case PlayerState::Roll:
+			
+			setRollAnimations();
+
+			// Roll logic
+			if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN) {
+				isRolling = true;
+				diferencia.x = position.x;
+				diferencia.y = position.y;
+			}
+			
+			if (isMoving()) {
+				currentState = PlayerState::Moving;
+			}
+
+			currentState = PlayerState::Idle;
+			
+			LOG("roll state");
+
+			break;
+
+		case PlayerState::Win:
+
+			setWinAnimations();
+
+			// Win logic
+			// TODO
+
+			LOG("win state");
+
+			break;
+
+		case PlayerState::Spawn:
+
+			setSpawnAnimations();
+
+			// Spawn logic
+			// TODO
+
+			// enter idle state
+			currentState = PlayerState::Idle;
+
+			LOG("spawn state");
+
+			break;
+
+		case PlayerState::Death:
+
+			setDeathAnimations();
+
+			// Death logic
+			// TODO
+
+			LOG("death state");
+
+			break;
+
+		case PlayerState::Damage:
+
+			setDamageAnimations();
+
+			// Damage logic
+			updateHp();
+
+			if (hp == 0) {
+				currentState = PlayerState::Death;
+			}
+
+			currentState = PlayerState::Idle;
+			
+			LOG("damage state");
+
+			break;
 	}
 }

@@ -12,6 +12,11 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	spawnAnimLeft.PushBack({});
 	spawnAnimRight.PushBack({});
 
+	//Death Animation
+	deathAnim.PushBack({});
+	leftDeathAnim.PushBack({});
+	rightDeathAnim.PushBack({});
+
 	//Idle animations
 	idleUpAnim.PushBack({ 267, 102, 20, 20 });
 	idleDownAnim.PushBack({});
@@ -33,11 +38,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	downLeftAnim.PushBack({});
 	downRightAnim.PushBack({});
 
-	//Death Animation
-	deathAnim.PushBack({});
-	leftDeathAnim.PushBack({});
-	rightDeathAnim.PushBack({});
-
+	//Gun
 	//Gun movement
 	gunUpAnim.PushBack({});
 	gunDownAnim.PushBack({});
@@ -56,6 +57,9 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunIdleUpRightAnim.PushBack({});
 	gunIdleDownLeftAnim.PushBack({});
 	gunIdleDownRightAnim.PushBack({});
+	//Gun hit
+	gunHitRightAnim.PushBack({});
+	gunHitLeftAnim.PushBack({});
 
 	//Knife movement
 	knifeUpAnim.PushBack({});

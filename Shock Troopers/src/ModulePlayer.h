@@ -71,6 +71,8 @@ public:
 
 	void roll();
 
+	void getLastDirection();
+
 	void stateMachine();
 
 public:

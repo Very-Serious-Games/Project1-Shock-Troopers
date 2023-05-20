@@ -16,7 +16,6 @@ class SceneIntro;
 class SceneLevel1;
 class ModuleParticles;
 class ModulePickUp;
-class ModuleObject;
 class ModuleCollisions;
 class ModuleEnemies;
 class ModuleFadeToBlack;
@@ -62,7 +61,6 @@ public:
 	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModulePickUp* pickUps = nullptr;
-	ModuleObject* objects = nullptr;
 
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* fade = nullptr;

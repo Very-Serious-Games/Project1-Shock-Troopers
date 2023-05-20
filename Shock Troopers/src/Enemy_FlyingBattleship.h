@@ -29,7 +29,7 @@ private:
 	// The path that will define the position in the world
 	Path path;
 
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* textureFlyingBattleship = nullptr;
 
 };
 

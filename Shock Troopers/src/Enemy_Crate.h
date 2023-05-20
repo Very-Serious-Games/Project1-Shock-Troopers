@@ -1,14 +1,14 @@
-#ifndef __ENEMY_BRIDGE_H__
-#define __ENEMY_BRIDGE_H__
+#ifndef __ENEMY_CRATE_H__
+#define __ENEMY_CRATE_H__
 
 #include "Enemy.h"
 #include "Path.h"
 #include "Module.h"
 
-class Enemy_Bridge : public Enemy {
+class Enemy_Crate : public Enemy {
 public:
 
-	Enemy_Bridge(int x, int y);
+	Enemy_Crate(int x, int y);
 
 
 	void Update() override;
@@ -21,12 +21,12 @@ public:
 
 	void StateMachine() override;
 
-protected:
+private:
 
 	Path path;
 
-	SDL_Texture* textureBridge = nullptr;
+	SDL_Texture* textureCrate = nullptr;
 
 };
 
-#endif // __ENEMY_BRIDGE_H__
+#endif

@@ -123,11 +123,11 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object.h">
-      <Filter>Source Files\entities</Filter>
+    <ClInclude Include="src\Enemy_Bridge.h">
+      <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
-    <ClInclude Include="src\ModuleObject.h">
-      <Filter>Source Files\modules\gameplay</Filter>
+    <ClInclude Include="src\Enemy_Crate.h">
+      <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -209,11 +209,11 @@
     <ClCompile Include="src\PickUp.cpp">
       <Filter>Source Files\entities</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object.cpp">
-      <Filter>Source Files\entities</Filter>
+    <ClCompile Include="src\Enemy_Bridge.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="src\ModuleObject.cpp">
-      <Filter>Source Files\modules\gameplay</Filter>
+    <ClCompile Include="src\Enemy_Crate.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

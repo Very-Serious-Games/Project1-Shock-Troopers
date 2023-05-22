@@ -10,6 +10,8 @@ enum class Enemy_Type
 	NO_TYPE,
 	INFANTRY_SOLDIER,
 	FLYING_BATTLESHIP,
+	BRIDGE,
+	CRATE,
 };
 
 struct EnemySpawnpoint
@@ -75,7 +77,9 @@ private:
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* textureFlyingBattleship = nullptr;
+	SDL_Texture* textureBridge = nullptr;
+	SDL_Texture* textureCrate = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

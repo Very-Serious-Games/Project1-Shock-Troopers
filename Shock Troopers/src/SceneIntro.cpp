@@ -9,16 +9,16 @@
 
 SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled) {
 
-	// iterate the animation, that have 5 frames per row and 189 rows
-	for (int row = 0; row < 33; row++) {
-		for (int col = 0; col < 12; col++) {
+	// iterate the animation, that have 23 frames per row and 6 rows
+	for (int row = 0; row < 6; row++) {
+		for (int col = 0; col < 23; col++) {
 			int frameX = col * SCREEN_WIDTH;
 			int frameY = row * SCREEN_HEIGHT;
 			introAnimation.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
 		}
 	}
 
-	introAnimation.speed = 0.2f;
+	introAnimation.speed = 0.1f;
 
 	path.PushBack({ 0.0f, 0.0f }, 1000, &introAnimation);
 

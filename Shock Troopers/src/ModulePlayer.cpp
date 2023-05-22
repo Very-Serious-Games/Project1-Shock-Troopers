@@ -938,6 +938,10 @@ void ModulePlayer::stateMachine() {
 
 		shootMoving();
 		
+		if (isHitted) {
+			currentState = PlayerState::Damage;
+		}
+
 		if (!isShootingMoving()) {
 			currentState = PlayerState::Idle;
 		}
@@ -951,6 +955,10 @@ void ModulePlayer::stateMachine() {
 		setMovingAnimations();
 
 		move();
+
+		if (isHitted) {
+			currentState = PlayerState::Damage;
+		}
 
 		if (isShootingMoving()) {
 			currentState = PlayerState::ShootingMoving;
@@ -969,6 +977,10 @@ void ModulePlayer::stateMachine() {
 		setShootingAnimations();
 
 		shoot();
+
+		if (isHitted) {
+			currentState = PlayerState::Damage;
+		}
 
 		if (isShootingMoving()) {
 			currentState = PlayerState::ShootingMoving;
@@ -989,6 +1001,10 @@ void ModulePlayer::stateMachine() {
 		// Grenade logic
 		
 		grenade();
+
+		if (isHitted) {
+			currentState = PlayerState::Damage;
+		}
 
 		if (!isGrenade()) {
 			currentState = PlayerState::Idle;

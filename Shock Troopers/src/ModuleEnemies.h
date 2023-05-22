@@ -10,6 +10,7 @@ enum class Enemy_Type
 	NO_TYPE,
 	INFANTRY_SOLDIER,
 	FLYING_BATTLESHIP,
+	BRIDGE,
 };
 
 struct EnemySpawnpoint

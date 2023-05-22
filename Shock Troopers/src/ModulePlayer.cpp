@@ -494,31 +494,31 @@ void ModulePlayer::setShootingAnimations() {
 		currentAnimationLegs = &idleAnimUpLegs;
 		break;
 	case 2: //UL
-		currentAnimationTorso = &shootAnimUpLeft;
+		currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &idleAnimUpLeftLegs;
 		break;
 	case 3: //DR
-		currentAnimationTorso = &shootAnimDownRight;
+		currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &idleAnimDownRightLegs;
 		break;
 	case 4: //DL
-		currentAnimationTorso = &shootAnimDownLeft;
+		currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &idleAnimDownLeftLegs;
 		break;
 	case 5: //R
-		currentAnimationTorso = &shootAnimRight;
+		currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &idleAnimRightLegs;
 		break;
 	case 6: //L
-		currentAnimationTorso = &shootAnimLeft;
+		currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &idleAnimLeftLegs;
 		break;
 	case 7: //D
-		currentAnimationTorso = &shootAnimDown;
+		 currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &idleAnimDownLegs;
 		break;
 	case 8: //U
-		currentAnimationTorso = &shootAnimUp;
+		currentAnimationTorso = &shootAnimUpRight;
 		currentAnimationLegs = &idleAnimUpLegs;
 		break;
 	}
@@ -656,7 +656,6 @@ bool ModulePlayer::isShootingMoving() {
 		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 		and
 		(App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)) {
-
 		return true;
 
 	}
@@ -687,7 +686,6 @@ bool ModulePlayer::isMoving() {
 bool ModulePlayer::isShooting() {
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT) {
-
 		return true;
 
 	}
@@ -696,6 +694,7 @@ bool ModulePlayer::isShooting() {
 		return false;
 
 	}
+
 }
 
 bool ModulePlayer::isGrenade() {
@@ -783,6 +782,9 @@ void ModulePlayer::move() {
 	if (currentDirection != 0) {
 		lastDirection = currentDirection;
 	}
+	if (!isShootingMoving()) {
+		shootDirection = currentDirection;
+	}
 }
 
 void ModulePlayer::roll() {
@@ -838,7 +840,7 @@ void ModulePlayer::shoot() {
 
 void ModulePlayer::grenade() {
 	App->particles->playerShot.setDirection(lastDirection);
-	//TODO añadir direccion
+	//TODO aï¿½adir direccion
 	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 	newParticle->collider->AddListener(this);
 	newParticle->granada = true;
@@ -846,7 +848,15 @@ void ModulePlayer::grenade() {
 }
 
 void ModulePlayer::shootMoving() {
-	// TODO add shooting while moving
+	delay--;
+	if (delay == 0) {
+		//App->particles->laser.setDirection(lastDirection);
+		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+		newParticle->collider->AddListener(this);
+		App->audio->PlayFx(laserFx);
+
+		delay = 10;
+	}
 }
 
 void ModulePlayer::getLastDirection() {
@@ -1108,7 +1118,7 @@ bool ModulePlayer::Start() {
 
 	// Setup current state to spawn
 	currentState = PlayerState::Spawn;
-	setSpawnAnimations(); // TODO revisar esto, debería entrar al estado de spawn y cargar las animaciones de spawn
+	setSpawnAnimations(); // TODO revisar esto, deberï¿½a entrar al estado de spawn y cargar las animaciones de spawn
 
 	LOG("Loading player textures");
 

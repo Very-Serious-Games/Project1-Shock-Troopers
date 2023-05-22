@@ -10,12 +10,70 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 
 	//Spawn animations
 	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimLeft.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
+	spawnAnimRight.PushBack({});
 	spawnAnimRight.PushBack({});
 
 	//Death Animation
-	deathAnim.PushBack({});
+	deathAnim.PushBack({51, });
+	deathAnim.PushBack({51, });
+	deathAnim.PushBack({51, });
+	deathAnim.PushBack({51, });
+	deathAnim.PushBack({51, });
+	deathAnim.PushBack({51, });
+	deathAnim.PushBack({51, });
+	leftDeathAnim.PushBack({});
+	leftDeathAnim.PushBack({});
+	leftDeathAnim.PushBack({});
+	leftDeathAnim.PushBack({});
+	leftDeathAnim.PushBack({});
+	leftDeathAnim.PushBack({});
 	leftDeathAnim.PushBack({});
 	rightDeathAnim.PushBack({});
+	rightDeathAnim.PushBack({});
+	rightDeathAnim.PushBack({});
+	rightDeathAnim.PushBack({});
+	rightDeathAnim.PushBack({});
+	rightDeathAnim.PushBack({});
+	rightDeathAnim.PushBack({});
+	//Pink Death Animation
+	pinkDeathAnim.PushBack({50, });
+	pinkDeathAnim.PushBack({50, });
+	pinkDeathAnim.PushBack({50, });
+	pinkDeathAnim.PushBack({50, });
+	pinkDeathAnim.PushBack({50, });
+	pinkDeathAnim.PushBack({50, });
+	pinkDeathAnim.PushBack({50, });
+	leftPinkDeathAnim.PushBack({});
+	rightPinkDeathAnim.PushBack({});
 
 	//Idle animations
 	idleUpAnim.PushBack({});
@@ -41,12 +99,56 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	//Gun
 	//Gun movement
 	gunUpAnim.PushBack({});
+	gunUpAnim.PushBack({});
+	gunUpAnim.PushBack({});
+	gunUpAnim.PushBack({});
+	gunDownAnim.PushBack({});
+	gunDownAnim.PushBack({});
+	gunDownAnim.PushBack({});
+	gunDownAnim.PushBack({});
+	gunDownAnim.PushBack({});
+	gunDownAnim.PushBack({});
+	gunDownAnim.PushBack({});
 	gunDownAnim.PushBack({});
 	gunLeftAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunLeftAnim.PushBack({});
+	gunRightAnim.PushBack({});
+	gunRightAnim.PushBack({});
+	gunRightAnim.PushBack({});
+	gunRightAnim.PushBack({});
+	gunRightAnim.PushBack({});
+	gunRightAnim.PushBack({});
+	gunRightAnim.PushBack({});
 	gunRightAnim.PushBack({});
 	gunUpLeftAnim.PushBack({});
+	gunUpLeftAnim.PushBack({});
+	gunUpLeftAnim.PushBack({});
+	gunUpLeftAnim.PushBack({});
+	gunUpRightAnim.PushBack({});
+	gunUpRightAnim.PushBack({});
+	gunUpRightAnim.PushBack({});
 	gunUpRightAnim.PushBack({});
 	gunDownLeftAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownLeftAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
+	gunDownRightAnim.PushBack({});
 	gunDownRightAnim.PushBack({});
 	//Gun Idle
 	gunIdleUpAnim.PushBack({});
@@ -84,8 +186,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeHitLeftAnim.PushBack({});
 
 	//falling soldiers
-	fallRightAnim.PushBack({});
-	fallLeftAnim.PushBack({});
+	fallRightAnim.PushBack({ 50, 899, 62, 67 });
+	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
 
 	//Hiding half body sodier
 	hidingIdleRightAnim.PushBack({});

@@ -360,47 +360,52 @@ ModulePlayer::~ModulePlayer() {
 
 void ModulePlayer::updateHp() {
 
+	if (!isInvulnerable) {
+		isInvulnerable = true;
+		invulnerabilityTimer = 0.0f;
+	}
+
 	//Carga sprite en base a la vida del jugador
 	switch (hp) {
-	case 100:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
-		break;
-	case 90:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
-		break;
-	case 80:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
-		break;
-	case 70:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
-		break;
-	case 60:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
-		break;
-	case 50:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
-		break;
-	case 40:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
-		break;
-	case 30:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
-		break;
-	case 20:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
-		break;
-	case 10:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
-		break;
-	case 0:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-		destroyed = true;
-		//TODO  poner esto donde toque
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
-		break;
-	default:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-		break;
+		case 100:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
+			break;
+		case 90:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
+			break;
+		case 80:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
+			break;
+		case 70:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
+			break;
+		case 60:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
+			break;
+		case 50:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
+			break;
+		case 40:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
+			break;
+		case 30:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
+			break;
+		case 20:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
+			break;
+		case 10:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
+			break;
+		case 0:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
+			destroyed = true;
+			//TODO  poner esto donde toque
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
+			break;
+		default:
+			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
+			break;
 	}
 }
 
@@ -897,7 +902,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Moving;
 		}
 
-		if (false/*player got hitted*/) {
+		if (isHitted) {
 			currentState = PlayerState::Damage;
 		}
 
@@ -963,7 +968,7 @@ void ModulePlayer::stateMachine() {
 
 		setShootingAnimations();
 
-		shootMoving();
+		shoot();
 
 		if (isShootingMoving()) {
 			currentState = PlayerState::ShootingMoving;
@@ -1043,8 +1048,7 @@ void ModulePlayer::stateMachine() {
 
 		setDeathAnimations();
 
-		// Death logic
-		// TODO
+		// TODO Death logic
 
 		LOG("death state");
 
@@ -1057,11 +1061,25 @@ void ModulePlayer::stateMachine() {
 		// Damage logic
 		updateHp();
 
+		if (isInvulnerable) {
+			// Check if the invulnerability period has ended
+			if (invulnerabilityTimer >= invulnerabilityDuration) {
+				// Make the player vulnerable again
+				isInvulnerable = false;
+				isHitted = false;
+			}
+
+			// Update the invulnerability timer
+			invulnerabilityTimer += 1;
+		}
+
 		if (hp == 0) {
 			currentState = PlayerState::Death;
 		}
 		
-		currentState = PlayerState::Idle;
+		if (!isHitted) {
+			currentState = PlayerState::Idle;
+		}
 		
 
 		LOG("damage state");
@@ -1181,19 +1199,25 @@ Update_Status ModulePlayer::PostUpdate() {
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !godMode) {
+	if (!isInvulnerable) {
+		// Ignore collision while invulnerable
+		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !godMode) {
 
-		//TODO add hit animation
-		if(hp < 0)
-		hp -= 10;
+			if (hp < 0)
+				hp -= 10;
 
-	}
+			isHitted = true;
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !godMode) {
+		}
 
-		//TODO add hit animation
-		if (hp < 0)
-		hp -= 10;
+		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !godMode) {
+
+			if (hp < 0)
+				hp -= 10;
+
+			isHitted = true;
+
+		}
 
 	}
 

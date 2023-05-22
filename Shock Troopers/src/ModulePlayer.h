@@ -105,6 +105,12 @@ public:
 
 	bool isRolling = false;
 
+	bool isInvulnerable = false;
+	float invulnerabilityTimer = 0.0f;
+	const float invulnerabilityDuration = 50.0f;  // set invulnerability duration
+
+	bool isHitted = false;
+
 	bool godMode = false;
 
 	// The speed in which we move the player (pixels per frame)

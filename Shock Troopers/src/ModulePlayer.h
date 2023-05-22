@@ -78,6 +78,8 @@ public:
 
 	void shoot();
 
+	void shootMoving();
+
 	void getLastDirection();
 
 	void stateMachine();

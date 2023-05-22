@@ -831,6 +831,10 @@ void ModulePlayer::shoot() {
 	}
 }
 
+void ModulePlayer::shootMoving() {
+	// TODO add shooting while moving
+}
+
 void ModulePlayer::getLastDirection() {
 	//Map controls
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
@@ -918,10 +922,8 @@ void ModulePlayer::stateMachine() {
 
 		move();
 
-		// Shoot logic
-		shoot();
+		shootMoving();
 		
-
 		if (!isShootingMoving()) {
 			currentState = PlayerState::Idle;
 		}

@@ -101,6 +101,8 @@ public:
 
 	int currentDirection;
 
+	int shootDirection;
+
 	iPoint diferencia;
 
 	bool isRolling = false;
@@ -203,6 +205,7 @@ public:
 	bool lockL = false;
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
+
 
 	// Font score index
 	uint score = 010;

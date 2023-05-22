@@ -6,38 +6,36 @@
 
 Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
 
+    spawnAnim.PushBack({ 0, 0, 64, 54 });
 
+    idleAnim.PushBack({ 0, 0, 64, 54 });
 
-    spawnAnim.PushBack({ 96, 0, 124, 90 });
-    spawnAnim.speed = 0.2f;
+    deathAnim.PushBack({ 64, 0, 64, 54 });
+    deathAnim.PushBack({ 128, 0, 64, 54 });
+    deathAnim.PushBack({ 192, 0, 64, 54 });
+    deathAnim.PushBack({ 256, 0, 64, 54 });
+    deathAnim.PushBack({ 320, 0, 64, 54 });
+    deathAnim.PushBack({ 384, 0, 64, 54 });
+    deathAnim.PushBack({ 448, 0, 64, 54 });
+    deathAnim.PushBack({ 512, 0, 64, 54 });
 
-    idleAnim.PushBack({ 96, 0, 124, 90 });
-
-    deathAnim.PushBack({ 135, 0, 177, 90 });
-    deathAnim.PushBack({ 188, 0, 241, 90 });
-    deathAnim.PushBack({ 255, 0, 317, 90 });
-    deathAnim.PushBack({ 329, 0, 391, 90 });
-    deathAnim.PushBack({ 403, 0, 465, 90 });
-    deathAnim.PushBack({ 476, 0, 539, 90 });
-    deathAnim.PushBack({ 550, 0, 613, 90 });
-    deathAnim.PushBack({ 625, 0, 687, 90 });
+    deathAnim.speed = 0.05f;
 
     //path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
-    //path.PushBack({ 1.0f, 0.0f }, 150, &idleAnim);
-    //path.PushBack({ -1.0f, 0.0f }, 150, &idleAnim);
-    path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
+    //path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
+    path.PushBack({ 0.0f, 0.0f }, 50, &deathAnim);
 
 
     // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 0, 0, 124, 90 }, Collider::Type::ENEMY, (Module*)App->enemies);
+    collider = App->collisions->AddCollider({ 0, 0, 47, 49 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_Crate::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    //currentAnim = path.GetCurrentAnimation();
-    currentAnim = &spawnAnim;
+    currentAnim = path.GetCurrentAnimation();
+    //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end
     // It will update the collider depending on the position

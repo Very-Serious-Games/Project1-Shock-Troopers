@@ -78,6 +78,8 @@ public:
 
 	void shoot();
 
+	void grenade();
+
 	void shootMoving();
 
 	void getLastDirection();

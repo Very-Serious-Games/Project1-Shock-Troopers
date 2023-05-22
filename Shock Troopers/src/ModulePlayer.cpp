@@ -831,6 +831,15 @@ void ModulePlayer::shoot() {
 	}
 }
 
+void ModulePlayer::grenade() {
+	App->particles->playerShot.setDirection(lastDirection);
+	//TODO añadir direccion
+	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
+	newParticle->collider->AddListener(this);
+	newParticle->granada = true;
+	App->audio->PlayFx(laserFx);
+}
+
 void ModulePlayer::shootMoving() {
 	// TODO add shooting while moving
 }
@@ -973,39 +982,8 @@ void ModulePlayer::stateMachine() {
 		setGrenadeAnimations();
 
 		// Grenade logic
-		if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_DOWN) {
-			App->particles->playerShot.setDirection(lastDirection);
-			//TODO añadir direccion
-			Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticle->collider->AddListener(this);
-			newParticle->granada = true;
-			App->audio->PlayFx(laserFx);
-		}
-
-		// probar si es posible mandar granada a idle directamente y usar los estados de idle para ahorrar comprobaciones
-		// sino hay que comprobar todos los estados comentados abajo
-
-		/*
-		if (isMoving()) {
-			PlayerState::Moving;
-		}
-
-		if (false/*player got hitted/) {
-			PlayerState::Damage;
-		}
-
-		if (hp == 0) {
-			PlayerState::Death;
-		}
-
-		if (isRoll()) {
-			PlayerState::Roll;
-		}
-
-		if (isShooting()) {
-			PlayerState::Shooting;
-		}
-		*/
+		
+		grenade();
 
 		if (!isGrenade()) {
 			currentState = PlayerState::Idle;

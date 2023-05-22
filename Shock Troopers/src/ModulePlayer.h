@@ -11,8 +11,22 @@ using namespace std;
 struct SDL_Texture;
 struct Collider;
 
-class ModulePlayer : public Module
-{
+// Define the player states
+enum class PlayerState {
+	Idle,
+	Moving,
+	Shooting,
+	Grenade,
+	Roll,
+	Win,
+	Spawn,
+	Death,
+	Damage,
+	ShootingMoving,
+	GrenadeMoving
+};
+
+class ModulePlayer : public Module {
 public:
 	// Constructor
 	ModulePlayer(bool startEnabled);
@@ -35,16 +49,49 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	void setAnimations();
+	void updateHp();
 
 	void setIdleAnimations();
+	void setMovingAnimations();
+	void setShootingAnimations();
+	void setGrenadeAnimations();
+	void setRollAnimations();
+	void setWinAnimations();
+	void setSpawnAnimations();
+	void setDeathAnimations();
+	void setDamageAnimations();
+	void setShootingMovingAnimations();
 
+	bool isMoving();
+
+	bool isShooting();
+
+	bool isGrenade();
+
+	bool isRoll();
+
+	bool isShootingMoving();
 
 	void move();
+
+	void roll();
+
+	void shoot();
+
+	void grenade();
+
+	void shootMoving();
+
+	void getLastDirection();
+
+	void stateMachine();
 
 public:
 	// Position of the player in the map
 	iPoint position;
+
+	// Player current state
+	PlayerState currentState;
 
 	int lastDirection;
 
@@ -56,7 +103,7 @@ public:
 
 	iPoint diferencia;
 
-	bool roll = false;
+	bool isRolling = false;
 
 	bool godMode = false;
 
@@ -66,6 +113,9 @@ public:
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 
+	SDL_Texture* textureHp = nullptr;
+	SDL_Texture* textureP1 = nullptr;
+	SDL_Texture* textureWeapon = nullptr;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -73,7 +123,10 @@ public:
 	Animation* currentAnimationLegs = nullptr;
 
 	// A set of animations
-	float animSpeed = 0.01f;
+	float animSpeed = 0.1f;
+
+	Animation emptyAnimation;
+
 	Animation idleAnimUpTorso;			// Idle animation (torso)
 	Animation idleAnimDownTorso;		// Idle animation (torso)
 	Animation idleAnimLeftTorso;		// Idle animation (torso)
@@ -120,7 +173,18 @@ public:
 	Animation shootAnimDownLeft;		// Shoot animation
 	Animation shootAnimDownRight;		// Shoot animation
 
+	Animation grenadeAnimUp;			// Grenade animation
+	Animation grenadeAnimDown;			// Grenade animation
+	Animation grenadeAnimLeft;			// Grenade animation
+	Animation grenadeAnimRight;			// Grenade animation
+	Animation grenadeAnimUpLeft;		// Grenade animation
+	Animation grenadeAnimUpRight;		// Grenade animation
+	Animation grenadeAnimDownLeft;		// Grenade animation
+	Animation grenadeAnimDownRight;		// Grenade animation
+
 	Animation deathAnim;				// Death animation
+
+	Animation damageAnim;				// Damage animation
 
 	// Sound effects indices
 	uint laserFx = 0;

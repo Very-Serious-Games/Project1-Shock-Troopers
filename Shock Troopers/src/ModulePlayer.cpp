@@ -954,7 +954,7 @@ void ModulePlayer::stateMachine() {
 
 		setShootingAnimations();
 
-		shoot();
+		shootMoving();
 
 		if (isShootingMoving()) {
 			currentState = PlayerState::ShootingMoving;

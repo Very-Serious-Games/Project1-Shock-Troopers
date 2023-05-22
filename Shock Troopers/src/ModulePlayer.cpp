@@ -443,10 +443,6 @@ void ModulePlayer::setIdleAnimations() {
 			currentAnimationTorso = &idleAnimUpTorso;
 			currentAnimationLegs = &idleAnimUpLegs;
 			break;
-		default:
-			currentAnimationTorso = &idleAnimUpTorso;
-			currentAnimationLegs = &idleAnimUpLegs;
-			break;
 		}
 }
 
@@ -494,31 +490,31 @@ void ModulePlayer::setShootingAnimations() {
 		currentAnimationLegs = &idleAnimUpLegs;
 		break;
 	case 2: //UL
-		currentAnimationTorso = &shootAnimUpRight;
+		currentAnimationTorso = &shootAnimUpLeft;
 		currentAnimationLegs = &idleAnimUpLeftLegs;
 		break;
 	case 3: //DR
-		currentAnimationTorso = &shootAnimUpRight;
+		currentAnimationTorso = &shootAnimDownRight;
 		currentAnimationLegs = &idleAnimDownRightLegs;
 		break;
 	case 4: //DL
-		currentAnimationTorso = &shootAnimUpRight;
+		currentAnimationTorso = &shootAnimDownLeft;
 		currentAnimationLegs = &idleAnimDownLeftLegs;
 		break;
 	case 5: //R
-		currentAnimationTorso = &shootAnimUpRight;
+		currentAnimationTorso = &shootAnimRight;
 		currentAnimationLegs = &idleAnimRightLegs;
 		break;
 	case 6: //L
-		currentAnimationTorso = &shootAnimUpRight;
+		currentAnimationTorso = &shootAnimLeft;
 		currentAnimationLegs = &idleAnimLeftLegs;
 		break;
 	case 7: //D
-		 currentAnimationTorso = &shootAnimUpRight;
+		 currentAnimationTorso = &shootAnimDown;
 		currentAnimationLegs = &idleAnimDownLegs;
 		break;
 	case 8: //U
-		currentAnimationTorso = &shootAnimUpRight;
+		currentAnimationTorso = &shootAnimUp;
 		currentAnimationLegs = &idleAnimUpLegs;
 		break;
 	}

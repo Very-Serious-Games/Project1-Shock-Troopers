@@ -11,6 +11,7 @@ using namespace std;
 #include "ModuleCollisions.h"
 #include "ModulePickUp.h"
 #include "ModuleEnemies.h"
+#include "ModuleUI.h"
 #include "ModulePlayer.h"
 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
@@ -53,6 +54,7 @@ bool SceneLevel1::Start()
 	App->enemies->Enable();
 	App->collisions->Enable();
 	App->pickUps->Enable();
+	App->ui->Enable();
 
 	return ret;
 }
@@ -77,6 +79,7 @@ bool SceneLevel1::CleanUp()
 	App->sceneLevel_1->Disable();
 	App->pickUps->Disable();
 	App->collisions->Disable();
+	App->ui->Disable();
 
 	// TODO remove all memory leaks
 

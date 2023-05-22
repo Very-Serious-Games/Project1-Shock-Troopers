@@ -55,19 +55,10 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
-
-
-	int newCamX = App->player->position.x * 3 - 400;
-	int newCamY = App->player->position.y * 3 - 300;
-
-	if (newCamX < 515 && newCamX > 0) {
-		App->render->camera.x = newCamX;
-	}
-	if (newCamY < 5058 && newCamY > -342) {
-		App->render->camera.y = newCamY;
-	}
-
 	//Handle positive vertical movement
+
+	camera.y = App->player->position.y - 100;
+	camera.x = App->player->position.x - 120;
 
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 		camera.y -= cameraSpeed * SCREEN_HEIGHT;
@@ -79,8 +70,10 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
 		camera.x -= cameraSpeed;
 	if (camera.x < 0) camera.x = 0;
+	if (camera.x >= 188) camera.x = 188;
 
 	if (camera.y < 0) camera.y = 0;
+	if (camera.y >= 1686) camera.y = 1686;
 
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
 		camera.x += cameraSpeed;
@@ -117,8 +110,10 @@ bool ModuleRender::Blit(SDL_Texture* texture, int x, int y, const SDL_Rect* sect
 
 	if (useCamera)
 	{
-		dstRect.x -= (camera.x * speed);
-		dstRect.y -= (camera.y * speed);
+		dstRect = {
+		(int)((-camera.x * speed) + x) * SCREEN_SIZE,
+		(int)((-camera.y * speed) + y) * SCREEN_SIZE,
+		(0,0)};
 	}
 
 	if (section != nullptr)
@@ -154,8 +149,8 @@ bool ModuleRender::DrawQuad(const SDL_Rect& rect, Uint8 r, Uint8 g, Uint8 b, Uin
 	SDL_Rect dstRect { rect.x * SCREEN_SIZE, rect.y * SCREEN_SIZE, rect.w * SCREEN_SIZE, rect.h * SCREEN_SIZE };
 
 	if (useCamera) {
-		dstRect.x -= (camera.x * speed);
-		dstRect.y -= (camera.y * speed);
+		dstRect.x -= ((camera.x * speed) * SCREEN_SIZE);
+		dstRect.y -= ((camera.y * speed) * SCREEN_SIZE);
 	}
 
 	if (SDL_RenderFillRect(renderer, &dstRect) != 0) {

@@ -120,14 +120,11 @@
     <ClInclude Include="src\PickUp.h">
       <Filter>Source Files\entities</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Enemy_Bridge.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enemy_Crate.h">
-      <Filter>Source Files\entities\enemies</Filter>
+    <ClInclude Include="src\ModuleUI.h">
+      <Filter>Source Files\modules\core</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -212,13 +209,8 @@
     <ClCompile Include="src\Enemy_Bridge.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy_Crate.cpp">
-      <Filter>Source Files\entities\enemies</Filter>
+    <ClCompile Include="src\ModuleUI.cpp">
+      <Filter>Source Files\modules\core</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="Shock Troopers.rc">
-      <Filter>Resource Files</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

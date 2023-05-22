@@ -37,9 +37,8 @@ public:
 
 	void setAnimations();
 
-	void updateHp();
-
 	void setIdleAnimations();
+
 
 	void move();
 
@@ -67,9 +66,6 @@ public:
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 
-	SDL_Texture* textureHp = nullptr;
-	SDL_Texture* textureP1 = nullptr;
-	SDL_Texture* textureWeapon = nullptr;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction

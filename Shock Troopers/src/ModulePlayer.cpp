@@ -161,50 +161,6 @@ ModulePlayer::~ModulePlayer()
 
 }
 
-void ModulePlayer::updateHp() {
-	//Carga sprite en base a la vida del jugador
-	switch (hp) {
-	case 100:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
-		break;
-	case 90:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
-		break;
-	case 80:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
-		break;
-	case 70:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
-		break;
-	case 60:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
-		break;
-	case 50:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
-		break;
-	case 40:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
-		break;
-	case 30:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
-		break;
-	case 20:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
-		break;
-	case 10:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
-		break;
-	case 0:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-		destroyed = true;
-		//TODO  poner esto donde toque
-		App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
-		break;
-	default:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-		break;
-	}
-}
 
 bool ModulePlayer::Start()
 {
@@ -217,9 +173,6 @@ bool ModulePlayer::Start()
 	currentAnimationLegs = &idleAnimUpLegs;
 	currentAnimationTorso = &idleAnimUpTorso;
 
-	// Starting sprite
-	textureP1 = App->textures->Load("Assets/Sprites/ui/Player1_Milky.png");
-	textureWeapon = App->textures->Load("Assets/Sprites/ui/Weapon_Normal.png");
 
 	// Spund effects
 	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");
@@ -247,7 +200,6 @@ bool ModulePlayer::Start()
 
 Update_Status ModulePlayer::Update()
 {
-	updateHp();
 
 	cout << App->render->camera.x;
 	cout << App->render->camera.y;
@@ -394,15 +346,7 @@ Update_Status ModulePlayer::PostUpdate()
 		//Mostramos por pantalla el frame de la animacion
 		App->render->Blit(texture, position.x+1, position.y+3, &rectLegs);
 		App->render->Blit(texture, position.x, position.y, &rectTorso);
-		
-		//Obtenemos position de las diferentes partes de la UI en base al jugador y la camara
-		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
-		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
-
-		//Mostramos por pantalla la UI
-		App->render->Blit(textureHp,x - 10, y, NULL);
-		App->render->Blit(textureP1, x - 20, y - 50, NULL);
-		App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
+	
 	}
 
 	//Mostramos por pantalla el score

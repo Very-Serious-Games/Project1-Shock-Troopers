@@ -21,11 +21,11 @@ public:
 
 	void StateMachine() override;
 
-protected:
+private:
 
 	Path path;
 
-	SDL_Texture* textureBridge = nullptr;
+	SDL_Texture* texture = nullptr;
 
 };
 

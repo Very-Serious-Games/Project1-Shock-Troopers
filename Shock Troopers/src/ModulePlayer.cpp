@@ -651,12 +651,10 @@ bool ModulePlayer::isShootingMoving() {
 		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 		and
 		(App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)) {
-		lockShooting = true;
 		return true;
 
 	}
 	else {
-		lockShooting = false;
 
 		return false;
 

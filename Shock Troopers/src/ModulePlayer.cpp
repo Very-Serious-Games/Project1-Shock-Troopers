@@ -612,37 +612,56 @@ void ModulePlayer::setDamageAnimations() {
 }
 
 void ModulePlayer::setShootingMovingAnimations() {
-	switch (lastDirection) {
+	switch (shootDirection) {
 	case 1: //UR
 		currentAnimationTorso = &shootAnimUpRight;
-		currentAnimationLegs = &upRightAnimLegs;
 		break;
 	case 2: //UL
 		currentAnimationTorso = &shootAnimUpLeft;
-		currentAnimationLegs = &upLeftAnimLegs;
 		break;
 	case 3: //DR
 		currentAnimationTorso = &shootAnimDownRight;
-		currentAnimationLegs = &downRightAnimLegs;
 		break;
 	case 4: //DL
 		currentAnimationTorso = &shootAnimDownLeft;
-		currentAnimationLegs = &downLeftAnimLegs;
 		break;
 	case 5: //R
 		currentAnimationTorso = &shootAnimRight;
-		currentAnimationLegs = &rightAnimLegs;
 		break;
 	case 6: //L
 		currentAnimationTorso = &shootAnimLeft;
-		currentAnimationLegs = &leftAnimLegs;
 		break;
 	case 7: //D
 		currentAnimationTorso = &shootAnimDown;
-		currentAnimationLegs = &downAnimLegs;
 		break;
 	case 8: //U
 		currentAnimationTorso = &shootAnimUp;
+		break;
+	}
+
+	switch (lastDirection) {
+	case 1: //UR
+		currentAnimationLegs = &upRightAnimLegs;
+		break;
+	case 2: //UL
+		currentAnimationLegs = &upLeftAnimLegs;
+		break;
+	case 3: //DR
+		currentAnimationLegs = &downRightAnimLegs;
+		break;
+	case 4: //DL
+		currentAnimationLegs = &downLeftAnimLegs;
+		break;
+	case 5: //R
+		currentAnimationLegs = &rightAnimLegs;
+		break;
+	case 6: //L
+		currentAnimationLegs = &leftAnimLegs;
+		break;
+	case 7: //D
+		currentAnimationLegs = &downAnimLegs;
+		break;
+	case 8: //U
 		currentAnimationLegs = &upAnimLegs;
 		break;
 	}

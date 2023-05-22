@@ -21,7 +21,9 @@ enum class PlayerState {
 	Win,
 	Spawn,
 	Death,
-	Damage
+	Damage,
+	ShootingMoving,
+	GrenadeMoving
 };
 
 class ModulePlayer : public Module {
@@ -58,6 +60,7 @@ public:
 	void setSpawnAnimations();
 	void setDeathAnimations();
 	void setDamageAnimations();
+	void setShootingMovingAnimations();
 
 	bool isMoving();
 
@@ -67,9 +70,13 @@ public:
 
 	bool isRoll();
 
+	bool isShootingMoving();
+
 	void move();
 
 	void roll();
+
+	void shoot();
 
 	void getLastDirection();
 

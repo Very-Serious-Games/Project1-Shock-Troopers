@@ -11,6 +11,7 @@
 #include "ModuleFonts.h"
 #include <iostream>
 #include <stdio.h>
+#include <SDL/include/SDL_timer.h>
 
 using namespace std;
 
@@ -485,35 +486,35 @@ void ModulePlayer::setShootingAnimations() {
 	switch (lastDirection) {
 	case 1: //UR
 		currentAnimationTorso = &shootAnimUpRight;
-		currentAnimationLegs = &upRightAnimLegs;
+		currentAnimationLegs = &idleAnimUpLegs;
 		break;
 	case 2: //UL
 		currentAnimationTorso = &shootAnimUpLeft;
-		currentAnimationLegs = &upLeftAnimLegs;
+		currentAnimationLegs = &idleAnimUpLeftLegs;
 		break;
 	case 3: //DR
 		currentAnimationTorso = &shootAnimDownRight;
-		currentAnimationLegs = &downRightAnimLegs;
+		currentAnimationLegs = &idleAnimDownRightLegs;
 		break;
 	case 4: //DL
 		currentAnimationTorso = &shootAnimDownLeft;
-		currentAnimationLegs = &downLeftAnimLegs;
+		currentAnimationLegs = &idleAnimDownLeftLegs;
 		break;
 	case 5: //R
 		currentAnimationTorso = &shootAnimRight;
-		currentAnimationLegs = &rightAnimLegs;
+		currentAnimationLegs = &idleAnimRightLegs;
 		break;
 	case 6: //L
 		currentAnimationTorso = &shootAnimLeft;
-		currentAnimationLegs = &leftAnimLegs;
+		currentAnimationLegs = &idleAnimLeftLegs;
 		break;
 	case 7: //D
 		currentAnimationTorso = &shootAnimDown;
-		currentAnimationLegs = &downAnimLegs;
+		currentAnimationLegs = &idleAnimDownLegs;
 		break;
 	case 8: //U
 		currentAnimationTorso = &shootAnimUp;
-		currentAnimationLegs = &upAnimLegs;
+		currentAnimationLegs = &idleAnimUpLegs;
 		break;
 	}
 }
@@ -605,6 +606,62 @@ void ModulePlayer::setDamageAnimations() {
 	currentAnimationLegs = &damageAnim;
 }
 
+void ModulePlayer::setShootingMovingAnimations() {
+	switch (lastDirection) {
+	case 1: //UR
+		currentAnimationTorso = &shootAnimUpRight;
+		currentAnimationLegs = &upRightAnimLegs;
+		break;
+	case 2: //UL
+		currentAnimationTorso = &shootAnimUpLeft;
+		currentAnimationLegs = &upLeftAnimLegs;
+		break;
+	case 3: //DR
+		currentAnimationTorso = &shootAnimDownRight;
+		currentAnimationLegs = &downRightAnimLegs;
+		break;
+	case 4: //DL
+		currentAnimationTorso = &shootAnimDownLeft;
+		currentAnimationLegs = &downLeftAnimLegs;
+		break;
+	case 5: //R
+		currentAnimationTorso = &shootAnimRight;
+		currentAnimationLegs = &rightAnimLegs;
+		break;
+	case 6: //L
+		currentAnimationTorso = &shootAnimLeft;
+		currentAnimationLegs = &leftAnimLegs;
+		break;
+	case 7: //D
+		currentAnimationTorso = &shootAnimDown;
+		currentAnimationLegs = &downAnimLegs;
+		break;
+	case 8: //U
+		currentAnimationTorso = &shootAnimUp;
+		currentAnimationLegs = &upAnimLegs;
+		break;
+	}
+}
+
+bool ModulePlayer::isShootingMoving() {
+
+	if ((App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or
+		App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT or
+		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
+		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+		and
+		(App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)) {
+
+		return true;
+
+	}
+	else {
+
+		return false;
+
+	}
+}
+
 bool ModulePlayer::isMoving() {
 
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or
@@ -650,8 +707,7 @@ bool ModulePlayer::isGrenade() {
 	}
 }
 
-bool ModulePlayer::isRoll()
-{
+bool ModulePlayer::isRoll() {
 	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_REPEAT) {
 
 		return true;
@@ -763,6 +819,18 @@ void ModulePlayer::roll() {
 	}
 }
 
+void ModulePlayer::shoot() {
+	delay--;
+	if (delay == 0) {
+		//App->particles->laser.setDirection(lastDirection);
+		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+		newParticle->collider->AddListener(this);
+		App->audio->PlayFx(laserFx);
+
+		delay = 10;
+	}
+}
+
 void ModulePlayer::getLastDirection() {
 	//Map controls
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
@@ -808,6 +876,10 @@ void ModulePlayer::stateMachine() {
 
 		setIdleAnimations();
 
+		if (isShootingMoving()) {
+			currentState = PlayerState::ShootingMoving;
+		}
+
 		if (isMoving()) {
 			currentState = PlayerState::Moving;
 		}
@@ -840,30 +912,32 @@ void ModulePlayer::stateMachine() {
 
 		break;
 
+	case PlayerState::ShootingMoving:
+
+		setShootingMovingAnimations();
+
+		move();
+
+		// Shoot logic
+		shoot();
+		
+
+		if (!isShootingMoving()) {
+			currentState = PlayerState::Idle;
+		}
+
+		LOG("shooting moving state");
+
+		break;
+
 	case PlayerState::Moving:
 
 		setMovingAnimations();
 
 		move();
 
-		if (false/*player got hitted*/) {
-			currentState = PlayerState::Damage;
-		}
-
-		if (isShooting()) {
-			currentState = PlayerState::Shooting;
-		}
-
-		if (hp == 0) {
-			currentState = PlayerState::Death;
-		}
-
-		if (isRoll()) {
-			currentState = PlayerState::Roll;
-		}
-
-		if (isGrenade()) {
-			currentState = PlayerState::Grenade;
+		if (isShootingMoving()) {
+			currentState = PlayerState::ShootingMoving;
 		}
 
 		if (!isMoving()) {
@@ -878,37 +952,10 @@ void ModulePlayer::stateMachine() {
 
 		setShootingAnimations();
 
-		// Shoot logic
-		if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT) {
-			delay--;
-			if (delay == 0) {
-				//App->particles->laser.setDirection(lastDirection);
-				Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-				newParticle->collider->AddListener(this);
-				App->audio->PlayFx(laserFx);
+		shoot();
 
-				delay = 10;
-			}
-		}
-
-		if (isMoving()) {
-			currentState = PlayerState::Moving;
-		}
-
-		if (false/*player got hitted*/) {
-			currentState = PlayerState::Damage;
-		}
-
-		if (hp == 0) {
-			currentState = PlayerState::Death;
-		}
-
-		if (isRoll()) {
-			currentState = PlayerState::Roll;
-		}
-
-		if (isGrenade()) {
-			currentState = PlayerState::Grenade;
+		if (isShootingMoving()) {
+			currentState = PlayerState::ShootingMoving;
 		}
 
 		if (!isShooting()) {
@@ -958,7 +1005,9 @@ void ModulePlayer::stateMachine() {
 		}
 		*/
 
-		currentState = PlayerState::Idle;
+		if (!isGrenade()) {
+			currentState = PlayerState::Idle;
+		}
 
 		LOG("grenade state");
 
@@ -975,10 +1024,6 @@ void ModulePlayer::stateMachine() {
 			isRolling = true;
 			diferencia.x = position.x;
 			diferencia.y = position.y;
-		}
-
-		if (isMoving()) {
-			currentState = PlayerState::Moving;
 		}
 
 		if (!isRoll()) {
@@ -1035,7 +1080,6 @@ void ModulePlayer::stateMachine() {
 		if (hp == 0) {
 			currentState = PlayerState::Death;
 		}
-
 		
 		currentState = PlayerState::Idle;
 		
@@ -1157,17 +1201,20 @@ Update_Status ModulePlayer::PostUpdate() {
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !godMode)
-	{
-		//TODO AÑADIR ANIMACION SA EXO PUPA
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !godMode) {
+
+		//TODO add hit animation
 		if(hp < 0)
 		hp -= 10;
+
 	}
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !godMode)
-	{
-		//TODO AÑADIR ANIMACION SA EXO PUPA
+
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !godMode) {
+
+		//TODO add hit animation
 		if (hp < 0)
 		hp -= 10;
+
 	}
 
 
@@ -1175,25 +1222,28 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		lockR = true;
 		isRolling = false;
 	}
+
 	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockU = true;
 		isRolling = false;
 	}
+
 	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockD = true;
 		isRolling = false;
 	}
+
 	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockL = true;
 		isRolling = false;
 	}
 
-
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
 		hp += 10;
 	}
-	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY)
-	{
+
+	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY) {
 		score += 23;
 	}
+
 }

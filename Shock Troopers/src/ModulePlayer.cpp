@@ -670,7 +670,8 @@ bool ModulePlayer::isShootingMoving() {
 		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
 		and
-		(App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)) {
+		(App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
+		and !lockControls) {
 		return true;
 
 	}
@@ -686,7 +687,8 @@ bool ModulePlayer::isMoving() {
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
-		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT and 
+		!lockControls) {
 
 		return true;
 
@@ -700,7 +702,7 @@ bool ModulePlayer::isMoving() {
 
 bool ModulePlayer::isShooting() {
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT) {
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT and !lockControls) {
 		return true;
 
 	}
@@ -714,7 +716,7 @@ bool ModulePlayer::isShooting() {
 
 bool ModulePlayer::isGrenade() {
 
-	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT) {
+	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT and !lockControls) {
 
 		return true;
 
@@ -727,8 +729,9 @@ bool ModulePlayer::isGrenade() {
 }
 
 bool ModulePlayer::isRoll() {
-	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_REPEAT) {
-
+	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN or isRolling) {
+		isRolling = true;
+		
 		return true;
 
 	}
@@ -814,6 +817,7 @@ void ModulePlayer::roll() {
 		speed = 3;
 
 		//then the player moves
+		currentDirection = lastDirection;
 		move();
 
 		//and when the player has moved 50 pixels, the roll ends
@@ -882,32 +886,27 @@ void ModulePlayer::shootMoving() {
 
 void ModulePlayer::getLastDirection() {
 	//Map controls
-	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
-		currentDirection = 1;
-	}
-	else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
-		currentDirection = 2;
-	}
-	else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
-		currentDirection = 3;
-	}
-	else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
-		currentDirection = 4;
-	}
-	else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
-		currentDirection = 5;
-	}
-	else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
-		currentDirection = 6;
-	}
-	else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) {
-		currentDirection = 7;
-	}
-	else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) {
-		currentDirection = 8;
-	}
-	else {
-		currentDirection = 0;
+	if(!lockControls){
+
+		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 1;
+		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 2;
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 3;
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 4;
+		} else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+			currentDirection = 5;
+		} else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+			currentDirection = 6;
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) {
+			currentDirection = 7;
+		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) {
+			currentDirection = 8;
+		} else {
+			currentDirection = 0;
+		}
 	}
 
 	//We save the current direction if there is a new one
@@ -915,7 +914,10 @@ void ModulePlayer::getLastDirection() {
 		lastDirection = currentDirection;
 	}
 }	
-
+void ModulePlayer::saveLastPosition() {
+	diferencia.x = position.x;
+	diferencia.y = position.y;
+}
 void ModulePlayer::stateMachine() {
 	getLastDirection();
 
@@ -957,6 +959,8 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Grenade;
 		}
 
+		saveLastPosition();
+
 		LOG("idle state");
 
 		break;
@@ -966,6 +970,8 @@ void ModulePlayer::stateMachine() {
 		setShootingMovingAnimations();
 
 		move();
+
+		saveLastPosition();
 
 		shootMoving();
 		
@@ -977,6 +983,10 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		if (isRoll()) {
+			currentState = PlayerState::Roll;
+		}
+
 		LOG("shooting moving state");
 
 		break;
@@ -986,6 +996,8 @@ void ModulePlayer::stateMachine() {
 		setMovingAnimations();
 
 		move();
+
+		saveLastPosition();
 
 		if (isHitted) {
 			currentState = PlayerState::Damage;
@@ -1047,18 +1059,15 @@ void ModulePlayer::stateMachine() {
 	case PlayerState::Roll:
 
 		setRollAnimations();
+		isRolling = true;
+		lockControls = true;
 
 		roll();
 
-		// Roll logic
-		if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN) {
-			isRolling = true;
-			diferencia.x = position.x;
-			diferencia.y = position.y;
-		}
-
 		if (!isRoll()) {
 			currentState = PlayerState::Idle;
+			lockControls = false;
+
 		}
 
 		LOG("roll state");

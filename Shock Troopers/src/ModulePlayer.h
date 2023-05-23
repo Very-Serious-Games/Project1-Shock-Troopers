@@ -61,6 +61,7 @@ public:
 	void setDeathAnimations();
 	void setDamageAnimations();
 	void setShootingMovingAnimations();
+	void saveLastPosition();
 
 	bool isMoving();
 	bool isShooting();

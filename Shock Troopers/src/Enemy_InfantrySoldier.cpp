@@ -14,13 +14,13 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	
 
 	//Death Animation
-	deathAnim.PushBack({51, 849, 54, 54 });
-	deathAnim.PushBack({});
-	deathAnim.PushBack({});
-	deathAnim.PushBack({});
-	deathAnim.PushBack({});
-	deathAnim.PushBack({});
-	deathAnim.PushBack({});
+	deathAnim.PushBack({436, 828, 42, 53 }); //41x53?
+	deathAnim.PushBack({478, 828, 42, 53});
+	deathAnim.PushBack({520, 828, 42, 53});
+	deathAnim.PushBack({562, 828, 42, 53});
+	deathAnim.PushBack({604, 828, 42, 53});  //604?
+	deathAnim.PushBack({646, 828, 42, 53});
+	deathAnim.PushBack({688, 828, 42, 53});
 	leftDeathAnim.PushBack({51, 827, 54, 54});
 	leftDeathAnim.PushBack({104, 827, 54, 54});
 	leftDeathAnim.PushBack({158, 827, 54, 54});
@@ -36,13 +36,13 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	rightDeathAnim.PushBack({1015, 827, 54, 54});
 	rightDeathAnim.PushBack({1070, 827, 54, 54});
 	//Pink Death Animation
-	pinkDeathAnim.PushBack({50, });
-	pinkDeathAnim.PushBack({50, });
-	pinkDeathAnim.PushBack({50, });
-	pinkDeathAnim.PushBack({50, });
-	pinkDeathAnim.PushBack({50, });
-	pinkDeathAnim.PushBack({50, });
-	pinkDeathAnim.PushBack({50, });
+	pinkDeathAnim.PushBack({50, 765, 42, 53});  //41?
+	pinkDeathAnim.PushBack({92, 765, 42, 53 });
+	pinkDeathAnim.PushBack({134, 765, 42, 53});
+	pinkDeathAnim.PushBack({176, 765, 42, 53});
+	pinkDeathAnim.PushBack({218, 765, 42, 53});
+	pinkDeathAnim.PushBack({260, 765, 42, 53});
+	pinkDeathAnim.PushBack({302, 765, 42, 53});
 	leftPinkDeathAnim.PushBack({});
 	rightPinkDeathAnim.PushBack({});
 

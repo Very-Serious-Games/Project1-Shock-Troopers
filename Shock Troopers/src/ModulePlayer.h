@@ -63,23 +63,15 @@ public:
 	void setShootingMovingAnimations();
 
 	bool isMoving();
-
 	bool isShooting();
-
 	bool isGrenade();
-
 	bool isRoll();
-
 	bool isShootingMoving();
 
 	void move();
-
 	void roll();
-
 	void shoot();
-
 	void grenade();
-
 	void shootMoving();
 
 	void getLastDirection();
@@ -106,6 +98,7 @@ public:
 	iPoint diferencia;
 
 	bool isRolling = false;
+	bool lockControls = false;
 
 	bool isInvulnerable = false;
 	float invulnerabilityTimer = 0.0f;

@@ -806,6 +806,10 @@ void ModulePlayer::roll() {
 
 	if (isRolling) {
 
+		isRolling = true;
+
+		lockControls = true;
+
 		//If the player is rolling, the speed is increased
 		speed = 3;
 
@@ -815,10 +819,12 @@ void ModulePlayer::roll() {
 		//and when the player has moved 50 pixels, the roll ends
 		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
 			isRolling = false;
+			lockControls = false;
 		}
 
 	} else {	
 
+		// TODO mover god mode
 		if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
 			hp -= 10;
 
@@ -1024,7 +1030,6 @@ void ModulePlayer::stateMachine() {
 		setGrenadeAnimations();
 
 		// Grenade logic
-		
 		grenade();
 
 		if (isHitted) {
@@ -1244,8 +1249,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		// Ignore collision while invulnerable
 		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !godMode) {
 
-			if (hp < 0)
+			if (hp < 0) {
 				hp -= 10;
+			}
 
 			isHitted = true;
 
@@ -1253,8 +1259,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !godMode) {
 
-			if (hp < 0)
+			if (hp < 0) {
 				hp -= 10;
+			}
 
 			isHitted = true;
 

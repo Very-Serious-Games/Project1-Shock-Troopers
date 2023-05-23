@@ -61,6 +61,7 @@ public:
 	void setDeathAnimations();
 	void setDamageAnimations();
 	void setShootingMovingAnimations();
+	void saveLastPosition();
 
 	bool isMoving();
 
@@ -106,6 +107,7 @@ public:
 	iPoint diferencia;
 
 	bool isRolling = false;
+	bool lockControls = false;
 
 	bool isInvulnerable = false;
 	float invulnerabilityTimer = 0.0f;

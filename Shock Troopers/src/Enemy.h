@@ -3,6 +3,10 @@
 
 #include "p2Point.h"
 #include "Animation.h"
+#include "Application.h"
+#include "Particle.h"
+#include "ModuleParticles.h"
+#include "ModuleAudio.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -36,6 +40,14 @@ public:
 
 	virtual void StateMachine();
 
+	virtual void Attack();
+
+	virtual void deathAnimation();
+
+	virtual void spawnAnimation();
+
+	virtual void idleAnimation();
+
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
 
@@ -65,9 +77,16 @@ public:
 
 	int health = 100;
 
+	int delay = 15;
+	int deathAnimDelay = 50;
+
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+
+	Animation deathAnim;
+	Animation spawnAnim;
+	Animation idleAnim;
 
 	// The enemy's collider
 	Collider* collider = nullptr;

@@ -23,9 +23,8 @@ bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
 	// Load particles spritesheet
-	texture = App->textures->Load("Assets/Sprites/particles.png");
 
-	textureTest = App->textures->Load("Assets/Sprites/normal_bullets.png");
+	texture = App->textures->Load("Assets/Sprites/particles/normal_bullets.png");
 
 	// Explosion particle
 	explosion.anim.PushBack({274, 296, 33, 30});
@@ -37,11 +36,20 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
+
+	flyingbattleshipShop.anim.PushBack({0, 0, 3, 3});
+	flyingbattleshipShop.anim.PushBack({5, 0, 3, 3});
+	flyingbattleshipShop.anim.speed = 0.2f;
+
+	playerShot.anim.PushBack({});
+
+	/*
 	laser.currentAnimation = &laser.bullet_R;
 
 	laser.speed.x = 5;
 	laser.lifetime = 180;
 	laser.anim.speed = 0.2f;
+	*/
 
 	return true;
 }
@@ -121,7 +129,7 @@ Update_Status ModuleParticles::PostUpdate()
 		Particle* particle = particles[i];
 		if (particle != nullptr && particle->isAlive)
 		{
-   			App->render->Blit(textureTest, particle->position.x, particle->position.y, &(particle->currentAnimation->GetCurrentFrame()));
+   			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->currentAnimation->GetCurrentFrame()));
 		}
 	}
 
@@ -141,10 +149,10 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
 			newParticle->frameCount = -(int)delay;
 			newParticle->position.x = x;
 			newParticle->position.y = y;
-			newParticle->currentAnimation = &laser.bullet_R;
+			//newParticle->currentAnimation = &playerShot.bullet_U;
 			//Adding the particle's collider
 			if (colliderType != Collider::Type::NONE)
-				newParticle->collider = App->collisions->AddCollider(newParticle->currentAnimation->GetCurrentFrame(), colliderType, this);
+				newParticle->collider = App->collisions->AddCollider(newParticle->anim.GetCurrentFrame(), colliderType, this);
 			newParticle->setDirection(direction);
 			particles[i] = newParticle;
 			break;

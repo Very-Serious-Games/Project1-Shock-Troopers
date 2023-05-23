@@ -5,6 +5,7 @@
 #include "ModuleRender.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
+#include "ModulePlayer.h"
 #include "ModuleCollisions.h"
 
 #include "PickUp.h"
@@ -26,7 +27,7 @@ ModulePickUp::~ModulePickUp()
 bool ModulePickUp::Start()
 {
 
-	texture = App->textures->Load("Assets/Sprites/miniboss1_muzzle_flash.png");
+	texture = App->textures->Load("Assets/Sprites/particles/miniboss1_muzzle_flash.png");
 
 	SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
 	return true;
@@ -50,6 +51,7 @@ Update_Status ModulePickUp::PreUpdate()
 
 Update_Status ModulePickUp::Update()
 {
+
 	HandlePickUpSpawn();
 
 	for (uint i = 0; i < MAX_PICKUP; ++i)
@@ -106,19 +108,19 @@ void ModulePickUp::HandlePickUpSpawn()
 }
 
 void ModulePickUp::HandlePickUpDespawn()
-{/*
+{
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
 		if (pickUp[i] != nullptr)
 		{
-			if (pickUp[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+		if ((abs(pickUp[i]->position.x - App->player->position.x) > 200 || abs(pickUp[i]->position.y - App->player->position.y) > 200) && pickUp[i]->despawn)
 			{
 				LOG("DeSpawning pickUp at %d", pickUp[i]->position.x * SCREEN_SIZE);
 
 				pickUp[i]->SetToDelete();
 			}
 		}
-	}*/
+	}
 }
 
 void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)

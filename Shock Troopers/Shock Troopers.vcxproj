@@ -19,9 +19,13 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="src\Enemy_Bridge.h" />
+    <ClInclude Include="src\Enemy_Crate.h" />
     <ClInclude Include="src\Enemy_FlyingBattleship.h" />
     <ClInclude Include="src\Enemy_InfantrySoldier.h" />
     <ClInclude Include="src\ModulePickUp.h" />
+    <ClInclude Include="src\ModuleUI.h" />
     <ClInclude Include="src\PickUp.h" />
     <ClInclude Include="src\SceneMenu.h" />
     <ClInclude Include="src\Animation.h" />
@@ -49,9 +53,12 @@
     <ClInclude Include="src\SceneLevel1.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Enemy_Bridge.cpp" />
+    <ClCompile Include="src\Enemy_Crate.cpp" />
     <ClCompile Include="src\Enemy_FlyingBattleship.cpp" />
     <ClCompile Include="src\Enemy_InfantrySoldier.cpp" />
     <ClCompile Include="src\ModulePickUp.cpp" />
+    <ClCompile Include="src\ModuleUI.cpp" />
     <ClCompile Include="src\PickUp.cpp" />
     <ClCompile Include="src\SceneMenu.cpp" />
     <ClCompile Include="src\Application.cpp" />
@@ -87,13 +94,13 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
     <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>

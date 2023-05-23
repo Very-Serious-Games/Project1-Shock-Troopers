@@ -106,12 +106,15 @@ int Particle::parabole(int x, int direction_x) {
 	return y;
 }
 
+
 void Particle::SetToDelete()
 {
 	pendingToDelete = true;
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
 }
+
+// TODO cambiar esto a codigo mas legible
 
 void Particle::setDirection(int direction) {
 	switch (direction)

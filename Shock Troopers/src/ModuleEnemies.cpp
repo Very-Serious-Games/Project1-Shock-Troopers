@@ -9,6 +9,8 @@
 #include "Enemy.h"
 #include "Enemy_InfantrySoldier.h"
 #include "Enemy_FlyingBattleship.h"
+#include "Enemy_Bridge.h"
+#include "Enemy_Crate.h"
 
 #define SPAWN_MARGIN 50
 
@@ -28,7 +30,9 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// TODO cargar texturas y fx enemigos
-	texture = App->textures->Load("Assets/Sprites/jet_boss.png");
+	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
+	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
+	textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -165,9 +169,19 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case Enemy_Type::FLYING_BATTLESHIP:
 					enemies[i] = new Enemy_FlyingBattleship(info.x, info.y);
 					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureFlyingBattleship;
+					break;
+				case Enemy_Type::BRIDGE:
+					enemies[i] = new Enemy_Bridge(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureBridge;
+					break;
+				case Enemy_Type::CRATE:
+					enemies[i] = new Enemy_Crate(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureCrate;
 					break;
 			}
-			enemies[i]->texture = texture;
 			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}

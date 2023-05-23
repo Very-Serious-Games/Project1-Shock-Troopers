@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include "SceneMenu.h"
 
-#define NUM_MODULES 15
+#define NUM_MODULES 16
 
 class Module;
 class ModuleWindow;
@@ -21,6 +21,7 @@ class ModuleEnemies;
 class ModuleFadeToBlack;
 class ModuleFonts;
 class ModuleRender;
+class ModuleUI;
 
 class Application
 {
@@ -53,6 +54,8 @@ public:
 	ModuleAudio* audio = nullptr;
 
 	ModulePlayer* player = nullptr;
+
+	ModuleUI* ui = nullptr;
 
 	SceneIntro* sceneIntro = nullptr;
 	SceneLevel1* sceneLevel_1 = nullptr;

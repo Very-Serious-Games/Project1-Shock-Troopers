@@ -913,11 +913,13 @@ void ModulePlayer::getLastDirection() {
 	if (currentDirection != 0) {
 		lastDirection = currentDirection;
 	}
-}	
+}
+
 void ModulePlayer::saveLastPosition() {
 	diferencia.x = position.x;
 	diferencia.y = position.y;
 }
+
 void ModulePlayer::stateMachine() {
 	getLastDirection();
 
@@ -1007,6 +1009,10 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::ShootingMoving;
 		}
 
+		if (isRoll()) {
+			currentState = PlayerState::Roll;
+		}
+
 		if (!isMoving()) {
 			currentState = PlayerState::Idle;
 		}
@@ -1029,6 +1035,10 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::ShootingMoving;
 		}
 
+		if (isRoll()) {
+			currentState = PlayerState::Roll;
+		}
+
 		if (!isShooting()) {
 			currentState = PlayerState::Idle;
 		}
@@ -1046,6 +1056,10 @@ void ModulePlayer::stateMachine() {
 
 		if (isHitted) {
 			currentState = PlayerState::Damage;
+		}
+
+		if (isRoll()) {
+			currentState = PlayerState::Roll;
 		}
 
 		if (!isGrenade()) {
@@ -1282,21 +1296,33 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockR = true;
 		isRolling = false;
+
+		diferencia.x = 0;
+		diferencia.y = 0;
 	}
 
 	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockU = true;
 		isRolling = false;
+
+		diferencia.x = 0;
+		diferencia.y = 0;
 	}
 
 	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockD = true;
 		isRolling = false;
+
+		diferencia.x = 0;
+		diferencia.y = 0;
 	}
 
 	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockL = true;
 		isRolling = false;
+
+		diferencia.x = 0;
+		diferencia.y = 0;
 	}
 
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {

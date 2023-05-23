@@ -1073,8 +1073,6 @@ void ModulePlayer::stateMachine() {
 	case PlayerState::Roll:
 
 		setRollAnimations();
-		isRolling = true;
-		lockControls = true;
 
 		roll();
 
@@ -1083,6 +1081,9 @@ void ModulePlayer::stateMachine() {
 			lockControls = false;
 
 		}
+
+		isRolling = true;
+		lockControls = true;
 
 		LOG("roll state");
 
@@ -1296,33 +1297,21 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockR = true;
 		isRolling = false;
-
-		diferencia.x = 0;
-		diferencia.y = 0;
 	}
 
 	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockU = true;
 		isRolling = false;
-
-		diferencia.x = 0;
-		diferencia.y = 0;
 	}
 
 	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockD = true;
 		isRolling = false;
-
-		diferencia.x = 0;
-		diferencia.y = 0;
 	}
 
 	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
 		lockL = true;
 		isRolling = false;
-
-		diferencia.x = 0;
-		diferencia.y = 0;
 	}
 
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {

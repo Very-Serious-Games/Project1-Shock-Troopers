@@ -44,6 +44,10 @@ void Enemy::Attack()
 {
 }
 
+void Enemy::move()
+{
+}
+
 void Enemy::deathAnimation()
 {
 }
@@ -53,6 +57,14 @@ void Enemy::spawnAnimation()
 }
 
 void Enemy::idleAnimation()
+{
+}
+
+void Enemy::moveAnimation()
+{
+}
+
+void Enemy::attackAnimation()
 {
 }
 

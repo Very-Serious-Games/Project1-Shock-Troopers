@@ -42,11 +42,17 @@ public:
 
 	virtual void Attack();
 
+	virtual void move();
+
 	virtual void deathAnimation();
 
 	virtual void spawnAnimation();
 
 	virtual void idleAnimation();
+
+	virtual void moveAnimation();
+
+	virtual void attackAnimation();
 
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
@@ -87,6 +93,8 @@ protected:
 	Animation deathAnim;
 	Animation spawnAnim;
 	Animation idleAnim;
+	Animation attackAnim;
+	Animation moveAnim;
 
 	// The enemy's collider
 	Collider* collider = nullptr;

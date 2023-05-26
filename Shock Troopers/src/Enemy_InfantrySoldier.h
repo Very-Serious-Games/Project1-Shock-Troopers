@@ -21,9 +21,15 @@ public:
 
 	void spawnAnimation() override;
 
+	void moveAnimation() override;
+
+	void attackAnimation() override;
+
 	void StateMachine() override;
 
 	void Attack() override;
+
+	void move() override;
 
 private:
 	

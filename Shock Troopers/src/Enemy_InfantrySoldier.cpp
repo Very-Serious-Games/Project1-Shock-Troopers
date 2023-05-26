@@ -14,6 +14,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 
 void Enemy_InfantrySoldier::Update() {
 
+	StateMachine();
+
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
 	currentAnim = path.GetCurrentAnimation();
@@ -23,20 +25,71 @@ void Enemy_InfantrySoldier::Update() {
 	Enemy::Update();
 }
 
-void Enemy_InfantrySoldier::deathAnimation()
-{
+void Enemy_InfantrySoldier::deathAnimation() {
+	//currentAnim = &deathAnim;
 }
 
-void Enemy_InfantrySoldier::idleAnimation()
-{
+void Enemy_InfantrySoldier::idleAnimation() {
+	//currentAnim = &idleAnim;
 }
 
-void Enemy_InfantrySoldier::spawnAnimation()
-{
+void Enemy_InfantrySoldier::spawnAnimation() {
+	//currentAnim = &spawnAnim;
 }
 
-void Enemy_InfantrySoldier::StateMachine()
-{
+void Enemy_InfantrySoldier::moveAnimation() {
+	//currentAnim = &moveAnim;
+}
+
+void Enemy_InfantrySoldier::attackAnimation() {
+	//currentAnim = &attackAnim;
+}
+
+void Enemy_InfantrySoldier::StateMachine() {
+	switch (state) {
+		case Enemy_State::SPAWN:
+
+			spawnAnimation();
+
+			break;
+
+		case Enemy_State::IDLE:
+
+			idleAnimation();
+
+			break;
+
+		case Enemy_State::ATTACK:
+
+			attackAnimation();
+
+			Attack();
+
+			break;
+
+		case Enemy_State::DEATH:
+
+			deathAnimation();
+
+			if (deathAnimDelay == 0) {
+				pendingToDelete = true;
+				LOG("pendingToDelete enemy");
+			}
+
+			deathAnimDelay--;
+
+			break;
+
+		case Enemy_State::MOVE:
+
+			moveAnimation();
+
+			move();
+
+			break;
+
+	}
+
 }
 
 // 3 diferent states for attack with diferent percentages of chance to happen
@@ -44,10 +97,8 @@ void Enemy_InfantrySoldier::StateMachine()
 // 2. mele attack
 // 3. no attack
 void Enemy_InfantrySoldier::Attack() {
-	/*
 	// get random number between with 10%, 30, 60% chance to happen
 	int attackType = rand() % 10; // generate a random number between 0 and 9
-
 	if (attackType < 6) { // 60% chance to do a melee attack
 		LOG("Enemy: Infantry Soldier normal attack");
 		// TODO add normal attack
@@ -58,5 +109,9 @@ void Enemy_InfantrySoldier::Attack() {
 		LOG("Enemy: Infantry Soldier no attack");
 		// do nothing
 	}
-	*/
+	
+}
+
+void Enemy_InfantrySoldier::move() {
+
 }

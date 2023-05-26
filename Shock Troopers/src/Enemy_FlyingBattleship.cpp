@@ -136,6 +136,7 @@ void Enemy_FlyingBattleship::StateMachine() {
             pendingToDelete = true;
             LOG("pendingToDelete enemy");
         }
+
         deathAnimDelay--;
         
         break;

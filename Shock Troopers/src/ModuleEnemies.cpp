@@ -31,7 +31,7 @@ bool ModuleEnemies::Start()
 {
 	// TODO cargar texturas y fx enemigos
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
-	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/enemies-soldiers.png");
+	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/Soldiers-Infantry.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
 	textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");

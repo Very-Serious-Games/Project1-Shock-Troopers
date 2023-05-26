@@ -14,7 +14,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	spawnAnimRight.PushBack({});
 	
 	//Death Animation
-	deathAnim.PushBack({436, 828, 42, 53 }); //41x53?
+	deathAnim.PushBack({436, 828, 42, 53}); //41x53?
 	deathAnim.PushBack({478, 828, 42, 53});
 	deathAnim.PushBack({520, 828, 42, 53});
 	deathAnim.PushBack({562, 828, 42, 53});
@@ -210,38 +210,39 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeHitLeftAnim.PushBack({});
 
 	//falling soldiers
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallRightAnim.PushBack({ 50, 899, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
-	fallLeftAnim.PushBack({ 50, 829, 62, 67 });
+	fallRightAnim.PushBack({ 50, 33, 62, 67 });
+	fallRightAnim.PushBack({ 113, 33, 62, 67 });
+	fallRightAnim.PushBack({ 176, 33, 62, 67 });
+	fallRightAnim.PushBack({ 239, 33, 62, 67 });
+	fallRightAnim.PushBack({ 302, 33, 62, 67 });
+	fallRightAnim.PushBack({ 365, 33, 62, 67 });
+	fallRightAnim.PushBack({ 428, 33, 62, 67 });
+	fallRightAnim.PushBack({ 491, 33, 62, 67 });
+	fallRightAnim.PushBack({ 554, 33, 62, 67 });
+	fallRightAnim.PushBack({ 617, 33, 62, 67 });
+	fallRightAnim.PushBack({ 680, 33, 62, 67 });
+	fallRightAnim.PushBack({ 743, 33, 62, 67 });
+	fallRightAnim.PushBack({ 806, 33, 62, 67 });
+	fallRightAnim.PushBack({ 869, 33, 62, 67 });
+	fallRightAnim.PushBack({ 932, 33, 62, 67 });
+	fallRightAnim.PushBack({ 995, 33, 62, 67 });
+
+	fallRightAnim.PushBack({ 50, 103, 62, 67 });
+	fallRightAnim.PushBack({ 113, 103, 62, 67 });
+	fallRightAnim.PushBack({ 176, 103, 62, 67 });
+	fallRightAnim.PushBack({ 239, 103, 62, 67 });
+	fallRightAnim.PushBack({ 302, 103, 62, 67 });
+	fallRightAnim.PushBack({ 365, 103, 62, 67 });
+	fallRightAnim.PushBack({ 428, 103, 62, 67 });
+	fallRightAnim.PushBack({ 491, 103, 62, 67 });
+	fallRightAnim.PushBack({ 554, 103, 62, 67 });
+	fallRightAnim.PushBack({ 617, 103, 62, 67 });
+	fallRightAnim.PushBack({ 680, 103, 62, 67 });
+	fallRightAnim.PushBack({ 743, 103, 62, 67 });
+	fallRightAnim.PushBack({ 806, 103, 62, 67 });
+	fallRightAnim.PushBack({ 869, 103, 62, 67 });
+	fallRightAnim.PushBack({ 932, 103, 62, 67 });
+	fallRightAnim.PushBack({ 995, 103, 62, 67 });
 
 	//Hiding half body sodier
 	hidingIdleRightAnim.PushBack({});
@@ -349,11 +350,18 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
+	path.PushBack({ 0.0f, 0.0f }, 1000, &fallLeftAnim);
+	path.PushBack({ 0.0f, 0.0f }, 1000, &fallRightAnim);
+
+	// AAA
+	fallRightAnim.speed = 0.1f;
+	fallLeftAnim.speed = 0.1f;
+
 }
 
 void Enemy_InfantrySoldier::Update() {
 
-	//StateMachine();
+	StateMachine();
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();

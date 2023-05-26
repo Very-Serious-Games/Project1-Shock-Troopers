@@ -51,6 +51,8 @@ public:
 
 	void updateHp();
 
+	void godMode();
+
 	void setIdleAnimations();
 	void setMovingAnimations();
 	void setShootingAnimations();
@@ -107,7 +109,7 @@ public:
 
 	bool isHitted = false;
 
-	bool godMode = false;
+	bool isGodMode = false;
 
 	// The speed in which we move the player (pixels per frame)
 	int speed = 1;

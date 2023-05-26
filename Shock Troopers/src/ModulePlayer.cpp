@@ -409,6 +409,42 @@ void ModulePlayer::updateHp() {
 	}
 }
 
+void ModulePlayer::godMode() {
+	// Activate god mode
+	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN) {
+		isGodMode = !isGodMode;
+	}
+
+	// TP player to the flying battleship (for testing purposes)
+	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
+		App->player->position.x = 232;
+		App->player->position.y = 190;
+	}
+
+	// Damage player 
+	if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
+		hp -= 10;
+
+	}
+
+	// Heal player
+	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
+		hp += 10;
+
+	}
+
+	// Kill player
+	if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
+		isGodMode = false;
+		hp = 0;
+	}
+
+	// Spawn power up
+	if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
+		App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x - 90, position.y , true });
+	}
+}
+
 void ModulePlayer::setIdleAnimations() {
 	switch (lastDirection) {
 		case 1: //UR
@@ -807,47 +843,21 @@ void ModulePlayer::move() {
 
 void ModulePlayer::roll() {
 
-	if (isRolling) {
+	isRolling = true;
 
-		isRolling = true;
+	lockControls = true;
 
-		lockControls = true;
+	//If the player is rolling, the speed is increased
+	speed = 3;
 
-		//If the player is rolling, the speed is increased
-		speed = 3;
+	//then the player moves
+	currentDirection = lastDirection;
+	move();
 
-		//then the player moves
-		currentDirection = lastDirection;
-		move();
-
-		//and when the player has moved 50 pixels, the roll ends
-		if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
-			isRolling = false;
-			lockControls = false;
-		}
-
-	} else {	
-
-		// TODO mover god mode
-		if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
-			hp -= 10;
-
-		}
-
-		if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
-			hp += 10;
-
-		}
-
-		if (App->input->keys[SDL_SCANCODE_F5] == Key_State::KEY_DOWN) {
-			godMode = false;
-			hp = 0;
-		}
-
-		if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-			App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x - 90, position.y , true });
-		}
-
+	//and when the player has moved 50 pixels, the roll ends
+	if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
+		isRolling = false;
+		lockControls = false;
 	}
 }
 
@@ -1201,6 +1211,8 @@ Update_Status ModulePlayer::Update() {
 	// Update the state machine
 	stateMachine();
 
+	godMode();
+
 	cout << App->render->camera.x;
 	cout << App->render->camera.y;
 
@@ -1215,13 +1227,7 @@ Update_Status ModulePlayer::Update() {
 	currentAnimationLegs->Update();
 	currentAnimationTorso->Update();
 
-	if (App->input->keys[SDL_SCANCODE_F2] == Key_State::KEY_DOWN) {
-		godMode = !godMode;
-	}
-	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
-		App->player->position.x = 232;
-		App->player->position.y = 190;
-	}
+	
 
 	//Reset variables
 	lockR = false;
@@ -1268,7 +1274,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (!isInvulnerable) {
 		// Ignore collision while invulnerable
-		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !godMode) {
+		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !isGodMode) {
 
 			if (hp < 0) {
 				hp -= 10;
@@ -1278,7 +1284,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		}
 
-		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !godMode) {
+		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !isGodMode) {
 
 			if (hp < 0) {
 				hp -= 10;
@@ -1291,22 +1297,22 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 
-	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockR = true;
 		isRolling = false;
 	}
 
-	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockU = true;
 		isRolling = false;
 	}
 
-	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockD = true;
 		isRolling = false;
 	}
 
-	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !godMode) {
+	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockL = true;
 		isRolling = false;
 	}

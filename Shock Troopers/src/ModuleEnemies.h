@@ -78,6 +78,7 @@ private:
 
 	// The enemies sprite sheet
 	SDL_Texture* textureFlyingBattleship = nullptr;
+	SDL_Texture* textureInfantrySoldier = nullptr;
 	SDL_Texture* textureBridge = nullptr;
 	SDL_Texture* textureCrate = nullptr;
 

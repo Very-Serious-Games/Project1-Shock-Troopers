@@ -69,6 +69,8 @@ public:
 	// Check if the player is mele
 	bool PlayerIsMele();
 
+	virtual int GetPlayerDirection();
+
 public:
 	Enemy_State state = Enemy_State::SPAWN;
 

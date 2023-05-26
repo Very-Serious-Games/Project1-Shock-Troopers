@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
+#include "ModulePlayer.h"
 
 
 Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
@@ -34,6 +35,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	rightDeathAnim.PushBack({960, 827, 54, 54});   //54+1 o 54 entre x i x
 	rightDeathAnim.PushBack({1015, 827, 54, 54});
 	rightDeathAnim.PushBack({1070, 827, 54, 54});
+
 	//Pink Death Animation
 	pinkDeathAnim.PushBack({50, 765, 42, 53});  //41?
 	pinkDeathAnim.PushBack({92, 765, 42, 53 });
@@ -120,6 +122,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunDownRightAnim.PushBack({});
 	gunDownRightAnim.PushBack({});
 	gunDownRightAnim.PushBack({});
+
 	//Gun Idle
 	gunIdleUpAnim.PushBack({});
 	gunIdleDownAnim.PushBack({});
@@ -180,6 +183,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeDownRightAnim.PushBack({});
 	knifeDownRightAnim.PushBack({});
 	knifeDownRightAnim.PushBack({});
+
 	//knife Idle
 	//no need to speed these animations bc they only have one frame
 	knifeIdleUpAnim.PushBack({});
@@ -190,6 +194,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeIdleUpRightAnim.PushBack({});
 	knifeIdleDownLeftAnim.PushBack({});
 	knifeIdleDownRightAnim.PushBack({});
+
 	//knife hit
 	knifeHitRightAnim.PushBack({});
 	knifeHitRightAnim.PushBack({});
@@ -339,7 +344,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	upBossSoldierAnim.PushBack({});
 	upBossSoldierAnim.PushBack({});
 	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});  
+	upBossSoldierAnim.PushBack({});
 
 	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
@@ -357,6 +362,64 @@ void Enemy_InfantrySoldier::Update() {
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
+}
+
+int Enemy_InfantrySoldier::GetPlayerDirection() {
+	// Get the player position
+	iPoint playerPos = App->player->position;
+
+	// Calculate the direction vector from enemy position to player position
+	iPoint enemyPos = position;
+	iPoint direction = playerPos - enemyPos;
+
+	// Determine the player direction based on the direction vector
+	int playerDirection = 0;
+
+	if (direction.y < 0) {
+		// Player is above the enemy
+		if (direction.x < 0) {
+			// Player is above and to the left of the enemy
+			playerDirection = 2; // Up-Left
+		}
+		else if (direction.x > 0) {
+			// Player is above and to the right of the enemy
+			playerDirection = 1; // Up-Right
+		}
+		else {
+			// Player is directly above the enemy
+			playerDirection = 8; // Up
+		}
+	}
+	else if (direction.y > 0) {
+		// Player is below the enemy
+		if (direction.x < 0) {
+			// Player is below and to the left of the enemy
+			playerDirection = 4; // Down-Left
+		}
+		else if (direction.x > 0) {
+			// Player is below and to the right of the enemy
+			playerDirection = 3; // Down-Right
+		}
+		else {
+			// Player is directly below the enemy
+			playerDirection = 7; // Down
+		}
+	}
+	else {
+		// Player is at the same height as the enemy
+		if (direction.x < 0) {
+			// Player is to the left of the enemy
+			playerDirection = 6; // Left
+		}
+		else if (direction.x > 0) {
+			// Player is to the right of the enemy
+			playerDirection = 5; // Right
+		}
+	}
+
+	// Return the player direction
+	return playerDirection;
+
 }
 
 void Enemy_InfantrySoldier::deathAnimation() {
@@ -392,7 +455,6 @@ void Enemy_InfantrySoldier::idleAnimation(int direction) {
 		}
 
 }
-
 
 void Enemy_InfantrySoldier::spawnAnimation(int direction) {
 	switch (direction) {
@@ -442,13 +504,13 @@ void Enemy_InfantrySoldier::StateMachine() {
 	switch (state) {
 		case Enemy_State::SPAWN:
 
-			spawnAnimation(1/*direction*/);
+			spawnAnimation(GetPlayerDirection());
 
 			break;
 
 		case Enemy_State::IDLE:
 
-			idleAnimation(1/*direction*/);
+			idleAnimation(GetPlayerDirection());
 
 			if (PlayerIsNear()) {
 				state = Enemy_State::MOVE;
@@ -479,7 +541,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 		case Enemy_State::MOVE:
 
-			moveAnimation(1/*direction*/);
+			moveAnimation(GetPlayerDirection());
 
 			move();
 
@@ -501,18 +563,59 @@ void Enemy_InfantrySoldier::Attack() {
 	// get random number between with 10%, 30, 60% chance to happen
 	int attackType = rand() % 10; // generate a random number between 0 and 9
 	if (attackType < 6) { // 60% chance to do a melee attack
+
+		Knife();
+
 		LOG("Enemy: Infantry Soldier normal attack");
-		// TODO add normal attack
+
 	} else if (attackType < 4) { // 30% chance to do a normal attack
+
+		Shoot();
+
 		LOG("Enemy: Infantry Soldier mele attack");
-		// TODO add melee attack
+
 	} else { // 10% chance to not attack
+
 		LOG("Enemy: Infantry Soldier no attack");
+
 		// do nothing
 	}
 	
 }
 
-void Enemy_InfantrySoldier::move() {
+void Enemy_InfantrySoldier::Shoot() {
+	// TODO add normal attack with bullets shooting towards player position
+}
 
+void Enemy_InfantrySoldier::Knife() {
+	// TODO add melee attack with knife towards player position at mele range
+}
+
+void Enemy_InfantrySoldier::move() {
+	/*
+	
+	probablemente esto no funcione, pero es una idea de como hacerlo
+	
+	*/
+
+	// TODO add movement traking player position and moving towards him
+
+	// Get the direction vector from enemy position to player position
+	iPoint playerPos = App->player->position;
+	iPoint enemyPos = position;
+
+	iPoint direction = playerPos - enemyPos;
+
+	// Normalize the direction vector
+	float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+	if (length != 0) {
+		direction.x /= length;
+		direction.y /= length;
+	}
+
+	// Update the enemy's position based on the direction and movement speed
+	float speed = 2.0f; // Adjust the movement speed as needed
+	position.x += static_cast<int>(direction.x * speed);
+	position.y += static_cast<int>(direction.y * speed);
+	
 }

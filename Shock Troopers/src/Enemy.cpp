@@ -128,3 +128,8 @@ bool Enemy::PlayerIsMele() {
 
     return false;
 }
+
+int Enemy::GetPlayerDirection()
+{
+    return 0;
+}

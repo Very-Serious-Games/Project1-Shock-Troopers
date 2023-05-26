@@ -31,6 +31,7 @@ bool ModuleEnemies::Start()
 {
 	// TODO cargar texturas y fx enemigos
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
+	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/enemies-soldiers.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
 	textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
@@ -165,6 +166,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case Enemy_Type::INFANTRY_SOLDIER:
 					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y);
 					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureInfantrySoldier;
 					break;
 				case Enemy_Type::FLYING_BATTLESHIP:
 					enemies[i] = new Enemy_FlyingBattleship(info.x, info.y);

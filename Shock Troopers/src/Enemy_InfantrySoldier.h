@@ -29,6 +29,12 @@ public:
 
 	void Attack() override;
 
+	int GetPlayerDirection() override;
+
+	void Shoot();
+
+	void Knife();
+
 	void move() override;
 
 private:

@@ -1077,13 +1077,10 @@ void ModulePlayer::stateMachine() {
 		roll();
 
 		if (!isRoll()) {
-			currentState = PlayerState::Idle;
 			lockControls = false;
+			currentState = PlayerState::Idle;
 
 		}
-
-		isRolling = true;
-		lockControls = true;
 
 		LOG("roll state");
 

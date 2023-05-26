@@ -12,7 +12,6 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	spawnAnimLeft.PushBack({});
 	spawnAnimRight.PushBack({});
 	
-
 	//Death Animation
 	deathAnim.PushBack({436, 828, 42, 53 }); //41x53?
 	deathAnim.PushBack({478, 828, 42, 53});
@@ -342,17 +341,14 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	upBossSoldierAnim.PushBack({});
 	upBossSoldierAnim.PushBack({});  
 
-
 	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
-
-	// TODO add animations
 
 }
 
 void Enemy_InfantrySoldier::Update() {
 
-	StateMachine();
+	//StateMachine();
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
@@ -364,36 +360,99 @@ void Enemy_InfantrySoldier::Update() {
 }
 
 void Enemy_InfantrySoldier::deathAnimation() {
-	//currentAnim = &deathAnim;
+	currentAnim = &deathAnim;
 }
 
-void Enemy_InfantrySoldier::idleAnimation() {
-	//currentAnim = &idleAnim;
+void Enemy_InfantrySoldier::idleAnimation(int direction) {
+	switch (direction) {
+		case 1: //UR
+			currentAnim = &idleUpRightAnim;
+			break;
+		case 2: //UL
+			currentAnim = &idleUpLeftAnim;
+			break;
+		case 3: //DR
+			currentAnim = &idleDownRightAnim;
+			break;
+		case 4: //DL
+			currentAnim = &idleDownLeftAnim;
+			break;
+		case 5: //R
+			currentAnim = &idleRightAnim;
+			break;
+		case 6: //L
+			currentAnim = &idleLeftAnim;
+			break;
+		case 7: //D
+			currentAnim = &idleDownAnim;
+			break;
+		case 8: //U
+			currentAnim = &idleUpAnim;
+			break;
+		}
+
 }
 
-void Enemy_InfantrySoldier::spawnAnimation() {
-	//currentAnim = &spawnAnim;
+
+void Enemy_InfantrySoldier::spawnAnimation(int direction) {
+	switch (direction) {
+	case 1: //L
+		currentAnim = &spawnAnimLeft;
+		break;
+	case 2: //R
+		currentAnim = &spawnAnimRight;
+		break;
+	}
 }
 
-void Enemy_InfantrySoldier::moveAnimation() {
-	//currentAnim = &moveAnim;
+void Enemy_InfantrySoldier::moveAnimation(int direction) {
+	switch (direction) {
+		case 1: //UR
+			currentAnim = &upRightAnim;
+			break;
+		case 2: //UL
+			currentAnim = &upLeftAnim;
+			break;
+		case 3: //DR
+			currentAnim = &downRightAnim;
+			break;
+		case 4: //DL
+			currentAnim = &downLeftAnim;
+			break;
+		case 5: //R
+			currentAnim = &rightAnim;
+			break;
+		case 6: //L
+			currentAnim = &leftAnim;
+			break;
+		case 7: //D
+			currentAnim = &downAnim;
+			break;
+		case 8: //U
+			currentAnim = &upAnim;
+			break;
+	}
 }
 
 void Enemy_InfantrySoldier::attackAnimation() {
-	//currentAnim = &attackAnim;
+	currentAnim = &attackAnim;
 }
 
 void Enemy_InfantrySoldier::StateMachine() {
 	switch (state) {
 		case Enemy_State::SPAWN:
 
-			spawnAnimation();
+			spawnAnimation(1/*direction*/);
 
 			break;
 
 		case Enemy_State::IDLE:
 
-			idleAnimation();
+			idleAnimation(1/*direction*/);
+
+			if (PlayerIsNear()) {
+				state = Enemy_State::MOVE;
+			}
 
 			break;
 
@@ -420,9 +479,13 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 		case Enemy_State::MOVE:
 
-			moveAnimation();
+			moveAnimation(1/*direction*/);
 
 			move();
+
+			if (PlayerIsMele()) {
+				state = Enemy_State::ATTACK;
+			}
 
 			break;
 

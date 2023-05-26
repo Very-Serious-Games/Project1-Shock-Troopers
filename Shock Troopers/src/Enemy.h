@@ -66,6 +66,9 @@ public:
 	// Check if the player is near
 	bool PlayerIsNear();
 
+	// Check if the player is mele
+	bool PlayerIsMele();
+
 public:
 	Enemy_State state = Enemy_State::SPAWN;
 

@@ -17,11 +17,11 @@ public:
 
 	void deathAnimation() override;
 
-	void idleAnimation() override;
+	void idleAnimation(int direction);
 
-	void spawnAnimation() override;
+	void spawnAnimation(int direction);
 
-	void moveAnimation() override;
+	void moveAnimation(int direction);
 
 	void attackAnimation() override;
 
@@ -42,7 +42,6 @@ private:
 	Animation spawnAnimLeft;
 
 	//Death Animations
-	Animation deathAnim;
 	Animation leftDeathAnim;
 	Animation rightDeathAnim;
 	//Pink Death Animations

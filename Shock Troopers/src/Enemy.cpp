@@ -109,3 +109,22 @@ bool Enemy::PlayerIsNear() {
 
     return false;
 }
+
+bool Enemy::PlayerIsMele() {
+
+    int detectionDistance = 5; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+    int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
+
+
+    // TODO print debug mode detection zone
+    /*
+    SDL_Rect rect = { position.x, position.y, detectionDistance, detectionDistance };
+    App->collisions->AddCollider(rect, Collider::Type::DETECTION_ZONE);
+    */
+
+    if (distance <= detectionDistance) {
+        return true;
+    }
+
+    return false;
+}

@@ -70,50 +70,57 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 
 	//Gun
 	//Gun movement
-	gunUpAnim.PushBack({});
-	gunUpAnim.PushBack({});
-	gunUpAnim.PushBack({});
-	gunUpAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunDownAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunLeftAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunRightAnim.PushBack({});
-	gunUpLeftAnim.PushBack({});
-	gunUpLeftAnim.PushBack({});
-	gunUpLeftAnim.PushBack({});
-	gunUpLeftAnim.PushBack({});
-	gunUpRightAnim.PushBack({});
-	gunUpRightAnim.PushBack({});
-	gunUpRightAnim.PushBack({});
-	gunUpRightAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
-	gunDownLeftAnim.PushBack({});
+	gunUpAnim.PushBack({702, 227, 35, 50});  //35x50
+	gunUpAnim.PushBack({738, 227, 35, 50});
+	gunUpAnim.PushBack({774, 227, 35, 50});
+	gunUpAnim.PushBack({810, 227, 35, 50});
+
+	gunDownAnim.PushBack({50, 179, 29, 47});
+	gunDownAnim.PushBack({80, 179, 29, 47});
+	gunDownAnim.PushBack({110, 179, 29, 47});
+	gunDownAnim.PushBack({140, 179, 29, 47});
+	gunDownAnim.PushBack({170, 179, 29, 47});
+	gunDownAnim.PushBack({200, 179, 29, 47});
+	gunDownAnim.PushBack({230, 179, 29, 47});
+	gunDownAnim.PushBack({260, 179, 29, 47});
+
+	gunLeftAnim.PushBack({50, 230, 41, 47});
+	gunLeftAnim.PushBack({91, 230, 41, 47});
+	gunLeftAnim.PushBack({132, 230, 41, 47});
+	gunLeftAnim.PushBack({173, 230, 41, 47});
+	gunLeftAnim.PushBack({214, 230, 41, 47});
+	gunLeftAnim.PushBack({255, 230, 41, 47});
+	gunLeftAnim.PushBack({296, 230, 41, 47});
+	gunLeftAnim.PushBack({337, 230, 41, 47});
+
+	gunRightAnim.PushBack({370, 230, 41, 47}); //puede ser que haya que cambiarlos
+	gunRightAnim.PushBack({411, 230, 41, 47}); //410?
+	gunRightAnim.PushBack({452, 230, 41, 47});
+	gunRightAnim.PushBack({493, 230, 41, 47});
+	gunRightAnim.PushBack({534, 230, 41, 47});
+	gunRightAnim.PushBack({575, 230, 41, 47});
+	gunRightAnim.PushBack({616, 230, 41, 47});
+	gunRightAnim.PushBack({657, 230, 41, 47});
+
+	gunUpLeftAnim.PushBack({295, 176, 34, 50}); // check
+	gunUpLeftAnim.PushBack({329, 176, 34, 50});
+	gunUpLeftAnim.PushBack({363, 176, 34, 50});
+	gunUpLeftAnim.PushBack({397, 176, 34, 50});
+
+	gunUpRightAnim.PushBack({437, 176, 34, 50});
+	gunUpRightAnim.PushBack({471, 176, 34, 50});
+	gunUpRightAnim.PushBack({505, 176, 34, 50});
+	gunUpRightAnim.PushBack({539, 176, 34, 50});
+
+	gunDownLeftAnim.PushBack({576, 176, 33, 50}); //check
+	gunDownLeftAnim.PushBack({609, 176, 33, 50});
+	gunDownLeftAnim.PushBack({642, 176, 33, 50});
+	gunDownLeftAnim.PushBack({675, 176, 33, 50});
+	gunDownLeftAnim.PushBack({708, 176, 33, 50});
+	gunDownLeftAnim.PushBack({741, 176, 33, 50});
+	gunDownLeftAnim.PushBack({774, 176, 33, 50});
+	gunDownLeftAnim.PushBack({810, 176, 33, 50});
+
 	gunDownRightAnim.PushBack({});
 	gunDownRightAnim.PushBack({});
 	gunDownRightAnim.PushBack({});

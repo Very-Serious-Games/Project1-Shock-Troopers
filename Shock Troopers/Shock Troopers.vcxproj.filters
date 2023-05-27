@@ -126,6 +126,12 @@
     <ClInclude Include="src\ModuleUI.h">
       <Filter>Source Files\modules\core</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_Crate.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -211,6 +217,9 @@
     </ClCompile>
     <ClCompile Include="src\ModuleUI.cpp">
       <Filter>Source Files\modules\core</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Crate.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

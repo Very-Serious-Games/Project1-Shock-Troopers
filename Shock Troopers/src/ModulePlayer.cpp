@@ -700,14 +700,20 @@ void ModulePlayer::setShootingMovingAnimations() {
 }
 
 bool ModulePlayer::isShootingMoving() {
+	GamePad& pad = App->input->pads[0];
 
 	if ((App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
-		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) 
 		and
 		(App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
 		and !lockControls) {
+		return true;
+
+	}
+	else if ((pad.l_y < 0 or pad.l_x < 0 or pad.l_y > 0 or pad.l_x > 0) and
+		(pad.x == true) and !lockControls) {
 		return true;
 
 	}
@@ -719,11 +725,14 @@ bool ModulePlayer::isShootingMoving() {
 }
 
 bool ModulePlayer::isMoving() {
+	GamePad& pad = App->input->pads[0];
 
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
-		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT and 
+		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT or
+		pad.l_y < 0 or pad.l_x < 0 or pad.l_y > 0 or pad.l_x > 0 and
+
 		!lockControls) {
 
 		return true;
@@ -737,8 +746,9 @@ bool ModulePlayer::isMoving() {
 }
 
 bool ModulePlayer::isShooting() {
+	GamePad& pad = App->input->pads[0];
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT and !lockControls) {
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT or pad.x == true and !lockControls) {
 		return true;
 
 	}
@@ -751,8 +761,9 @@ bool ModulePlayer::isShooting() {
 }
 
 bool ModulePlayer::isGrenade() {
+	GamePad& pad = App->input->pads[0];
 
-	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT and !lockControls) {
+	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT or pad.y == true and !lockControls) {
 
 		return true;
 
@@ -765,7 +776,9 @@ bool ModulePlayer::isGrenade() {
 }
 
 bool ModulePlayer::isRoll() {
-	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN or isRolling) {
+	GamePad& pad = App->input->pads[0];
+
+	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN or pad.b == true or isRolling) {
 		isRolling = true;
 		
 		return true;
@@ -895,24 +908,27 @@ void ModulePlayer::shootMoving() {
 }
 
 void ModulePlayer::getLastDirection() {
-	//Map controls
+	
+	GamePad& pad = App->input->pads[0];
+
+//Map controls
 	if(!lockControls){
 
-		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_y < 0 && pad.l_x > 0) {
 			currentDirection = 1;
-		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_y < 0 && pad.l_x < 0) {
 			currentDirection = 2;
-		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_y > 0 && pad.l_x > 0) {
 			currentDirection = 3;
-		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_y > 0 && pad.l_x < 0) {
 			currentDirection = 4;
-		} else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_x > 0) {
 			currentDirection = 5;
-		} else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_x < 0) {
 			currentDirection = 6;
-		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || pad.l_y > 0) {
 			currentDirection = 7;
-		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || pad.l_y < 0) {
 			currentDirection = 8;
 		} else {
 			currentDirection = 0;

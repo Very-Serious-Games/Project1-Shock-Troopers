@@ -132,8 +132,8 @@ Update_Status SceneMenu::Update()
 		currentCharacter--;
 	}
 
-	if (App->player->godMode == true) {
-		App->player->godMode = false;
+	if (App->player->isGodMode == true) {
+		App->player->isGodMode = false;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

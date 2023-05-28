@@ -136,6 +136,7 @@ void ModuleEnemies::HandleEnemiesSpawn()
 
 void ModuleEnemies::HandleEnemiesDespawn()
 {
+	/*
 	// Iterate existing enemies
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -149,7 +150,7 @@ void ModuleEnemies::HandleEnemiesDespawn()
 				enemies[i]->SetToDelete();
 			}
 		}
-	}
+	}*/
 }
 
 void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)

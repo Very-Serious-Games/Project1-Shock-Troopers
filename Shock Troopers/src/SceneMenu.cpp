@@ -116,18 +116,19 @@ bool SceneMenu::Start()
 Update_Status SceneMenu::Update()
 {
 	selectionAnimation.Update();
+	GamePad& pad = App->input->pads[0];
 
-	// Pressing SPACE goes to the level 1 if current character is Milky
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN and currentCharacter == 1)
+	// Pressing SPACE or A(gamepad) goes to the level 1 if current character is Milky
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN and currentCharacter == 1 || pad.a == true and currentCharacter == 1)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN) {
+	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.right == true) {
 		currentCharacter++;
 	}
 
-	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN) {
+	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.left == true) {
 		currentCharacter--;
 	}
 

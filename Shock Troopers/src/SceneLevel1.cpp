@@ -45,7 +45,9 @@ bool SceneLevel1::Start()
 	
 	//Add objects
 	//App->enemies->AddEnemy(Enemy_Type::BRIDGE, 125, 1822);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 128, 1296);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 713);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 668);
 
 	App->render->camera.x = 220;
 	App->render->camera.y = 5058;

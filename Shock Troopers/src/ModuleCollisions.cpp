@@ -155,7 +155,7 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::PLAYER_SHOT: // yellow
 				App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 				break;
-			case Collider::Type::ENEMY_SHOT: // magenta
+			case Collider::Type::ENEMY_SHOT: // cian
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 				break;
 			case Collider::Type::HEAL: // magenta
@@ -166,6 +166,9 @@ void ModuleCollisions::DebugDraw()
 				break;
 			case Collider::Type::LASER: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+				break;
+			case Collider::Type::OBJECT: // pink
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 				break;
 
 			default:

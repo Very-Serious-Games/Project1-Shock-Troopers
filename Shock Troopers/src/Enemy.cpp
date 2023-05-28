@@ -64,10 +64,7 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {   
-    if (collider->PLAYER_SHOT)
-    {
-        this->health = health - 10; // TODO : change this to the damage of the bullet
-    }
+    this->health = health - 10; // TODO : change this to the damage of the bullet
    
     if (health <= 0) {
         App->particles->AddParticle(App->particles->explosion, position.x, position.y,0);

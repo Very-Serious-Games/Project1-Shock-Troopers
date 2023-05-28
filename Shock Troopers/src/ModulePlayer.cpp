@@ -1312,7 +1312,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	}
 
-
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockR = true;
 		isRolling = false;
@@ -1329,6 +1328,26 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+		lockL = true;
+		isRolling = false;
+	}
+	
+	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
+		lockR = true;
+		isRolling = false;
+	}
+
+	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
+		lockU = true;
+		isRolling = false;
+	}
+
+	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
+		lockD = true;
+		isRolling = false;
+	}
+
+	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
 		lockL = true;
 		isRolling = false;
 	}

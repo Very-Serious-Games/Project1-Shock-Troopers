@@ -70,10 +70,8 @@ Update_Status ModuleRender::Update()
 	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
 		camera.x -= cameraSpeed;
 	if (camera.x < 0) camera.x = 0;
-	if (camera.x >= 188) camera.x = 188;
 
 	if (camera.y < 0) camera.y = 0;
-	if (camera.y >= 1686) camera.y = 1686;
 
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
 		camera.x += cameraSpeed;

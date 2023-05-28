@@ -1188,7 +1188,7 @@ bool ModulePlayer::Start() {
 
 	//Setting up player position
 	position.x = 220;
-	position.y = 1820;
+	position.y = 2800;
 	
 	//Setting up player wall coliders
 	colliderL = App->collisions->AddCollider({ position.x + 5, position.y + 2, 2, 43 }, Collider::Type::LASER, this);

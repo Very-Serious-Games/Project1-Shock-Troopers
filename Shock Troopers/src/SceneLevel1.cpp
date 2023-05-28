@@ -27,13 +27,13 @@ bool SceneLevel1::Start()
 	bool ret = true;
 
 	// Load textures and fx
-	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain.png");
+	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain_full.png");
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 
 	// Add colliders
-	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 490, 0, 1, 1909 }, Collider::Type::WALL);
+//	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
+//	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
+//	App->collisions->AddCollider({ 490, 0, 1, 1909 }, Collider::Type::WALL);
 
 
 	createMargenes();
@@ -48,7 +48,7 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 128, 1296);
 
 	App->render->camera.x = 220;
-	App->render->camera.y = 5058;
+	App->render->camera.y = 2800;
 
 	App->player->Enable();
 	App->enemies->Enable();

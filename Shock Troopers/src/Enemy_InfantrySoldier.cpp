@@ -124,50 +124,58 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	//no need to speed these animations since they only have 1 frame
 	
 	//Gun hit
-	gunHitRightAnim.PushBack({});
-	gunHitRightAnim.PushBack({});
-	gunHitRightAnim.PushBack({});
-	gunHitRightAnim.PushBack({});
-	gunHitRightAnim.PushBack({});
-	gunHitRightAnim.PushBack({});
-	gunHitRightAnim.PushBack({});
-	gunHitRightAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
-	gunHitLeftAnim.PushBack({});
+	gunHitRightAnim.PushBack({51, 289, 47, 50});
+	gunHitRightAnim.PushBack({98, 289, 47, 50});
+	gunHitRightAnim.PushBack({145, 289, 47, 50});
+	gunHitRightAnim.PushBack({192, 289, 47, 50});
+	gunHitRightAnim.PushBack({239, 289, 47, 50});
+	gunHitRightAnim.PushBack({286, 289, 47, 50});
+	gunHitRightAnim.PushBack({333, 289, 47, 50});
+	gunHitRightAnim.PushBack({380, 289, 47, 50});
+
+	gunHitLeftAnim.PushBack({448, 289, 47, 50});
+	gunHitLeftAnim.PushBack({495, 289, 47, 50});
+	gunHitLeftAnim.PushBack({542, 289, 47, 50});
+	gunHitLeftAnim.PushBack({589, 289, 47, 50});
+	gunHitLeftAnim.PushBack({636, 289, 47, 50});
+	gunHitLeftAnim.PushBack({683, 289, 47, 50});
+	gunHitLeftAnim.PushBack({730, 289, 47, 50});
+	gunHitLeftAnim.PushBack({777, 289, 47, 50});
 
 	//Knife movement
 	knifeUpAnim.PushBack({});
 	knifeUpAnim.PushBack({});
 	knifeUpAnim.PushBack({});
 	knifeUpAnim.PushBack({});
+
 	knifeDownAnim.PushBack({});
 	knifeDownAnim.PushBack({});
+
 	knifeLeftAnim.PushBack({});
 	knifeLeftAnim.PushBack({});
 	knifeLeftAnim.PushBack({});
 	knifeLeftAnim.PushBack({});
+
 	knifeRightAnim.PushBack({});
 	knifeRightAnim.PushBack({});
 	knifeRightAnim.PushBack({});
 	knifeRightAnim.PushBack({});
+
 	knifeUpLeftAnim.PushBack({});
 	knifeUpLeftAnim.PushBack({});
 	knifeUpLeftAnim.PushBack({});
 	knifeUpLeftAnim.PushBack({});
+
 	knifeUpRightAnim.PushBack({});
 	knifeUpRightAnim.PushBack({});
 	knifeUpRightAnim.PushBack({});
 	knifeUpRightAnim.PushBack({});
+
 	knifeDownLeftAnim.PushBack({});
 	knifeDownLeftAnim.PushBack({});
 	knifeDownLeftAnim.PushBack({});
 	knifeDownLeftAnim.PushBack({});
+
 	knifeDownRightAnim.PushBack({});
 	knifeDownRightAnim.PushBack({});
 	knifeDownRightAnim.PushBack({});

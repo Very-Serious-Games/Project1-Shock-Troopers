@@ -47,27 +47,6 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	leftPinkDeathAnim.PushBack({});
 	rightPinkDeathAnim.PushBack({});
 
-	//Idle animations
-	idleUpAnim.PushBack({});
-	idleDownAnim.PushBack({});
-	idleLeftAnim.PushBack({});
-	idleRightAnim.PushBack({});
-	idleUpLeftAnim.PushBack({});
-	idleUpRightAnim.PushBack({});
-	idleDownLeftAnim.PushBack({});
-	idleDownRightAnim.PushBack({});
-	//no need to speed bc this animation has only one frame
-
-	//Movement
-	upAnim.PushBack({});
-	downAnim.PushBack({});
-	leftAnim.PushBack({});
-	rightAnim.PushBack({});
-	upLeftAnim.PushBack({});
-	upRightAnim.PushBack({});
-	downLeftAnim.PushBack({});
-	downRightAnim.PushBack({});
-
 	//Gun
 	//Gun movement
 	gunUpAnim.PushBack({702, 227, 35, 50});  //35x50
@@ -112,33 +91,36 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunUpRightAnim.PushBack({505, 176, 34, 50});
 	gunUpRightAnim.PushBack({539, 176, 34, 50});
 
-	gunDownLeftAnim.PushBack({576, 176, 33, 50}); //check
-	gunDownLeftAnim.PushBack({609, 176, 33, 50});
-	gunDownLeftAnim.PushBack({642, 176, 33, 50});
-	gunDownLeftAnim.PushBack({675, 176, 33, 50});
-	gunDownLeftAnim.PushBack({708, 176, 33, 50});
-	gunDownLeftAnim.PushBack({741, 176, 33, 50});
-	gunDownLeftAnim.PushBack({774, 176, 33, 50});
-	gunDownLeftAnim.PushBack({810, 176, 33, 50});
+	gunDownLeftAnim.PushBack({854, 176, 33, 50}); //check. 34? if not right fix spritesheet
+	gunDownLeftAnim.PushBack({887, 176, 33, 50});
+	gunDownLeftAnim.PushBack({920, 176, 33, 50});
+	gunDownLeftAnim.PushBack({953, 176, 33, 50});
+	gunDownLeftAnim.PushBack({986, 176, 33, 50});
+	gunDownLeftAnim.PushBack({1019, 176, 33, 50});
+	gunDownLeftAnim.PushBack({1052, 176, 33, 50});
+	gunDownLeftAnim.PushBack({1085, 176, 33, 50});
 
-	gunDownRightAnim.PushBack({});
-	gunDownRightAnim.PushBack({});
-	gunDownRightAnim.PushBack({});
-	gunDownRightAnim.PushBack({});
-	gunDownRightAnim.PushBack({});
-	gunDownRightAnim.PushBack({});
-	gunDownRightAnim.PushBack({});
-	gunDownRightAnim.PushBack({});
+	gunDownRightAnim.PushBack({ 576, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 609, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 642, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 675, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 708, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 741, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 774, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 810, 176, 33, 50 });
 
 	//Gun Idle
-	gunIdleUpAnim.PushBack({});
-	gunIdleDownAnim.PushBack({});
-	gunIdleLeftAnim.PushBack({});
-	gunIdleRightAnim.PushBack({});
-	gunIdleUpLeftAnim.PushBack({});
-	gunIdleUpRightAnim.PushBack({});
-	gunIdleDownLeftAnim.PushBack({});
-	gunIdleDownRightAnim.PushBack({});
+	gunIdleUpAnim.PushBack({1108, 232, 29, 46}); //close legs
+	gunIdle2UpAnim.PushBack({ 850, 232, 28, 46}); //spread legs
+	gunIdleDownAnim.PushBack({ 1172, 233, 29, 45 }); //close legs
+	gunIdle2DownAnim.PushBack({ 910, 232, 26, 46 }); //spread legs
+	gunIdlePointDownAnim.PushBack({ 879, 232, 28, 46}); //pointing gun idle down
+	gunIdleLeftAnim.PushBack({1019, 231, 43, 47 });
+	gunIdleRightAnim.PushBack({ 1063, 231, 43, 47 });
+	gunIdleUpLeftAnim.PushBack({939, 232, 38, 46});
+	gunIdleUpRightAnim.PushBack({978, 232, 38, 46});
+	gunIdleDownLeftAnim.PushBack({}); //none btm
+	gunIdleDownRightAnim.PushBack({}); //none btm
 	//no need to speed these animations since they only have 1 frame
 	
 	//Gun hit

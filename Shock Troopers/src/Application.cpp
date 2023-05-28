@@ -7,7 +7,6 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
-#include "ModuleUi.h"
 #include "SceneIntro.h"
 #include "SceneLevel1.h"
 #include "ModuleParticles.h"
@@ -15,6 +14,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+#include "ModuleUI.h"
 #include "ModuleRender.h"
 
 Application::Application()

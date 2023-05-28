@@ -20,8 +20,8 @@ class ModuleCollisions;
 class ModuleEnemies;
 class ModuleFadeToBlack;
 class ModuleFonts;
-class ModuleRender;
 class ModuleUI;
+class ModuleRender;
 
 class Application
 {
@@ -55,7 +55,6 @@ public:
 
 	ModulePlayer* player = nullptr;
 
-	ModuleUI* ui = nullptr;
 
 	SceneIntro* sceneIntro = nullptr;
 	SceneLevel1* sceneLevel_1 = nullptr;
@@ -64,6 +63,8 @@ public:
 	ModuleEnemies* enemies = nullptr;
 	ModuleParticles* particles = nullptr;
 	ModulePickUp* pickUps = nullptr;
+
+	ModuleUI* ui = nullptr;
 
 	ModuleCollisions* collisions = nullptr;
 	ModuleFadeToBlack* fade = nullptr;

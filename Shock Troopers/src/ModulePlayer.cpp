@@ -766,7 +766,7 @@ bool ModulePlayer::isGrenade() {
 
 bool ModulePlayer::isRoll() {
 	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN or isRolling) {
-		isRolling = true;
+
 		
 		return true;
 
@@ -843,6 +843,9 @@ void ModulePlayer::move() {
 
 void ModulePlayer::roll() {
 
+	if (cantRoll) {
+		return;
+	}
 	isRolling = true;
 
 	lockControls = true;
@@ -1191,10 +1194,10 @@ bool ModulePlayer::Start() {
 	position.y = 2800;
 	
 	//Setting up player wall coliders
-	colliderL = App->collisions->AddCollider({ position.x + 5, position.y + 2, 2, 43 }, Collider::Type::LASER, this);
-	colliderU = App->collisions->AddCollider({ position.x + 5, position.y + 8, 22, 2 }, Collider::Type::LASER, this);
-	colliderD = App->collisions->AddCollider({ position.x + 5, position.y + 51, 22, 2 }, Collider::Type::LASER, this);
-	colliderR = App->collisions->AddCollider({ position.x + 32, position.y + 2, 2,43 }, Collider::Type::LASER, this);
+	colliderL = App->collisions->AddCollider({ position.x -3 , position.y + 2, 5, 43 }, Collider::Type::LASER, this);
+	colliderU = App->collisions->AddCollider({ position.x + 5, position.y + 5, 22, 5 }, Collider::Type::LASER, this);
+	colliderD = App->collisions->AddCollider({ position.x + 5, position.y + 51, 22, 5 }, Collider::Type::LASER, this);
+	colliderR = App->collisions->AddCollider({ position.x + 29, position.y + 2, 5,43 }, Collider::Type::LASER, this);
 
 	//Setting up player hitbox
 	collider = App->collisions->AddCollider({ position.x + 5,position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
@@ -1218,10 +1221,10 @@ Update_Status ModulePlayer::Update() {
 
 	//Collider update
 	collider->SetPos(position.x + 12, position.y + 10);
-	colliderU->SetPos(position.x + 12, position.y + 8);
+	colliderU->SetPos(position.x + 12, position.y + 5);
 	colliderR->SetPos(position.x + 34, position.y + 10);
 	colliderD->SetPos(position.x + 12, position.y + 53);
-	colliderL->SetPos(position.x + 10, position.y + 10);
+	colliderL->SetPos(position.x + 7, position.y + 10);
 
 	//We update the current animation
 	currentAnimationLegs->Update();
@@ -1234,6 +1237,7 @@ Update_Status ModulePlayer::Update() {
 	lockU = false;
 	lockD = false;
 	lockL = false;
+	cantRoll = false;
 	speed = 1;
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -1299,22 +1303,38 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockR = true;
+		if (isRolling) {
+			position.x -= 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 
 	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockU = true;
+		if (isRolling) {
+			position.y += 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 
 	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockD = true;
+		if (isRolling) {
+			position.y -= 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 
 	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockL = true;
+		if (isRolling) {
+			position.x += 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {

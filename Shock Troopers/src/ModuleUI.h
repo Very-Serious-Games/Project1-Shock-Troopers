@@ -3,10 +3,12 @@
 
 #include <string>
 #include <cmath>
-using namespace std;
+
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+
+using namespace std;
 
 struct SDL_Texture;
 
@@ -34,9 +36,6 @@ public:
 	void updateHp();
 
 public:
-	// Position of the player in the map
-	iPoint position;
-	SDL_Rect rectA = { 0, 0 , 25, 25 };
 
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;

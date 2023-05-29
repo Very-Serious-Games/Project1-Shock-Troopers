@@ -534,9 +534,12 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 			idleAnimation(GetPlayerDirection());
 
-			if (PlayerIsNear()) {
-				//state = Enemy_State::MOVE;
+			if (PlayerIsAttackRange()) {
 				state = Enemy_State::ATTACK;
+			}
+
+			if (PlayerIsNear()) {
+				state = Enemy_State::MOVE;
 			}
 
 			LOG("IDLE STATE");
@@ -548,6 +551,10 @@ void Enemy_InfantrySoldier::StateMachine() {
 			attackAnimation();
 
 			Attack();
+
+			if (!PlayerIsAttackRange()) {
+				state = Enemy_State::IDLE;
+			}
 
 			LOG("ATTACK STATE");
 
@@ -574,7 +581,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 			move();
 
-			if (PlayerIsMele()) {
+			if (PlayerIsAttackRange()) {
 				state = Enemy_State::ATTACK;
 			}
 
@@ -595,18 +602,18 @@ void Enemy_InfantrySoldier::StateMachine() {
 // 2. mele attack
 // 3. no attack
 void Enemy_InfantrySoldier::Attack() {
-	Shoot();
 	// get random number between with 10%, 30, 60% chance to happen
+	/*
 	int attackType = rand() % 10; // generate a random number between 0 and 9
-	if (attackType < 6) { // 60% chance to do a melee attack
-
-		Knife();
+	if (attackType < 6) { // 60% chance to do a normal attack
+		
+		Shoot();
 
 		LOG("Enemy: Infantry Soldier normal attack");
 
-	} else if (attackType < 4) { // 30% chance to do a normal attack
+	} else if (attackType < 4) { // 30% chance to do a mele attack
 
-		Shoot();
+		Knife();
 
 		LOG("Enemy: Infantry Soldier mele attack");
 
@@ -615,6 +622,15 @@ void Enemy_InfantrySoldier::Attack() {
 		LOG("Enemy: Infantry Soldier no attack");
 
 		// do nothing
+	}
+	*/
+
+	if (PlayerIsMele()) {
+		LOG("Enemy: mele");
+		Knife();
+	} else {
+		LOG("Enemy: shot");
+		Shoot();
 	}
 	
 }

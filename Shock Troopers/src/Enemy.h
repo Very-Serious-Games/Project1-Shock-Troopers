@@ -66,6 +66,8 @@ public:
 	// Check if the player is near
 	bool PlayerIsNear();
 
+	bool PlayerIsAttackRange();
+
 	// Check if the player is mele
 	bool PlayerIsMele();
 

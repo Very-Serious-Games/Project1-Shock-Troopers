@@ -110,9 +110,21 @@ bool Enemy::PlayerIsNear() {
     return false;
 }
 
+bool Enemy::PlayerIsAttackRange() {
+
+    int detectionDistance = 150; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+    int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
+
+    if (distance <= detectionDistance) {
+        return true;
+    }
+
+    return false;
+}
+
 bool Enemy::PlayerIsMele() {
 
-    int detectionDistance = 5; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+    int detectionDistance = 30; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
     int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
 
 

@@ -11,6 +11,7 @@
 #include "Enemy_FlyingBattleship.h"
 #include "Enemy_Bridge.h"
 #include "Enemy_Crate.h"
+#include "Enemy_Landmine.h"
 
 #define SPAWN_MARGIN 50
 
@@ -31,6 +32,7 @@ bool ModuleEnemies::Start()
 	// TODO cargar texturas y fx enemigos
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
+	textureLandmines = App->textures->Load("Assets/Sprites/characters/landmine.png");
 	textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
@@ -180,6 +182,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_Crate(info.x, info.y);
 					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
 					enemies[i]->texture = textureCrate;
+					break;
+				case Enemy_Type::LANDMINE:
+					enemies[i] = new Enemy_Landmine(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureLandmines;
 					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;

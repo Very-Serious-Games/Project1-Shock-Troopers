@@ -12,6 +12,7 @@ enum class Enemy_Type
 	FLYING_BATTLESHIP,
 	BRIDGE,
 	CRATE,
+	LANDMINE,
 };
 
 struct EnemySpawnpoint
@@ -80,6 +81,7 @@ private:
 	SDL_Texture* textureFlyingBattleship = nullptr;
 	SDL_Texture* textureBridge = nullptr;
 	SDL_Texture* textureCrate = nullptr;
+	SDL_Texture* textureLandmines = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

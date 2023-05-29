@@ -20,6 +20,7 @@ struct Collider
 		ENEMY_SHOT,
 		HEAL,
 		OBJECT,
+		LANDMINE,
 		DETECTION_ZONE,
 
 		MAX

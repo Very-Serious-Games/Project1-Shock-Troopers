@@ -43,6 +43,9 @@ bool SceneLevel1::Start()
 								
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20); // (493 / 2) - (128 / 2) = 183
 	
+	//Add landmines
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 87, 2330);
+
 	//Add objects
 	//App->enemies->AddEnemy(Enemy_Type::BRIDGE, 125, 1822);
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);

@@ -643,14 +643,5 @@ void Enemy_InfantrySoldier::move() {
 	float speed = 0.1f; // Adjust the movement speed as needed
 	relativePosition.x += (float)direction.x * speed;
 	relativePosition.y += (float)direction.y * speed;
-
-	
-	LOG("Player position: %f, %f", App->player->position.x, App->player->position.y);
-	LOG("Enemy position: %d, %d", relativePosition.x, relativePosition.y);
-	LOG("Enemy direction: %f, %f", direction.x, direction.y);
-	LOG("Enemy speed: %f", speed);
-	LOG("Enemy lenght: %f", length);
-	LOG("Enemy result: %f, %f", (float)direction.x * speed, (float)direction.y * speed);
-	
 	
 }

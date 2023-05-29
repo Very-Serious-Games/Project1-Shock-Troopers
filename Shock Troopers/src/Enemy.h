@@ -97,6 +97,7 @@ public:
 
 	int delay = 15;
 	int delayShoot = 700;
+	int delayKnife = 500;
 	int deathAnimDelay = 50;
 
 protected:

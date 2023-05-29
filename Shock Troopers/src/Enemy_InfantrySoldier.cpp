@@ -627,7 +627,13 @@ void Enemy_InfantrySoldier::Attack() {
 
 	if (PlayerIsMele()) {
 		LOG("Enemy: mele");
-		Knife();
+		delayKnife--;
+		if (delayKnife == 0) {
+			Knife();
+			delayKnife = 500;
+		}
+		
+		
 	} else {
 		LOG("Enemy: shot");
 		Shoot();
@@ -665,7 +671,60 @@ void Enemy_InfantrySoldier::Shoot() {
 }
 
 void Enemy_InfantrySoldier::Knife() {
-	// TODO add melee attack with knife towards player position at mele range
+	// Create a direction vector
+	fPoint direction;
+
+	// Calculate the direction between the enemy and the player
+	direction.x = App->player->position.x - position.x;
+	direction.y = App->player->position.y - position.y;
+
+	// Normalize the direction vector
+	float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+	if (length != 0) {
+		direction.x /= length;
+		direction.y /= length;
+	}
+
+	int knifeWidth = 20;
+	int knifeHeight = 50;
+
+	// Calculate the position of the knife collider based on the player's position
+	int knifePosX = static_cast<int>(position.x);
+	int knifePosY = static_cast<int>(position.y);
+
+	// Adjust the position of the knife collider based on the player's direction
+	if (direction.x < 0) {
+		// Player is to the right of the enemy
+		knifePosX += collider->rect.w;
+	} else {
+		// Player is to the left of the enemy
+		knifePosX -= knifeWidth;
+	}
+
+	if (direction.y < 0) {
+		// Player is above the enemy
+		knifePosY -= knifeHeight;
+	} else {
+		// Player is below the enemy
+		knifePosY += collider->rect.h;
+	}
+
+	// Add the knife collider
+	Collider* knife = App->collisions->AddCollider(
+		{
+			knifePosX,
+			knifePosY,
+			knifeWidth,
+			knifeHeight
+		},
+		Collider::Type::KNIFE, // TODO: KNIFE
+		NULL);
+
+	// TODO logica para borrar el collider dependiendo de la animacion
+	if (knifeUpAnim.HasFinished()) {
+		App->collisions->RemoveCollider(knife);
+	}
+
 }
 
 void Enemy_InfantrySoldier::move() {

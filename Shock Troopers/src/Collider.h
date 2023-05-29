@@ -21,6 +21,7 @@ struct Collider
 		HEAL,
 		OBJECT,
 		DETECTION_ZONE,
+		KNIFE,
 
 		MAX
 	};

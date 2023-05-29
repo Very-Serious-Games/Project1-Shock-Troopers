@@ -170,6 +170,9 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::OBJECT: // pink
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 				break;
+			case Collider::Type::KNIFE: // brown
+				App->render->DrawQuad(colliders[i]->rect, 165, 42, 42, alpha);
+				break;
 
 			default:
 				break;

@@ -200,12 +200,12 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeHitRightAnim.PushBack({});
 	knifeHitRightAnim.PushBack({});
 
-	knifeHitLeftAnim.PushBack({});
-	knifeHitLeftAnim.PushBack({});
-	knifeHitLeftAnim.PushBack({});
-	knifeHitLeftAnim.PushBack({});
-	knifeHitLeftAnim.PushBack({});
-	knifeHitLeftAnim.PushBack({});
+	knifeHitLeftAnim.PushBack({385, 412, 50, 53}); //check
+	knifeHitLeftAnim.PushBack({431, 412, 50, 53});
+	knifeHitLeftAnim.PushBack({482, 412, 50, 53});
+	knifeHitLeftAnim.PushBack({532, 412, 50, 53});
+	knifeHitLeftAnim.PushBack({582, 412, 50, 53});
+	knifeHitLeftAnim.PushBack({632, 412, 50, 53});
 
 	//falling soldiers
 	fallRightAnim.PushBack({ 50, 33, 62, 67 });

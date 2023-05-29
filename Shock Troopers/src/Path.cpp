@@ -30,9 +30,8 @@ void Path::Update()
 	relativePosition += steps[currentStep].speed;
 }
 
-iPoint Path::GetRelativePosition() const
-{
-	return iPoint((int)relativePosition.x, (int)relativePosition.y);
+fPoint Path::GetRelativePosition() const {
+	return fPoint((int)relativePosition.x, (int)relativePosition.y);
 }
 
 Animation* Path::GetCurrentAnimation()

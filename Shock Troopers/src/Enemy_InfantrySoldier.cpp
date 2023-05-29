@@ -364,7 +364,7 @@ void Enemy_InfantrySoldier::Update() {
 	StateMachine();
 
 	path.Update();
-	position = spawnPos + path.GetRelativePosition();
+	position = spawnPos + relativePosition;
 	currentAnim = path.GetCurrentAnimation();
 
 	// Call to the base class. It must be called at the end
@@ -374,11 +374,11 @@ void Enemy_InfantrySoldier::Update() {
 
 int Enemy_InfantrySoldier::GetPlayerDirection() {
 	// Get the player position
-	iPoint playerPos = App->player->position;
+	fPoint playerPos = App->player->position;
 
 	// Calculate the direction vector from enemy position to player position
-	iPoint enemyPos = position;
-	iPoint direction = playerPos - enemyPos;
+	fPoint enemyPos = position;
+	fPoint direction = playerPos - enemyPos;
 
 	// Determine the player direction based on the direction vector
 	int playerDirection = 0;
@@ -514,6 +514,12 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 			spawnAnimation(GetPlayerDirection());
 
+			if (true /*condition to idle*/) {
+				state = Enemy_State::IDLE;
+			}
+
+			LOG("SPAWN STATE");
+
 			break;
 
 		case Enemy_State::IDLE:
@@ -524,6 +530,8 @@ void Enemy_InfantrySoldier::StateMachine() {
 				state = Enemy_State::MOVE;
 			}
 
+			LOG("IDLE STATE");
+
 			break;
 
 		case Enemy_State::ATTACK:
@@ -531,6 +539,8 @@ void Enemy_InfantrySoldier::StateMachine() {
 			attackAnimation();
 
 			Attack();
+
+			LOG("ATTACK STATE");
 
 			break;
 
@@ -545,6 +555,8 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 			deathAnimDelay--;
 
+			LOG("DEATH STATE");
+
 			break;
 
 		case Enemy_State::MOVE:
@@ -556,6 +568,12 @@ void Enemy_InfantrySoldier::StateMachine() {
 			if (PlayerIsMele()) {
 				state = Enemy_State::ATTACK;
 			}
+
+			if (!PlayerIsNear()) {
+				state = Enemy_State::IDLE;
+			}
+
+			LOG("MOVE STATE");
 
 			break;
 
@@ -608,11 +626,11 @@ void Enemy_InfantrySoldier::move() {
 
 	// TODO add movement traking player position and moving towards him
 
-	// Get the direction vector from enemy position to player position
-	iPoint playerPos = App->player->position;
-	iPoint enemyPos = position;
+	//iPoint direction = playerPos - enemyPos;
+	fPoint direction;
 
-	iPoint direction = playerPos - enemyPos;
+	direction.x = App->player->position.x - relativePosition.x;
+	direction.y = App->player->position.y - relativePosition.y;
 
 	// Normalize the direction vector
 	float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
@@ -622,8 +640,17 @@ void Enemy_InfantrySoldier::move() {
 	}
 
 	// Update the enemy's position based on the direction and movement speed
-	float speed = 2.0f; // Adjust the movement speed as needed
-	position.x += static_cast<int>(direction.x * speed);
-	position.y += static_cast<int>(direction.y * speed);
+	float speed = 0.5f; // Adjust the movement speed as needed
+	relativePosition.x += (float)direction.x * speed;
+	relativePosition.y += (float)direction.y * speed;
+
+	
+	LOG("Player position: %f, %f", App->player->position.x, App->player->position.y);
+	LOG("Enemy position: %d, %d", relativePosition.x, relativePosition.y);
+	LOG("Enemy direction: %f, %f", direction.x, direction.y);
+	LOG("Enemy speed: %f", speed);
+	LOG("Enemy lenght: %f", length);
+	LOG("Enemy result: %f, %f", (float)direction.x * speed, (float)direction.y * speed);
+	
 	
 }

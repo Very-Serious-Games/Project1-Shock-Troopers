@@ -83,7 +83,7 @@ public:
 
 public:
 	// Position of the player in the map
-	iPoint position;
+	fPoint position;
 
 	// Player current state
 	PlayerState currentState;

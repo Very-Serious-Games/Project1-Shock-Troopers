@@ -75,7 +75,12 @@ public:
 	Enemy_State state = Enemy_State::SPAWN;
 
 	// The current position in the world
-	iPoint position;
+	fPoint position;
+
+	// The position relative to the start of the path
+	fPoint relativePosition = fPoint(0.0f, 0.0f);
+
+
 
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;
@@ -105,7 +110,7 @@ protected:
 	Collider* collider = nullptr;
 
 	// Original spawn position. Stored for movement calculations
-	iPoint spawnPos;
+	fPoint spawnPos;
 
 	// Trigger area
 	Collider* triggerArea = nullptr;

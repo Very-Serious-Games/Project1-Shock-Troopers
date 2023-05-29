@@ -19,15 +19,17 @@ Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
     deathAnim.PushBack({ 448, 0, 64, 54 });
     deathAnim.PushBack({ 512, 0, 64, 54 });
 
-    deathAnim.speed = 0.05f;
+    deathAnim.speed = 0.2f;
+    
 
     //path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
     //path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
-    path.PushBack({ 0.0f, 0.0f }, 50, &deathAnim);
-
+    path.PushBack({ 0.0f, 0.0f }, 150, &deathAnim);
 
     // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 0, 0, 47, 49 }, Collider::Type::ENEMY, (Module*)App->enemies);
+    collider = App->collisions->AddCollider({ 0, 0, 47, 49 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    
+    health = 1;
 }
 
 void Enemy_Crate::Update() {
@@ -87,4 +89,14 @@ void Enemy_Crate::StateMachine() {
         LOG("ERROR STATE");
         break;
     }
+}
+
+void Enemy_Crate::OnCollision(Collider* collider) {
+    if (collider->type == Collider::Type::PLAYER_SHOT) {
+		health--;
+        if (health == 0) {
+            App->audio->PlayFx(destroyedFx);
+            SetToDelete();
+		}
+	}
 }

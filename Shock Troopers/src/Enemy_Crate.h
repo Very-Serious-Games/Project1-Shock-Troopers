@@ -21,6 +21,8 @@ public:
 
 	void StateMachine() override;
 
+	void OnCollision(Collider* collider) override;
+
 private:
 
 	Path path;

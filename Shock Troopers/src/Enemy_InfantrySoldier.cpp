@@ -361,12 +361,34 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
-	path.PushBack({ 0.0f, 0.0f }, 1000, &fallLeftAnim);
-	path.PushBack({ 0.0f, 0.0f }, 1000, &fallRightAnim);
+	
+	path.PushBack({ 0.0f, 0.0f }, 200, &spawnAnim);
+	
 
-	// AAA
+	// Spawn fall animation
 	fallRightAnim.speed = 0.1f;
 	fallLeftAnim.speed = 0.1f;
+
+	// Movement gun animation
+	gunUpAnim.speed = 0.1f;
+	gunDownAnim.speed = 0.1f;
+	gunLeftAnim.speed = 0.1f;
+	gunRightAnim.speed = 0.1f;
+	gunUpRightAnim.speed = 0.1f;
+	gunUpLeftAnim.speed = 0.1f;
+	gunDownRightAnim.speed = 0.1f;
+	gunDownLeftAnim.speed = 0.1f;
+
+	// Knife speed
+	knifeUpAnim.speed = 0.1f;
+	knifeDownAnim.speed = 0.1f;
+	knifeLeftAnim.speed = 0.1f;
+	knifeRightAnim.speed = 0.1f;
+	knifeUpRightAnim.speed = 0.05f;
+	knifeUpLeftAnim.speed = 0.1f;
+	knifeDownRightAnim.speed = 0.1f;
+	knifeDownLeftAnim.speed = 0.1f;
+
 
 }
 
@@ -376,7 +398,7 @@ void Enemy_InfantrySoldier::Update() {
 
 	path.Update();
 	position = spawnPos + relativePosition;
-	currentAnim = path.GetCurrentAnimation();
+	//currentAnim = &upBossSoldierAnim;
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
@@ -456,28 +478,28 @@ void Enemy_InfantrySoldier::deathAnimation() {
 void Enemy_InfantrySoldier::idleAnimation(int direction) {
 	switch (direction) {
 		case 1: //UR
-			currentAnim = &idleUpRightAnim;
+			currentAnim = &knifeIdleUpAnim;
 			break;
 		case 2: //UL
-			currentAnim = &idleUpLeftAnim;
+			currentAnim = &knifeIdleUpLeftAnim;
 			break;
 		case 3: //DR
-			currentAnim = &idleDownRightAnim;
+			currentAnim = &knifeIdleDownRightAnim;
 			break;
 		case 4: //DL
-			currentAnim = &idleDownLeftAnim;
+			currentAnim = &knifeIdleDownLeftAnim;
 			break;
 		case 5: //R
-			currentAnim = &idleRightAnim;
+			currentAnim = &knifeIdleRightAnim;
 			break;
 		case 6: //L
-			currentAnim = &idleLeftAnim;
+			currentAnim = &knifeIdleLeftAnim;
 			break;
 		case 7: //D
-			currentAnim = &idleDownAnim;
+			currentAnim = &knifeIdleDownAnim;
 			break;
 		case 8: //U
-			currentAnim = &idleUpAnim;
+			currentAnim = &knifeIdleUpAnim;
 			break;
 		}
 
@@ -486,10 +508,10 @@ void Enemy_InfantrySoldier::idleAnimation(int direction) {
 void Enemy_InfantrySoldier::spawnAnimation(int direction) {
 	switch (direction) {
 	case 1: //L
-		currentAnim = &spawnAnimLeft;
+		currentAnim = &fallLeftAnim;
 		break;
 	case 2: //R
-		currentAnim = &spawnAnimRight;
+		currentAnim = &fallRightAnim;
 		break;
 	}
 }
@@ -497,34 +519,101 @@ void Enemy_InfantrySoldier::spawnAnimation(int direction) {
 void Enemy_InfantrySoldier::moveAnimation(int direction) {
 	switch (direction) {
 		case 1: //UR
-			currentAnim = &upRightAnim;
+			currentAnim = &gunUpAnim;
 			break;
 		case 2: //UL
-			currentAnim = &upLeftAnim;
+			currentAnim = &gunUpLeftAnim;
 			break;
 		case 3: //DR
-			currentAnim = &downRightAnim;
+			currentAnim = &gunDownRightAnim;
 			break;
 		case 4: //DL
-			currentAnim = &downLeftAnim;
+			currentAnim = &gunDownLeftAnim;
 			break;
 		case 5: //R
-			currentAnim = &rightAnim;
+			currentAnim = &gunRightAnim;
 			break;
 		case 6: //L
-			currentAnim = &leftAnim;
+			currentAnim = &gunLeftAnim;
 			break;
 		case 7: //D
-			currentAnim = &downAnim;
+			currentAnim = &gunDownAnim;
 			break;
 		case 8: //U
-			currentAnim = &upAnim;
+			currentAnim = &gunUpAnim;
 			break;
 	}
 }
 
-void Enemy_InfantrySoldier::attackAnimation() {
-	currentAnim = &attackAnim;
+void Enemy_InfantrySoldier::attackAnimation(int direction) {
+	switch (direction) {
+	case 1: //UR
+		currentAnim = &gunIdleUpAnim;
+		break;
+	case 2: //UL
+		currentAnim = &gunIdleDownLeftAnim;
+		break;
+	case 3: //DR
+		currentAnim = &gunIdleDownRightAnim;
+		break;
+	case 4: //DL
+		currentAnim = &gunIdleDownLeftAnim;
+		break;
+	case 5: //R
+		currentAnim = &gunIdleRightAnim;
+		break;
+	case 6: //L
+		currentAnim = &gunIdleLeftAnim;
+		break;
+	case 7: //D
+		// rand number between 1 and 2
+
+		// TODO animacion random entre las dos variantes
+
+		/*
+		if (rand() % 2 == 0) {
+			currentAnim = &gunIdleDownAnim;
+		} else {
+			currentAnim = &gunIdle2DownAnim;
+		}
+		*/
+		currentAnim = &gunIdle2DownAnim;
+		break;
+	case 8: //U
+		currentAnim = &gunIdleUpAnim;
+		break;
+	}
+
+	// Knife running animation
+
+	/*
+	switch (direction) {
+	case 1: //UR
+		currentAnim = &knifeUpRightAnim;
+		break;
+	case 2: //UL
+		currentAnim = &knifeUpLeftAnim;
+		break;
+	case 3: //DR
+		currentAnim = &knifeDownRightAnim;
+		break;
+	case 4: //DL
+		currentAnim = &knifeDownLeftAnim;
+		break;
+	case 5: //R
+		currentAnim = &knifeRightAnim;
+		break;
+	case 6: //L
+		currentAnim = &knifeLeftAnim;
+		break;
+	case 7: //D
+		currentAnim = &knifeDownAnim;
+		break;
+	case 8: //U
+		currentAnim = &knifeUpAnim;
+		break;
+	}
+	*/
 }
 
 void Enemy_InfantrySoldier::StateMachine() {
@@ -532,8 +621,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 		case Enemy_State::SPAWN:
 
 			spawnAnimation(GetPlayerDirection());
-
-			if (true /*condition to idle*/) {
+			if (true) {
 				state = Enemy_State::IDLE;
 			}
 
@@ -559,7 +647,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 		case Enemy_State::ATTACK:
 
-			attackAnimation();
+			attackAnimation(GetPlayerDirection());
 
 			Attack();
 
@@ -608,34 +696,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 }
 
-// 3 diferent states for attack with diferent percentages of chance to happen
-// 1. normal attack
-// 2. mele attack
-// 3. no attack
 void Enemy_InfantrySoldier::Attack() {
-	// get random number between with 10%, 30, 60% chance to happen
-	/*
-	int attackType = rand() % 10; // generate a random number between 0 and 9
-	if (attackType < 6) { // 60% chance to do a normal attack
-		
-		Shoot();
-
-		LOG("Enemy: Infantry Soldier normal attack");
-
-	} else if (attackType < 4) { // 30% chance to do a mele attack
-
-		Knife();
-
-		LOG("Enemy: Infantry Soldier mele attack");
-
-	} else { // 10% chance to not attack
-
-		LOG("Enemy: Infantry Soldier no attack");
-
-		// do nothing
-	}
-	*/
-
 	if (PlayerIsMele()) {
 		LOG("Enemy: mele");
 		delayKnife--;
@@ -643,8 +704,6 @@ void Enemy_InfantrySoldier::Attack() {
 			Knife();
 			delayKnife = 500;
 		}
-		
-		
 	} else {
 		LOG("Enemy: shot");
 		Shoot();
@@ -675,9 +734,6 @@ void Enemy_InfantrySoldier::Shoot() {
 		App->audio->PlayFx(/*sound effect*/NULL);
 		delayShoot = 700;
 	}
-
-
-	// TODO add normal attack with bullets shooting towards player position
 
 }
 

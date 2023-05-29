@@ -52,7 +52,7 @@ public:
 
 	virtual void moveAnimation();
 
-	virtual void attackAnimation();
+	virtual void attackAnimation(int direction);
 
 	// Called from ModuleEnemies' Update
 	virtual void Draw();

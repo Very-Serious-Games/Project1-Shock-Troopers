@@ -64,7 +64,7 @@ void Enemy::moveAnimation()
 {
 }
 
-void Enemy::attackAnimation()
+void Enemy::attackAnimation(int direction)
 {
 }
 

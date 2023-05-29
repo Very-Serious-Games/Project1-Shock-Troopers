@@ -23,7 +23,7 @@ public:
 
 	void moveAnimation(int direction);
 
-	void attackAnimation() override;
+	void attackAnimation(int directio) override;
 
 	void StateMachine() override;
 
@@ -84,7 +84,10 @@ private:
 	Animation gunDownRightAnim;
 
 	Animation gunIdleUpAnim;
+	Animation gunIdle2UpAnim;
 	Animation gunIdleDownAnim;
+	Animation gunIdle2DownAnim;
+	Animation gunIdlePointDownAnim;
 	Animation gunIdleLeftAnim;
 	Animation gunIdleRightAnim;
 	Animation gunIdleUpLeftAnim;
@@ -151,6 +154,10 @@ private:
 	Animation bazookaUpLeftAnim;
 	Animation bazookaHalfLeftAnim;
 	Animation bazookaHalfRightAnim;
+	Animation bazookaDownLeftAnim;
+	Animation bazookaDownRightAnim;
+	Animation bazookaDownHalfLeftAnim;
+	Animation bazookaDownHalfRightAnim;
 
 	//Throwing throwing grenade soldier
 	Animation grenadeSoldierRightAnim;

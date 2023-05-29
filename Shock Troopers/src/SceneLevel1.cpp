@@ -11,9 +11,9 @@ using namespace std;
 #include "ModuleCollisions.h"
 #include "ModulePickUp.h"
 #include "ModuleEnemies.h"
-#include "ModuleUI.h"
 #include "ModulePlayer.h"
-
+#include "ModuleUI.h"
+ 
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
 {}
 

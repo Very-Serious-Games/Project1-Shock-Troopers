@@ -1,10 +1,12 @@
-#include "ModuleUi.h"
+
+#include <stdio.h>
 #include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePickUp.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
+#include "ModuleUI.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
@@ -12,8 +14,6 @@
 #include "ModuleFonts.h"
 #include <iostream>
 using namespace std;
-
-#include <stdio.h>
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
@@ -81,22 +81,23 @@ Update_Status ModuleUI::Update()
 {
 
 	updateHp();
-	
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModuleUI::PostUpdate()
 {
 	int x, y;
+
 	//Obtenemos la posicion de la camara
 	x = App->render->camera.x + 10;
 	y = App->render->camera.y + 10;
-	
-	
+
+
 
 	//Mostramos por pantalla la UI
 	App->render->Blit(textureHp, x + 20, y + 50, NULL);
-	App->render->Blit(textureP1, x + 20, y + 20, &rectA);
+	App->render->Blit(textureP1, x + 20, y + 20, NULL);
 	App->render->Blit(textureWeapon, x + 20, y + 200, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;

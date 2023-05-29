@@ -55,6 +55,9 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 
 	matrix[Collider::Type::HEAL][Collider::Type::PLAYER] = true;
+
+	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_TRIGGER] = true;
+	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_TRIGGER] = true;
 }
 
 // Destructor
@@ -92,10 +95,9 @@ Update_Status ModuleCollisions::PreUpdate()
 			// skip empty colliders
 			if(colliders[k] == nullptr)
 				continue;
-
-
 			c2 = colliders[k];
 			if(matrix[c1->type][c2->type] && c1->Intersects(c2->rect)) {
+				
 				for (uint i = 0; i < MAX_LISTENERS; ++i) {
 					if (c1->listeners[i] != nullptr) {
 						c1->listeners[i]->OnCollision(c1, c2);
@@ -166,6 +168,12 @@ void ModuleCollisions::DebugDraw()
 				break;
 			case Collider::Type::LASER: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+				break;
+			case Collider::Type::STOP_CAM_ZONE: // orange
+				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
+				break;
+			case Collider::Type::STOP_CAM_TRIGGER: // orange
+				App->render->DrawQuad(colliders[i]->rect, 100, 100, 100, alpha);
 				break;
 
 			default:

@@ -20,6 +20,8 @@ struct Collider
 		ENEMY_SHOT,
 		HEAL,
 		DETECTION_ZONE,
+		STOP_CAM_ZONE,
+		STOP_CAM_TRIGGER,
 
 		MAX
 	};

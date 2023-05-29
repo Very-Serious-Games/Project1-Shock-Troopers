@@ -385,49 +385,57 @@ int Enemy_InfantrySoldier::GetPlayerDirection() {
 
 	if (direction.y < 0) {
 		// Player is above the enemy
-		if (direction.x < 0) {
-			// Player is above and to the left of the enemy
-			playerDirection = 2; // Up-Left
-		}
-		else if (direction.x > 0) {
-			// Player is above and to the right of the enemy
-			playerDirection = 1; // Up-Right
-		}
-		else {
-			// Player is directly above the enemy
+		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
+
 			playerDirection = 8; // Up
+
+		} else if (direction.x < 0) {
+
+			playerDirection = 2; // Up-Left
+
+		} else {
+
+			playerDirection = 1; // Up-Right
+
 		}
-	}
-	else if (direction.y > 0) {
+
+	} else if (direction.y > 0) {
+
 		// Player is below the enemy
-		if (direction.x < 0) {
-			// Player is below and to the left of the enemy
+		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
+
+			playerDirection = 7; // Down
+
+		} else if (direction.x < 0) {
+
 			playerDirection = 4; // Down-Left
-		}
-		else if (direction.x > 0) {
-			// Player is below and to the right of the enemy
+
+		} else {
+
 			playerDirection = 3; // Down-Right
 		}
-		else {
-			// Player is directly below the enemy
-			playerDirection = 7; // Down
-		}
-	}
-	else {
+
+	} else {
 		// Player is at the same height as the enemy
 		if (direction.x < 0) {
-			// Player is to the left of the enemy
+
 			playerDirection = 6; // Left
-		}
-		else if (direction.x > 0) {
-			// Player is to the right of the enemy
+
+		} else if (direction.x > 0) {
+
 			playerDirection = 5; // Right
+
+		} else {
+
+			// Player is at the exact position as the enemy (unlikely scenario)
+			playerDirection = 0; // No direction
+
 		}
+
 	}
 
 	// Return the player direction
 	return playerDirection;
-
 }
 
 void Enemy_InfantrySoldier::deathAnimation() {
@@ -527,7 +535,8 @@ void Enemy_InfantrySoldier::StateMachine() {
 			idleAnimation(GetPlayerDirection());
 
 			if (PlayerIsNear()) {
-				state = Enemy_State::MOVE;
+				//state = Enemy_State::MOVE;
+				state = Enemy_State::ATTACK;
 			}
 
 			LOG("IDLE STATE");
@@ -586,6 +595,8 @@ void Enemy_InfantrySoldier::StateMachine() {
 // 2. mele attack
 // 3. no attack
 void Enemy_InfantrySoldier::Attack() {
+	Shoot();
+	/*
 	// get random number between with 10%, 30, 60% chance to happen
 	int attackType = rand() % 10; // generate a random number between 0 and 9
 	if (attackType < 6) { // 60% chance to do a melee attack
@@ -606,11 +617,37 @@ void Enemy_InfantrySoldier::Attack() {
 
 		// do nothing
 	}
+	*/
 	
 }
 
 void Enemy_InfantrySoldier::Shoot() {
+	// Get the player position
+	fPoint playerPos = App->player->position;
+
+	// Calculate the direction vector from enemy position to player position
+	fPoint enemyPos = position;
+	fPoint direction = playerPos - enemyPos;
+
+	// Normalize the direction vector
+	float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+	if (length != 0) {
+		direction.x /= length;
+		direction.y /= length;
+	}
+
+	delay--;
+	if (delay == 0) {
+		// TODO modify shot to be an enemy shot
+		Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+		shot->collider->AddListener(NULL);
+		App->audio->PlayFx(/*sound effect*/NULL);
+		delay = 15;
+	}
+
+
 	// TODO add normal attack with bullets shooting towards player position
+
 }
 
 void Enemy_InfantrySoldier::Knife() {
@@ -618,17 +655,11 @@ void Enemy_InfantrySoldier::Knife() {
 }
 
 void Enemy_InfantrySoldier::move() {
-	/*
-	
-	probablemente esto no funcione, pero es una idea de como hacerlo
-	
-	*/
 
-	// TODO add movement traking player position and moving towards him
-
-	//iPoint direction = playerPos - enemyPos;
+	// Create a direction vector
 	fPoint direction;
 
+	// Calculate the direction between the enemy and the player
 	direction.x = App->player->position.x - position.x;
 	direction.y = App->player->position.y - position.y;
 

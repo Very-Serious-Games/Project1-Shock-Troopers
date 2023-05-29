@@ -629,8 +629,8 @@ void Enemy_InfantrySoldier::move() {
 	//iPoint direction = playerPos - enemyPos;
 	fPoint direction;
 
-	direction.x = App->player->position.x - relativePosition.x;
-	direction.y = App->player->position.y - relativePosition.y;
+	direction.x = App->player->position.x - position.x;
+	direction.y = App->player->position.y - position.y;
 
 	// Normalize the direction vector
 	float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
@@ -640,7 +640,7 @@ void Enemy_InfantrySoldier::move() {
 	}
 
 	// Update the enemy's position based on the direction and movement speed
-	float speed = 0.5f; // Adjust the movement speed as needed
+	float speed = 0.1f; // Adjust the movement speed as needed
 	relativePosition.x += (float)direction.x * speed;
 	relativePosition.y += (float)direction.y * speed;
 

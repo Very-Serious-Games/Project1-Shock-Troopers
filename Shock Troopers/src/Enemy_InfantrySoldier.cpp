@@ -183,14 +183,14 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 
 	//knife Idle
 	//no need to speed these animations bc they only have one frame
-	knifeIdleUpAnim.PushBack({});
-	knifeIdleDownAnim.PushBack({});
-	knifeIdleLeftAnim.PushBack({});
-	knifeIdleRightAnim.PushBack({});
-	knifeIdleUpLeftAnim.PushBack({});
-	knifeIdleUpRightAnim.PushBack({});
-	knifeIdleDownLeftAnim.PushBack({});
-	knifeIdleDownRightAnim.PushBack({});
+	knifeIdleUpAnim.PushBack({51, 491, 35, 50});
+	knifeIdleDownAnim.PushBack({254, 494, 38, 47});
+	knifeIdleLeftAnim.PushBack({90, 488, 34, 53});
+	knifeIdleRightAnim.PushBack({130, 488, 34, 53});
+	knifeIdleUpLeftAnim.PushBack({}); // none atm
+	knifeIdleUpRightAnim.PushBack({});  //none atm
+	knifeIdleDownLeftAnim.PushBack({167, 499, 41, 42});
+	knifeIdleDownRightAnim.PushBack({209, 499, 41, 42});
 
 	//knife hit
 	knifeHitRightAnim.PushBack({});
@@ -199,6 +199,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeHitRightAnim.PushBack({});
 	knifeHitRightAnim.PushBack({});
 	knifeHitRightAnim.PushBack({});
+
 	knifeHitLeftAnim.PushBack({});
 	knifeHitLeftAnim.PushBack({});
 	knifeHitLeftAnim.PushBack({});

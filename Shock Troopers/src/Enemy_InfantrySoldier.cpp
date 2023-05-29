@@ -119,8 +119,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunIdleRightAnim.PushBack({ 1063, 231, 43, 47 });
 	gunIdleUpLeftAnim.PushBack({939, 232, 38, 46});
 	gunIdleUpRightAnim.PushBack({978, 232, 38, 46});
-	gunIdleDownLeftAnim.PushBack({}); //none btm
-	gunIdleDownRightAnim.PushBack({}); //none btm
+	gunIdleDownLeftAnim.PushBack({}); //none atm
+	gunIdleDownRightAnim.PushBack({}); //none atm
 	//no need to speed these animations since they only have 1 frame
 	
 	//Gun hit
@@ -148,38 +148,38 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	knifeUpAnim.PushBack({123, 352, 35, 50});
 	knifeUpAnim.PushBack({159, 352, 35, 50});
 
-	knifeDownAnim.PushBack({});
-	knifeDownAnim.PushBack({});
+	knifeDownAnim.PushBack({202, 355, 38, 47});
+	knifeDownAnim.PushBack({241, 355, 38, 47});
 
-	knifeLeftAnim.PushBack({});
-	knifeLeftAnim.PushBack({});
-	knifeLeftAnim.PushBack({});
-	knifeLeftAnim.PushBack({});
+	knifeLeftAnim.PushBack({625, 354, 48, 49}); //check
+	knifeLeftAnim.PushBack({577, 354, 48, 49});
+	knifeLeftAnim.PushBack({529, 354, 48, 49});
+	knifeLeftAnim.PushBack({481, 354, 48, 49});
 
-	knifeRightAnim.PushBack({});
-	knifeRightAnim.PushBack({});
-	knifeRightAnim.PushBack({});
-	knifeRightAnim.PushBack({});
+	knifeRightAnim.PushBack({284, 354, 48, 49}); //check
+	knifeRightAnim.PushBack({332, 354, 48, 49});
+	knifeRightAnim.PushBack({380, 354, 48, 49}); //379?
+	knifeRightAnim.PushBack({428, 354, 48, 49});
 
-	knifeUpLeftAnim.PushBack({});
-	knifeUpLeftAnim.PushBack({});
-	knifeUpLeftAnim.PushBack({});
-	knifeUpLeftAnim.PushBack({});
+	knifeUpLeftAnim.PushBack({858, 352, 43, 50}); //check
+	knifeUpLeftAnim.PushBack({901, 352, 43, 50});
+	knifeUpLeftAnim.PushBack({941, 352, 43, 50});
+	knifeUpLeftAnim.PushBack({985, 352, 43, 50});
 
-	knifeUpRightAnim.PushBack({});
-	knifeUpRightAnim.PushBack({});
-	knifeUpRightAnim.PushBack({});
-	knifeUpRightAnim.PushBack({});
+	knifeUpRightAnim.PushBack({678, 352, 43, 50});
+	knifeUpRightAnim.PushBack({722, 352, 43, 50});
+	knifeUpRightAnim.PushBack({766, 352, 43, 50});
+	knifeUpRightAnim.PushBack({810, 352, 43, 50});
 
-	knifeDownLeftAnim.PushBack({});
-	knifeDownLeftAnim.PushBack({});
-	knifeDownLeftAnim.PushBack({});
-	knifeDownLeftAnim.PushBack({});
+	knifeDownLeftAnim.PushBack({51, 418, 39, 47});
+	knifeDownLeftAnim.PushBack({91, 418, 39, 47});
+	knifeDownLeftAnim.PushBack({131, 418, 39, 47});
+	knifeDownLeftAnim.PushBack({171, 418, 39, 47});
 
-	knifeDownRightAnim.PushBack({});
-	knifeDownRightAnim.PushBack({});
-	knifeDownRightAnim.PushBack({});
-	knifeDownRightAnim.PushBack({});
+	knifeDownRightAnim.PushBack({219, 418, 39, 47});
+	knifeDownRightAnim.PushBack({259, 418, 39, 47});
+	knifeDownRightAnim.PushBack({299, 418, 39, 47});
+	knifeDownRightAnim.PushBack({339, 418, 39, 47});
 
 	//knife Idle
 	//no need to speed these animations bc they only have one frame
@@ -242,107 +242,120 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallRightAnim.PushBack({ 995, 103, 62, 67 });
 
 	//Hiding half body sodier
-	hidingIdleRightAnim.PushBack({});
-	hidingIdleLeftAnim.PushBack({});
-	hidingDownAnim.PushBack({});
-	hidingHalfLeftAnim.PushBack({});
-	hidingHalfRightAnim.PushBack({});
-	hidingLeftAnim.PushBack({});
-	hidingRightAnim.PushBack({});
+	hidingIdleRightAnim.PushBack({381, 519, 25, 22});
+	hidingIdleLeftAnim.PushBack({355, 519, 25, 22});
+	hidingDownAnim.PushBack({477, 514, 25, 27});
+	hidingHalfLeftAnim.PushBack({444, 513, 26, 28});
+	hidingHalfRightAnim.PushBack({543, 514, 23, 27});
+	hidingLeftAnim.PushBack({411, 516, 32, 25});
+	hidingRightAnim.PushBack({510, 516, 26, 25});
 
 	//Hands in the head soldier
-	headHandsLeftAnim.PushBack({});
-	headHandsRightAnim.PushBack({});
+	headHandsLeftAnim.PushBack({294, 494, 27, 47});
+	headHandsRightAnim.PushBack({321, 494, 25, 47});
 
 	//General soldier with binoculars
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
-	generalAnim.PushBack({});
+	generalAnim.PushBack({595, 478, 41, 63});
+	generalAnim.PushBack({637, 478, 41, 63});
+	generalAnim.PushBack({679, 478, 41, 63});
+	generalAnim.PushBack({721, 478, 41, 63});
+	generalAnim.PushBack({763, 478, 41, 63});
+	generalAnim.PushBack({805, 478, 41, 63});
+	generalAnim.PushBack({847, 478, 41, 63});
+	generalAnim.PushBack({889, 478, 41, 63});
+	generalAnim.PushBack({931, 478, 41, 63});
+	generalAnim.PushBack({973, 478, 41, 63});
+	generalAnim.PushBack({1015, 478, 41, 63});
+	generalAnim.PushBack({1057, 478, 41, 63});
+	generalAnim.PushBack({1099, 478, 41, 63});
 
 	//Flying soldiers
-	flyingSoldiersLeftAnim.PushBack({});
-	flyingSoldiersDownLeftAnim.PushBack({});
-	flyingSoldiersRightAnim.PushBack({});
-	flyingSoldiersDownRightAnim.PushBack({});
+	flyingSoldiersLeftAnim.PushBack({156, 551, 52, 53});
+	flyingSoldiersDownLeftAnim.PushBack({ 209, 554, 46, 50 });
+	flyingSoldiersRightAnim.PushBack({103, 551, 52, 53});
+	flyingSoldiersDownRightAnim.PushBack({ 51, 554, 46, 50 });
 
 	//Bazooka soldiers
-	bazookaDownAnim.PushBack({});
-	bazookaRightAnim.PushBack({});
-	bazookaLeftAnim.PushBack({});
-	bazookaUpLeftAnim.PushBack({});
-	bazookaUpRightAnim.PushBack({});
-	bazookaHalfRightAnim.PushBack({});
-	bazookaHalfLeftAnim.PushBack({});
+	bazookaDownAnim.PushBack({584, 551, 28, 53});
+	bazookaDownLeftAnim.PushBack({526, 551, 28, 53}); //looking at left side
+	bazookaDownHalfLeftAnim.PushBack({555, 551, 28, 53});
+	bazookaDownRightAnim.PushBack({641, 551, 28, 53}); //looking at right side
+	bazookaDownHalfRightAnim.PushBack({613, 551, 28, 53});
+	bazookaRightAnim.PushBack({474, 553, 41, 51});
+	bazookaLeftAnim.PushBack({265, 553, 41, 51});
+	bazookaUpLeftAnim.PushBack({349, 548, 29, 56});
+	bazookaUpRightAnim.PushBack({391, 548, 29, 56});
+	bazookaHalfRightAnim.PushBack({433, 551, 35, 53});
+	bazookaHalfLeftAnim.PushBack({307, 551, 35, 53});
 
 	//Throwing grenade soldiers
-	grenadeSoldierLeftAnim.PushBack({});
-	grenadeSoldierLeftAnim.PushBack({});
-	grenadeSoldierLeftAnim.PushBack({});
-	grenadeSoldierLeftAnim.PushBack({});
-	grenadeSoldierLeftAnim.PushBack({});
-	grenadeSoldierDownLeftAnim.PushBack({});
-	grenadeSoldierDownLeftAnim.PushBack({});
-	grenadeSoldierDownLeftAnim.PushBack({});
-	grenadeSoldierDownLeftAnim.PushBack({});
-	grenadeSoldierDownLeftAnim.PushBack({});
-	grenadeSoldierUpLeftAnim.PushBack({});
-	grenadeSoldierUpLeftAnim.PushBack({});
-	grenadeSoldierUpLeftAnim.PushBack({});
-	grenadeSoldierUpLeftAnim.PushBack({});
-	grenadeSoldierUpLeftAnim.PushBack({});
-	grenadeSoldierRightAnim.PushBack({});
-	grenadeSoldierRightAnim.PushBack({});
-	grenadeSoldierRightAnim.PushBack({});
-	grenadeSoldierRightAnim.PushBack({});
-	grenadeSoldierRightAnim.PushBack({});
-	grenadeSoldierDownRightAnim.PushBack({});
-	grenadeSoldierDownRightAnim.PushBack({});
-	grenadeSoldierDownRightAnim.PushBack({});
-	grenadeSoldierDownRightAnim.PushBack({});
-	grenadeSoldierUpRightAnim.PushBack({});
-	grenadeSoldierUpRightAnim.PushBack({});
-	grenadeSoldierUpRightAnim.PushBack({});
-	grenadeSoldierUpRightAnim.PushBack({});
-	grenadeSoldierUpRightAnim.PushBack({});
+	grenadeSoldierLeftAnim.PushBack({410, 615, 46, 52});
+	grenadeSoldierLeftAnim.PushBack({457, 615, 46, 52});
+	grenadeSoldierLeftAnim.PushBack({504, 615, 46, 52});
+	grenadeSoldierLeftAnim.PushBack({551, 615, 46, 52});
+	grenadeSoldierLeftAnim.PushBack({598, 615, 46, 52});
+
+	grenadeSoldierDownLeftAnim.PushBack({50, 615, 42, 52});
+	grenadeSoldierDownLeftAnim.PushBack({92, 615, 42, 52});
+	grenadeSoldierDownLeftAnim.PushBack({135, 615, 42, 52});
+	grenadeSoldierDownLeftAnim.PushBack({176, 615, 42, 52});
+
+	grenadeSoldierUpLeftAnim.PushBack({918, 557, 45, 47});
+	grenadeSoldierUpLeftAnim.PushBack({964, 557, 45, 47});
+	grenadeSoldierUpLeftAnim.PushBack({1010, 557, 45, 47});
+	grenadeSoldierUpLeftAnim.PushBack({1056, 557, 45, 47});
+	grenadeSoldierUpLeftAnim.PushBack({1102, 557, 45, 47});
+
+	grenadeSoldierRightAnim.PushBack({656, 615, 46, 52});
+	grenadeSoldierRightAnim.PushBack({703, 615, 46, 52});
+	grenadeSoldierRightAnim.PushBack({750, 615, 46, 52});
+	grenadeSoldierRightAnim.PushBack({797, 615, 46, 52});
+	grenadeSoldierRightAnim.PushBack({844, 615, 46, 52});
+
+	grenadeSoldierDownRightAnim.PushBack({232, 615, 42, 52});
+	grenadeSoldierDownRightAnim.PushBack({275, 615, 42, 52});
+	grenadeSoldierDownRightAnim.PushBack({318, 615, 42, 52});
+	grenadeSoldierDownRightAnim.PushBack({360, 615, 42, 52});
+
+	grenadeSoldierUpRightAnim.PushBack({909, 620, 45, 47});
+	grenadeSoldierUpRightAnim.PushBack({954, 620, 45, 47});
+	grenadeSoldierUpRightAnim.PushBack({999, 620, 45, 47});
+	grenadeSoldierUpRightAnim.PushBack({1047, 620, 45, 47});
+	grenadeSoldierUpRightAnim.PushBack({1093, 620, 45, 47});
 
 	//Final boss soldier
-	headBossSoldierAnim.PushBack({});
-	grenadeBossSoldierAnim.PushBack({});
-	grenadeBossSoldierAnim.PushBack({});
-	grenadeBossSoldierAnim.PushBack({});
-	grenadeBossSoldierAnim.PushBack({});
-	grenadeBossSoldierAnim.PushBack({});
-	grenadeBossSoldierAnim.PushBack({});
-	grenadeBossSoldierRightAnim.PushBack({});
-	grenadeBossSoldierRightAnim.PushBack({});
-	grenadeBossSoldierRightAnim.PushBack({});
-	grenadeBossSoldierRightAnim.PushBack({});
-	grenadeBossSoldierRightAnim.PushBack({});
-	grenadeBossSoldierLeftAnim.PushBack({});
-	grenadeBossSoldierLeftAnim.PushBack({});
-	grenadeBossSoldierLeftAnim.PushBack({});
-	grenadeBossSoldierLeftAnim.PushBack({});
-	grenadeBossSoldierLeftAnim.PushBack({});
-	bossSoldierIdleAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
-	upBossSoldierAnim.PushBack({});
+	headBossSoldierAnim.PushBack({53, 740, 21, 15});
+
+	grenadeBossSoldierAnim.PushBack({81, 713, 38, 42});
+	grenadeBossSoldierAnim.PushBack({120, 713, 38, 42});
+	grenadeBossSoldierAnim.PushBack({159, 713, 38, 42});
+	grenadeBossSoldierAnim.PushBack({198, 713, 38, 42});
+	grenadeBossSoldierAnim.PushBack({237, 713, 38, 42});
+	grenadeBossSoldierAnim.PushBack({276, 713, 38, 42});
+
+	grenadeBossSoldierRightAnim.PushBack({604, 717, 50, 38});
+	grenadeBossSoldierRightAnim.PushBack({655, 717, 50, 38});
+	grenadeBossSoldierRightAnim.PushBack({706, 717, 50, 38});
+	grenadeBossSoldierRightAnim.PushBack({757, 717, 50, 38});
+	grenadeBossSoldierRightAnim.PushBack({808, 717, 50, 38});
+
+	grenadeBossSoldierLeftAnim.PushBack({ 346, 717, 50, 38 });
+	grenadeBossSoldierLeftAnim.PushBack({ 397, 717, 50, 38 });
+	grenadeBossSoldierLeftAnim.PushBack({ 448, 717, 50, 38 });
+	grenadeBossSoldierLeftAnim.PushBack({ 498, 717, 50, 38 });
+	grenadeBossSoldierLeftAnim.PushBack({ 549, 717, 50, 38 });
+
+	bossSoldierIdleAnim.PushBack({868, 704, 28, 51});
+
+	upBossSoldierAnim.PushBack({907, 702, 30, 53});
+	upBossSoldierAnim.PushBack({938, 702, 30, 53});
+	upBossSoldierAnim.PushBack({969, 702, 30, 53});
+	upBossSoldierAnim.PushBack({1000, 702, 30, 53});
+	upBossSoldierAnim.PushBack({1031, 702, 30, 53});
+	upBossSoldierAnim.PushBack({1062, 702, 30, 53});
+	upBossSoldierAnim.PushBack({1093, 702, 30, 53});
+	upBossSoldierAnim.PushBack({1124, 702, 30, 53});
+	upBossSoldierAnim.PushBack({1155, 702, 30, 53});
 
 	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);

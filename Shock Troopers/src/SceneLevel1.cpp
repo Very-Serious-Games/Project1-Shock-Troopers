@@ -39,7 +39,7 @@ bool SceneLevel1::Start()
 	createMargenes();
 
 	// Add enemies
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 128, 1680);
+	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 128, 2900);
 								
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20); // (493 / 2) - (128 / 2) = 183
 	

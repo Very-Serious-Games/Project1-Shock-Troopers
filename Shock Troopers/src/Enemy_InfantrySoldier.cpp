@@ -143,10 +143,10 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunHitLeftAnim.PushBack({777, 289, 47, 50});
 
 	//Knife movement
-	knifeUpAnim.PushBack({});
-	knifeUpAnim.PushBack({});
-	knifeUpAnim.PushBack({});
-	knifeUpAnim.PushBack({});
+	knifeUpAnim.PushBack({51, 352, 35, 50});
+	knifeUpAnim.PushBack({87, 352, 35, 50});
+	knifeUpAnim.PushBack({123, 352, 35, 50});
+	knifeUpAnim.PushBack({159, 352, 35, 50});
 
 	knifeDownAnim.PushBack({});
 	knifeDownAnim.PushBack({});

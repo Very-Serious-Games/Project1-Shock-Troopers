@@ -596,7 +596,6 @@ void Enemy_InfantrySoldier::StateMachine() {
 // 3. no attack
 void Enemy_InfantrySoldier::Attack() {
 	Shoot();
-	/*
 	// get random number between with 10%, 30, 60% chance to happen
 	int attackType = rand() % 10; // generate a random number between 0 and 9
 	if (attackType < 6) { // 60% chance to do a melee attack
@@ -617,7 +616,6 @@ void Enemy_InfantrySoldier::Attack() {
 
 		// do nothing
 	}
-	*/
 	
 }
 
@@ -636,13 +634,13 @@ void Enemy_InfantrySoldier::Shoot() {
 		direction.y /= length;
 	}
 
-	delay--;
-	if (delay == 0) {
+	delayShoot--;
+	if (delayShoot == 0) {
 		// TODO modify shot to be an enemy shot
 		Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
 		shot->collider->AddListener(NULL);
 		App->audio->PlayFx(/*sound effect*/NULL);
-		delay = 15;
+		delayShoot = 700;
 	}
 
 

@@ -1,7 +1,3 @@
----
-layout: default
----
-
 # Project1 Shock Troopers
 
 Shock Troopers is a run-and-gun arcade game developed by Saurus and originally released in 1997. With a top-down perspective, it offers exciting gameplay for up to two players who get to control one of eight skilled mercenaries hired by the government to eliminate a notorious terrorist organization.

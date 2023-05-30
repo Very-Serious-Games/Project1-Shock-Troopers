@@ -53,6 +53,8 @@ public:
 
 	virtual void idleAnimation(int direction);
 
+	virtual void idleAnimation(int direction, int directionBelow);
+
 	virtual void moveAnimation();
 
 	virtual void attackAnimation(int direction);
@@ -75,6 +77,8 @@ public:
 	bool PlayerIsMele();
 
 	virtual int GetPlayerDirection();
+
+	virtual int GetPlayerDirectionBelow();
 
 public:
 	Enemy_State state = Enemy_State::SPAWN;

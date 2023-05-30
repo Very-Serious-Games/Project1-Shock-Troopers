@@ -19,9 +19,9 @@ public:
 
 	void deathAnimation() override;
 
-	void idleAnimation(int direction) override;
+	void idleAnimation(int direction, int directionBelow) override;
 
-	void hitAnimation(int direction);
+	void hitAnimation(int direction, int directionBelow);
 
 	void StateMachine() override;
 
@@ -62,22 +62,20 @@ private:
 	Animation hitTopAnimUpRight;
 
 	Animation midAnimDown;
-	Animation midAnimUp;
 	Animation midAnimLeft;
 	Animation midAnimRight;
 	Animation midAnimDownLeft;
 	Animation midAnimDownRight;
-	Animation midAnimUpLeft;
-	Animation midAnimUpRight;
+	Animation midAnimDownLeftDiagonal;
+	Animation midAnimDownRightDiagonal;
 
 	Animation hitMidAnimDown;
-	Animation hitMidAnimUp;
 	Animation hitMidAnimLeft;
 	Animation hitMidAnimRight;
 	Animation hitMidAnimDownLeft;
 	Animation hitMidAnimDownRight;
-	Animation hitMidAnimUpLeft;
-	Animation hitMidAnimUpRight;
+	Animation hitMidAnimDownLeftDiagonal;
+	Animation hitMidAnimDownRightDiagonal;
 
 	Animation botAnimMoving;
 

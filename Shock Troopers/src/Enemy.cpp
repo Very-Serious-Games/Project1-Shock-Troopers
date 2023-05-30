@@ -110,6 +110,50 @@ int Enemy::GetPlayerDirection() {
 	return playerDirection;
 }
 
+int Enemy::GetPlayerDirectionBelow() {
+    // Get the player position
+    fPoint playerPos = App->player->position;
+
+    // Calculate the direction vector from enemy position to player position
+    fPoint enemyPos = position;
+    fPoint direction = playerPos - enemyPos;
+
+    // Determine the player direction based on the direction vector
+    int playerDirection = 0;
+
+    if (direction.y > 0) {
+        // Player is below the enemy
+        
+        float angle = atan2f(direction.y, direction.x) * 180.0f / M_PI;
+
+        if (angle > -45 && angle <= 45) {
+            playerDirection = 7; // Below (90°)
+        }
+        else if (angle > 45 && angle <= 90) {
+            playerDirection = 4; // Left (0°)
+        }
+        else if (angle > 90 && angle <= 135) {
+            playerDirection = 3; // Right (180°)
+        }
+        else if (angle > 135 && angle <= 165) {
+            playerDirection = 6; // Down-Left-Diagonal (45°)
+        }
+        else if (angle > -165 && angle <= -135) {
+            playerDirection = 5; // Down-Right-Diagonal (135°)
+        }
+        else if (angle > -135 && angle <= -75) {
+            playerDirection = 2; // Down-Left (120°)
+        }
+        else if (angle > -75 && angle <= -15) {
+            playerDirection = 1; // Down-Right (60°)
+        }
+    }
+
+    // Return the player direction
+    return playerDirection;
+
+}
+
 void Enemy::StateMachine()
 {
 }
@@ -135,6 +179,10 @@ void Enemy::idleAnimation()
 }
 
 void Enemy::idleAnimation(int direction)
+{
+}
+
+void Enemy::idleAnimation(int direction, int directionBelow)
 {
 }
 

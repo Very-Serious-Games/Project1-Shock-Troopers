@@ -186,14 +186,14 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	rollAnimDownLeft.PushBack({ 378, 208, 54, 52 });
 	rollAnimDownLeft.PushBack({ 432, 208, 54, 52 });
 
-	rollAnimDownRight.PushBack({ 486, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 540, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 594, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 648, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 702, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 756, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 810, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 864, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 486, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 540, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 594, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 648, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 702, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 756, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 810, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 864, 416, 54, 52 }); // TODO @martagnarta
 
 	rollAnimUpLeft.PushBack({ 0,   156, 54, 52 });
 	rollAnimUpLeft.PushBack({ 54,  156, 54, 52 });

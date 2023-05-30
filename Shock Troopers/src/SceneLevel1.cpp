@@ -48,7 +48,7 @@ bool SceneLevel1::Start()
 
 	//TODO spawnear todos los objetos
 	//Add objects
-	App->enemies->AddEnemy(Enemy_Type::BRIDGE, 76, 2635);
+	App->enemies->AddEnemy(Enemy_Type::BRIDGE, 70, 2635);
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);
 
 

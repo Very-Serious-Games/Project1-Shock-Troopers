@@ -82,6 +82,14 @@ private:
 	Animation hitBotAnimMoving;
 	Animation deathAnim;
 
+	Animation soldierGrenadeRightAnim;
+	Animation soldierGrenadeLeftAnim;
+	Animation soldierGrenadeFrontAnim;
+
+	Animation soldierHideAnim;
+	Animation soldierPointAnim;
+	Animation soldierUpAnim;
+
 };
 
 #endif // __ENEMY_TANKBOSS_H__

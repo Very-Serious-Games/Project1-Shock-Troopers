@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "Particle.h"
+#include "ModuleParticles.h"
 
 Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
 
@@ -84,6 +84,7 @@ void Enemy_Landmine::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER) {
         health--;
         if (health == 0) {
+            App->particles->AddParticle(App->particles->explosion, position.x, position.y, 9, Collider::Type::NONE);
             App->audio->PlayFx(destroyedFx);
             SetToDelete();
         }

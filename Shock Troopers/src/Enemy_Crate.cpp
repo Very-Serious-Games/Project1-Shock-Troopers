@@ -2,7 +2,6 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "Particle.h"
 
 Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
 

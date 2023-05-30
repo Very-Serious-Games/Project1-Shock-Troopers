@@ -126,9 +126,6 @@
     <ClInclude Include="src\ModuleUI.h">
       <Filter>Source Files\modules\core</Filter>
     </ClInclude>
-    <ClInclude Include="resource.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Enemy_Crate.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>

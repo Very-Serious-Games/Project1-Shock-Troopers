@@ -43,6 +43,16 @@ frameCount(p.frameCount), lifetime(p.lifetime)
 
 	bullet_D_L.PushBack({ 1, 89, 13, 13 });
 	bullet_D_L.PushBack({ 15, 89, 13, 13 });
+
+	// Explosion particle
+	int posx = 0;
+	for (int i = 0; i < 30; ++i)
+	{
+		explosion.PushBack({ posx, 104, 64, 63 });
+		posx += 66;
+	}
+	explosion.speed = 0.3f;
+	explosion.loop = false;
 }
 
 Particle::~Particle()
@@ -166,6 +176,12 @@ void Particle::setDirection(int direction) {
 		speed.x = 0;
 		speed.y = -5;
 		currentAnimation = &bullet_U;
+		break;
+	case 9: //Exposion
+		direccion = 7;
+		speed.x = 0;
+		speed.y = 0;
+		currentAnimation = &explosion;
 		break;
 	default:
 		direccion = 5;

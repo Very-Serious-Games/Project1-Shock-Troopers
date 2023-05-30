@@ -13,10 +13,10 @@ We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to th
 ## Authors
 
 - [@nsortsauquillo](https://www.github.com/nsortsauquillo) Nicolás Sort Sauquillo
-- [@MiquelAr-GD](https://www.github.com/MiquelAr-GD) Miquel Andrés Rodríguez
-- [@martagnarta](https://www.github.com/martagnarta) Marta Jover Valero
-- [@mdoradom](https://www.github.com/mdoradom) Mario Dorado Martínez
-- [@apb8](https://www.github.com/apb8) Alexia Palacín Bargalló
+- [@MiquelAr-GD](https://www.github.com/MiquelAr-GD)       Miquel Andrés Rodríguez
+- [@martagnarta](https://www.github.com/martagnarta)       Marta Jover Valero
+- [@mdoradom](https://www.github.com/mdoradom)             Mario Dorado Martínez
+- [@apb8](https://www.github.com/apb8)                     Alexia Palacín Bargalló
 
 
 ## Shock Troopers Gameplay

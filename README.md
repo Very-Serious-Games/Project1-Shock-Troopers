@@ -6,6 +6,10 @@ The game comprises eight challenging missions, with each level having a distinct
 
 ![](img/shock_troopers.jpg)
 
+## Our Project
+
+We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to the game. Made by UPC CITM Terrassa students.
+
 ## Authors
 
 - [@mdoradom](https://www.github.com/mdoradom)
@@ -13,10 +17,6 @@ The game comprises eight challenging missions, with each level having a distinct
 - [@nsortsauquillo](https://www.github.com/nsortsauquillo)
 - [@apb8](https://www.github.com/apb8)
 - [@martagnarta](https://www.github.com/martagnarta)
-
-## Our Project
-
-We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to the game. Made by CITM UPC Terrassa students.
 
 ## Shock Troopers Gameplay
 

@@ -50,30 +50,10 @@ private:
 	//Death Animations
 	Animation leftDeathAnim;
 	Animation rightDeathAnim;
-	//Pink Death Animations
-	Animation pinkDeathAnim;
-	Animation leftPinkDeathAnim;
-	Animation rightPinkDeathAnim;
-
-	Animation upAnim;
-	Animation downAnim;
-	Animation leftAnim;
-	Animation rightAnim;
-	Animation upLeftAnim;
-	Animation upRightAnim;
-	Animation downLeftAnim;
-	Animation downRightAnim;
-
-	Animation idleUpAnim;
-	Animation idleDownAnim;
-	Animation idleLeftAnim;
-	Animation idleRightAnim;
-	Animation idleUpLeftAnim;
-	Animation idleUpRightAnim;
-	Animation idleDownLeftAnim;
-	Animation idleDownRightAnim;
-
+	Animation deathAnim;
+	
 	//Gun
+	//movement
 	Animation gunUpAnim;
 	Animation gunDownAnim;
 	Animation gunLeftAnim;
@@ -83,6 +63,7 @@ private:
 	Animation gunDownLeftAnim;
 	Animation gunDownRightAnim;
 
+	//idle
 	Animation gunIdleUpAnim;
 	Animation gunIdle2UpAnim;
 	Animation gunIdleDownAnim;
@@ -95,87 +76,29 @@ private:
 	Animation gunIdleDownLeftAnim;
 	Animation gunIdleDownRightAnim;
 
+	//idle pointing
+	Animation gunPointUp;
+	Animation gunPointDown;
+	Animation gunPointLeft;
+	Animation gunPointRight;
+	Animation gunPointUpRight;
+	Animation gunPointUpLeft;
+	Animation gunPointDownLeft;
+	Animation gunPointDownRight;
+
+	//gun hit
 	Animation gunHitRightAnim;
 	Animation gunHitLeftAnim;
-
-	//knife
-	Animation knifeUpAnim;
-	Animation knifeDownAnim;
-	Animation knifeLeftAnim;
-	Animation knifeRightAnim;
-	Animation knifeUpLeftAnim;
-	Animation knifeUpRightAnim;
-	Animation knifeDownLeftAnim;
-	Animation knifeDownRightAnim;
-
-	Animation knifeIdleUpAnim;
-	Animation knifeIdleDownAnim;
-	Animation knifeIdleLeftAnim;
-	Animation knifeIdleRightAnim;
-	Animation knifeIdleUpLeftAnim;
-	Animation knifeIdleUpRightAnim;
-	Animation knifeIdleDownLeftAnim;
-	Animation knifeIdleDownRightAnim;
-
-	Animation knifeHitRightAnim;
-	Animation knifeHitLeftAnim; 
+	Animation gunHitUpAnim;
+	Animation gunHitUpLeftAnim;
+	Animation gunHitUpRightAnim;
+	Animation gunHitDownAnim;
+	Animation gunHitDownRightAnim;
+	Animation gunHitDownLeftAnim;
 
 	//falling soldiers
 	Animation fallRightAnim;
 	Animation fallLeftAnim;
-
-	//Hiding half body soldier
-	Animation hidingIdleRightAnim;
-	Animation hidingIdleLeftAnim;
-	Animation hidingDownAnim;
-	Animation hidingHalfLeftAnim;
-	Animation hidingHalfRightAnim;
-	Animation hidingLeftAnim;
-	Animation hidingRightAnim;
-
-	//Hands in the head soldier
-	Animation headHandsLeftAnim;
-	Animation headHandsRightAnim;
-	
-	//General soldier binoculars behind barrels
-	Animation generalAnim;
-
-	//Flying soldiers
-	Animation flyingSoldiersRightAnim;
-	Animation flyingSoldiersDownRightAnim;
-	Animation flyingSoldiersLeftAnim;
-	Animation flyingSoldiersDownLeftAnim;
-
-	//Bazooka soldiers
-	Animation bazookaDownAnim;
-	Animation bazookaRightAnim;
-	Animation bazookaLeftAnim;
-	Animation bazookaUpRightAnim;
-	Animation bazookaUpLeftAnim;
-	Animation bazookaHalfLeftAnim;
-	Animation bazookaHalfRightAnim;
-	Animation bazookaDownLeftAnim;
-	Animation bazookaDownRightAnim;
-	Animation bazookaDownHalfLeftAnim;
-	Animation bazookaDownHalfRightAnim;
-
-	//Throwing throwing grenade soldier
-	Animation grenadeSoldierRightAnim;
-	Animation grenadeSoldierDownRightAnim;
-	Animation grenadeSoldierLeftAnim;
-	Animation grenadeSoldierDownLeftAnim;
-	Animation grenadeSoldierUpLeftAnim;
-	Animation grenadeSoldierUpRightAnim;
-
-	//Final boss soldier
-	Animation headBossSoldierAnim;
-	Animation grenadeBossSoldierAnim;
-	Animation grenadeBossSoldierRightAnim;
-	Animation grenadeBossSoldierLeftAnim;
-	Animation bossSoldierIdleAnim;
-	Animation upBossSoldierAnim;
-
-
 };
 
 #endif // __ENEMY_INFANTRYSOLDIER_H__

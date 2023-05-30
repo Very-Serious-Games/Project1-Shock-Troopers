@@ -216,9 +216,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunHitDownRightAnim.PushBack({ 333, 289, 47, 50 });
 	gunHitDownRightAnim.PushBack({ 380, 289, 47, 50 });
 
-	// TODO cambiar tama�o collider
-	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
-
+	collider = App->collisions->AddCollider({ 0, 0, 26, 50 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	
 	path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
 	
@@ -465,14 +463,13 @@ void Enemy_InfantrySoldier::attackMeleAnimation(int direction) {
 	}
 }
 
-
 void Enemy_InfantrySoldier::StateMachine() {
 	switch (state) {
 		case Enemy_State::SPAWN:
 
 			spawnAnimation(GetPlayerDirection());
 			if (true) {
-				//state = Enemy_State::IDLE;
+				state = Enemy_State::IDLE;
 			}
 
 			LOG("SPAWN STATE");

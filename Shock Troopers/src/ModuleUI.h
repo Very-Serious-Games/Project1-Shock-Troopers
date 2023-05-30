@@ -35,6 +35,13 @@ public:
 
 	void updateHp();
 
+	// Font score index
+	uint score = 010;
+	int scoreFont = -1;
+	char scoreText[10] = { "\0" };
+
+	void updateScore(int points);
+
 public:
 
 	SDL_Texture* textureHp = nullptr;

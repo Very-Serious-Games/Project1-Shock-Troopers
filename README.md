@@ -12,11 +12,12 @@ We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to th
 
 ## Authors
 
-- [@mdoradom](https://www.github.com/mdoradom)
-- [@MiquelAr-GD](https://www.github.com/MiquelAr-GD)
 - [@nsortsauquillo](https://www.github.com/nsortsauquillo)
-- [@apb8](https://www.github.com/apb8)
+- [@MiquelAr-GD](https://www.github.com/MiquelAr-GD)
 - [@martagnarta](https://www.github.com/martagnarta)
+- [@mdoradom](https://www.github.com/mdoradom)
+- [@apb8](https://www.github.com/apb8)
+
 
 ## Shock Troopers Gameplay
 

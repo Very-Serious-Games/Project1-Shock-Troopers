@@ -29,6 +29,7 @@ bool SceneLevel1::Start()
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain_full.png");
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
+	App->ui->Enable();
 
 	// Add colliders
 //	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
@@ -50,19 +51,17 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 713);
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 668);
-
+	
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
 	App->pickUps->Enable();
-	App->ui->Enable();
 
 	return ret;
 }
 
 Update_Status SceneLevel1::Update()
 {
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

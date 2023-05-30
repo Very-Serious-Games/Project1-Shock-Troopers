@@ -1,4 +1,3 @@
-
 #include <stdio.h>
 #include "ModulePlayer.h"
 #include "Application.h"
@@ -13,6 +12,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
 #include <iostream>
+
 using namespace std;
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
@@ -71,15 +71,14 @@ bool ModuleUI::Start()
 	bool ret = true;
 
 	// Starting sprite
-	textureP1 = App->textures->Load("Assets/Sprites/ui/Player1_Milky.png");
-	textureWeapon = App->textures->Load("Assets/Sprites/ui/Weapon_Normal.png");
+	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
+	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
 
 	return ret;
 }
 
 Update_Status ModuleUI::Update()
 {
-
 	updateHp();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -90,14 +89,12 @@ Update_Status ModuleUI::PostUpdate()
 	int x, y;
 
 	//Obtenemos la posicion de la camara
-	x = App->render->camera.x + 10;
-	y = App->render->camera.y + 10;
-
-
+	x = App->render->camera.x + 2;
+	y = App->render->camera.y + 2;
 
 	//Mostramos por pantalla la UI
-	App->render->Blit(textureHp, x + 20, y + 50, NULL);
-	App->render->Blit(textureP1, x + 20, y + 20, NULL);
+	App->render->Blit(textureHp, x + 5, y + 30, NULL);
+	App->render->Blit(textureP1, x, y, NULL);
 	App->render->Blit(textureWeapon, x + 20, y + 200, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;

@@ -1263,9 +1263,9 @@ Update_Status ModulePlayer::PostUpdate() {
 		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
 
 		//Mostramos por pantalla la UI
-		App->render->Blit(textureHp,x - 10, y, NULL);
-		App->render->Blit(textureP1, x - 20, y - 50, NULL);
-		App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
+		//App->render->Blit(textureHp,x - 10, y, NULL);
+		//App->render->Blit(textureP1, x - 20, y - 50, NULL);
+		//App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
 	}
 
 	//Mostramos por pantalla el score

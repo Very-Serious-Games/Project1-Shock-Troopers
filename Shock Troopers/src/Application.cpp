@@ -34,14 +34,14 @@ Application::Application()
 
 	modules[7]	=	player			=	new ModulePlayer(false);	//Player starts disabled
 	modules[8]	=	particles		=	new ModuleParticles(true);
-	modules[9]	=	enemies			=	new ModuleEnemies(false);	//Enemies start disabled
-	modules[10] =	pickUps		    =   new ModulePickUp(true); 	
+	modules[9] =	pickUps		    =   new ModulePickUp(false); 
+	modules[10] =	enemies			=	new ModuleEnemies(false);	//Enemies start disabled
+	modules[11]	=	ui				=	new ModuleUI(false);
 
-	modules[11]	=	collisions		=	new ModuleCollisions(true);
-	modules[12] =	fade			=	new ModuleFadeToBlack(true);
-	modules[13] =	fonts			=	new ModuleFonts(true);
-	modules[14] =	render			=	new ModuleRender(true);
-	modules[15] =	ui				=	new ModuleUI(false);
+	modules[12]	=	collisions		=	new ModuleCollisions(true);
+	modules[13] =	fade			=	new ModuleFadeToBlack(true);
+	modules[14] =	fonts			=	new ModuleFonts(true);
+	modules[15] =	render			=	new ModuleRender(true);
 }
 
 Application::~Application()

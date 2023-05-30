@@ -40,8 +40,6 @@ public:
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;
-
-
 };
 
 #endif //!__MODULE_UI_H__

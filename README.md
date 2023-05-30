@@ -4,6 +4,8 @@ Shock Troopers is a run-and-gun arcade game developed by Saurus and originally r
 
 The game comprises eight challenging missions, with each level having a distinct objective and culminating in a boss battle. To progress through the missions, players must combat waves of enemies, including soldiers and vehicles, using an arsenal of weapons ranging from guns to grenades. Additionally, each character possesses unique special attacks that enhance the gameplay experience.
 
+![](img/shock_troopers.jpg)
+
 ## Authors
 
 - [@mdoradom](https://www.github.com/mdoradom)

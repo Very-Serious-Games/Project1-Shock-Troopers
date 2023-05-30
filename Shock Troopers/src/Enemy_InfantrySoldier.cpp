@@ -149,7 +149,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunPointUpLeft.PushBack({ 942, 232, 38, 46 });
 	gunPointUpRight.PushBack({ 981, 232, 38, 46 });
 	gunPointDownRight.PushBack({ 887, 231, 26, 46 });
-	gunPointDownLeft.PushBack({ 915, 232, 38, 46 });
+	gunPointDownLeft.PushBack({ 915, 232, 26, 46 });
 	//no need to speed these animations since they only have 1 frame
 	
 	//Gun hit
@@ -216,7 +216,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunHitDownRightAnim.PushBack({ 333, 289, 47, 50 });
 	gunHitDownRightAnim.PushBack({ 380, 289, 47, 50 });
 
-	// TODO cambiar tamaño collider
+	// TODO cambiar tamaï¿½o collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
 	
@@ -226,15 +226,30 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallRightAnim.speed = 0.1f;
 	fallLeftAnim.speed = 0.1f;
 
-	// Movement gun animation
+	//Death
+	deathAnim.speed = 0.1f;
+	leftDeathAnim.speed = 0.1f;
+	rightDeathAnim.speed = 0.1f;
+
+	//gun movement
 	gunUpAnim.speed = 0.1f;
+	gunUpLeftAnim.speed = 0.1f;
+	gunUpRightAnim.speed = 0.1f;
 	gunDownAnim.speed = 0.1f;
+	gunDownLeftAnim.speed = 0.1f;
+	gunDownRightAnim.speed = 0.1f;
 	gunLeftAnim.speed = 0.1f;
 	gunRightAnim.speed = 0.1f;
-	gunUpRightAnim.speed = 0.1f;
-	gunUpLeftAnim.speed = 0.1f;
-	gunDownRightAnim.speed = 0.1f;
-	gunDownLeftAnim.speed = 0.1f;
+
+	//gun hit
+	gunHitUpAnim.speed = 0.1f;
+	gunHitUpRightAnim.speed = 0.1f;
+	gunHitUpLeftAnim.speed = 0.1f;
+	gunHitLeftAnim.speed = 0.1f;
+	gunHitRightAnim.speed = 0.1f;
+	gunHitDownAnim.speed = 0.1f;
+	gunHitDownRightAnim.speed = 0.1f;
+	gunHitDownLeftAnim.speed = 0.1f;
 }
 
 void Enemy_InfantrySoldier::Update() {

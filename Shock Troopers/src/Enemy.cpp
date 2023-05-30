@@ -36,6 +36,80 @@ void Enemy::Update() {
     StateMachine();
 }
 
+int Enemy::GetPlayerDirection() {
+	// Get the player position
+	fPoint playerPos = App->player->position;
+
+	// Calculate the direction vector from enemy position to player position
+	fPoint enemyPos = position;
+	fPoint direction = playerPos - enemyPos;
+
+	// Determine the player direction based on the direction vector
+	int playerDirection = 0;
+
+	if (direction.y < 0) {
+		// Player is above the enemy
+		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
+
+			playerDirection = 8; // Up
+
+		}
+		else if (direction.x < 0) {
+
+			playerDirection = 2; // Up-Left
+
+		}
+		else {
+
+			playerDirection = 1; // Up-Right
+
+		}
+
+	}
+	else if (direction.y > 0) {
+
+		// Player is below the enemy
+		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
+
+			playerDirection = 7; // Down
+
+		}
+		else if (direction.x < 0) {
+
+			playerDirection = 4; // Down-Left
+
+		}
+		else {
+
+			playerDirection = 3; // Down-Right
+		}
+
+	}
+	else {
+		// Player is at the same height as the enemy
+		if (direction.x < 0) {
+
+			playerDirection = 6; // Left
+
+		}
+		else if (direction.x > 0) {
+
+			playerDirection = 5; // Right
+
+		}
+		else {
+
+			// Player is at the exact position as the enemy (unlikely scenario)
+			playerDirection = 0; // No direction
+
+		}
+
+	}
+
+	// Return the player direction
+	return playerDirection;
+}
+
 void Enemy::StateMachine()
 {
 }
@@ -60,6 +134,10 @@ void Enemy::idleAnimation()
 {
 }
 
+void Enemy::idleAnimation(int direction)
+{
+}
+
 void Enemy::moveAnimation()
 {
 }
@@ -72,6 +150,21 @@ void Enemy::Draw()
 {
 	if (currentAnim != nullptr)
 		App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
+
+	// TODO ajustar posicion a la q se renderizan las partes del boss
+
+	if (botCurrentAnim != nullptr) {
+		App->render->Blit(texture, position.x, position.y, &(botCurrentAnim->GetCurrentFrame()));
+	}
+
+	if (midCurrentAnim != nullptr) {
+		App->render->Blit(texture, position.x, position.y, &(midCurrentAnim->GetCurrentFrame()));
+	}
+
+	if (topCurrentAnim != nullptr) {
+		App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+	}
+	
 }
 
 void Enemy::OnCollision(Collider* collider)
@@ -140,9 +233,4 @@ bool Enemy::PlayerIsMele() {
     }
 
     return false;
-}
-
-int Enemy::GetPlayerDirection()
-{
-    return 0;
 }

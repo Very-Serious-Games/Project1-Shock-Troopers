@@ -263,72 +263,6 @@ void Enemy_InfantrySoldier::Update() {
 	Enemy::Update();
 }
 
-int Enemy_InfantrySoldier::GetPlayerDirection() {
-	// Get the player position
-	fPoint playerPos = App->player->position;
-
-	// Calculate the direction vector from enemy position to player position
-	fPoint enemyPos = position;
-	fPoint direction = playerPos - enemyPos;
-
-	// Determine the player direction based on the direction vector
-	int playerDirection = 0;
-
-	if (direction.y < 0) {
-		// Player is above the enemy
-		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
-
-			playerDirection = 8; // Up
-
-		} else if (direction.x < 0) {
-
-			playerDirection = 2; // Up-Left
-
-		} else {
-
-			playerDirection = 1; // Up-Right
-
-		}
-
-	} else if (direction.y > 0) {
-
-		// Player is below the enemy
-		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
-
-			playerDirection = 7; // Down
-
-		} else if (direction.x < 0) {
-
-			playerDirection = 4; // Down-Left
-
-		} else {
-
-			playerDirection = 3; // Down-Right
-		}
-
-	} else {
-		// Player is at the same height as the enemy
-		if (direction.x < 0) {
-
-			playerDirection = 6; // Left
-
-		} else if (direction.x > 0) {
-
-			playerDirection = 5; // Right
-
-		} else {
-
-			// Player is at the exact position as the enemy (unlikely scenario)
-			playerDirection = 0; // No direction
-
-		}
-
-	}
-
-	// Return the player direction
-	return playerDirection;
-}
-
 void Enemy_InfantrySoldier::deathAnimation() {
 	currentAnim = &deathAnim;
 }
@@ -472,8 +406,6 @@ void Enemy_InfantrySoldier::StateMachine() {
 				state = Enemy_State::IDLE;
 			}
 
-			LOG("SPAWN STATE");
-
 			break;
 
 		case Enemy_State::IDLE:
@@ -488,8 +420,6 @@ void Enemy_InfantrySoldier::StateMachine() {
 				state = Enemy_State::MOVE;
 			}
 
-			LOG("IDLE STATE");
-
 			break;
 
 		case Enemy_State::ATTACK:
@@ -501,8 +431,6 @@ void Enemy_InfantrySoldier::StateMachine() {
 			if (!PlayerIsAttackRange()) {
 				state = Enemy_State::IDLE;
 			}
-
-			LOG("ATTACK STATE");
 
 			break;
 
@@ -516,8 +444,6 @@ void Enemy_InfantrySoldier::StateMachine() {
 			}
 
 			deathAnimDelay--;
-
-			LOG("DEATH STATE");
 
 			break;
 
@@ -535,8 +461,6 @@ void Enemy_InfantrySoldier::StateMachine() {
 				state = Enemy_State::IDLE;
 			}
 
-			LOG("MOVE STATE");
-
 			break;
 
 	}
@@ -545,14 +469,12 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 void Enemy_InfantrySoldier::Attack() {
 	if (PlayerIsMele()) {
-		LOG("Enemy: mele");
 		delayKnife--;
 		if (delayKnife == 0) {
 			Knife();
 			delayKnife = 500;
 		}
 	} else {
-		LOG("Enemy: shot");
 		Shoot();
 	}
 	

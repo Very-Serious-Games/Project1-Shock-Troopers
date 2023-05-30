@@ -421,7 +421,7 @@ void ModulePlayer::godMode() {
 		App->player->position.y = 190;
 	}
 
-	// TP player to the flying battleship (for testing purposes)
+	// TP player to the tank boss (for testing purposes)
 	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
 		App->player->position.x = 1430;
 		App->player->position.y = 250;
@@ -998,8 +998,6 @@ void ModulePlayer::stateMachine() {
 
 		saveLastPosition();
 
-		LOG("idle state");
-
 		break;
 
 	case PlayerState::ShootingMoving:
@@ -1023,8 +1021,6 @@ void ModulePlayer::stateMachine() {
 		if (isRoll()) {
 			currentState = PlayerState::Roll;
 		}
-
-		LOG("shooting moving state");
 
 		break;
 
@@ -1052,8 +1048,6 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
-		LOG("moving state");
-
 		break;
 
 	case PlayerState::Shooting:
@@ -1078,8 +1072,6 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
-		LOG("shooting state");
-
 		break;
 
 	case PlayerState::Grenade:
@@ -1101,8 +1093,6 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
-		LOG("grenade state");
-
 		break;
 
 	case PlayerState::Roll:
@@ -1117,8 +1107,6 @@ void ModulePlayer::stateMachine() {
 
 		}
 
-		LOG("roll state");
-
 		break;
 
 	case PlayerState::Win:
@@ -1127,8 +1115,6 @@ void ModulePlayer::stateMachine() {
 
 		// Win logic
 		// TODO
-
-		LOG("win state");
 
 		break;
 
@@ -1142,8 +1128,6 @@ void ModulePlayer::stateMachine() {
 		// enter idle state
 		currentState = PlayerState::Idle;
 
-		LOG("spawn state");
-
 		break;
 
 	case PlayerState::Death:
@@ -1151,8 +1135,6 @@ void ModulePlayer::stateMachine() {
 		setDeathAnimations();
 
 		// TODO Death logic
-
-		LOG("death state");
 
 		break;
 
@@ -1182,9 +1164,6 @@ void ModulePlayer::stateMachine() {
 		if (!isHitted) {
 			currentState = PlayerState::Idle;
 		}
-		
-
-		LOG("damage state");
 
 		break;
 	}

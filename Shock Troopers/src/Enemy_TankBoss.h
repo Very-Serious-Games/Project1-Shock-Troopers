@@ -15,9 +15,13 @@ public:
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
 
+	void OnCollision(Collider* collider) override;
+
 	void deathAnimation() override;
 
-	void idleAnimation() override;
+	void idleAnimation(int direction) override;
+
+	void hitAnimation(int direction);
 
 	void StateMachine() override;
 
@@ -33,7 +37,11 @@ private:
 	// The path that will define the position in the world
 	Path path;
 
+	bool isHitted = false;
+
 	SDL_Texture* textureTankBoss = nullptr;
+
+	Animation emptyAnimation;
 
 	Animation topAnimDown;
 	Animation topAnimUp;
@@ -75,12 +83,6 @@ private:
 
 	Animation hitBotAnimMoving;
 	Animation deathAnim;
-
-	Animation* topCurrentAnim = nullptr;
-	Animation* midCurrentAnim = nullptr;
-	Animation* botCurrentAnim = nullptr;
-
-
 
 };
 

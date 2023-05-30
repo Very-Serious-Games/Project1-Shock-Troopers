@@ -51,6 +51,8 @@ public:
 
 	virtual void idleAnimation();
 
+	virtual void idleAnimation(int direction);
+
 	virtual void moveAnimation();
 
 	virtual void attackAnimation(int direction);
@@ -103,6 +105,9 @@ public:
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+	Animation* topCurrentAnim = nullptr;
+	Animation* midCurrentAnim = nullptr;
+	Animation* botCurrentAnim = nullptr;
 
 	Animation deathAnim;
 	Animation spawnAnim;

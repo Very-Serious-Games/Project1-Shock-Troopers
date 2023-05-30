@@ -13,7 +13,7 @@
 #include "Enemy_Crate.h"
 #include "Enemy_TankBoss.h"
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 5000
 
 
 ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)
@@ -22,7 +22,7 @@ ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)
 		enemies[i] = nullptr;
 
 }
-
+ 
 ModuleEnemies::~ModuleEnemies()
 {
 
@@ -188,7 +188,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case Enemy_Type::TANK_BOSS:
 					enemies[i] = new Enemy_TankBoss(info.x, info.y);
-					enemies[i]->state = Enemy_State::IDLE; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
 					enemies[i]->texture = textureTankBoss;
 					break;
 			}

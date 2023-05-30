@@ -149,7 +149,7 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunPointUpLeft.PushBack({ 942, 232, 38, 46 });
 	gunPointUpRight.PushBack({ 981, 232, 38, 46 });
 	gunPointDownRight.PushBack({ 887, 231, 26, 46 });
-	gunPointDownLeft.PushBack({ 915, 232, 38, 46 });
+	gunPointDownLeft.PushBack({ 915, 232, 26, 46 });
 	//no need to speed these animations since they only have 1 frame
 	
 	//Gun hit

@@ -12,6 +12,7 @@ enum class Enemy_Type
 	FLYING_BATTLESHIP,
 	BRIDGE,
 	CRATE,
+	TANK_BOSS,
 };
 
 struct EnemySpawnpoint

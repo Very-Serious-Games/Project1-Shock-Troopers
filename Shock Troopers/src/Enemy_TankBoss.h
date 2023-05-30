@@ -35,6 +35,53 @@ private:
 
 	SDL_Texture* textureTankBoss = nullptr;
 
+	Animation topAnimDown;
+	Animation topAnimUp;
+	Animation topAnimLeft;
+	Animation topAnimRight;
+	Animation topAnimDownLeft;
+	Animation topAnimDownRight;
+	Animation topAnimUpLeft;
+	Animation topAnimUpRight;
+
+	Animation hitTopAnimDown;
+	Animation hitTopAnimUp;
+	Animation hitTopAnimLeft;
+	Animation hitTopAnimRight;
+	Animation hitTopAnimDownLeft;
+	Animation hitTopAnimDownRight;
+	Animation hitTopAnimUpLeft;
+	Animation hitTopAnimUpRight;
+
+	Animation midAnimDown;
+	Animation midAnimUp;
+	Animation midAnimLeft;
+	Animation midAnimRight;
+	Animation midAnimDownLeft;
+	Animation midAnimDownRight;
+	Animation midAnimUpLeft;
+	Animation midAnimUpRight;
+
+	Animation hitMidAnimDown;
+	Animation hitMidAnimUp;
+	Animation hitMidAnimLeft;
+	Animation hitMidAnimRight;
+	Animation hitMidAnimDownLeft;
+	Animation hitMidAnimDownRight;
+	Animation hitMidAnimUpLeft;
+	Animation hitMidAnimUpRight;
+
+	Animation botAnimMoving;
+
+	Animation hitBotAnimMoving;
+	Animation deathAnim;
+
+	Animation* topCurrentAnim = nullptr;
+	Animation* midCurrentAnim = nullptr;
+	Animation* botCurrentAnim = nullptr;
+
+
+
 };
 
 #endif // __ENEMY_TANKBOSS_H__

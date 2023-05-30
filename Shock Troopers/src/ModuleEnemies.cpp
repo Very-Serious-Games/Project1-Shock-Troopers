@@ -186,6 +186,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
 					enemies[i]->texture = textureCrate;
 					break;
+				case Enemy_Type::TANK_BOSS:
+					enemies[i] = new Enemy_TankBoss(info.x, info.y);
+					enemies[i]->state = Enemy_State::IDLE; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureTankBoss;
+					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;

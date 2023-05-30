@@ -421,6 +421,12 @@ void ModulePlayer::godMode() {
 		App->player->position.y = 190;
 	}
 
+	// TP player to the flying battleship (for testing purposes)
+	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
+		App->player->position.x = 1430;
+		App->player->position.y = 250;
+	}
+
 	// Damage player 
 	if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
 		hp -= 10;

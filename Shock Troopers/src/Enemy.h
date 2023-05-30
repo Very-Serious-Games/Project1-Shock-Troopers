@@ -19,6 +19,7 @@ enum class Enemy_State
 	ATTACK,
 	MOVE,
 	DEATH,
+	HIT,
 };
 
 class Enemy

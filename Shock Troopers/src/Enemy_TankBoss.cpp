@@ -9,8 +9,50 @@
 
 Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
 
+    // animations
+    topAnimDown.PushBack(           {0,0,42,27});
+    topAnimUp.PushBack(             {0,0,42,27});
+    topAnimLeft.PushBack(           {0,0,42,27});
+    topAnimRight.PushBack(          {0,0,42,27});
+    topAnimDownLeft.PushBack(       {0,0,42,27});
+    topAnimDownRight.PushBack(      {0,0,42,27});
+    topAnimUpLeft.PushBack(         {0,0,42,27});
+    topAnimUpRight.PushBack(        {0,0,42,27});
+                                     
+    hitTopAnimDown.PushBack(        {0,0,42,27});
+    hitTopAnimUp.PushBack(          {0,0,42,27});
+    hitTopAnimLeft.PushBack(        {0,0,42,27});
+    hitTopAnimRight.PushBack(       {0,0,42,27});
+    hitTopAnimDownLeft.PushBack(    {0,0,42,27});
+    hitTopAnimDownRight.PushBack(   {0,0,42,27});
+    hitTopAnimUpLeft.PushBack(      {0,0,42,27});
+    hitTopAnimUpRight.PushBack(     {0,0,42,27});
+                                     
+    midAnimDown.PushBack(           {0,0,42,27});
+    midAnimUp.PushBack(             {0,0,42,27});
+    midAnimLeft.PushBack(           {0,0,42,27});
+    midAnimRight.PushBack(          {0,0,42,27});
+    midAnimDownLeft.PushBack(       {0,0,42,27});
+    midAnimDownRight.PushBack(      {0,0,42,27});
+    midAnimUpLeft.PushBack(         {0,0,42,27});
+    midAnimUpRight.PushBack(        {0,0,42,27});
+                                     
+    hitMidAnimDown.PushBack(        {0,0,42,27});
+    hitMidAnimUp.PushBack(          {0,0,42,27});
+    hitMidAnimLeft.PushBack(        {0,0,42,27});
+    hitMidAnimRight.PushBack(       {0,0,42,27});
+    hitMidAnimDownLeft.PushBack(    {0,0,42,27});
+    hitMidAnimDownRight.PushBack(   {0,0,42,27});
+    hitMidAnimUpLeft.PushBack(      {0,0,42,27});
+    hitMidAnimUpRight.PushBack(     {0,0,42,27});
+                                     
+    botAnimMoving.PushBack(         {0,0,42,27});
+                                     
+    hitBotAnimMoving.PushBack(      {0,0,42,27});
+    deathAnim.PushBack(             {0,0,42,27});
+
     // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 0, 0, 121, 124 }, Collider::Type::ENEMY, (Module*)App->enemies);
+    collider = App->collisions->AddCollider({ 0, 0, 200, 500 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
 }
 
@@ -18,8 +60,10 @@ void Enemy_TankBoss::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    //currentAnim = path.GetCurrentAnimation();
-    currentAnim = &spawnAnim;
+    
+    topCurrentAnim = &topAnimDown;
+    midCurrentAnim = &midAnimDown;
+    botCurrentAnim = &botAnimMoving;
 
     // Call to the base class. It must be called at the end
     // It will update the collider depending on the position
@@ -90,7 +134,6 @@ void Enemy_TankBoss::idleAnimation() {
 
 void Enemy_TankBoss::Attack() {
 
-    // TODO ataque
     canon();
     shot();
     grenade();
@@ -120,7 +163,6 @@ void Enemy_TankBoss::StateMachine() {
         break;
     case Enemy_State::DEATH:
         deathAnimation();
-
         if (deathAnimDelay == 0) {
             pendingToDelete = true;
             LOG("pendingToDelete enemy");
@@ -130,6 +172,9 @@ void Enemy_TankBoss::StateMachine() {
 
         break;
 
+    case Enemy_State::HIT:
+        // hitanim
+        break;
     default:
         // Handle default state logic
         LOG("ERROR STATE");

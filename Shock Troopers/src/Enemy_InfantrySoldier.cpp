@@ -150,7 +150,6 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunPointUpRight.PushBack({ 981, 232, 38, 46 });
 	gunPointDownRight.PushBack({ 887, 231, 26, 46 });
 	gunPointDownLeft.PushBack({ 915, 232, 38, 46 });
-	
 	//no need to speed these animations since they only have 1 frame
 	
 	//Gun hit
@@ -172,7 +171,50 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunHitLeftAnim.PushBack({730, 289, 47, 50});
 	gunHitLeftAnim.PushBack({777, 289, 47, 50});
 
-	
+	gunHitUpAnim.PushBack({996, 410, 51, 55});
+	gunHitUpAnim.PushBack({1047, 410, 51, 55});
+	gunHitUpAnim.PushBack({1098, 410, 51, 55});
+	gunHitUpAnim.PushBack({1149, 410, 51, 55});
+	gunHitUpAnim.PushBack({1201, 410, 51, 55});
+	gunHitUpAnim.PushBack({1252, 410, 51, 55});
+	gunHitUpAnim.PushBack({1353, 410, 51, 55}); //check
+
+	gunHitUpLeftAnim.PushBack({366, 906, 53, 50});
+	gunHitUpLeftAnim.PushBack({420, 906, 53, 50});
+	gunHitUpLeftAnim.PushBack({474, 906, 53, 50});
+	gunHitUpLeftAnim.PushBack({528, 906, 53, 50});
+	gunHitUpLeftAnim.PushBack({582, 906, 53, 50});
+
+	gunHitUpRightAnim.PushBack({654, 907, 53, 50});
+	gunHitUpRightAnim.PushBack({708, 907, 53, 50});
+	gunHitUpRightAnim.PushBack({762, 907, 53, 50});
+	gunHitUpRightAnim.PushBack({816, 907, 53, 50});
+	gunHitUpRightAnim.PushBack({870, 907, 53, 50});
+
+	gunHitDownAnim.PushBack({50, 902, 45, 55});
+	gunHitDownAnim.PushBack({96, 902, 45, 55});
+	gunHitDownAnim.PushBack({142, 902, 45, 55});
+	gunHitDownAnim.PushBack({188, 902, 45, 55});
+	gunHitDownAnim.PushBack({234, 902, 45, 55});
+	gunHitDownAnim.PushBack({280, 902, 45, 55});
+
+	gunHitDownLeftAnim.PushBack({ 448, 289, 47, 50 });
+	gunHitDownLeftAnim.PushBack({ 495, 289, 47, 50 });
+	gunHitDownLeftAnim.PushBack({ 542, 289, 47, 50 });
+	gunHitDownLeftAnim.PushBack({ 589, 289, 47, 50 });
+	gunHitDownLeftAnim.PushBack({ 636, 289, 47, 50 });
+	gunHitDownLeftAnim.PushBack({ 683, 289, 47, 50 });
+	gunHitDownLeftAnim.PushBack({ 730, 289, 47, 50 });
+	gunHitDownLeftAnim.PushBack({ 777, 289, 47, 50 });
+
+	gunHitDownRightAnim.PushBack({ 51, 289, 47, 50 });
+	gunHitDownRightAnim.PushBack({ 98, 289, 47, 50 });
+	gunHitDownRightAnim.PushBack({ 145, 289, 47, 50 });
+	gunHitDownRightAnim.PushBack({ 192, 289, 47, 50 });
+	gunHitDownRightAnim.PushBack({ 239, 289, 47, 50 });
+	gunHitDownRightAnim.PushBack({ 286, 289, 47, 50 });
+	gunHitDownRightAnim.PushBack({ 333, 289, 47, 50 });
+	gunHitDownRightAnim.PushBack({ 380, 289, 47, 50 });
 
 	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);

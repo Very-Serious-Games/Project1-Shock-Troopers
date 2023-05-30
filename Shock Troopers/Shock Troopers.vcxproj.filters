@@ -126,9 +126,6 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enemy_Crate.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\ModuleUI.h">
       <Filter>Source Files\modules\core</Filter>
     </ClInclude>
@@ -136,6 +133,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy_Crate.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_Crate.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_TankBoss.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -221,13 +224,16 @@
     <ClCompile Include="src\Enemy_Bridge.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy_Crate.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\ModuleUI.cpp">
       <Filter>Source Files\modules\core</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy_Crate.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Crate.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_TankBoss.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>

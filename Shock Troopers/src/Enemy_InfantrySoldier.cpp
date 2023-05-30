@@ -226,6 +226,30 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallRightAnim.speed = 0.1f;
 	fallLeftAnim.speed = 0.1f;
 
+	//Death
+	deathAnim.speed = 0.1f;
+	leftDeathAnim.speed = 0.1f;
+	rightDeathAnim.speed = 0.1f;
+
+	//gun movement
+	gunUpAnim.speed = 0.1f;
+	gunUpLeftAnim.speed = 0.1f;
+	gunUpRightAnim.speed = 0.1f;
+	gunDownAnim.speed = 0.1f;
+	gunDownLeftAnim.speed = 0.1f;
+	gunDownRightAnim.speed = 0.1f;
+	gunLeftAnim.speed = 0.1f;
+	gunRightAnim.speed = 0.1f;
+
+	//gun hit
+	gunHitUpAnim.speed = 0.1f;
+	gunHitUpRightAnim.speed = 0.1f;
+	gunHitUpLeftAnim.speed = 0.1f;
+	gunHitLeftAnim.speed = 0.1f;
+	gunHitRightAnim.speed = 0.1f;
+	gunHitDownAnim.speed = 0.1f;
+	gunHitDownRightAnim.speed = 0.1f;
+	gunHitDownLeftAnim.speed = 0.1f;
 }
 
 void Enemy_InfantrySoldier::Update() {

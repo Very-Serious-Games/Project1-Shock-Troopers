@@ -35,7 +35,6 @@ bool SceneLevel1::Start()
 //	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
 //	App->collisions->AddCollider({ 490, 0, 1, 1909 }, Collider::Type::WALL);
 
-
 	createMargenes();
 
 	// Add enemies
@@ -43,14 +42,15 @@ bool SceneLevel1::Start()
 								
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20); // (493 / 2) - (128 / 2) = 183
 	
+	//TODO spawnear todas las minas
 	//Add landmines
 	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 87, 2330);
 
+	//TODO spawnear todos los objetos
 	//Add objects
-	//App->enemies->AddEnemy(Enemy_Type::BRIDGE, 125, 1822);
+	App->enemies->AddEnemy(Enemy_Type::BRIDGE, 76, 2635);
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 713);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 668);
+
 
 	App->render->camera.x = 220;
 	App->render->camera.y = 2800;

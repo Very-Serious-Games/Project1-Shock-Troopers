@@ -19,6 +19,7 @@ enum class Enemy_State
 	ATTACK,
 	MOVE,
 	DEATH,
+	HIT,
 };
 
 class Enemy
@@ -43,6 +44,8 @@ public:
 	virtual void Attack();
 
 	virtual void deathAnimation();
+
+	virtual void brokenAnimation();
 
 	virtual void spawnAnimation();
 
@@ -79,12 +82,15 @@ public:
 
 	int delay = 15;
 	int deathAnimDelay = 50;
+	int brokenAnimDelay = 50;
 
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
 
 	Animation deathAnim;
+	Animation idlebrokenAnim;
+	Animation brokenAnim;
 	Animation spawnAnim;
 	Animation idleAnim;
 

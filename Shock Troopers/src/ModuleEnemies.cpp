@@ -33,7 +33,7 @@ bool ModuleEnemies::Start()
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
 	textureLandmines = App->textures->Load("Assets/Sprites/characters/landmine.png");
-	textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
+	textureBridge = App->textures->Load("Assets/Sprites/background/level1/stone-bridge.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;

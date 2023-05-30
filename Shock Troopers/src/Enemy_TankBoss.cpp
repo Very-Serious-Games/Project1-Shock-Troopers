@@ -3,28 +3,15 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "Particle.h"
+#include "ModuleTextures.h"
+#include "ModuleRender.h"
+#include "ModulePlayer.h"
 
 Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
 
-
-
-    spawnAnim.PushBack({ 0, 0, 121, 124 });
-    spawnAnim.PushBack({ 128, 0, 121, 124 });
-    spawnAnim.pingpong = true;
-    spawnAnim.speed = 0.2f;
-
-    idleAnim.PushBack({ 256, 0 , 121, 124 });
-
-    deathAnim.PushBack({ 384, 0, 121, 124 });
-
-    //path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
-    path.PushBack({ 1.0f, 0.0f }, 150, &idleAnim);
-    path.PushBack({ -1.0f, 0.0f }, 150, &idleAnim);
-    //path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
-
-
     // TODO cambiar tamaño collider
     collider = App->collisions->AddCollider({ 0, 0, 121, 124 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
 }
 
 void Enemy_TankBoss::Update() {
@@ -39,54 +26,57 @@ void Enemy_TankBoss::Update() {
     Enemy::Update();
 }
 
-void Enemy_TankBoss::Attack() {
-    // get random number between with 10%, 30, 60% chance to happen
-    int attackType = rand() % 100 + 1;
+void Enemy_TankBoss::canon() {
+    // Get the player position
+    fPoint playerPos = App->player->position;
 
-    //LOG("Random attack type: %d", attackType);
+    // Calculate the direction vector from enemy position to player position
+    fPoint enemyPos = position;
+    fPoint direction = playerPos - enemyPos;
 
-    if (attackType <= 10) {           // 10% chance to do a not attack
-        delay--;
-        if (delay == 0) {
-            LOG("No attack");
-            // do nothing   
-            delay = 15;
-        }
-
+    // Normalize the direction vector
+    float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+    if (length != 0) {
+        direction.x /= length;
+        direction.y /= length;
     }
-    else if (attackType <= 30) {    // 30% chance to do a rocket attack
-        delay--;
-        if (delay == 0) {
-            LOG("Rocket attack");
-            // TODO add rocket attack
-            // TODO add explosion when shooting
-            // TODO change particle used to the correct one
-            /*
-            Particle* rocket1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            rocket1->collider->AddListener(NULL);
-            Particle* rocket2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            rocket2->collider->AddListener(NULL);
-            App->audio->PlayFx(/*sound effectNULL);
-            */
 
-            delay = 15;
-        }
+    delayCanon--;
+    if (delayCanon == 0) {
+        // TODO modify shot to be an enemy shot
+        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+        shot->collider->AddListener(NULL);
+        App->audio->PlayFx(/*sound effect*/NULL);
+        delayCanon = 700;
+    }
+}
 
+void Enemy_TankBoss::shot() {
+    // Get the player position
+    fPoint playerPos = App->player->position;
+
+    // Calculate the direction vector from enemy position to player position
+    fPoint enemyPos = position;
+    fPoint direction = playerPos - enemyPos;
+
+    // Normalize the direction vector
+    float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+    if (length != 0) {
+        direction.x /= length;
+        direction.y /= length;
     }
-    else {                       // 60% chance to do a normal attack
-        delay--;
-        if (delay == 0) {
-            LOG("Normal attack");
-            // TODO add explosion when shooting
-            // TODO change particle used to the correct one
-            Particle* shot1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            shot1->collider->AddListener(NULL);
-            Particle* shot2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            shot2->collider->AddListener(NULL);
-            App->audio->PlayFx(/*sound effect*/NULL);
-            delay = 15;
-        }
+
+    delayShoot--;
+    if (delayShoot == 0) {
+        // TODO modify shot to be an enemy shot
+        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+        shot->collider->AddListener(NULL);
+        App->audio->PlayFx(/*sound effect*/NULL);
+        delayShoot = 700;
     }
+}
+
+void Enemy_TankBoss::grenade() {
 
 }
 
@@ -94,24 +84,21 @@ void Enemy_TankBoss::deathAnimation() {
     currentAnim = &deathAnim;
 }
 
-void Enemy_TankBoss::spawnAnimation() {
-    currentAnim = &spawnAnim;
-}
-
 void Enemy_TankBoss::idleAnimation() {
     currentAnim = &idleAnim;
 }
 
+void Enemy_TankBoss::Attack() {
+
+    // TODO ataque
+    canon();
+    shot();
+    grenade();
+
+}
+
 void Enemy_TankBoss::StateMachine() {
     switch (state) {
-    case Enemy_State::SPAWN:
-        spawnAnimation();
-        // Handle spawn state logic
-        if (/* some condition for idle */true) {
-            state = Enemy_State::IDLE;
-            LOG("state changed to IDLE");
-        }
-        break;
     case Enemy_State::IDLE:
         idleAnimation();
         if (PlayerIsNear()) {

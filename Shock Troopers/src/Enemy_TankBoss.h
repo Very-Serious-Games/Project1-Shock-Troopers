@@ -19,11 +19,15 @@ public:
 
 	void idleAnimation() override;
 
-	void spawnAnimation() override;
-
 	void StateMachine() override;
 
 	void Attack() override;
+
+	void canon();
+
+	void shot();
+
+	void grenade();
 
 private:
 	// The path that will define the position in the world

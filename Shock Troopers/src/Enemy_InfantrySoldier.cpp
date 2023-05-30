@@ -32,17 +32,17 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallLeftAnim.PushBack({ 176, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 239, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 302, 103, 62, 67 });
-	fallRightAnim.PushBack({ 365, 103, 62, 67 });
-	fallRightAnim.PushBack({ 428, 103, 62, 67 });
-	fallRightAnim.PushBack({ 491, 103, 62, 67 });
-	fallRightAnim.PushBack({ 554, 103, 62, 67 });
-	fallRightAnim.PushBack({ 617, 103, 62, 67 });
-	fallRightAnim.PushBack({ 680, 103, 62, 67 });
-	fallRightAnim.PushBack({ 743, 103, 62, 67 });
-	fallRightAnim.PushBack({ 806, 103, 62, 67 });
-	fallRightAnim.PushBack({ 869, 103, 62, 67 });
-	fallRightAnim.PushBack({ 932, 103, 62, 67 });
-	fallRightAnim.PushBack({ 995, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 365, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 428, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 491, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 554, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 617, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 680, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 743, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 806, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 869, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 932, 103, 62, 67 });
+	fallLeftAnim.PushBack({ 995, 103, 62, 67 });
 
 	//Death Animation
 	deathAnim.PushBack({436, 828, 42, 53}); //41x53?
@@ -220,9 +220,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	collider = App->collisions->AddCollider({ 0, 0, 24, 24 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
 	
-	path.PushBack({ 0.0f, 0.0f }, 200, &spawnAnim);
+	path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
 	
-
 	// Spawn fall animation
 	fallRightAnim.speed = 0.1f;
 	fallLeftAnim.speed = 0.1f;
@@ -236,18 +235,6 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunUpLeftAnim.speed = 0.1f;
 	gunDownRightAnim.speed = 0.1f;
 	gunDownLeftAnim.speed = 0.1f;
-
-	// Knife speed
-	knifeUpAnim.speed = 0.1f;
-	knifeDownAnim.speed = 0.1f;
-	knifeLeftAnim.speed = 0.1f;
-	knifeRightAnim.speed = 0.1f;
-	knifeUpRightAnim.speed = 0.05f;
-	knifeUpLeftAnim.speed = 0.1f;
-	knifeDownRightAnim.speed = 0.1f;
-	knifeDownLeftAnim.speed = 0.1f;
-
-
 }
 
 void Enemy_InfantrySoldier::Update() {
@@ -336,34 +323,35 @@ void Enemy_InfantrySoldier::deathAnimation() {
 void Enemy_InfantrySoldier::idleAnimation(int direction) {
 	switch (direction) {
 		case 1: //UR
-			currentAnim = &knifeIdleUpAnim;
+			currentAnim = &gunIdleUpRightAnim;
 			break;
 		case 2: //UL
-			currentAnim = &knifeIdleUpLeftAnim;
+			currentAnim = &gunIdleUpLeftAnim;
 			break;
 		case 3: //DR
-			currentAnim = &knifeIdleDownRightAnim;
+			currentAnim = &gunIdleDownRightAnim;
 			break;
 		case 4: //DL
-			currentAnim = &knifeIdleDownLeftAnim;
+			currentAnim = &gunIdleDownLeftAnim;
 			break;
 		case 5: //R
-			currentAnim = &knifeIdleRightAnim;
+			currentAnim = &gunIdleRightAnim;
 			break;
 		case 6: //L
-			currentAnim = &knifeIdleLeftAnim;
+			currentAnim = &gunIdleLeftAnim;
 			break;
 		case 7: //D
-			currentAnim = &knifeIdleDownAnim;
+			currentAnim = &gunIdleDownAnim;
 			break;
 		case 8: //U
-			currentAnim = &knifeIdleUpAnim;
+			currentAnim = &gunIdleUpAnim;
 			break;
 		}
 
 }
 
 void Enemy_InfantrySoldier::spawnAnimation(int direction) {
+
 	switch (direction) {
 	case 1: //L
 		currentAnim = &fallLeftAnim;
@@ -372,12 +360,13 @@ void Enemy_InfantrySoldier::spawnAnimation(int direction) {
 		currentAnim = &fallRightAnim;
 		break;
 	}
+	
 }
 
 void Enemy_InfantrySoldier::moveAnimation(int direction) {
 	switch (direction) {
 		case 1: //UR
-			currentAnim = &gunUpAnim;
+			currentAnim = &gunUpRightAnim;
 			break;
 		case 2: //UL
 			currentAnim = &gunUpLeftAnim;
@@ -406,73 +395,61 @@ void Enemy_InfantrySoldier::moveAnimation(int direction) {
 void Enemy_InfantrySoldier::attackAnimation(int direction) {
 	switch (direction) {
 	case 1: //UR
-		currentAnim = &gunIdleUpAnim;
+		currentAnim = &gunPointUpRight;
 		break;
 	case 2: //UL
-		currentAnim = &gunIdleDownLeftAnim;
+		currentAnim = &gunPointUpLeft;
 		break;
 	case 3: //DR
-		currentAnim = &gunIdleDownRightAnim;
+		currentAnim = &gunPointDownRight;
 		break;
 	case 4: //DL
-		currentAnim = &gunIdleDownLeftAnim;
+		currentAnim = &gunPointDownLeft;
 		break;
 	case 5: //R
-		currentAnim = &gunIdleRightAnim;
+		currentAnim = &gunPointRight;
 		break;
 	case 6: //L
-		currentAnim = &gunIdleLeftAnim;
+		currentAnim = &gunPointLeft;
 		break;
 	case 7: //D
-		// rand number between 1 and 2
-
-		// TODO animacion random entre las dos variantes
-
-		/*
-		if (rand() % 2 == 0) {
-			currentAnim = &gunIdleDownAnim;
-		} else {
-			currentAnim = &gunIdle2DownAnim;
-		}
-		*/
-		currentAnim = &gunIdle2DownAnim;
+		currentAnim = &gunPointDown;
 		break;
 	case 8: //U
-		currentAnim = &gunIdleUpAnim;
+		currentAnim = &gunPointUp;
 		break;
 	}
+}
 
-	// Knife running animation
-
-	/*
+void Enemy_InfantrySoldier::attackMeleAnimation(int direction) {
 	switch (direction) {
 	case 1: //UR
-		currentAnim = &knifeUpRightAnim;
+		currentAnim = &gunHitUpAnim;
 		break;
 	case 2: //UL
-		currentAnim = &knifeUpLeftAnim;
+		currentAnim = &gunHitUpLeftAnim;
 		break;
 	case 3: //DR
-		currentAnim = &knifeDownRightAnim;
+		currentAnim = &gunHitDownRightAnim;
 		break;
 	case 4: //DL
-		currentAnim = &knifeDownLeftAnim;
+		currentAnim = &gunHitDownLeftAnim;
 		break;
 	case 5: //R
-		currentAnim = &knifeRightAnim;
+		currentAnim = &gunHitRightAnim;
 		break;
 	case 6: //L
-		currentAnim = &knifeLeftAnim;
+		currentAnim = &gunHitLeftAnim;
 		break;
 	case 7: //D
-		currentAnim = &knifeDownAnim;
+		currentAnim = &gunHitDownAnim;
 		break;
 	case 8: //U
-		currentAnim = &knifeUpAnim;
+		currentAnim = &gunHitUpAnim;
 		break;
 	}
-	*/
 }
+
 
 void Enemy_InfantrySoldier::StateMachine() {
 	switch (state) {
@@ -480,7 +457,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 			spawnAnimation(GetPlayerDirection());
 			if (true) {
-				state = Enemy_State::IDLE;
+				//state = Enemy_State::IDLE;
 			}
 
 			LOG("SPAWN STATE");
@@ -646,9 +623,11 @@ void Enemy_InfantrySoldier::Knife() {
 		NULL);
 
 	// TODO logica para borrar el collider dependiendo de la animacion
+	/*
 	if (knifeUpAnim.HasFinished()) {
 		App->collisions->RemoveCollider(knife);
 	}
+	*/
 
 }
 

@@ -77,6 +77,7 @@ private:
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
+	SDL_Texture* textureTankBoss = nullptr;
 	SDL_Texture* textureFlyingBattleship = nullptr;
 	SDL_Texture* textureInfantrySoldier = nullptr;
 	SDL_Texture* textureBridge = nullptr;

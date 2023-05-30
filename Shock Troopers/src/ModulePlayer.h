@@ -3,10 +3,11 @@
 
 #include <string>
 #include <cmath>
-using namespace std;
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+
+using namespace std;
 
 struct SDL_Texture;
 struct Collider;

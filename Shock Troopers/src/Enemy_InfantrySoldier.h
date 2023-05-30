@@ -23,7 +23,9 @@ public:
 
 	void moveAnimation(int direction);
 
-	void attackAnimation(int directio) override;
+	void attackAnimation(int direction) override;
+
+	void attackMeleAnimation(int direction);
 
 	void StateMachine() override;
 

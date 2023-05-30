@@ -11,6 +11,7 @@
 #include "Enemy_FlyingBattleship.h"
 #include "Enemy_Bridge.h"
 #include "Enemy_Crate.h"
+#include "Enemy_TankBoss.h"
 
 #define SPAWN_MARGIN 50
 
@@ -30,6 +31,7 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// TODO cargar texturas y fx enemigos
+	textureTankBoss = App->textures->Load("Assets/Sprites/characters/tank_boss.png");
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/Soldiers-Infantry.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");

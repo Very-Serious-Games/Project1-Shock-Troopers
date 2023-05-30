@@ -82,8 +82,6 @@ public:
 	// The position relative to the start of the path
 	fPoint relativePosition = fPoint(0.0f, 0.0f);
 
-
-
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;
 
@@ -97,6 +95,7 @@ public:
 
 	int delay = 15;
 	int delayShoot = 700;
+	int delayCanon= 700;
 	int delayKnife = 500;
 	int deathAnimDelay = 50;
 

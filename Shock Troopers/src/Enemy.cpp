@@ -36,86 +36,55 @@ void Enemy::Update() {
     StateMachine();
 }
 
+#include <cmath>
+
 int Enemy::GetPlayerDirection() {
-	// Get the player position
-	fPoint playerPos = App->player->position;
+    // Get the player position
+    fPoint playerPos = App->player->position;
 
-	playerPos.x += App->player->collider->rect.w/2;
-	playerPos.y += App->player->collider->rect.h/2;
+    // Calculate the direction vector from enemy position to player position
+    fPoint enemyPos = position;
+    fPoint direction = playerPos - enemyPos;
 
-	// Calculate the direction vector from enemy position to player position
-	fPoint enemyPos = position;
+    // Calculate the angle between the enemy and the player
+    float angle = atan2(direction.y, direction.x);
 
-	enemyPos.x += collider->rect.w/2;
-	enemyPos.y += collider->rect.h/2;
+    // Convert the angle to degrees
+    float angleDegrees = angle * (180.0f / M_PI);
 
-	fPoint direction = playerPos - enemyPos;
+    // Determine the player direction based on the angle
+    int playerDirection = 0;
 
-	// Determine the player direction based on the direction vector
-	int playerDirection = 0;
+    if (angleDegrees >= -22.5f && angleDegrees < 22.5f) {
+        playerDirection = 5; // Right
+    }
+    else if (angleDegrees >= 22.5f && angleDegrees < 67.5f) {
+        playerDirection = 3; // Down-Right
+    }
+    else if (angleDegrees >= 67.5f && angleDegrees < 112.5f) {
+        playerDirection = 7; // Down
+    }
+    else if (angleDegrees >= 112.5f && angleDegrees < 157.5f) {
+        playerDirection = 4; // Down-Left
+    }
+    else if (angleDegrees >= 157.5f || angleDegrees < -157.5f) {
+        playerDirection = 6; // Left
+    }
+    else if (angleDegrees >= -157.5f && angleDegrees < -112.5f) {
+        playerDirection = 2; // Up-Left
+    }
+    else if (angleDegrees >= -112.5f && angleDegrees < -67.5f) {
+        playerDirection = 8; // Up
+    }
+    else if (angleDegrees >= -67.5f && angleDegrees < -22.5f) {
+        playerDirection = 1; // Up-Right
+    }
 
-	if (direction.y < 0) {
-		// Player is above the enemy
-		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
-
-			playerDirection = 8; // Up
-
-		}
-		else if (direction.x < 0) {
-
-			playerDirection = 2; // Up-Left
-
-		}
-		else {
-
-			playerDirection = 1; // Up-Right
-
-		}
-
-	}
-	else if (direction.y > 0) {
-
-		// Player is below the enemy
-		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
-
-			playerDirection = 7; // Down
-
-		}
-		else if (direction.x < 0) {
-
-			playerDirection = 4; // Down-Left
-
-		}
-		else {
-
-			playerDirection = 3; // Down-Right
-		}
-
-	}
-	else {
-		// Player is at the same height as the enemy
-		if (direction.x < 0) {
-
-			playerDirection = 6; // Left
-
-		}
-		else if (direction.x > 0) {
-
-			playerDirection = 5; // Right
-
-		}
-		else {
-
-			// Player is at the exact position as the enemy (unlikely scenario)
-			playerDirection = 0; // No direction
-
-		}
-
-	}
-
-	// Return the player direction
-	return playerDirection;
+    // Return the player direction
+    return playerDirection;
 }
+
+
 
 int Enemy::GetPlayerDirectionBelow() {
     // Get the player position

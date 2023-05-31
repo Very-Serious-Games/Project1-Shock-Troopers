@@ -107,7 +107,7 @@ void Enemy_Tank::idleAnimation(int direction) {
 }
 
 void Enemy_Tank::hitAnimation(int direction) {
-    currentAnim2 = &moveAnim;
+    currentAnim2 = &hitMoveAnim;
     switch (direction) {
     case 1: //UR
         currentAnim = &hitIdleAnimUpRight;
@@ -149,6 +149,9 @@ void Enemy_Tank::StateMachine() {
             state = Enemy_State::ATTACK;
             LOG("state changed to ATTACK");
         }
+        if (isHitted) {
+            state = Enemy_State::HIT;
+        }
         break;
     case Enemy_State::ATTACK:
         idleAnimation(GetPlayerDirection());
@@ -160,6 +163,9 @@ void Enemy_Tank::StateMachine() {
         if (this->health == 0) {
             state = Enemy_State::DEATH;
             LOG("state changed to DEATH");
+        }
+        if (isHitted) {
+            state = Enemy_State::HIT;
         }
         break;
     case Enemy_State::DEATH:

@@ -190,22 +190,16 @@ void Enemy_TankBoss::grenade() {
 void Enemy_TankBoss::missileRain() {
     int numMissiles = rand() % 8 + 3; // Generate a random number between 3 and 10
 
-    //for (int i = 0; i < numMissiles; ++i) {
-        
-        //Particle* missile = App->particles->AddParticle(App->particles->playerShot, rand() % SCREEN_WIDTH + 5, position.y + 200, 7 /*DOWN*/, Collider::Type::ENEMY_SHOT);
-        //missile->collider->AddListener(NULL);
-        //App->audio->PlayFx(/*sound effect*/NULL);
     delayShoot--;
     if (delayShoot == 0) {
-        Particle* missile = App->particles->AddParticle(App->particles->playerShot, position.x + (rand() % SCREEN_WIDTH), position.y + 10, 7 /*DOWN*/, Collider::Type::ENEMY_SHOT);
-        missile->collider->AddListener(NULL);
-        App->audio->PlayFx(/*sound effect*/NULL);
-        delayShoot = 100;
+        for (int i = 0; i < numMissiles; ++i) {
+            Particle* missile = App->particles->AddParticle(App->particles->playerShot, position.x + (rand() % SCREEN_WIDTH), position.y + 10, 7 /*DOWN*/, Collider::Type::ENEMY_SHOT);
+            missile->collider->AddListener(NULL);
+            App->audio->PlayFx(/*sound effect*/NULL);
+        }
+        delayShoot = 700;
     }
-        
-    //}
 }
-
 
 void Enemy_TankBoss::missileLaunch() {
 
@@ -228,36 +222,53 @@ void Enemy_TankBoss::deathAnimation() {
 void Enemy_TankBoss::idleAnimation(int direction, int directionBelow) {
     botCurrentAnim = &botAnimMoving;
     switch (direction) {
-    case 1: //UR - Down-Right (60°)
+    case 1: //UR
         topCurrentAnim = &topAnimUpRight;
-        midCurrentAnim = &midAnimDownRight;
         break;
-    case 2: //UL - Down-Left (120°)
+    case 2: //UL
         topCurrentAnim = &topAnimUpLeft;
-        midCurrentAnim = &midAnimDownLeft;
         break;
-    case 3: //DR - Right (180°)
+    case 3: //DR
         topCurrentAnim = &topAnimDownRight;
-        midCurrentAnim = &midAnimRight;
         break;
-    case 4: //DL - Left (0°)
+    case 4: //DL
         topCurrentAnim = &topAnimDownLeft;
-        midCurrentAnim = &midAnimLeft;
         break;
-    case 5: //R - Down-Right-Diagonal (135°)
+    case 5: //R
         topCurrentAnim = &topAnimRight;
-        midCurrentAnim = &midAnimDownRightDiagonal;
         break;
-    case 6: //L - Down-Left-Diagonal (45°)
+    case 6: //L
         topCurrentAnim = &topAnimLeft;
-        midCurrentAnim = &midAnimDownLeftDiagonal;
         break;
-    case 7: //D - Below (90°)
+    case 7: //D
         topCurrentAnim = &topAnimDown;
-        midCurrentAnim = &midAnimDown;
         break;
     case 8: //U
         topCurrentAnim = &topAnimUp;
+        break;
+    }
+
+    switch (directionBelow) {
+    case 1: // Down-Right
+        midCurrentAnim = &midAnimDownRight;
+        break;
+    case 2: // Down-Left
+        midCurrentAnim = &midAnimDownLeft;
+        break;
+    case 3: // Right
+        midCurrentAnim = &midAnimRight;
+        break;
+    case 4: // Left
+        midCurrentAnim = &midAnimLeft;
+        break;
+    case 5: // Down-Right-Diagonal
+        midCurrentAnim = &midAnimDownRightDiagonal;
+        break;
+    case 6: // Down-Left-Diagonal
+        midCurrentAnim = &midAnimDownLeftDiagonal;
+        break;
+    case 7: // Below
+        midCurrentAnim = &midAnimDown;
         break;
     }
 }
@@ -265,36 +276,53 @@ void Enemy_TankBoss::idleAnimation(int direction, int directionBelow) {
 void Enemy_TankBoss::hitAnimation(int direction, int directionBelow) {
     botCurrentAnim = &hitBotAnimMoving;
     switch (direction) {
-    case 1: //UR - Down-Right (60°)
+    case 1: // UR
         topCurrentAnim = &hitTopAnimUpRight;
+        break;
+    case 2: // UL
+        topCurrentAnim = &hitTopAnimUpLeft;
+        break;
+    case 3: // DR
+        topCurrentAnim = &hitTopAnimDownRight;
+        break;
+    case 4: // DL
+        topCurrentAnim = &hitTopAnimDownLeft;
+        break;
+    case 5: // R
+        topCurrentAnim = &hitTopAnimRight;
+        break;
+    case 6: // L
+        topCurrentAnim = &hitTopAnimLeft;
+        break;
+    case 7: // D
+        topCurrentAnim = &hitTopAnimDown;
+        break;
+    case 8: // U
+        topCurrentAnim = &hitTopAnimUp;
+        break;
+    };
+
+    switch (directionBelow) {
+    case 1: // Down-Right
         midCurrentAnim = &hitMidAnimDownRight;
         break;
-    case 2: //UL - Down-Left (120°)
-        topCurrentAnim = &hitTopAnimUpLeft;
+    case 2: // Down-Left
         midCurrentAnim = &hitMidAnimDownLeft;
         break;
-    case 3: //DR - Right (180°)
-        topCurrentAnim = &hitTopAnimDownRight;
+    case 3: // Right
         midCurrentAnim = &hitMidAnimRight;
         break;
-    case 4: //DL - Left (0°)
-        topCurrentAnim = &hitTopAnimDownLeft;
+    case 4: // Left
         midCurrentAnim = &hitMidAnimLeft;
         break;
-    case 5: //R - Down-Right-Diagonal (135°)
-        topCurrentAnim = &hitTopAnimRight;
+    case 5: // Down-Right-Diagonal
         midCurrentAnim = &hitMidAnimDownRightDiagonal;
         break;
-    case 6: //L - Down-Left-Diagonal (45°)
-        topCurrentAnim = &hitTopAnimLeft;
+    case 6: // Down-Left-Diagonal
         midCurrentAnim = &hitMidAnimDownLeftDiagonal;
         break;
-    case 7: //D - Below (90°)
-        topCurrentAnim = &hitTopAnimDown;
+    case 7: // Below
         midCurrentAnim = &hitMidAnimDown;
-        break;
-    case 8: //U
-        topCurrentAnim = &hitTopAnimUp;
         break;
     };
 }

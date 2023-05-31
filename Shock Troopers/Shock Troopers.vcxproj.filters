@@ -136,6 +136,8 @@
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy_TankBoss.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
     <ClInclude Include="src\Enemy_Landmine.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
@@ -232,6 +234,8 @@
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy_TankBoss.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
     <ClCompile Include="src\Enemy_Landmine.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>

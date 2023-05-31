@@ -131,9 +131,9 @@ int Enemy::GetPlayerDirectionBelow() {
         } else if (angle >= 30 && angle < 40) {
             playerDirection = 5; // Down-Right-Diagonal
         } else if (angle < 65 && angle >= 40) {
-            playerDirection = 1; // Down-Right
+            playerDirection = 9; // Down-Right
         } else if (angle > 105 && angle <= 120) {
-            playerDirection = 2; // Down-Left
+            playerDirection = 10; // Down-Left
         } else if (angle > 135 || angle < -135) {
             playerDirection = 4; // Left
         } else if (angle < 30 && angle > -30) {

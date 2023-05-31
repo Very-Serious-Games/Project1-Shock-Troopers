@@ -151,10 +151,10 @@ void Enemy_TankBoss::canon() {
     delayCanon--;
     if (delayCanon == 0) {
         // TODO modify shot to be an enemy shot
-        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
         shot->collider->AddListener(NULL);
         App->audio->PlayFx(/*sound effect*/NULL);
-        delayCanon = 700;
+        delayCanon = 50;
     }
 }
 
@@ -207,10 +207,10 @@ void Enemy_TankBoss::missileLaunch() {
 }
 
 void Enemy_TankBoss::Attack() {
-    //canon();
+    canon();
     //shot();
     //grenade();
-    missileRain();
+    //missileRain();
     //missileLaunch();
 }
 
@@ -256,10 +256,10 @@ void Enemy_TankBoss::idleAnimation(int direction, int directionBelow) {
     case 2: // Down-Left
         midCurrentAnim = &midAnimDownLeft;
         break;
-    case 3: // Right
+    case 9: // Right
         midCurrentAnim = &midAnimRight;
         break;
-    case 4: // Left
+    case 10: // Left
         midCurrentAnim = &midAnimLeft;
         break;
     case 5: // Down-Right-Diagonal
@@ -310,10 +310,10 @@ void Enemy_TankBoss::hitAnimation(int direction, int directionBelow) {
     case 2: // Down-Left
         midCurrentAnim = &hitMidAnimDownLeft;
         break;
-    case 3: // Right
+    case 9: // Right
         midCurrentAnim = &hitMidAnimRight;
         break;
-    case 4: // Left
+    case 10: // Left
         midCurrentAnim = &hitMidAnimLeft;
         break;
     case 5: // Down-Right-Diagonal

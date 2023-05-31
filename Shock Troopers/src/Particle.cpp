@@ -115,10 +115,9 @@ void Particle::SetToDelete()
 }
 
 // TODO cambiar esto a codigo mas legible
-
 void Particle::setDirection(int direction) {
-	switch (direction)
-	{
+
+	switch (direction) {
 	case 1: //UR
 		direccion = 1;
 		speed.x = 5;
@@ -167,12 +166,23 @@ void Particle::setDirection(int direction) {
 		speed.y = -5;
 		currentAnimation = &bullet_U;
 		break;
+	case 9: // Down-Right (closer to below)
+		direccion = 9;
+		speed.x = 3;
+		speed.y = 5;
+		currentAnimation = &bullet_D_R;
+		break;
+	case 10: // Down-Left (closer to below)
+		direccion = 10;
+		speed.x = -3;
+		speed.y = 5;
+		currentAnimation = &bullet_D_L;
+		break;
 	default:
 		direccion = 5;
 		speed.x = 5;
 		speed.y = 0;
 		currentAnimation = &bullet_R;
-
 		break;
 	}
 }

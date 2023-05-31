@@ -187,12 +187,36 @@ void Enemy_TankBoss::grenade() {
 
 }
 
+void Enemy_TankBoss::missileRain() {
+    int numMissiles = rand() % 8 + 3; // Generate a random number between 3 and 10
+
+    //for (int i = 0; i < numMissiles; ++i) {
+        
+        //Particle* missile = App->particles->AddParticle(App->particles->playerShot, rand() % SCREEN_WIDTH + 5, position.y + 200, 7 /*DOWN*/, Collider::Type::ENEMY_SHOT);
+        //missile->collider->AddListener(NULL);
+        //App->audio->PlayFx(/*sound effect*/NULL);
+    delayShoot--;
+    if (delayShoot == 0) {
+        Particle* missile = App->particles->AddParticle(App->particles->playerShot, position.x + (rand() % SCREEN_WIDTH), position.y + 10, 7 /*DOWN*/, Collider::Type::ENEMY_SHOT);
+        missile->collider->AddListener(NULL);
+        App->audio->PlayFx(/*sound effect*/NULL);
+        delayShoot = 100;
+    }
+        
+    //}
+}
+
+
+void Enemy_TankBoss::missileLaunch() {
+
+}
+
 void Enemy_TankBoss::Attack() {
-
-    canon();
-    shot();
-    grenade();
-
+    //canon();
+    //shot();
+    //grenade();
+    missileRain();
+    //missileLaunch();
 }
 
 void Enemy_TankBoss::deathAnimation() {
@@ -294,7 +318,7 @@ void Enemy_TankBoss::StateMachine() {
         break;
     case Enemy_State::ATTACK:
         idleAnimation(GetPlayerDirection(), GetPlayerDirectionBelow());
-        //Attack();
+        Attack();
         if (!PlayerIsNear()) {
             state = Enemy_State::IDLE;
             //LOG("state changed to IDLE");

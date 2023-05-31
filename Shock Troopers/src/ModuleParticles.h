@@ -62,6 +62,7 @@ public:
 
 	//Template particle for a laser
 	Particle playerShot;
+	Particle tankMissile;
 
 private:
 	// Particles spritesheet loaded into an SDL Texture

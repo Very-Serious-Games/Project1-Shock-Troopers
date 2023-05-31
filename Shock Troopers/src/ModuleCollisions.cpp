@@ -53,8 +53,10 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::LASER][Collider::Type::LASER] = false;
 
-
 	matrix[Collider::Type::HEAL][Collider::Type::PLAYER] = true;
+
+	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER] = true; // TODO revisar
+	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER_SHOT] = true;
 }
 
 // Destructor

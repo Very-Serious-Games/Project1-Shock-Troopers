@@ -205,6 +205,8 @@ void Enemy::Draw()
 
 	// TODO ajustar posicion a la q se renderizan las partes del boss
 
+    
+
 	if (botCurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(botCurrentAnim->GetCurrentFrame()));
 	}
@@ -213,10 +215,44 @@ void Enemy::Draw()
 		App->render->Blit(texture, position.x, position.y, &(midCurrentAnim->GetCurrentFrame()));
 	}
 
-	if (topCurrentAnim != nullptr) {
-		App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+	switch (GetPlayerDirectionBelow()) {
+	case 1: // Down -Right
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 2: // Down-Left
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 3: // Right
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 4: // Left
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 5: // Down-Right-Diagonal
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 6: // Down-Left-Diagonal
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 7: // Below
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
 	}
-	
+
 }
 
 void Enemy::OnCollision(Collider* collider)

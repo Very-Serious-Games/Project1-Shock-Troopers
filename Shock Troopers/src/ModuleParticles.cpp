@@ -24,17 +24,15 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	// Load particles spritesheet
 
-	texture = App->textures->Load("Assets/Sprites/particles/normal_bullets.png");
+	texture = App->textures->Load("Assets/Sprites/particles/particles.png");
 
-	// Explosion particle
-	explosion.anim.PushBack({274, 296, 33, 30});
-	explosion.anim.PushBack({313, 296, 33, 30});
-	explosion.anim.PushBack({346, 296, 33, 30});
-	explosion.anim.PushBack({382, 296, 33, 30});
-	explosion.anim.PushBack({419, 296, 33, 30});
-	explosion.anim.PushBack({457, 296, 33, 30});
-	explosion.anim.loop = false;
-	explosion.anim.speed = 0.3f;
+	//// Explosion particle
+	//int x = 0;
+	//for (int i = 0; i < 29; ++i)
+	//{
+	//	explosion.anim.PushBack({ x, 104, 64, 63 });
+	//	x += 66;
+	//}
 
 
 	flyingbattleshipShop.anim.PushBack({0, 0, 3, 3});

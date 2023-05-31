@@ -47,6 +47,8 @@ public:
 
 	virtual void deathAnimation();
 
+	virtual void brokenAnimation();
+
 	virtual void spawnAnimation();
 
 	virtual void idleAnimation();
@@ -105,6 +107,7 @@ public:
 	int delayCanon= 700;
 	int delayKnife = 500;
 	int deathAnimDelay = 50;
+	int brokenAnimDelay = 50;
 
 protected:
 	// A ptr to the current animation
@@ -114,6 +117,8 @@ protected:
 	Animation* botCurrentAnim = nullptr;
 
 	Animation deathAnim;
+	Animation idlebrokenAnim;
+	Animation brokenAnim;
 	Animation spawnAnim;
 	Animation idleAnim;
 	Animation attackAnim;

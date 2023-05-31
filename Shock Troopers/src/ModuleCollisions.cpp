@@ -181,6 +181,12 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::STOP_CAM_TRIGGER: // orange
 				App->render->DrawQuad(colliders[i]->rect, 100, 100, 100, alpha);
 				break;
+			case Collider::Type::BRIDGE: // pink
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+				break;
+			case Collider::Type::LANDMINE: // red
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+				break;
 
 			default:
 				break;

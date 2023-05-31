@@ -20,6 +20,8 @@ struct Collider
 		ENEMY_SHOT,
 		HEAL,
 		OBJECT,
+		BRIDGE,
+		LANDMINE,
 		DETECTION_ZONE,
 		KNIFE,
 		STOP_CAM_ZONE,

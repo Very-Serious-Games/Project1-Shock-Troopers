@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "Particle.h"
+#include "ModulePickUp.h"
 
 Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
 
@@ -75,6 +76,8 @@ void Enemy_Crate::StateMachine() {
         break;
     case Enemy_State::DEATH:
         deathAnimation();
+        App->pickUps->SpawnPickUp({ PickUp_Type::HP, (int)position.x, (int)position.y });
+        //SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
 
         if (deathAnimDelay == 0) {
             pendingToDelete = true;

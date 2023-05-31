@@ -2,6 +2,7 @@
 #define __MODULE_PICKUP_H__
 
 #include "Module.h"
+#include "Animation.h"
 
 #define MAX_PICKUP 10
 
@@ -10,8 +11,9 @@ enum class PickUp_Type
 	NO_TYPE,
 	HP,
 	DIAMOND,
-	INVENCIBILITY
+	INVENCIBILIDAD
 };
+
 
 struct PickUpSpawnpoint
 {
@@ -70,13 +72,20 @@ public:
 private:
 
 	// All spawned PickUp in the scene
-	//PickUp* pickUp[MAX_PICKUP] = { nullptr };
+	PickUp* pickUp[MAX_PICKUP] = { nullptr };
 
 	// The PickUp sprite sheet
 	SDL_Texture* texture = nullptr;
 
 	// The audio fx for destroying an PickUp
 	int pickUpDestroyedFx = 0;
+
+	Animation Medkit;
+	Animation PickedMedkit;
+	Animation Diamond;
+	Animation PickedDiamond;
+	Animation NoDamage;
+	Animation PickedNoDamage;
 };
 
 #endif // __MODULE_PickUp_H__

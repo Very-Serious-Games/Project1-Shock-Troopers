@@ -45,11 +45,24 @@ bool SceneLevel1::Start()
 	//TODO spawnear todas las minas
 	//Add landmines
 	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 87, 2330);
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 146, 1631);
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 217, 1597);
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 290, 1563);
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1564, 848);// no spawnea
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1513, 808);// no spawnea
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1635, 808);// no spawnea
 
 	//TODO spawnear todos los objetos
 	//Add objects
-	App->enemies->AddEnemy(Enemy_Type::BRIDGE, 70, 2635);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);
+	App->enemies->AddEnemy(Enemy_Type::BRIDGE, 65, 2624);
+
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 120, 2264);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 330, 1747);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 330, 1790);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 628, 1122);// no spawnea
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1534, 1025);// no spawnea
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1436, 211);// no spawnea
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1338, 211);// no spawnea
 
 
 	App->render->camera.x = 220;

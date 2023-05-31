@@ -38,12 +38,12 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
         deathAnim.PushBack({ disX, disY, 224, 220 });
         disX += 304;
     }
-    deathAnim.speed = 0.2f;
+    deathAnim.speed = 0.7f;
     deathAnim.loop = false;
 
-    path.PushBack({ 0.0f, 0.0f }, 150, &brokenAnim);
+    path.PushBack({ 0.0f, 0.0f }, 300, &brokenAnim);
 
-    path.PushBack({ 0.0f, 0.0f }, 150, &deathAnim);
+    path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
     // TODO cambiar tamaño collider
     collider = App->collisions->AddCollider({ 0, 0, 224, 86 }, Collider::Type::BRIDGE, (Module*)App->enemies);
@@ -54,6 +54,7 @@ void Enemy_Bridge::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
+    currentAnim = path.GetCurrentAnimation();
     //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end
@@ -91,36 +92,32 @@ void Enemy_Bridge::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
-        LOG("state changed to IDLE");
+        LOG("Bridge state changed to IDLE");
         idleAnimation();
         if (this->health <= 10)
         {
             brokenAnimation();
+            if (brokenAnim.HasFinished()) {
+                state = Enemy_State::HIT;
+            }
         }
-        if (brokenAnimDelay == 0) {
-            state = Enemy_State::HIT;
-        }
-        deathAnimDelay--;
         break;
     case Enemy_State::HIT:
-        LOG("state changed to HIT");
+        LOG("Bridge state changed to HIT");
         idlebrokenAnimation();
         if (this->health == 0) {
             state = Enemy_State::DEATH;
         }
         break;
     case Enemy_State::DEATH:
-        LOG("state changed to DEATH");
+        LOG("Bridge state changed to DEATH");
         deathAnimation();
 
-        if (deathAnimDelay == 0) {
+        if (deathAnim.HasFinished()) {
             pendingToDelete = true;
-            LOG("pendingToDelete enemy");
+            LOG("pendingToDelete Bridge");
         }
-        deathAnimDelay--;
-
         break;
-
     default:
         // Handle default state logic
         LOG("ERROR STATE");

@@ -18,8 +18,7 @@ Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
     deathAnim.PushBack({ 448, 0, 64, 54 });
     deathAnim.PushBack({ 512, 0, 64, 54 });
 
-    deathAnim.speed = 0.2f;
-    
+    deathAnim.speed = 0.1f;
 
     //path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
     //path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);

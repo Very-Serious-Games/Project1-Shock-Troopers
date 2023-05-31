@@ -82,7 +82,6 @@ public:
 
 	int delay = 15;
 	int deathAnimDelay = 50;
-	int brokenAnimDelay = 50;
 
 protected:
 	// A ptr to the current animation

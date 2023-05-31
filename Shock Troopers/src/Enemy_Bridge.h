@@ -19,13 +19,7 @@ public:
 
 	void spawnAnimation() override;
 
-	void brokenAnimation() ;
-
-	void idlebrokenAnimation() ;
-
 	void StateMachine() override;
-
-	void OnCollision(Collider* collider) override;
 
 private:
 

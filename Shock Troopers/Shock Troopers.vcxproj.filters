@@ -129,6 +129,9 @@
     <ClInclude Include="src\ModuleUI.h">
       <Filter>Source Files\modules\core</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\Enemy_Crate.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
@@ -136,9 +139,12 @@
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy_TankBoss.h">
+<<<<<<< HEAD
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy_Landmine.h">
+=======
+>>>>>>> parent of 3cad532 (Merge branch 'Nico' into Mario)
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -234,9 +240,12 @@
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy_TankBoss.cpp">
+<<<<<<< HEAD
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy_Landmine.cpp">
+=======
+>>>>>>> parent of 3cad532 (Merge branch 'Nico' into Mario)
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>

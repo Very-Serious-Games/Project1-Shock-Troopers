@@ -1287,16 +1287,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		}
 
-		if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
-
-			if (hp < 0) {
-				hp -= 20;
-			}
-
-			isHitted = true;
-
-		}
-
 	}
 
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {

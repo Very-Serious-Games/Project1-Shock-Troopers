@@ -2,62 +2,31 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "Particle.h"
 
 Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
 
-    spawnAnim.PushBack({ 0, 0, 224, 220 });
+    spawnAnim.PushBack({ 0, 0, 279, 87 });
+    spawnAnim.pingpong = false;
+    spawnAnim.speed = 0.2f;
 
-    idleAnim.PushBack({ 0, 0, 224, 220 });
+    idleAnim.PushBack({ 0, 0 , 279, 87 });
+    
+    deathAnim.PushBack({ 360, 0, 279, 87 });
 
-    int disX = 0;
-    int disY = 0;
-    for (int i = 0; i < 37; ++i)
-    {
-        if (i == 20)
-        {
-            disY += 222;
-            disX = 0;
-        }
-        brokenAnim.PushBack({ disX, disY, 224, 220 });
-        disX += 304;
-    }
-    brokenAnim.speed = 0.2f;
-    brokenAnim.loop = false;
-
-    idlebrokenAnim.PushBack({ 0, 444, 224, 220 });
-
-    disY = 444;
-    disX = 0;
-    for (int j = 0; j < 106; ++j)
-    {
-        if (j == 20 or j == 40 or j == 60 or j == 80)
-        {
-            disY += 222;
-            disX = 0;
-        }
-        deathAnim.PushBack({ disX, disY, 224, 220 });
-        disX += 304;
-    }
-    deathAnim.speed = 0.2f;
-    deathAnim.loop = false;
-
-    path.PushBack({ 0.0f, 0.0f }, 150, &brokenAnim);
-
-    path.PushBack({ 0.0f, 0.0f }, 150, &deathAnim);
+    path.PushBack({ 1.0f, 0.0f }, 150, &idleAnim);
+    path.PushBack({ -1.0f, 0.0f }, 150, &idleAnim);
 
     // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 0, 0, 224, 86 }, Collider::Type::BRIDGE, (Module*)App->enemies);
-    health = 20;
+    collider = App->collisions->AddCollider({ 0, 0, 279, 87 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
 void Enemy_Bridge::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    //currentAnim = &spawnAnim;
+    currentAnim = &spawnAnim;
 
-    // Call to the base class. It must be called at the end
-    // It will update the collider depending on the position
     Enemy::Update();
 }
 
@@ -67,14 +36,6 @@ void Enemy_Bridge::deathAnimation() {
 
 void Enemy_Bridge::spawnAnimation() {
     currentAnim = &spawnAnim;
-}
-
-void Enemy_Bridge::brokenAnimation() {
-    currentAnim = &brokenAnim;
-}
-
-void Enemy_Bridge::idlebrokenAnimation() {
-    currentAnim = &idlebrokenAnim;
 }
 
 void Enemy_Bridge::idleAnimation() {
@@ -88,29 +49,17 @@ void Enemy_Bridge::StateMachine() {
         // Handle spawn state logic
         if (/* some condition for idle */true) {
             state = Enemy_State::IDLE;
+            LOG("state changed to IDLE");
         }
         break;
     case Enemy_State::IDLE:
-        LOG("state changed to IDLE");
         idleAnimation();
-        if (this->health <= 10)
-        {
-            brokenAnimation();
-        }
-        if (brokenAnimDelay == 0) {
-            state = Enemy_State::HIT;
-        }
-        deathAnimDelay--;
-        break;
-    case Enemy_State::HIT:
-        LOG("state changed to HIT");
-        idlebrokenAnimation();
         if (this->health == 0) {
             state = Enemy_State::DEATH;
+            LOG("state changed to DEATH");
         }
         break;
     case Enemy_State::DEATH:
-        LOG("state changed to DEATH");
         deathAnimation();
 
         if (deathAnimDelay == 0) {
@@ -125,15 +74,5 @@ void Enemy_Bridge::StateMachine() {
         // Handle default state logic
         LOG("ERROR STATE");
         break;
-    }
-}
-
-void Enemy_Bridge::OnCollision(Collider* collider) {
-    if (collider->type == Collider::Type::PLAYER_SHOT) {
-        health -= 10;
-        if (health == 0) {
-            App->audio->PlayFx(destroyedFx);
-            SetToDelete();
-        }
     }
 }

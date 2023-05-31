@@ -56,7 +56,6 @@ public:
 	Animation bullet_U_L;
 	Animation bullet_D_R;
 	Animation bullet_D_L;
-	Animation explosion;
 
 	// Defines wether the particle is alive or not
 	// Particles will be set to not alive until "spawnTime" is reached

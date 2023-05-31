@@ -170,10 +170,6 @@ void Enemy::deathAnimation()
 {
 }
 
-void Enemy::brokenAnimation()
-{
-}
-
 void Enemy::spawnAnimation()
 {
 }

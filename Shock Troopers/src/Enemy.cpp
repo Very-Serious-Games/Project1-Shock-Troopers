@@ -195,51 +195,48 @@ void Enemy::Draw()
 		App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
 
 	// TODO ajustar posicion a la q se renderizan las partes del boss
-
-    
-
 	if (botCurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(botCurrentAnim->GetCurrentFrame()));
 	}
 
 	if (midCurrentAnim != nullptr) {
-		App->render->Blit(texture, position.x, position.y, &(midCurrentAnim->GetCurrentFrame()));
+		App->render->Blit(texture, position.x+3, position.y+10, &(midCurrentAnim->GetCurrentFrame()));
 	}
 
 	switch (GetPlayerDirectionBelow()) {
-	case 1: // Down -Right
+	case 9: // Down-Right
 		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, position.x+48, position.y+22, &(topCurrentAnim->GetCurrentFrame()));
 		}
 		break;
-	case 2: // Down-Left
+	case 10: // Down-Left
 		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, position.x+48, position.y+23, &(topCurrentAnim->GetCurrentFrame()));
 		}
 		break;
 	case 3: // Right
 		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, position.x+32, position.y+16, &(topCurrentAnim->GetCurrentFrame()));
 		}
 		break;
 	case 4: // Left
 		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, position.x+36, position.y+32, &(topCurrentAnim->GetCurrentFrame()));
 		}
 		break;
 	case 5: // Down-Right-Diagonal
 		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, position.x+42, position.y+16, &(topCurrentAnim->GetCurrentFrame()));
 		}
 		break;
 	case 6: // Down-Left-Diagonal
 		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, position.x+45, position.y+33, &(topCurrentAnim->GetCurrentFrame()));
 		}
 		break;
 	case 7: // Below
 		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+			App->render->Blit(texture, position.x+48, position.y+22, &(topCurrentAnim->GetCurrentFrame()));
 		}
 		break;
 	default:

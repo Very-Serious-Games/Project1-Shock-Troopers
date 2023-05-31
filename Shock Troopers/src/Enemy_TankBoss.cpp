@@ -271,16 +271,16 @@ void Enemy_TankBoss::idleAnimation(int direction, int directionBelow) {
     }
 
     switch (directionBelow) {
-    case 1: // Down-Right
+    case 9: // Down-Right
         midCurrentAnim = &midAnimDownRight;
         break;
-    case 2: // Down-Left
+    case 10: // Down-Left
         midCurrentAnim = &midAnimDownLeft;
         break;
-    case 9: // Right
+    case 3: // Right
         midCurrentAnim = &midAnimRight;
         break;
-    case 10: // Left
+    case 4: // Left
         midCurrentAnim = &midAnimLeft;
         break;
     case 5: // Down-Right-Diagonal
@@ -325,16 +325,16 @@ void Enemy_TankBoss::hitAnimation(int direction, int directionBelow) {
     };
 
     switch (directionBelow) {
-    case 1: // Down-Right
+    case 9: // Down-Right
         midCurrentAnim = &hitMidAnimDownRight;
         break;
-    case 2: // Down-Left
+    case 10: // Down-Left
         midCurrentAnim = &hitMidAnimDownLeft;
         break;
-    case 9: // Right
+    case 3: // Right
         midCurrentAnim = &hitMidAnimRight;
         break;
-    case 10: // Left
+    case 4: // Left
         midCurrentAnim = &hitMidAnimLeft;
         break;
     case 5: // Down-Right-Diagonal

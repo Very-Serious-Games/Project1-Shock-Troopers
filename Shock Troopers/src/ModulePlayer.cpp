@@ -12,6 +12,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <SDL/include/SDL_timer.h>
+#include "ModuleUI.h"
 
 using namespace std;
 
@@ -1203,10 +1204,6 @@ bool ModulePlayer::Start() {
 	//Setting up player hitbox
 	collider = App->collisions->AddCollider({ (int)position.x + 5,(int)position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
 
-
-	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/fonts/rtype_font3.png", lookupTable, 2);
-
 	return ret;
 }
 
@@ -1261,16 +1258,7 @@ Update_Status ModulePlayer::PostUpdate() {
 		//Obtenemos position de las diferentes partes de la UI en base al jugador y la camara
 		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
 		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
-
-		//Mostramos por pantalla la UI
-		//App->render->Blit(textureHp,x - 10, y, NULL);
-		//App->render->Blit(textureP1, x - 20, y - 50, NULL);
-		//App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
 	}
-
-	//Mostramos por pantalla el score
-	sprintf_s(scoreText, 10, "%7d", score);
-	App->fonts->BlitText(30, 5, scoreFont, scoreText);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -1372,7 +1360,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY) {
-		score += 23;
+		App->ui->updateScore(300);
 	}
 
 }

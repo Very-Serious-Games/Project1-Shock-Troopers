@@ -1,11 +1,11 @@
 #include <stdio.h>
+#include "ModuleUI.h"
 #include "ModulePlayer.h"
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModulePickUp.h"
 #include "ModuleInput.h"
 #include "ModuleRender.h"
-#include "ModuleUI.h"
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
@@ -64,6 +64,12 @@ void ModuleUI::updateHp() {
 	}
 }
 
+void ModuleUI::updateScore(int points)
+{
+	LOG("Updating Score");
+	score += points;
+}
+
 bool ModuleUI::Start()
 {
 	LOG("Loading UI textures");
@@ -73,6 +79,11 @@ bool ModuleUI::Start()
 	// Starting sprite
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
+
+	// Starting fonts
+	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
+	scoreFont = App->fonts->Load("Assets/fonts/rtype_font3.png", lookupTable, 2);
+
 
 	return ret;
 }
@@ -93,9 +104,13 @@ Update_Status ModuleUI::PostUpdate()
 	y = App->render->camera.y + 2;
 
 	//Mostramos por pantalla la UI
-	App->render->Blit(textureHp, x + 5, y + 30, NULL);
+	App->render->Blit(textureHp, x + 3, y + 40, NULL);
 	App->render->Blit(textureP1, x, y, NULL);
-	App->render->Blit(textureWeapon, x + 20, y + 200, NULL);
+	App->render->Blit(textureWeapon, x + 10, y + 200, NULL);
+
+	//Mostramos por pantalla el score
+	App->fonts->BlitText(20, 3, scoreFont, scoreText);
+	sprintf_s(scoreText, 10, "%7d", score);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

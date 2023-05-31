@@ -55,29 +55,31 @@ Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
 
     deathAnim.PushBack(                     {109,374,109,163});
 
-    soldierGrenadeRightAnim.PushBack({109, 535, 50, 38});
-    soldierGrenadeRightAnim.PushBack({159, 535, 50, 38});
-    soldierGrenadeRightAnim.PushBack({209, 535, 50, 38});
-    soldierGrenadeRightAnim.PushBack({9, 535, 50, 38});
-    soldierGrenadeRightAnim.PushBack({59, 535, 50, 38});
+    soldierGrenadeRightAnim.PushBack(       {109, 535, 50, 38});
+    soldierGrenadeRightAnim.PushBack(       {159, 535, 50, 38});
+    soldierGrenadeRightAnim.PushBack(       {209, 535, 50, 38});
+    soldierGrenadeRightAnim.PushBack(       {9, 535, 50, 38});
+    soldierGrenadeRightAnim.PushBack(       {59, 535, 50, 38});
 
-    soldierGrenadeFrontAnim.PushBack({});
-    soldierGrenadeFrontAnim.PushBack({});
-    soldierGrenadeFrontAnim.PushBack({});
-    soldierGrenadeFrontAnim.PushBack({});
-    soldierGrenadeFrontAnim.PushBack({});
+    soldierGrenadeFrontAnim.PushBack(       {0, 612, 38, 50});
+    soldierGrenadeFrontAnim.PushBack(       {38, 612, 38, 50});
+    soldierGrenadeFrontAnim.PushBack(       {155, 612, 38, 50});
+    soldierGrenadeFrontAnim.PushBack(       {117, 612, 38, 50});
+    soldierGrenadeFrontAnim.PushBack(       {79, 612, 38, 50});
 
-    soldierGrenadeLeftAnim.PushBack({200, 574, 50, 38});
-    soldierGrenadeLeftAnim.PushBack({150, 574, 50, 38});
-    soldierGrenadeLeftAnim.PushBack({100, 574, 50, 38});
-    soldierGrenadeLeftAnim.PushBack({50, 574, 50, 38});
-    soldierGrenadeLeftAnim.PushBack({0, 574, 50, 38});
+    soldierGrenadeLeftAnim.PushBack(        {200, 574, 50, 38});
+    soldierGrenadeLeftAnim.PushBack(        {150, 574, 50, 38});
+    soldierGrenadeLeftAnim.PushBack(        {100, 574, 50, 38});
+    soldierGrenadeLeftAnim.PushBack(        {50, 574, 50, 38});
+    soldierGrenadeLeftAnim.PushBack(        {0, 574, 50, 38});
 
-    soldierHideAnim.PushBack({});
+    soldierHideAnim.PushBack(               {28, 697, 21, 15});
+    //no need to set speed since it only has 1 frame
 
-    soldierPointAnim.PushBack({});
+    soldierPointAnim.PushBack({0, 661, 27, 51}); //28?
+    //no need to set speed since it only has 1 frame
 
-    soldierUpAnim.PushBack({0, 713, 30, 53});
+    soldierUpAnim.PushBack({0, 713, 30, 53});  
     soldierUpAnim.PushBack({31, 713, 30, 53});
     soldierUpAnim.PushBack({62, 713, 30, 53});
     soldierUpAnim.PushBack({93, 713, 30, 53});
@@ -88,6 +90,10 @@ Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
     soldierUpAnim.PushBack({248, 713, 30, 55});
 
     botAnimMoving.speed = 0.1f;
+    soldierGrenadeFrontAnim.speed = 0.1f;
+    soldierGrenadeLeftAnim.speed = 0.1f;
+    soldierGrenadeRightAnim.speed = 0.1f;
+    soldierUpAnim.speed = 0.1f;
 
     // TODO cambiar tamaño collider
     collider = App->collisions->AddCollider({ 0, 0, 109, 163 }, Collider::Type::ENEMY, (Module*)App->enemies);

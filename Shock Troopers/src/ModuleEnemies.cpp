@@ -12,6 +12,7 @@
 #include "Enemy_Bridge.h"
 #include "Enemy_Crate.h"
 #include "Enemy_Landmine.h"
+#include "Enemy_Sandbag.h"
 
 #define SPAWN_MARGIN 50
 
@@ -34,6 +35,7 @@ bool ModuleEnemies::Start()
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
 	textureLandmines = App->textures->Load("Assets/Sprites/characters/landmine.png");
 	textureBridge = App->textures->Load("Assets/Sprites/background/level1/stone-bridge.png");
+	textureSandbags = App->textures->Load("Assets/Sprites/background/level1/sandbags.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -187,6 +189,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_Landmine(info.x, info.y);
 					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
 					enemies[i]->texture = textureLandmines;
+					break;
+				case Enemy_Type::SANDBAG:
+					enemies[i] = new Enemy_Sandbag(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureSandbags;
 					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;

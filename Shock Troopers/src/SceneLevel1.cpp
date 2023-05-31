@@ -64,6 +64,7 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 1436, 211);// no spawnea
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 1338, 211);// no spawnea
 
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 132, 2921);
 
 	App->render->camera.x = 220;
 	App->render->camera.y = 2800;

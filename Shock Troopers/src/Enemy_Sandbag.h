@@ -1,14 +1,14 @@
-#ifndef __ENEMY_BRIDGE_H__
-#define __ENEMY_BRIDGE_H__
+#ifndef __ENEMY_SANDBAG_H__
+#define __ENEMY_SANDBAG_H__
 
 #include "Enemy.h"
 #include "Path.h"
 #include "Module.h"
 
-class Enemy_Bridge : public Enemy {
+class Enemy_Sandbag : public Enemy {
 public:
 
-	Enemy_Bridge(int x, int y);
+	Enemy_Sandbag(int x, int y);
 
 
 	void Update() override;
@@ -19,9 +19,9 @@ public:
 
 	void spawnAnimation() override;
 
-	void brokenAnimation() ;
+	void brokenAnimation();
 
-	void idlebrokenAnimation() ;
+	void idlebrokenAnimation();
 
 	void StateMachine() override;
 
@@ -31,8 +31,8 @@ private:
 
 	Path path;
 
-	SDL_Texture* textureBridge = nullptr;
+	SDL_Texture* textureSandbag = nullptr;
 
 };
 
-#endif // __ENEMY_BRIDGE_H__
+#endif

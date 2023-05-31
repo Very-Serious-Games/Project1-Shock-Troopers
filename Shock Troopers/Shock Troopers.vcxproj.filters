@@ -132,6 +132,9 @@
     <ClInclude Include="src\Enemy_Landmine.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
+    <ClInclude Include="src\Enemy_Sandbag.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Application.cpp">
@@ -222,6 +225,9 @@
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy_Landmine.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Sandbag.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>

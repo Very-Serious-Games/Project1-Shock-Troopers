@@ -12,6 +12,7 @@ enum class Enemy_Type
 	FLYING_BATTLESHIP,
 	BRIDGE,
 	CRATE,
+	SANDBAG,
 	LANDMINE,
 };
 
@@ -82,6 +83,7 @@ private:
 	SDL_Texture* textureBridge = nullptr;
 	SDL_Texture* textureCrate = nullptr;
 	SDL_Texture* textureLandmines = nullptr;
+	SDL_Texture* textureSandbags = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

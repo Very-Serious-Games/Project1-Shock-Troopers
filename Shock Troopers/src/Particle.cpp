@@ -177,7 +177,7 @@ void Particle::setDirection(int direction) {
 		speed.y = -5;
 		currentAnimation = &bullet_U;
 		break;
-	case 9: //Exposion
+	case 11: //Exposion
 		direccion = 7;
 		speed.x = 0;
 		speed.y = 0;

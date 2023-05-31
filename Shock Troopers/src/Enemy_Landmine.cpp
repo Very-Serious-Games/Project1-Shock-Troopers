@@ -84,7 +84,7 @@ void Enemy_Landmine::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER) {
         health--;
         if (health == 0) {
-            App->particles->AddParticle(App->particles->explosion, position.x, position.y, 9, Collider::Type::NONE);
+            App->particles->AddParticle(App->particles->explosion, position.x, position.y, 11, Collider::Type::NONE);
             App->audio->PlayFx(destroyedFx);
             SetToDelete();
         }

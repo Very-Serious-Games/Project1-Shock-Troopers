@@ -123,36 +123,40 @@ int Enemy::GetPlayerDirectionBelow() {
 
     if (direction.y > 0) {
         // Player is below the enemy
-        
+
         float angle = atan2f(direction.y, direction.x) * 180.0f / M_PI;
 
-        if (angle > -45 && angle <= 45) {
+        LOG("angle: %f", angle);
+
+        if (angle >= 0 && angle <= 180) {
             playerDirection = 7; // Below (90°)
-        }
-        else if (angle > 45 && angle <= 90) {
-            playerDirection = 4; // Left (0°)
-        }
-        else if (angle > 90 && angle <= 135) {
-            playerDirection = 3; // Right (180°)
-        }
-        else if (angle > 135 && angle <= 165) {
+            LOG("below");
+        } else if (angle > 150 || angle < -150) {
+            playerDirection = 4; // Left (1800°)
+            LOG("left");
+        } else if (angle < 30 && angle > -30) {
+            playerDirection = 3; // Right (0°)
+            LOG("right");
+        } else if (angle > 30 && angle <= 75) {
             playerDirection = 6; // Down-Left-Diagonal (45°)
-        }
-        else if (angle > -165 && angle <= -135) {
+            LOG("down-left-diagonal");
+        } else if (angle >= 105 && angle < 150) {
             playerDirection = 5; // Down-Right-Diagonal (135°)
-        }
-        else if (angle > -135 && angle <= -75) {
+            LOG("down-right-diagonal");
+        } else if (angle > 75 && angle <= 105) {
             playerDirection = 2; // Down-Left (120°)
-        }
-        else if (angle > -75 && angle <= -15) {
+            LOG("down-left");
+        } else if (angle < -30 && angle >= -75) {
             playerDirection = 1; // Down-Right (60°)
+            LOG("down-right");
         }
     }
 
     // Return the player direction
     return playerDirection;
-
 }
+
+
 
 void Enemy::StateMachine()
 {

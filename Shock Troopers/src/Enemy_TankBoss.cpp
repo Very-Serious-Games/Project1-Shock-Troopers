@@ -30,21 +30,21 @@ Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
     hitTopAnimUpLeft.PushBack(              {52*3,0,52,31});
     hitTopAnimUpRight.PushBack(             {52*2,0,52,31});
                                      
-    midAnimDown.PushBack(                   {114*7,62,114,74});
+    midAnimDown.PushBack(                   {114*0,62,114,74});
     midAnimLeft.PushBack(                   {114*6,62,114,74});
     midAnimRight.PushBack(                  {114*5,62,114,74});
-    midAnimDownLeft.PushBack(               {114*1,62,114,74});
-    midAnimDownRight.PushBack(              {114*2,62,114,74});
+    midAnimDownLeft.PushBack(               {114*2,62,114,74});
+    midAnimDownRight.PushBack(              {114*1,62,114,74});
     midAnimDownLeftDiagonal.PushBack(       {114*4,62,114,74});
     midAnimDownRightDiagonal.PushBack(      {114*3,62,114,74});
                                      
-    hitMidAnimDown.PushBack(                {114*7,136,114,74});
-    hitMidAnimLeft.PushBack(                {114*6,136,114,74});
-    hitMidAnimRight.PushBack(               {114*5,136,114,74});
+    hitMidAnimDown.PushBack(                {114*6,136,114,74});
+    hitMidAnimLeft.PushBack(                {114*5,136,114,74});
+    hitMidAnimRight.PushBack(               {114*4,136,114,74});
     hitMidAnimDownLeft.PushBack(            {114*1,136,114,74});
-    hitMidAnimDownRight.PushBack(           {114*2,136,114,74});
-    hitMidAnimDownLeftDiagonal.PushBack(    {114*4,136,114,74});
-    hitMidAnimDownRightDiagonal.PushBack(   {114*3,136,114,74});
+    hitMidAnimDownRight.PushBack(           {114*0,136,114,74});
+    hitMidAnimDownLeftDiagonal.PushBack(    {114*3,136,114,74});
+    hitMidAnimDownRightDiagonal.PushBack(   {114*2,136,114,74});
 
     botAnimMoving.PushBack(                 {0,210,109,163});
     botAnimMoving.PushBack(                 {109,210,109,163});

@@ -154,7 +154,7 @@ void Enemy_TankBoss::canon() {
         Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
         shot->collider->AddListener(NULL);
         App->audio->PlayFx(/*sound effect*/NULL);
-        delayCanon = 50;
+        delayCanon = 700;
     }
 }
 
@@ -203,15 +203,36 @@ void Enemy_TankBoss::missileRain() {
 }
 
 void Enemy_TankBoss::missileLaunch() {
+    // Get the player position
+    fPoint playerPos = App->player->position;
 
+    // Calculate the direction vector from enemy position to player position
+    fPoint enemyPos = position;
+    fPoint direction = playerPos - enemyPos;
+
+    // Normalize the direction vector
+    float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+    if (length != 0) {
+        direction.x /= length;
+        direction.y /= length;
+    }
+
+    delayMissile--;
+    if (delayMissile == 0) {
+        // TODO modify shot to be an missile
+        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+        shot->collider->AddListener(NULL);
+        App->audio->PlayFx(/*sound effect*/NULL);
+        delayMissile = 700;
+    }
 }
 
 void Enemy_TankBoss::Attack() {
     canon();
-    //shot();
+    shot();
     //grenade();
-    //missileRain();
-    //missileLaunch();
+    missileRain();
+    missileLaunch();
 }
 
 void Enemy_TankBoss::deathAnimation() {

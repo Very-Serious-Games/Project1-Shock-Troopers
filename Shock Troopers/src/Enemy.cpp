@@ -240,12 +240,20 @@ void Enemy::Draw()
 		}
 		break;
 	default:
-		if (topCurrentAnim != nullptr) {
-			App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+		switch (GetPlayerDirection()) {
+		case 1:
+			if (topCurrentAnim != nullptr) {
+				App->render->Blit(texture, position.x + 32, position.y + 16, &(topCurrentAnim->GetCurrentFrame()));
+			}
+			break;
+		case 2:
+			if (topCurrentAnim != nullptr) {
+				App->render->Blit(texture, position.x + 36, position.y + 32, &(topCurrentAnim->GetCurrentFrame()));
+			}
+			break;
 		}
 		break;
 	}
-	
 
 }
 

@@ -132,10 +132,13 @@
     <ClInclude Include="resource.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enemy_Landmine.h">
+    <ClInclude Include="src\Enemy_TankBoss.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enemy_TankBoss.h">
+    <ClInclude Include="src\Enemy_Tank.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_Crate.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -227,7 +230,10 @@
     <ClCompile Include="src\Enemy_TankBoss.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy_Landmine.cpp">
+    <ClCompile Include="src\Enemy_Tank.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Crate.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>

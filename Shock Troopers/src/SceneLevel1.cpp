@@ -45,6 +45,8 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20); // (493 / 2) - (128 / 2) = 183
 
 	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1355, 70);
+
+	App->enemies->AddEnemy(Enemy_Type::TANK, 128, 2300);
 	
 	//Add objects
 	//App->enemies->AddEnemy(Enemy_Type::BRIDGE, 125, 1822);

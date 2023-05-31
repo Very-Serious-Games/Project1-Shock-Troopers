@@ -12,6 +12,7 @@
 #include "Enemy_Bridge.h"
 #include "Enemy_Crate.h"
 #include "Enemy_TankBoss.h"
+#include "Enemy_Tank.h"
 
 #define SPAWN_MARGIN 5000
 
@@ -32,6 +33,7 @@ bool ModuleEnemies::Start()
 {
 	// TODO cargar texturas y fx enemigos
 	textureTankBoss = App->textures->Load("Assets/Sprites/characters/tank_boss.png");
+	textureTank = App->textures->Load("Assets/Sprites/characters/tank_spritesheet.png");
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/Soldiers-Infantry.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
@@ -191,6 +193,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_TankBoss(info.x, info.y);
 					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureTankBoss;
+					break;
+				case Enemy_Type::TANK:
+					enemies[i] = new Enemy_Tank(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i]->texture = textureTank;
 					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;

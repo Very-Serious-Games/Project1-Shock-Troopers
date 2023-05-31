@@ -10,6 +10,7 @@
 
 SceneMenu::SceneMenu(bool startEnabled) : Module(startEnabled)
 {
+
 	// Background
 	background.x = 261;
 	background.y = 0;

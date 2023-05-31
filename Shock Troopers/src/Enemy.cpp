@@ -40,8 +40,15 @@ int Enemy::GetPlayerDirection() {
 	// Get the player position
 	fPoint playerPos = App->player->position;
 
+	playerPos.x += App->player->collider->rect.w/2;
+	playerPos.y += App->player->collider->rect.h/2;
+
 	// Calculate the direction vector from enemy position to player position
 	fPoint enemyPos = position;
+
+	enemyPos.x += collider->rect.w/2;
+	enemyPos.y += collider->rect.h/2;
+
 	fPoint direction = playerPos - enemyPos;
 
 	// Determine the player direction based on the direction vector
@@ -191,10 +198,12 @@ void Enemy::attackAnimation(int direction)
 
 void Enemy::Draw()
 {
+	if (currentAnim2 != nullptr)
+		App->render->Blit(texture, position.x, position.y, &(currentAnim2->GetCurrentFrame()));
+
 	if (currentAnim != nullptr)
 		App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
 
-	// TODO ajustar posicion a la q se renderizan las partes del boss
 	if (botCurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(botCurrentAnim->GetCurrentFrame()));
 	}

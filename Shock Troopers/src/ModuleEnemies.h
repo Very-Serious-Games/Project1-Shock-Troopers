@@ -13,6 +13,7 @@ enum class Enemy_Type
 	BRIDGE,
 	CRATE,
 	TANK_BOSS,
+	TANK,
 };
 
 struct EnemySpawnpoint
@@ -79,6 +80,7 @@ private:
 
 	// The enemies sprite sheet
 	SDL_Texture* textureTankBoss = nullptr;
+	SDL_Texture* textureTank = nullptr;
 	SDL_Texture* textureFlyingBattleship = nullptr;
 	SDL_Texture* textureInfantrySoldier = nullptr;
 	SDL_Texture* textureBridge = nullptr;

@@ -110,6 +110,7 @@ public:
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+	Animation* currentAnim2 = nullptr;
 	Animation* topCurrentAnim = nullptr;
 	Animation* midCurrentAnim = nullptr;
 	Animation* botCurrentAnim = nullptr;

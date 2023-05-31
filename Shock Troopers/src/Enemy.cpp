@@ -128,27 +128,27 @@ int Enemy::GetPlayerDirectionBelow() {
 
         LOG("angle: %f", angle);
 
-        if (angle >= 0 && angle <= 180) {
-            playerDirection = 7; // Below (90°)
-            LOG("below");
-        } else if (angle > 150 || angle < -150) {
+        if (angle > 120 && angle <= 135) {
+            playerDirection = 6; // Down-Left-Diagonal 
+            LOG("down-left-diagonal");
+        } else if (angle >= 30 && angle < 40) {
+            playerDirection = 5; // Down-Right-Diagonal
+            LOG("down-right-diagonal");
+        } else if (angle < 65 && angle >= 40) {
+            playerDirection = 1; // Down-Right (60°)
+            LOG("down-right");
+        } else if (angle > 105 && angle <= 120) {
+            playerDirection = 2; // Down-Left (120°)
+            LOG("down-left");
+        } else if (angle > 135 || angle < -135) {
             playerDirection = 4; // Left (1800°)
             LOG("left");
         } else if (angle < 30 && angle > -30) {
             playerDirection = 3; // Right (0°)
             LOG("right");
-        } else if (angle > 30 && angle <= 75) {
-            playerDirection = 6; // Down-Left-Diagonal (45°)
-            LOG("down-left-diagonal");
-        } else if (angle >= 105 && angle < 150) {
-            playerDirection = 5; // Down-Right-Diagonal (135°)
-            LOG("down-right-diagonal");
-        } else if (angle > 75 && angle <= 105) {
-            playerDirection = 2; // Down-Left (120°)
-            LOG("down-left");
-        } else if (angle < -30 && angle >= -75) {
-            playerDirection = 1; // Down-Right (60°)
-            LOG("down-right");
+        } else if (angle >= 65 && angle <= 105) {
+            playerDirection = 7; // Below (90°)
+            LOG("below");
         }
     }
 

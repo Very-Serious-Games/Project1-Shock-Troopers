@@ -187,14 +187,14 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	rollAnimDownLeft.PushBack({ 378, 208, 54, 52 });
 	rollAnimDownLeft.PushBack({ 432, 208, 54, 52 });
 
-	rollAnimDownRight.PushBack({ 486, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 540, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 594, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 648, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 702, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 756, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 810, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 864, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 9 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 10 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 11 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 12 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 13 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 14 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 15 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 16 * 54, 7 * 52, 54, 52 }); 
 
 	rollAnimUpLeft.PushBack({ 0,   156, 54, 52 });
 	rollAnimUpLeft.PushBack({ 54,  156, 54, 52 });

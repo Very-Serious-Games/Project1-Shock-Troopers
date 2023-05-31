@@ -8,9 +8,10 @@
 enum class PickUp_Type
 {
 	NO_TYPE,
-	HP
+	HP,
+	DIAMOND,
+	INVENCIBILITY
 };
-
 
 struct PickUpSpawnpoint
 {
@@ -69,7 +70,7 @@ public:
 private:
 
 	// All spawned PickUp in the scene
-	PickUp* pickUp[MAX_PICKUP] = { nullptr };
+	//PickUp* pickUp[MAX_PICKUP] = { nullptr };
 
 	// The PickUp sprite sheet
 	SDL_Texture* texture = nullptr;

@@ -22,6 +22,8 @@ struct Collider
 		OBJECT,
 		DETECTION_ZONE,
 		KNIFE,
+		STOP_CAM_ZONE,
+		STOP_CAM_TRIGGER,
 
 		MAX
 	};

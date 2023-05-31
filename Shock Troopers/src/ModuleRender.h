@@ -20,7 +20,6 @@ public:
 	// Creates the rendering context using the program's window
 	bool Init() override;
 
-
 	// Called at the beginning of the application loop
 	// Clears the rendering context to a background color
 	Update_Status PreUpdate() override;
@@ -37,8 +36,6 @@ public:
 	// Called on application exit
 	// Destroys the rendering context
 	bool CleanUp() override;
-
-	void OnCollision(Collider* c1, Collider* c2) override;
 
 	// Prints a texture to the rendering context
 	// Param texture	- A valid SDL Texture, validation checks are not performed
@@ -59,17 +56,6 @@ public:
 
 	// The speed at which the camera will be moving
 	int cameraSpeed = 1;
-
-	int maxX = 0;
-	int maxY = 0;
-	int minX = 0;
-	int minY = 0;
-
-	Collider* cameraDownCollider = nullptr;
-	Collider* cameraLeftCollider = nullptr;
-	Collider* cameraRightCollider = nullptr;
-	Collider* cameraUpCollider = nullptr;
-	Collider* stopCameraCollider = nullptr;
 
 };
 

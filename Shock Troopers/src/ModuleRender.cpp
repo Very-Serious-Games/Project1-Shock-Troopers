@@ -32,13 +32,11 @@ bool ModuleRender::Init()
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
 
-	/*
 	cameraDownCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT +10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
 	cameraLeftCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
 	cameraRightCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
 	cameraUpCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
 	stopCameraCollider = App->collisions->AddCollider({ 0, 0, 2, 2 }, Collider::Type::STOP_CAM_TRIGGER, this);
-	*/
 
 
 
@@ -70,14 +68,9 @@ Update_Status ModuleRender::Update()
 	int nextCameraY = App->player->position.y - 100;
 	int nextCameraX = App->player->position.x - 120;
 
-	camera.y = nextCameraY;
-	camera.x = nextCameraX;
-
-	/*
 	if (nextCameraY <= camera.y) {
 		camera.y = App->player->position.y - 100;
 	}
-	
 	if (App->player->IsEnabled()) {
 		if (camera.y <= 980 && camera.x < 1100) {
 			camera.y = 980;
@@ -91,7 +84,6 @@ Update_Status ModuleRender::Update()
 
 	}
 
-	
 	if (maxX != 0) {
 		if (camera.x < minX) {
 			camera.x = minX;
@@ -106,14 +98,12 @@ Update_Status ModuleRender::Update()
 			camera.y = maxY - camera.h;
 		}
 	}
-	
 
 	cameraDownCollider->SetPos(camera.x, camera.y + SCREEN_HEIGHT);
 	cameraLeftCollider->SetPos(camera.x - 10, camera.y);
 	cameraRightCollider->SetPos(camera.x + SCREEN_WIDTH, camera.y);
 	cameraUpCollider->SetPos(camera.x, camera.y + 10);
 	stopCameraCollider->SetPos(camera.x + SCREEN_WIDTH / 2, camera.y + SCREEN_HEIGHT / 2);
-	*/
 
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 		camera.y -= cameraSpeed * SCREEN_HEIGHT;
@@ -160,14 +150,13 @@ bool ModuleRender::CleanUp()
 
 void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 {
-	/*
 	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE) {
 		minX = c2->rect.x;
 		minY = c2->rect.y;
 		maxX = c2->rect.x + c2->rect.w;
 		maxY = c2->rect.y + c2->rect.h;
+
 	}
-	*/
 }
 
 // Blit to screen

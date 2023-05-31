@@ -1196,12 +1196,10 @@ bool ModulePlayer::Start() {
 	position.y = 2800;
 	
 	//Setting up player wall coliders
-	/*
 	colliderL = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 2, 2, 43 }, Collider::Type::LASER, this);
 	colliderU = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 8, 22, 2 }, Collider::Type::LASER, this);
 	colliderD = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 51, 22, 2 }, Collider::Type::LASER, this);
 	colliderR = App->collisions->AddCollider({ (int)position.x + 32, (int)position.y + 2, 2,43 }, Collider::Type::LASER, this);
-	*/
 
 	//Setting up player hitbox
 	collider = App->collisions->AddCollider({ (int)position.x + 5,(int)position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);

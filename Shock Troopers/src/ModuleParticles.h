@@ -68,14 +68,7 @@ public:
 	Particle playerShotDownRight;
 	Particle playerShotDownLeft;
 
-	Particle enemyShotUp;
-	Particle enemyShotDown;
-	Particle enemyShotLeft;
-	Particle enemyShotRight;
-	Particle enemyShotUpRight;
-	Particle enemyShotUpLeft;
-	Particle enemyShotDownRight;
-	Particle enemyShotDownLeft;
+	Particle enemyShot;
 
 	Particle tankMissileUp;
 	Particle tankMissileDown;

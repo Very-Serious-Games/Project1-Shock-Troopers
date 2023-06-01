@@ -35,6 +35,7 @@ ModuleUI::~ModuleUI()
 }
 
 void ModuleUI::updateHp() {
+	LOG("Updating HP Scorebar");
 	switch (App->player->hp) {
 	case 100:
 		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");

@@ -187,14 +187,14 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	rollAnimDownLeft.PushBack({ 378, 208, 54, 52 });
 	rollAnimDownLeft.PushBack({ 432, 208, 54, 52 });
 
-	rollAnimDownRight.PushBack({ 486, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 540, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 594, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 648, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 702, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 756, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 810, 416, 54, 52 }); // TODO @martagnarta
-	rollAnimDownRight.PushBack({ 864, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 9 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 10 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 11 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 12 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 13 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 14 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 15 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 16 * 54, 7 * 52, 54, 52 }); 
 
 	rollAnimUpLeft.PushBack({ 0,   156, 54, 52 });
 	rollAnimUpLeft.PushBack({ 54,  156, 54, 52 });
@@ -351,6 +351,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	shootAnimUpRight.speed = animSpeed;
 
 	deathAnim.speed = animSpeed;
+	deathAnim.loop = false;
 
 	damageAnim.speed = animSpeed;
 }
@@ -364,49 +365,7 @@ void ModulePlayer::updateHp() {
 	if (!isInvulnerable) {
 		isInvulnerable = true;
 		invulnerabilityTimer = 0.0f;
-	}
-
-	//Carga sprite en base a la vida del jugador
-	switch (hp) {
-		case 100:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
-			break;
-		case 90:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
-			break;
-		case 80:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
-			break;
-		case 70:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
-			break;
-		case 60:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
-			break;
-		case 50:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
-			break;
-		case 40:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
-			break;
-		case 30:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
-			break;
-		case 20:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
-			break;
-		case 10:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
-			break;
-		case 0:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-			destroyed = true;
-			//TODO  poner esto donde toque
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
-			break;
-		default:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-			break;
+		hp -= 10;
 	}
 }
 
@@ -1135,7 +1094,10 @@ void ModulePlayer::stateMachine() {
 
 		setDeathAnimations();
 
-		// TODO Death logic
+		if (deathAnim.HasFinished()) {
+			// TODO Arreglar para que haga la transición entre escenas correctamente
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
+		}
 
 		break;
 

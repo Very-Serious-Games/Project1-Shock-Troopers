@@ -179,14 +179,22 @@ bool ModuleParticles::Start() {
     tankMissileDownLeft.lifetime = 180;
 
     // Tank shots
-    tankShotUp.anim.PushBack(               {});
-    tankShotDown.anim.PushBack(             {});
-    tankShotLeft.anim.PushBack(             {});
-    tankShotRight.anim.PushBack(            {});
-    tankShotUpRight.anim.PushBack(          {});
-    tankShotUpLeft.anim.PushBack(           {});
-    tankShotDownRight.anim.PushBack(        {});
-    tankShotDownLeft.anim.PushBack(         {});
+    tankShotUp.anim.PushBack(               { 48*6, 110, 48, 48 });
+    tankShotUp.anim.PushBack(               { 48*6, 158, 48, 48 });
+    tankShotDown.anim.PushBack(             { 48*7, 110, 48, 48 });
+    tankShotDown.anim.PushBack(             { 48*7, 158, 48, 48 }); 
+    tankShotLeft.anim.PushBack(             { 48*1, 110, 48, 48 });
+    tankShotLeft.anim.PushBack(             { 48*1, 158, 48, 48 });
+    tankShotRight.anim.PushBack(            { 48*0, 110, 48, 48 });
+    tankShotRight.anim.PushBack(            { 48*0, 158, 48, 48 });
+    tankShotUpRight.anim.PushBack(          { 48*4, 110, 48, 48 });
+    tankShotUpRight.anim.PushBack(          { 48*4, 158, 48, 48 });
+    tankShotUpLeft.anim.PushBack(           { 48*3, 110, 48, 48 });
+    tankShotUpLeft.anim.PushBack(           { 48*2, 158, 48, 48 });
+    tankShotDownRight.anim.PushBack(        { 48*2, 110, 48, 48 });
+    tankShotDownRight.anim.PushBack(        { 48*3, 158, 48, 48 });
+    tankShotDownLeft.anim.PushBack(         { 48*5, 110, 48, 48 });
+    tankShotDownLeft.anim.PushBack(         { 48*5, 158, 48, 48 });
 
     tankShotUp.anim.loop = true;
     tankShotUp.anim.speed = 0.3;
@@ -229,56 +237,72 @@ bool ModuleParticles::Start() {
 
     // Muzzles
     // Muzzle Player
-    playerMuzzleUp.anim.PushBack(           {});
-    playerMuzzleDown.anim.PushBack(         {});
-    playerMuzzleLeft.anim.PushBack(         {});
-    playerMuzzleRight.anim.PushBack(        {});
-    playerMuzzleUpRight.anim.PushBack(      {});
-    playerMuzzleUpLeft.anim.PushBack(       {});
-    playerMuzzleDownRight.anim.PushBack(    {});
-    playerMuzzleDownLeft.anim.PushBack(     {});
+    playerMuzzleUp.anim.PushBack(           { 23*21, 26, 23, 23 });
+    playerMuzzleUp.anim.PushBack(           { 23*22, 26, 23, 23 });
+    playerMuzzleUp.anim.PushBack(           { 23*23, 26, 23, 23 });
+    playerMuzzleDown.anim.PushBack(         { 23*18, 26, 23, 23 });
+    playerMuzzleDown.anim.PushBack(         { 23*19, 26, 23, 23 });
+    playerMuzzleDown.anim.PushBack(         { 23*20, 26, 23, 23 });
+    playerMuzzleLeft.anim.PushBack(         { 23*15, 26, 23, 23 });
+    playerMuzzleLeft.anim.PushBack(         { 23*16, 26, 23, 23 });
+    playerMuzzleLeft.anim.PushBack(         { 23*17, 26, 23, 23 });
+    playerMuzzleRight.anim.PushBack(        { 23*12, 26, 23, 23 });
+    playerMuzzleRight.anim.PushBack(        { 23*13, 26, 23, 23 });
+    playerMuzzleRight.anim.PushBack(        { 23*14, 26, 23, 23 });
+    playerMuzzleUpRight.anim.PushBack(      { 23*6,  26, 23, 23 });
+    playerMuzzleUpRight.anim.PushBack(      { 23*7,  26, 23, 23 });
+    playerMuzzleUpRight.anim.PushBack(      { 23*8,  26, 23, 23 });
+    playerMuzzleUpLeft.anim.PushBack(       { 23*9,  26, 23, 23 });
+    playerMuzzleUpLeft.anim.PushBack(       { 23*10, 26, 23, 23 });
+    playerMuzzleUpLeft.anim.PushBack(       { 23*11, 26, 23, 23 });
+    playerMuzzleDownRight.anim.PushBack(    { 23*0,  26, 23, 23 });
+    playerMuzzleDownRight.anim.PushBack(    { 23*1,  26, 23, 23 });
+    playerMuzzleDownRight.anim.PushBack(    { 23*2,  26, 23, 23 });
+    playerMuzzleDownLeft.anim.PushBack(     { 23*3,  26, 23, 23 });
+    playerMuzzleDownLeft.anim.PushBack(     { 23*4,  26, 23, 23 });
+    playerMuzzleDownLeft.anim.PushBack(     { 23*5,  26, 23, 23 });
 
-    playerMuzzleUp.anim.loop = true;
+    playerMuzzleUp.anim.loop = false;
     playerMuzzleUp.anim.speed = 0.3;
-    playerMuzzleUp.lifetime = 180;
 
-    playerMuzzleDown.anim.loop = true;
+    playerMuzzleDown.anim.loop = false;
     playerMuzzleDown.anim.speed = 0.3;
-    playerMuzzleDown.lifetime = 180;
 
-    playerMuzzleLeft.anim.loop = true;
+    playerMuzzleLeft.anim.loop = false;
     playerMuzzleLeft.anim.speed = 0.3;
-    playerMuzzleLeft.lifetime = 180;
 
-    playerMuzzleRight.anim.loop = true;
+    playerMuzzleRight.anim.loop = false;
     playerMuzzleRight.anim.speed = 0.3;
-    playerMuzzleRight.lifetime = 180;
 
-    playerMuzzleUpRight.anim.loop = true;
+    playerMuzzleUpRight.anim.loop = false;
     playerMuzzleUpRight.anim.speed = 0.3;
-    playerMuzzleUpRight.lifetime = 180;
 
-    playerMuzzleUpLeft.anim.loop = true;
+    playerMuzzleUpLeft.anim.loop = false;
     playerMuzzleUpLeft.anim.speed = 0.3;
-    playerMuzzleUpLeft.lifetime = 180;
 
-    playerMuzzleDownRight.anim.loop = true;
+    playerMuzzleDownRight.anim.loop = false;
     playerMuzzleDownRight.anim.speed = 0.3;
-    playerMuzzleDownRight.lifetime = 180;
 
-    playerMuzzleDownLeft.anim.loop = true;
+    playerMuzzleDownLeft.anim.loop = false;
     playerMuzzleDownLeft.anim.speed = 0.3;
-    playerMuzzleDownLeft.lifetime = 180;
 
     // Muzzle Enemy
-    enemyMuzzleUp.anim.PushBack(            {});
-    enemyMuzzleDown.anim.PushBack(          {});
-    enemyMuzzleLeft.anim.PushBack(          {});
-    enemyMuzzleRight.anim.PushBack(         {});
-    enemyMuzzleUpRight.anim.PushBack(       {});
-    enemyMuzzleUpLeft.anim.PushBack(        {});
-    enemyMuzzleDownRight.anim.PushBack(     {});
-    enemyMuzzleDownLeft.anim.PushBack(      {});
+    enemyMuzzleUp.anim.PushBack(            { 15*14, 11, 15, 15 });
+    enemyMuzzleUp.anim.PushBack(            { 15*15, 11, 15, 15 });
+    enemyMuzzleDown.anim.PushBack(          { 15*12, 11, 15, 15 });
+    enemyMuzzleDown.anim.PushBack(          { 15*13, 11, 15, 15 });
+    enemyMuzzleLeft.anim.PushBack(          { 15*10, 11, 15, 15 });
+    enemyMuzzleLeft.anim.PushBack(          { 15*11, 11, 15, 15 });
+    enemyMuzzleRight.anim.PushBack(         { 15*8,  11, 15, 15 });
+    enemyMuzzleRight.anim.PushBack(         { 15*9,  11, 15, 15 });
+    enemyMuzzleUpRight.anim.PushBack(       { 15*4,  11, 15, 15 });
+    enemyMuzzleUpRight.anim.PushBack(       { 15*5,  11, 15, 15 });
+    enemyMuzzleUpLeft.anim.PushBack(        { 15*6,  11, 15, 15 });
+    enemyMuzzleUpLeft.anim.PushBack(        { 15*7,  11, 15, 15 });
+    enemyMuzzleDownRight.anim.PushBack(     { 15*0,  11, 15, 15 });
+    enemyMuzzleDownRight.anim.PushBack(     { 15*1,  11, 15, 15 });
+    enemyMuzzleDownLeft.anim.PushBack(      { 15*2,  11, 15, 15 });
+    enemyMuzzleDownLeft.anim.PushBack(      { 15*3,  11, 15, 15 });
 
     enemyMuzzleUp.anim.loop = true;
     enemyMuzzleUp.anim.speed = 0.3;
@@ -313,7 +337,9 @@ bool ModuleParticles::Start() {
     enemyMuzzleDownLeft.lifetime = 180;
 
     // Muzzle Flying Battleship
-    flyingBattleshipMuzzle.anim.PushBack(   {});
+    flyingBattleshipMuzzle.anim.PushBack(   { 26*0, 49, 26, 29 });
+    flyingBattleshipMuzzle.anim.PushBack(   { 26*1, 49, 26, 29 });
+    flyingBattleshipMuzzle.anim.PushBack(   { 26*2, 49, 26, 29 });
 
     flyingBattleshipMuzzle.anim.loop = true;
     flyingBattleshipMuzzle.anim.speed = 0.3;

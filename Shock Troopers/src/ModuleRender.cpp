@@ -34,10 +34,10 @@ bool ModuleRender::Init()
 
 	cameraDownCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT +10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
 	cameraLeftCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
-	cameraRightCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
-	cameraUpCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
+	cameraRightCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
+	cameraUpCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
 	stopCameraCollider = App->collisions->AddCollider({ 0, 0, 2, 2 }, Collider::Type::STOP_CAM_TRIGGER, this);
-
+	stopCameraCollider->AddListener(this);
 
 
 
@@ -73,22 +73,22 @@ Update_Status ModuleRender::Update()
 	}
 	if (App->player->IsEnabled()) {
 		if (camera.y <= 980 && camera.x < 1100) {
-			camera.y = 980;
-			if (nextCameraX > camera.x) {
+			if (nextCameraX > camera.x && leaveZone) {
 				camera.x = nextCameraX;
 			}
-		}
-		else {
+		} else if (!isInZone2) {
 			camera.x = nextCameraX;
 		}
-
 	}
 
-	if (maxX != 0) {
+
+	if (isInZone) {
+		camera.y = nextCameraY;
+		camera.x = nextCameraX;
 		if (camera.x < minX) {
 			camera.x = minX;
 		}
-		else if (camera.x + camera.w  > maxX) {
+		else if (camera.x + camera.w > maxX) {
 			camera.x = maxX - camera.w;
 		}
 		if (camera.y < minY) {
@@ -100,26 +100,26 @@ Update_Status ModuleRender::Update()
 	}
 
 	cameraDownCollider->SetPos(camera.x, camera.y + SCREEN_HEIGHT);
-	cameraLeftCollider->SetPos(camera.x - 10, camera.y);
+	cameraLeftCollider->SetPos(camera.x, camera.y);
 	cameraRightCollider->SetPos(camera.x + SCREEN_WIDTH, camera.y);
-	cameraUpCollider->SetPos(camera.x, camera.y + 10);
+	cameraUpCollider->SetPos(camera.x, camera.y);
 	stopCameraCollider->SetPos(camera.x + SCREEN_WIDTH / 2, camera.y + SCREEN_HEIGHT / 2);
 
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 		camera.y -= cameraSpeed * SCREEN_HEIGHT;
 
 	//Handle negative vertical movement
-	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
-		camera.y += cameraSpeed * SCREEN_HEIGHT;
+	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT) camera.y += cameraSpeed * SCREEN_HEIGHT;
 
-	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
-		camera.x -= cameraSpeed;
+	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT) camera.x -= cameraSpeed;
+
 	if (camera.x < 0) camera.x = 0;
 
 	if (camera.y < 0) camera.y = 0;
 
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
-		camera.x += cameraSpeed;
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)	camera.x += cameraSpeed;
+
+	if (App->input->keys[SDL_SCANCODE_M] == KEY_DOWN) leaveZone = !leaveZone;
 
 	maxX = 0;
 	minX = 0;
@@ -151,10 +151,45 @@ bool ModuleRender::CleanUp()
 void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE) {
+
+		if (c1->rect.y < c2->rect.y + c2->rect.h && !isInZone) {
+			camera.y--;
+		}
+
+		if (camera.y + camera.h <= c2->rect.y + c2->rect.h || camera.y == c2->rect.y) {
+			isInZone = true;
+		}
+
 		minX = c2->rect.x;
 		minY = c2->rect.y;
 		maxX = c2->rect.x + c2->rect.w;
 		maxY = c2->rect.y + c2->rect.h;
+
+		if (leaveZone) {
+			c2->pendingToDelete = true;
+			isInZone = !isInZone;
+		}
+	}
+	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE_2) {
+		isInZone2 = true;
+		if (c1->rect.x + c1->rect.w > c2->rect.x && !isInZone) {
+			camera.x++;
+		}
+
+		if (camera.x >= c2->rect.x || camera.x == c2->rect.x) {
+			isInZone = true;
+		}
+
+		minX = c2->rect.x;
+		minY = c2->rect.y;
+		maxX = c2->rect.x + c2->rect.w;
+		maxY = c2->rect.y + c2->rect.h;
+
+		if (leaveZone) {
+			c2->pendingToDelete = true;
+			isInZone2 = !isInZone2;
+			isInZone = !isInZone;
+		}
 
 	}
 }

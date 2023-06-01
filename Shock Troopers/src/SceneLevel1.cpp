@@ -31,9 +31,9 @@ bool SceneLevel1::Start()
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 
 	// Add colliders
-	App->collisions->AddCollider({ 0, 1100, 486, 186 }, Collider::Type::STOP_CAM_ZONE);
-	App->collisions->AddCollider({ 838, 1100, 191, 102}, Collider::Type::STOP_CAM_ZONE);
-	App->collisions->AddCollider({ 1255, 3, 356, 217}, Collider::Type::STOP_CAM_ZONE);
+	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
+	App->collisions->AddCollider({ 838, 1000, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
+	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE);
 
 
 	createMargenes();

@@ -21,6 +21,7 @@ struct Collider
 		HEAL,
 		DETECTION_ZONE,
 		STOP_CAM_ZONE,
+		STOP_CAM_ZONE_2,
 		STOP_CAM_TRIGGER,
 
 		MAX

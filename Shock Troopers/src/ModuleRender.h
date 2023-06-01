@@ -71,6 +71,12 @@ public:
 	Collider* cameraUpCollider = nullptr;
 	Collider* stopCameraCollider = nullptr;
 
+
+	bool leaveZone = false;
+
+
+	bool isInZone2 = false;
+	bool isInZone = false;
 };
 
 #endif //__MODULE_RENDER_H__

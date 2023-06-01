@@ -14,7 +14,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::WALL][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::ENEMY_SHOT] = true;
 	matrix[Collider::Type::WALL][Collider::Type::LASER] = true;
@@ -26,12 +26,13 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::LASER] = false;
 
-	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = true;
+	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::LASER] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::STOP_CAM_ZONE] = false;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
@@ -52,11 +53,13 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::LASER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::LASER][Collider::Type::LASER] = false;
+	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_ZONE] = true;
 
 
 	matrix[Collider::Type::HEAL][Collider::Type::PLAYER] = true;
 
-	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_TRIGGER] = true;
+	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_ZONE] = true;
+	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_ZONE_2] = true;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_TRIGGER] = true;
 }
 
@@ -89,6 +92,7 @@ Update_Status ModuleCollisions::PreUpdate()
 
 		c1 = colliders[i];
 
+
 		// avoid checking collisions already checkedn
 		for(uint k = i+1; k < MAX_COLLIDERS; ++k)
 		{
@@ -97,7 +101,7 @@ Update_Status ModuleCollisions::PreUpdate()
 				continue;
 			c2 = colliders[k];
 			if(matrix[c1->type][c2->type] && c1->Intersects(c2->rect)) {
-				
+
 				for (uint i = 0; i < MAX_LISTENERS; ++i) {
 					if (c1->listeners[i] != nullptr) {
 						c1->listeners[i]->OnCollision(c1, c2);
@@ -170,6 +174,9 @@ void ModuleCollisions::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 				break;
 			case Collider::Type::STOP_CAM_ZONE: // orange
+				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
+				break;
+			case Collider::Type::STOP_CAM_ZONE_2: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
 				break;
 			case Collider::Type::STOP_CAM_TRIGGER: // orange

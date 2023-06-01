@@ -5,6 +5,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModulePickup.h"
 
 
 Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
@@ -439,6 +440,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 			deathAnimation();
 
 			if (deathAnimDelay == 0) {
+				App->pickUps->SpawnPickUp({ PickUp_Type::DIAMOND, (int)position.x, (int)position.y });
 				pendingToDelete = true;
 				LOG("pendingToDelete enemy");
 			}

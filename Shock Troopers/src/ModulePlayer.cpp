@@ -1307,7 +1307,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		isRolling = false;
 	}
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP) {
 		hp += 10;
 	}
 

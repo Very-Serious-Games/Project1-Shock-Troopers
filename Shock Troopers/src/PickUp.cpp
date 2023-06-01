@@ -29,7 +29,14 @@ void PickUp::Update()
 
 void PickUp::Draw()
 {
-	App->render->Blit(texture, position.x, position.y, NULL);
+	LOG("Drawing Pickup");
+	App->render->Blit(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
+}
+
+void PickUp::DrawColider()
+{
+	LOG("Drawing Colider");
+	App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP);
 }
 
 void PickUp::OnCollision(Collider* collider)

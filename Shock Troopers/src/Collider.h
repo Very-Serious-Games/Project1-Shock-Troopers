@@ -18,7 +18,7 @@ struct Collider
 		ENEMY,
 		PLAYER_SHOT,
 		ENEMY_SHOT,
-		HEAL,
+		PICKUP,
 		OBJECT,
 		DETECTION_ZONE,
 		KNIFE,

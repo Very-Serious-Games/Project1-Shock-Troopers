@@ -54,7 +54,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::LASER] = false;
 
 
-	matrix[Collider::Type::HEAL][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::PICKUP][Collider::Type::PLAYER] = true;
 }
 
 // Destructor
@@ -158,7 +158,7 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::ENEMY_SHOT: // cian
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 				break;
-			case Collider::Type::HEAL: // magenta
+			case Collider::Type::PICKUP: // magenta
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 				break;
 			case Collider::Type::DETECTION_ZONE: // orange

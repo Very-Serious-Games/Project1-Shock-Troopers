@@ -11,7 +11,7 @@ enum class PickUp_Type
 	NO_TYPE,
 	HP,
 	DIAMOND,
-	INVENCIBILIDAD
+	INVENCIBILITY
 };
 
 

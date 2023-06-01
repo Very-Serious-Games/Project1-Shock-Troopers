@@ -27,6 +27,8 @@ public:
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
 
+	virtual void DrawColider();
+
 	// Collision response
 	virtual void OnCollision(Collider* collider);
 
@@ -47,13 +49,15 @@ public:
 	bool pendingToDelete = false;
 
 	bool despawn = false;
+	bool isPicked = false;
 
 	// The pickUp collider
 	Collider* collider = nullptr;
 
-protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+
+protected:
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;

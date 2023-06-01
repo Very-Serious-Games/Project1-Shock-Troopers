@@ -37,6 +37,8 @@ public:
 	// Destroys the rendering context
 	bool CleanUp() override;
 
+	void OnCollision(Collider* c1, Collider* c2) override;
+
 	// Prints a texture to the rendering context
 	// Param texture	- A valid SDL Texture, validation checks are not performed
 	// Param x,y		- Position x,y in the screen (upper left axis)

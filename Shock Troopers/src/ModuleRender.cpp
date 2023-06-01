@@ -1,7 +1,7 @@
 #include "ModuleRender.h"
 
 #include "Application.h"
-
+#include "ModuleCollisions.h"
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
@@ -65,7 +65,8 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
-	//Handle positive vertical movement
+	int nextCameraY = App->player->position.y - 100;
+	int nextCameraX = App->player->position.x - 120;
 
 	if (nextCameraY <= camera.y) {
 		camera.y = App->player->position.y - 100;

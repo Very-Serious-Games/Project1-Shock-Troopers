@@ -1219,8 +1219,8 @@ bool ModulePlayer::Start() {
 	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
 
 	//Setting up player position
-	position.x = 220;
-	position.y = 2800;
+	position.x = 186;
+	position.y = 2900;
 	
 	//Setting up player wall coliders
 	colliderL = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 2, 2, 43 }, Collider::Type::LASER, this);
@@ -1246,10 +1246,10 @@ Update_Status ModulePlayer::Update() {
 
 	//Collider update
 	collider->SetPos(position.x + 12, position.y + 10);
-	colliderU->SetPos(position.x + 12, position.y + 5);
 	colliderR->SetPos(position.x + 34, position.y + 10);
 	colliderD->SetPos(position.x + 12, position.y + 53);
-	colliderL->SetPos(position.x + 7, position.y + 10);
+	colliderL->SetPos(position.x + 10 , position.y + 10);
+	colliderU->SetPos(position.x + 12, position.y +8);
 
 	//We update the current animation
 	currentAnimationLegs->Update();
@@ -1316,7 +1316,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	}
 
-	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderR && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockR = true;
 		if (isRolling) {
 			position.x -= 2;
@@ -1325,7 +1325,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderU && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockU = true;
 		if (isRolling) {
 			position.y += 2;
@@ -1334,7 +1334,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderD && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockD = true;
 		if (isRolling) {
 			position.y -= 2;
@@ -1343,7 +1343,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderL && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockL = true;
 		if (isRolling) {
 			position.x += 2;

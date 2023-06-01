@@ -18,16 +18,19 @@ using namespace std;
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
 	//iterate the start stage animation, that has 29 frames per row and 3 rows
-	for (int row = 0; row < 3; row++) {
-		for (int col = 0; col < 29; col++) {
+	for (int row = 0; row < 8; row++) {
+		for (int col = 0; col < 11; col++) {
 			int frameX = col * SCREEN_WIDTH;
 			int frameY = row * SCREEN_HEIGHT;
 			startStage.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
 		}
 	}
 
-	startStage.speed = 0.1f;
+	startStage.PushBack({ 0, 0, 0, 0 });
+	startStage.speed = 1.0f;
+	startStage.loop = false;
 	path.PushBack({ 0.0f, 0.0f }, 1000, &startStage);
+	
 }
 
 ModuleUI::~ModuleUI()

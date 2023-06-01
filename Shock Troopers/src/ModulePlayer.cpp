@@ -987,8 +987,6 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::Idle:
 
-		LOG("IDLE");
-
 		setIdleAnimations();
 
 		if (isShootingMoving()) {
@@ -1029,8 +1027,6 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::ShootingMoving:
 
-		LOG("SHOOT MOVING");
-
 		setShootingMovingAnimations();
 
 		move();
@@ -1054,8 +1050,6 @@ void ModulePlayer::stateMachine() {
 		break;
 
 	case PlayerState::Moving:
-
-		LOG("MOVING");
 
 		setMovingAnimations();
 
@@ -1082,8 +1076,6 @@ void ModulePlayer::stateMachine() {
 		break;
 
 	case PlayerState::Shooting:
-
-		LOG("SHOOTING");
 		
 		setShootingAnimations();
 
@@ -1109,8 +1101,6 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::Grenade:
 
-		LOG("GRENADE");
-
 		setGrenadeAnimations();
 
 		// Grenade logic
@@ -1132,8 +1122,6 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::Roll:
 
-		LOG("ROLL");
-
 		setRollAnimations();
 
 		roll();
@@ -1148,8 +1136,6 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::Win:
 
-		LOG("WIN");
-
 		setWinAnimations();
 
 		// Win logic
@@ -1158,8 +1144,6 @@ void ModulePlayer::stateMachine() {
 		break;
 
 	case PlayerState::Spawn:
-
-		LOG("SPAWN");
 
 		setSpawnAnimations();
 
@@ -1173,8 +1157,6 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::Death:
 
-		LOG("DEATH");
-
 		setDeathAnimations();
 
 		if (deathAnim.HasFinished()) {
@@ -1185,8 +1167,6 @@ void ModulePlayer::stateMachine() {
 		break;
 
 	case PlayerState::Damage:
-
-		LOG("DAMAGE");
 
 		setDamageAnimations();
 

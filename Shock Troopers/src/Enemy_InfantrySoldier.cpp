@@ -501,9 +501,13 @@ void Enemy_InfantrySoldier::Shoot() {
 	delayShoot--;
 	if (delayShoot == 0) {
 		// TODO modify shot to be an enemy shot
+
+		/*
 		Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
 		shot->collider->AddListener(NULL);
-		App->audio->PlayFx(/*sound effect*/NULL);
+		App->audio->PlayFx(NULL);
+		*/
+
 		delayShoot = 700;
 	}
 

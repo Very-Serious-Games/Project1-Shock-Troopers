@@ -151,8 +151,10 @@ void Enemy_TankBoss::canon() {
     delayCanon--;
     if (delayCanon == 0) {
         // TODO modify shot to be an enemy shot
+        /*
         Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
         shot->collider->AddListener(NULL);
+        */
         App->audio->PlayFx(/*sound effect*/NULL);
         delayCanon = 700;
     }
@@ -176,8 +178,10 @@ void Enemy_TankBoss::shot() {
     delayShoot--;
     if (delayShoot == 0) {
         // TODO modify shot to be an enemy shot
+        /*
         Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
         shot->collider->AddListener(NULL);
+        */
         App->audio->PlayFx(/*sound effect*/NULL);
         delayShoot = 700;
     }
@@ -193,9 +197,11 @@ void Enemy_TankBoss::missileRain() {
     delayShoot--;
     if (delayShoot == 0) {
         for (int i = 0; i < numMissiles; ++i) {
-            Particle* missile = App->particles->AddParticle(App->particles->playerShot, position.x + (rand() % SCREEN_WIDTH), position.y + 10 + (rand() % (SCREEN_WIDTH/2)), 7 /*DOWN*/, Collider::Type::ENEMY_SHOT);
+            /*
+            Particle* missile = App->particles->AddParticle(App->particles->playerShot, position.x + (rand() % SCREEN_WIDTH), position.y + 10 + (rand() % (SCREEN_WIDTH/2)), 7, Collider::Type::ENEMY_SHOT);
             missile->collider->AddListener(NULL);
             missile->speed.y = 1;
+            */
             App->audio->PlayFx(/*sound effect*/NULL);
         }
         delayShoot = 700;
@@ -220,8 +226,10 @@ void Enemy_TankBoss::missileLaunch() {
     delayMissile--;
     if (delayMissile == 0) {
         // TODO modify shot to be an missile
+        /*
         Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
         shot->collider->AddListener(NULL);
+        */
         App->audio->PlayFx(/*sound effect*/NULL);
         delayMissile = 700;
     }

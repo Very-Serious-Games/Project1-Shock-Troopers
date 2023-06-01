@@ -24,7 +24,8 @@ bool ModuleParticles::Start()
 	LOG("Loading particles");
 	// Load particles spritesheet
 
-	texture = App->textures->Load("Assets/Sprites/particles/normal_bullets.png");
+	// PARTICLES
+	texture = App->textures->Load("Assets/Sprites/particles/particles.png");
 
 	// Explosion particle
 	explosion.anim.PushBack({274, 296, 33, 30});
@@ -151,9 +152,12 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
 			newParticle->position.y = y;
 			//newParticle->currentAnimation = &playerShot.bullet_U;
 			//Adding the particle's collider
-			if (colliderType != Collider::Type::NONE)
+			if (colliderType != Collider::Type::NONE) {
 				newParticle->collider = App->collisions->AddCollider(newParticle->anim.GetCurrentFrame(), colliderType, this);
+			}
+
 			newParticle->setDirection(direction);
+
 			particles[i] = newParticle;
 			break;
 		}

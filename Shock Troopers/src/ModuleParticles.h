@@ -54,15 +54,24 @@ public:
 	Particle* AddParticle(const Particle& particle, int x, int y, int direction, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
 public:
-	//Template particle for an explosion
+	
+	// Explosion
 	Particle explosion;
 
-	//Template particle for a laser
+	// Shots
 	Particle flyingbattleshipShop;
-
-	//Template particle for a laser
 	Particle playerShot;
+	Particle enemyShot;
 	Particle tankMissile;
+	Particle tankShot;
+
+	// Grenades
+	Particle playerGrenade;
+
+	// Muzzles
+	Particle playerMuzzle;
+	Particle enemyMuzzle;
+	Particle flyingbattleshipMuzzle;
 
 private:
 	// Particles spritesheet loaded into an SDL Texture

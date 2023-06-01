@@ -468,6 +468,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 }
 
 void Enemy_InfantrySoldier::Attack() {
+	/*
 	if (PlayerIsMele()) {
 		delayKnife--;
 		if (delayKnife == 0) {
@@ -477,6 +478,8 @@ void Enemy_InfantrySoldier::Attack() {
 	} else {
 		Shoot();
 	}
+	*/
+	Shoot();
 	
 }
 

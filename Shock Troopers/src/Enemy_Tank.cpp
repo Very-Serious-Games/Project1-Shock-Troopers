@@ -206,12 +206,37 @@ void Enemy_Tank::Attack() {
 
     delayShoot--;
     if (delayShoot == 0) {
-        // TODO modify shot to be an enemy shot
 
-        /*
-        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
-        shot->collider->AddListener(NULL);
-        */
+        Particle* newParticle = nullptr;
+		switch (GetPlayerDirection()) {
+		case 1: // Up-Right
+			newParticle = App->particles->AddParticle(App->particles->tankShotUpRight, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		case 2: // Up-Left
+			newParticle = App->particles->AddParticle(App->particles->tankShotUpLeft, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		case 3: // Down-Right
+			newParticle = App->particles->AddParticle(App->particles->tankShotDownRight, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		case 4: // Down-Left
+			newParticle = App->particles->AddParticle(App->particles->tankShotDownLeft, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		case 5: // Right
+			newParticle = App->particles->AddParticle(App->particles->tankShotRight, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		case 6: // Left
+			newParticle = App->particles->AddParticle(App->particles->tankShotLeft, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		case 7: // Down
+			newParticle = App->particles->AddParticle(App->particles->tankShotDown, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		case 8: // Up
+			newParticle = App->particles->AddParticle(App->particles->tankShotUp, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			break;
+		}
+
+        newParticle->collider->AddListener(NULL);
+
         App->audio->PlayFx(/*sound effect*/NULL);
         delayShoot = 700;
     }

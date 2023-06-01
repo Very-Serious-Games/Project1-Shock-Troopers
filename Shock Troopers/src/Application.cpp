@@ -33,9 +33,10 @@ Application::Application()
 	modules[6]	=	sceneMenu		=	new SceneMenu(false);		//Menu scene starts disabled
 
 	modules[7]	=	player			=	new ModulePlayer(false);	//Player starts disabled
-	modules[8]	=	particles		=	new ModuleParticles(true);
-	modules[9] =	pickUps		    =   new ModulePickUp(false); 
-	modules[10] =	enemies			=	new ModuleEnemies(false);	//Enemies start disabled
+	modules[8]	=	enemies			=	new ModuleEnemies(false);	//Enemies start disabled
+	modules[9]	=	particles		=	new ModuleParticles(true);
+	modules[10] =	pickUps		    =   new ModulePickUp(false); 
+
 	modules[11]	=	ui				=	new ModuleUI(false);
 
 	modules[12]	=	collisions		=	new ModuleCollisions(true);

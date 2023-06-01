@@ -27,6 +27,7 @@ struct Collider
 		STOP_CAM_TRIGGER,
 		KNIFE,
 		MISSILE,
+		MUZZLE,
 
 		MAX
 	};

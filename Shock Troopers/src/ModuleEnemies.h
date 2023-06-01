@@ -14,6 +14,7 @@ enum class Enemy_Type
 	CRATE,
 	SANDBAG,
 	LANDMINE,
+	BARREL,
 };
 
 struct EnemySpawnpoint
@@ -84,6 +85,7 @@ private:
 	SDL_Texture* textureCrate = nullptr;
 	SDL_Texture* textureLandmines = nullptr;
 	SDL_Texture* textureSandbags = nullptr;
+	SDL_Texture* textureBarrel = nullptr;
 
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;

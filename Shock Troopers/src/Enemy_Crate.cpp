@@ -34,7 +34,6 @@ void Enemy_Crate::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    currentAnim = path.GetCurrentAnimation();
     //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end

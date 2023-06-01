@@ -15,7 +15,7 @@ Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
         brokenAnim.PushBack({ disX, 0, 109, 178 });
         disX += 109;
     }
-    brokenAnim.speed = 0.3f;
+    brokenAnim.speed = 0.5f;
     brokenAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 360, &brokenAnim);
@@ -27,7 +27,7 @@ Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
         deathAnim.PushBack({ disX, 0, 109, 178 });
         disX += 109;
     }
-    deathAnim.speed = 0.7f;
+    deathAnim.speed = 0.5f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 480, &deathAnim);

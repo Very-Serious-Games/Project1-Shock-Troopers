@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Enemy_Barrel.h" />
     <ClInclude Include="src\Enemy_Bridge.h" />
     <ClInclude Include="src\Enemy_Crate.h" />
     <ClInclude Include="src\Enemy_FlyingBattleship.h" />
@@ -54,6 +55,7 @@
     <ClInclude Include="src\SceneLevel1.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Enemy_Barrel.cpp" />
     <ClCompile Include="src\Enemy_Bridge.cpp" />
     <ClCompile Include="src\Enemy_Crate.cpp" />
     <ClCompile Include="src\Enemy_FlyingBattleship.cpp" />

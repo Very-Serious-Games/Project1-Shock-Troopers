@@ -21,7 +21,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
         brokenAnim.PushBack({ disX, disY, 224, 220 });
         disX += 304;
     }
-    brokenAnim.speed = 0.2f;
+    brokenAnim.speed = 0.5f;
     brokenAnim.loop = false;
 
     idlebrokenAnim.PushBack({ 0, 444, 224, 220 });
@@ -38,7 +38,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
         deathAnim.PushBack({ disX, disY, 224, 220 });
         disX += 304;
     }
-    deathAnim.speed = 0.7f;
+    deathAnim.speed = 0.5f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 330, &brokenAnim);
@@ -47,14 +47,13 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
 
     // TODO cambiar tamaño collider
     collider = App->collisions->AddCollider({ 0, 0, 224, 86 }, Collider::Type::BRIDGE, (Module*)App->enemies);
-    health = 20;
+    health = 2;
 }
 
 void Enemy_Bridge::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    currentAnim = path.GetCurrentAnimation();
     //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end
@@ -94,19 +93,19 @@ void Enemy_Bridge::StateMachine() {
     case Enemy_State::IDLE:
         LOG("Bridge state changed to IDLE");
         idleAnimation();
-        if (this->health <= 10)
+        if (this->health == 1)
         {
-            brokenAnimation();
-            if (brokenAnim.HasFinished()) {
-                state = Enemy_State::HIT;
-            }
+            state = Enemy_State::HIT;
         }
         break;
     case Enemy_State::HIT:
         LOG("Bridge state changed to HIT");
-        idlebrokenAnimation();
-        if (this->health == 0) {
-            state = Enemy_State::DEATH;
+        brokenAnimation();
+        if (brokenAnim.HasFinished()) {
+            idlebrokenAnimation();
+            if (this->health == 0) {
+                state = Enemy_State::DEATH;
+            }
         }
         break;
     case Enemy_State::DEATH:
@@ -127,7 +126,7 @@ void Enemy_Bridge::StateMachine() {
 
 void Enemy_Bridge::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
-        health -= 10;
+        health--;
         if (health == 0) {
             App->audio->PlayFx(destroyedFx);
             SetToDelete();

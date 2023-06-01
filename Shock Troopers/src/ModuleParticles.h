@@ -46,26 +46,82 @@ public:
 	// Called when a particle collider hits another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-
 	// Creates a new particle and adds it to the array
 	// Param particle	- A template particle from which the new particle will be created
 	// Param x, y		- Position x,y in the screen (upper left axis)
 	// Param delay		- Delay time from the moment the function is called until the particle is displayed in screen
-	Particle* AddParticle(const Particle& particle, int x, int y, int direction, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
+	Particle* AddParticle(const Particle& particle, int x, int y, int playerDirection, Collider::Type colliderType = Collider::Type::NONE, uint delay = 0);
 
 public:
-	//Template particle for an explosion
+	// Explosion
 	Particle explosion;
 
-	//Template particle for a laser
-	Particle flyingbattleshipShop;
+	// Shots
+	Particle flyingbattleshipShot;
 
-	//Template particle for a laser
-	Particle playerShot;
+	Particle playerShotUp;
+	Particle playerShotDown;
+	Particle playerShotLeft;
+	Particle playerShotRight;
+	Particle playerShotUpRight;
+	Particle playerShotUpLeft;
+	Particle playerShotDownRight;
+	Particle playerShotDownLeft;
+
+	Particle enemyShotUp;
+	Particle enemyShotDown;
+	Particle enemyShotLeft;
+	Particle enemyShotRight;
+	Particle enemyShotUpRight;
+	Particle enemyShotUpLeft;
+	Particle enemyShotDownRight;
+	Particle enemyShotDownLeft;
+
+	Particle tankMissileUp;
+	Particle tankMissileDown;
+	Particle tankMissileLeft;
+	Particle tankMissileRight;
+	Particle tankMissileUpRight;
+	Particle tankMissileUpLeft;
+	Particle tankMissileDownRight;
+	Particle tankMissileDownLeft;
+
+	Particle tankShotUp;
+	Particle tankShotDown;
+	Particle tankShotLeft;
+	Particle tankShotRight;
+	Particle tankShotUpRight;
+	Particle tankShotUpLeft;
+	Particle tankShotDownRight;
+	Particle tankShotDownLeft;
+
+	// Grenades
+	Particle playerGrenade;
+
+	// Muzzles
+	Particle playerMuzzleUp;
+	Particle playerMuzzleDown;
+	Particle playerMuzzleLeft;
+	Particle playerMuzzleRight;
+	Particle playerMuzzleUpRight;
+	Particle playerMuzzleUpLeft;
+	Particle playerMuzzleDownRight;
+	Particle playerMuzzleDownLeft;
+
+	Particle enemyMuzzleUp;
+	Particle enemyMuzzleDown;
+	Particle enemyMuzzleLeft;
+	Particle enemyMuzzleRight;
+	Particle enemyMuzzleUpRight;
+	Particle enemyMuzzleUpLeft;
+	Particle enemyMuzzleDownRight;
+	Particle enemyMuzzleDownLeft;
+
+	Particle flyingBattleshipMuzzle;
 
 private:
 	// Particles spritesheet loaded into an SDL Texture
-	SDL_Texture* texture = nullptr;
+	SDL_Texture* texture;
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };

@@ -12,10 +12,13 @@
 #include <iostream>
 #include <stdio.h>
 #include <SDL/include/SDL_timer.h>
+#include "ModuleUI.h"
 
 using namespace std;
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
+
+	lastDirection = 8;
 
 	//Setting up the player animations
 	// Empty animation
@@ -186,14 +189,14 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	rollAnimDownLeft.PushBack({ 378, 208, 54, 52 });
 	rollAnimDownLeft.PushBack({ 432, 208, 54, 52 });
 
-	rollAnimDownRight.PushBack({ 486, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 540, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 594, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 648, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 702, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 756, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 810, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 864, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 486, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 540, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 594, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 648, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 702, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 756, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 810, 416, 54, 52 }); // TODO @martagnarta
+	rollAnimDownRight.PushBack({ 864, 416, 54, 52 }); // TODO @martagnarta
 
 	rollAnimUpLeft.PushBack({ 0,   156, 54, 52 });
 	rollAnimUpLeft.PushBack({ 54,  156, 54, 52 });
@@ -350,6 +353,7 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	shootAnimUpRight.speed = animSpeed;
 
 	deathAnim.speed = animSpeed;
+	deathAnim.loop = false;
 
 	damageAnim.speed = animSpeed;
 }
@@ -363,49 +367,7 @@ void ModulePlayer::updateHp() {
 	if (!isInvulnerable) {
 		isInvulnerable = true;
 		invulnerabilityTimer = 0.0f;
-	}
-
-	//Carga sprite en base a la vida del jugador
-	switch (hp) {
-		case 100:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
-			break;
-		case 90:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
-			break;
-		case 80:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
-			break;
-		case 70:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
-			break;
-		case 60:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
-			break;
-		case 50:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
-			break;
-		case 40:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
-			break;
-		case 30:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
-			break;
-		case 20:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
-			break;
-		case 10:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
-			break;
-		case 0:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-			destroyed = true;
-			//TODO  poner esto donde toque
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
-			break;
-		default:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-			break;
+		hp -= 10;
 	}
 }
 
@@ -419,6 +381,12 @@ void ModulePlayer::godMode() {
 	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
 		App->player->position.x = 232;
 		App->player->position.y = 190;
+	}
+
+	// TP player to the tank boss (for testing purposes)
+	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
+		App->player->position.x = 1430;
+		App->player->position.y = 250;
 	}
 
 	// Damage player 
@@ -441,7 +409,7 @@ void ModulePlayer::godMode() {
 
 	// Spawn power up
 	if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-		App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x - 90, position.y , true });
+		App->pickUps->SpawnPickUp({ PickUp_Type::HP,(int)position.x - 90, (int)position.y , true });
 	}
 }
 
@@ -700,14 +668,20 @@ void ModulePlayer::setShootingMovingAnimations() {
 }
 
 bool ModulePlayer::isShootingMoving() {
+	GamePad& pad = App->input->pads[0];
 
 	if ((App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
-		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT)
+		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) 
 		and
 		(App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT)
 		and !lockControls) {
+		return true;
+
+	}
+	else if ((pad.l_y < 0 or pad.l_x < 0 or pad.l_y > 0 or pad.l_x > 0) and
+		(pad.x == true) and !lockControls) {
 		return true;
 
 	}
@@ -719,11 +693,14 @@ bool ModulePlayer::isShootingMoving() {
 }
 
 bool ModulePlayer::isMoving() {
+	GamePad& pad = App->input->pads[0];
 
 	if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT or
 		App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT or
-		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT and 
+		App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT or
+		pad.l_y < 0 or pad.l_x < 0 or pad.l_y > 0 or pad.l_x > 0 and
+
 		!lockControls) {
 
 		return true;
@@ -737,8 +714,9 @@ bool ModulePlayer::isMoving() {
 }
 
 bool ModulePlayer::isShooting() {
+	GamePad& pad = App->input->pads[0];
 
-	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT and !lockControls) {
+	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_REPEAT or pad.x == true and !lockControls) {
 		return true;
 
 	}
@@ -751,8 +729,9 @@ bool ModulePlayer::isShooting() {
 }
 
 bool ModulePlayer::isGrenade() {
+	GamePad& pad = App->input->pads[0];
 
-	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT and !lockControls) {
+	if (App->input->keys[SDL_SCANCODE_Z] == Key_State::KEY_REPEAT or pad.y == true and !lockControls) {
 
 		return true;
 
@@ -765,8 +744,10 @@ bool ModulePlayer::isGrenade() {
 }
 
 bool ModulePlayer::isRoll() {
-	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN or isRolling) {
+	GamePad& pad = App->input->pads[0];
 
+	if (App->input->keys[SDL_SCANCODE_LSHIFT] == Key_State::KEY_DOWN or pad.b == true or isRolling) {
+		isRolling = true;
 		
 		return true;
 
@@ -865,10 +846,39 @@ void ModulePlayer::roll() {
 }
 
 void ModulePlayer::shoot() {
+	if (!isShootingMoving()) {
+		shootDirection = lastDirection;
+	}
+
 	delay--;
 	if (delay == 0) {
-		//App->particles->laser.setDirection(lastDirection);
-		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+		Particle* newParticle = nullptr;
+		switch (lastDirection) {
+		case 1: // Up-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		case 2: // Up-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		case 3: // Down-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		case 4: // Down-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		case 5: // Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		case 6: // Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		case 7: // Down
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		case 8: // Up
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			break;
+		}
 		newParticle->collider->AddListener(this);
 		App->audio->PlayFx(laserFx);
 
@@ -877,20 +887,54 @@ void ModulePlayer::shoot() {
 }
 
 void ModulePlayer::grenade() {
+	/*
 	App->particles->playerShot.setDirection(lastDirection);
 	//TODO a�adir direccion
 	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 	newParticle->collider->AddListener(this);
 	newParticle->granada = true;
+	*/
 	App->audio->PlayFx(laserFx);
 }
 
 void ModulePlayer::shootMoving() {
 	delay--;
 	if (delay == 0) {
-		//App->particles->laser.setDirection(lastDirection);
-		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-		newParticle->collider->AddListener(this);
+		Particle* newParticle = nullptr;
+		switch (shootDirection) {
+		case 1: // Up-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		case 2: // Up-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		case 3: // Down-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		case 4: // Down-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		case 5: // Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		case 6: // Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		case 7: // Down
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		case 8: // Up
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticle->collider->AddListener(this);
+			break;
+		}
 		App->audio->PlayFx(laserFx);
 
 		delay = 10;
@@ -898,24 +942,27 @@ void ModulePlayer::shootMoving() {
 }
 
 void ModulePlayer::getLastDirection() {
-	//Map controls
+	
+	GamePad& pad = App->input->pads[0];
+
+//Map controls
 	if(!lockControls){
 
-		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_y < 0 && pad.l_x > 0) {
 			currentDirection = 1;
-		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_y < 0 && pad.l_x < 0) {
 			currentDirection = 2;
-		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_y > 0 && pad.l_x > 0) {
 			currentDirection = 3;
-		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT && App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_y > 0 && pad.l_x < 0) {
 			currentDirection = 4;
-		} else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_REPEAT || pad.l_x > 0) {
 			currentDirection = 5;
-		} else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_REPEAT || pad.l_x < 0) {
 			currentDirection = 6;
-		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_S] == Key_State::KEY_REPEAT || pad.l_y > 0) {
 			currentDirection = 7;
-		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT) {
+		} else if (App->input->keys[SDL_SCANCODE_W] == Key_State::KEY_REPEAT || pad.l_y < 0) {
 			currentDirection = 8;
 		} else {
 			currentDirection = 0;
@@ -976,8 +1023,6 @@ void ModulePlayer::stateMachine() {
 
 		saveLastPosition();
 
-		LOG("idle state");
-
 		break;
 
 	case PlayerState::ShootingMoving:
@@ -1001,8 +1046,6 @@ void ModulePlayer::stateMachine() {
 		if (isRoll()) {
 			currentState = PlayerState::Roll;
 		}
-
-		LOG("shooting moving state");
 
 		break;
 
@@ -1030,12 +1073,10 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
-		LOG("moving state");
-
 		break;
 
 	case PlayerState::Shooting:
-
+		
 		setShootingAnimations();
 
 		shoot();
@@ -1055,8 +1096,6 @@ void ModulePlayer::stateMachine() {
 		if (!isShooting()) {
 			currentState = PlayerState::Idle;
 		}
-
-		LOG("shooting state");
 
 		break;
 
@@ -1079,8 +1118,6 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
-		LOG("grenade state");
-
 		break;
 
 	case PlayerState::Roll:
@@ -1095,8 +1132,6 @@ void ModulePlayer::stateMachine() {
 
 		}
 
-		LOG("roll state");
-
 		break;
 
 	case PlayerState::Win:
@@ -1105,8 +1140,6 @@ void ModulePlayer::stateMachine() {
 
 		// Win logic
 		// TODO
-
-		LOG("win state");
 
 		break;
 
@@ -1120,17 +1153,16 @@ void ModulePlayer::stateMachine() {
 		// enter idle state
 		currentState = PlayerState::Idle;
 
-		LOG("spawn state");
-
 		break;
 
 	case PlayerState::Death:
 
 		setDeathAnimations();
 
-		// TODO Death logic
-
-		LOG("death state");
+		if (deathAnim.HasFinished()) {
+			// TODO Arreglar para que haga la transición entre escenas correctamente
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
+		}
 
 		break;
 
@@ -1160,9 +1192,6 @@ void ModulePlayer::stateMachine() {
 		if (!isHitted) {
 			currentState = PlayerState::Idle;
 		}
-		
-
-		LOG("damage state");
 
 		break;
 	}
@@ -1194,17 +1223,13 @@ bool ModulePlayer::Start() {
 	position.y = 2800;
 	
 	//Setting up player wall coliders
-	colliderL = App->collisions->AddCollider({ position.x -3 , position.y + 2, 5, 43 }, Collider::Type::LASER, this);
-	colliderU = App->collisions->AddCollider({ position.x + 5, position.y + 5, 22, 5 }, Collider::Type::LASER, this);
-	colliderD = App->collisions->AddCollider({ position.x + 5, position.y + 51, 22, 5 }, Collider::Type::LASER, this);
-	colliderR = App->collisions->AddCollider({ position.x + 29, position.y + 2, 5,43 }, Collider::Type::LASER, this);
+	colliderL = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 2, 2, 43 }, Collider::Type::LASER, this);
+	colliderU = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 8, 22, 2 }, Collider::Type::LASER, this);
+	colliderD = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 51, 22, 2 }, Collider::Type::LASER, this);
+	colliderR = App->collisions->AddCollider({ (int)position.x + 32, (int)position.y + 2, 2,43 }, Collider::Type::LASER, this);
 
 	//Setting up player hitbox
-	collider = App->collisions->AddCollider({ position.x + 5,position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
-
-
-	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/fonts/rtype_font3.png", lookupTable, 2);
+	collider = App->collisions->AddCollider({ (int)position.x + 5,(int)position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
 
 	return ret;
 }
@@ -1260,16 +1285,7 @@ Update_Status ModulePlayer::PostUpdate() {
 		//Obtenemos position de las diferentes partes de la UI en base al jugador y la camara
 		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
 		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
-
-		//Mostramos por pantalla la UI
-		App->render->Blit(textureHp,x - 10, y, NULL);
-		App->render->Blit(textureP1, x - 20, y - 50, NULL);
-		App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
 	}
-
-	//Mostramos por pantalla el score
-	sprintf_s(scoreText, 10, "%7d", score);
-	App->fonts->BlitText(30, 5, scoreFont, scoreText);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -1299,7 +1315,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		}
 
 	}
-
 
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
 		lockR = true;
@@ -1336,13 +1351,33 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		isRolling = false;
 		cantRoll = true;
 	}
+	
+	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
+		lockR = true;
+		isRolling = false;
+	}
+
+	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
+		lockU = true;
+		isRolling = false;
+	}
+
+	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
+		lockD = true;
+		isRolling = false;
+	}
+
+	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
+		lockL = true;
+		isRolling = false;
+	}
 
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
 		hp += 10;
 	}
 
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY) {
-		score += 23;
+		App->ui->updateScore(300);
 	}
 
 }

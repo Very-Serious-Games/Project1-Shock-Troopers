@@ -1,7 +1,7 @@
 #include "ModuleRender.h"
 
 #include "Application.h"
-#include "ModuleCollisions.h"
+
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
@@ -22,7 +22,7 @@ ModuleRender::~ModuleRender()
 bool ModuleRender::Init()
 {
 	LOG("Creating Renderer context");
-	bool ret = true;	 
+	bool ret = true;	
 	Uint32 flags = 0;
 
 	if (VSYNC == true)
@@ -65,8 +65,7 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
-	int nextCameraY = App->player->position.y - 100;
-	int nextCameraX = App->player->position.x - 120;
+	//Handle positive vertical movement
 
 	if (nextCameraY <= camera.y) {
 		camera.y = App->player->position.y - 100;
@@ -121,10 +120,6 @@ Update_Status ModuleRender::Update()
 
 	if (App->input->keys[SDL_SCANCODE_M] == KEY_DOWN) leaveZone = !leaveZone;
 
-	maxX = 0;
-	minX = 0;
-	maxY = 0;
-	minY = 0;
 
 	return Update_Status::UPDATE_CONTINUE;
 }

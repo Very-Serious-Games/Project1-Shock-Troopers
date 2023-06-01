@@ -29,6 +29,7 @@ bool SceneLevel1::Start()
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain_full.png");
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
+	App->ui->Enable();
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
@@ -39,29 +40,30 @@ bool SceneLevel1::Start()
 	createMargenes();
 
 	// Add enemies
-	//App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 100, 100);
+	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 128, 2900);
 								
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20); // (493 / 2) - (128 / 2) = 183
+
+	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1355, 70);
+
+	App->enemies->AddEnemy(Enemy_Type::TANK, 128, 2300);
 	
 	//Add objects
 	//App->enemies->AddEnemy(Enemy_Type::BRIDGE, 125, 1822);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 128, 1296);
-
-	App->render->camera.x = 220;
-	App->render->camera.y = 2800;
-
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 713);
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 668);
+	
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();
 	App->pickUps->Enable();
-	App->ui->Enable();
 
 	return ret;
 }
 
 Update_Status SceneLevel1::Update()
 {
-
 	return Update_Status::UPDATE_CONTINUE;
 }
 

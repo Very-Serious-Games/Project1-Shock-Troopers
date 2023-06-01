@@ -24,7 +24,7 @@ public:
 	void Update();
 
 	// Returns the position relative to the start of the path
-	iPoint GetRelativePosition() const;
+	fPoint GetRelativePosition() const;
 
 	// Returns the animation linked to the current step
 	Animation* GetCurrentAnimation();

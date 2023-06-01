@@ -77,11 +77,15 @@ void Enemy_FlyingBattleship::Attack() {
             LOG("Normal attack");
             // TODO add explosion when shooting
             // TODO change particle used to the correct one
+            
+            /*
             Particle* shot1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
             shot1->collider->AddListener(NULL);
             Particle* shot2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
             shot2->collider->AddListener(NULL);
-            App->audio->PlayFx(/*sound effect*/NULL);
+            App->audio->PlayFx(NULL);
+            */
+            
             delay = 15;
         }
     }
@@ -136,6 +140,7 @@ void Enemy_FlyingBattleship::StateMachine() {
             pendingToDelete = true;
             LOG("pendingToDelete enemy");
         }
+
         deathAnimDelay--;
         
         break;

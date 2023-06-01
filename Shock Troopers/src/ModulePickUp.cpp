@@ -26,9 +26,6 @@ ModulePickUp::~ModulePickUp()
 
 bool ModulePickUp::Start()
 {
-
-	texture = App->textures->Load("Assets/Sprites/particles/miniboss1_muzzle_flash.png");
-
 	SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
 	return true;
 }
@@ -71,8 +68,8 @@ Update_Status ModulePickUp::PostUpdate()
 {
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr)
-			pickUp[i]->Draw();
+		//if (pickUp[i] != nullptr)
+			//pickUp[i]->Draw();
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

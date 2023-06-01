@@ -55,12 +55,13 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::LASER] = false;
 	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_ZONE] = true;
 
-
 	matrix[Collider::Type::HEAL][Collider::Type::PLAYER] = true;
 
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_ZONE] = true;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_ZONE_2] = true;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_TRIGGER] = true;
+	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER] = true; // TODO revisar
+	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER_SHOT] = true;
 }
 
 // Destructor
@@ -99,9 +100,10 @@ Update_Status ModuleCollisions::PreUpdate()
 			// skip empty colliders
 			if(colliders[k] == nullptr)
 				continue;
+
+
 			c2 = colliders[k];
 			if(matrix[c1->type][c2->type] && c1->Intersects(c2->rect)) {
-
 				for (uint i = 0; i < MAX_LISTENERS; ++i) {
 					if (c1->listeners[i] != nullptr) {
 						c1->listeners[i]->OnCollision(c1, c2);
@@ -161,7 +163,7 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::PLAYER_SHOT: // yellow
 				App->render->DrawQuad(colliders[i]->rect, 255, 255, 0, alpha);
 				break;
-			case Collider::Type::ENEMY_SHOT: // magenta
+			case Collider::Type::ENEMY_SHOT: // cian
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 				break;
 			case Collider::Type::HEAL: // magenta
@@ -173,14 +175,17 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::LASER: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 				break;
-			case Collider::Type::STOP_CAM_ZONE: // orange
-				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
+			case Collider::Type::OBJECT: // pink
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 				break;
 			case Collider::Type::STOP_CAM_ZONE_2: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
 				break;
 			case Collider::Type::STOP_CAM_TRIGGER: // orange
 				App->render->DrawQuad(colliders[i]->rect, 100, 100, 100, alpha);
+				break;
+			case Collider::Type::KNIFE: // brown
+				App->render->DrawQuad(colliders[i]->rect, 165, 42, 42, alpha);
 				break;
 
 			default:

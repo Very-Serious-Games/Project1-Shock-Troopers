@@ -11,16 +11,19 @@
 #include "Enemy_FlyingBattleship.h"
 #include "Enemy_Bridge.h"
 #include "Enemy_Crate.h"
+#include "Enemy_TankBoss.h"
+#include "Enemy_Tank.h"
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 5000
 
 
 ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 		enemies[i] = nullptr;
-}
 
+}
+ 
 ModuleEnemies::~ModuleEnemies()
 {
 
@@ -29,9 +32,12 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 	// TODO cargar texturas y fx enemigos
+	textureTankBoss = App->textures->Load("Assets/Sprites/characters/tank_boss.png");
+	textureTank = App->textures->Load("Assets/Sprites/characters/tank_spritesheet.png");
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
+	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/Soldiers-Infantry.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
-	textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
+	//textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -136,7 +142,8 @@ void ModuleEnemies::HandleEnemiesSpawn()
 
 void ModuleEnemies::HandleEnemiesDespawn()
 {
-	/*
+	// TODO despawn enemies
+	
 	// Iterate existing enemies
 	for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
@@ -150,7 +157,7 @@ void ModuleEnemies::HandleEnemiesDespawn()
 				enemies[i]->SetToDelete();
 			}
 		}
-	}*/
+	}
 }
 
 void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
@@ -164,22 +171,33 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			{
 				case Enemy_Type::INFANTRY_SOLDIER:
 					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i]->texture = textureInfantrySoldier;
 					break;
 				case Enemy_Type::FLYING_BATTLESHIP:
 					enemies[i] = new Enemy_FlyingBattleship(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureFlyingBattleship;
 					break;
 				case Enemy_Type::BRIDGE:
 					enemies[i] = new Enemy_Bridge(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureBridge;
 					break;
 				case Enemy_Type::CRATE:
 					enemies[i] = new Enemy_Crate(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureCrate;
+					break;
+				case Enemy_Type::TANK_BOSS:
+					enemies[i] = new Enemy_TankBoss(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i]->texture = textureTankBoss;
+					break;
+				case Enemy_Type::TANK:
+					enemies[i] = new Enemy_Tank(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i]->texture = textureTank;
 					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;

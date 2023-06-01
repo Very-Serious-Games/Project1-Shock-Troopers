@@ -3,10 +3,11 @@
 
 #include <string>
 #include <cmath>
-using namespace std;
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+
+using namespace std;
 
 struct SDL_Texture;
 struct Collider;
@@ -83,7 +84,7 @@ public:
 
 public:
 	// Position of the player in the map
-	iPoint position;
+	fPoint position;
 
 	// Player current state
 	PlayerState currentState;
@@ -209,13 +210,6 @@ public:
 	bool destroyed = false;
 
 	bool cantRoll = false;
-
-
-	// Font score index
-	uint score = 010;
-	int scoreFont = -1;
-	char scoreText[10] = { "\0" };
-
 };
 
 #endif //!__MODULE_PLAYER_H__

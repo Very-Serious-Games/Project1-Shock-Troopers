@@ -27,9 +27,25 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	}
 
 	startStage.PushBack({ 0, 0, 0, 0 });
-	startStage.speed = 1.0f;
+	startStage.speed = 0.8f;
 	startStage.loop = false;
 	path.PushBack({ 0.0f, 0.0f }, 1000, &startStage);
+
+	//stage clear anim below
+	
+	////iterate the start stage animation, that has 6 frames per row and 14 rows
+	/*for (int row = 0; row < 14; row++) {
+		for (int col = 0; col < 6; col++) {
+			int frameX = col * SCREEN_WIDTH;
+			int frameY = row * SCREEN_HEIGHT;
+			endStage.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
+		}
+	}
+
+	endStage.PushBack({ 0, 0, 0, 0 });
+	endStage.speed = 1.0f;
+	endStage.loop = false;
+	path.PushBack({ 0.0f, 0.0f }, 1000, &endStage);*/
 	
 }
 
@@ -109,6 +125,7 @@ Update_Status ModuleUI::Update()
 {
 	updateHp();
 	startStage.Update();
+	/*endStage.Update();*/
 	path.Update();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -129,6 +146,7 @@ Update_Status ModuleUI::PostUpdate()
 
 	//Mostramos por pantalla la anim inicial
 	App->render->Blit(textureSstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);
+	/*App->render->Blit(textureEstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);*/
 
 	//Mostramos por pantalla el score
 	App->fonts->BlitText(20, 3, scoreFont, scoreText);
@@ -136,13 +154,3 @@ Update_Status ModuleUI::PostUpdate()
 
 	return Update_Status::UPDATE_CONTINUE;
 }
-
-
-//void ModuleUI::startstage() {
-//
-//}
-//
-//void ModuleUI::endstage() {
-//	App->textures->Load("Assets/sprites/background/stage-anim/stage-clear.png");
-//	endStage.PushBack({ 0, 0, SCREEN_HEIGHT, SCREEN_WIDTH });
-//}

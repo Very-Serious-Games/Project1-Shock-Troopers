@@ -42,7 +42,7 @@ public:
 	char scoreText[10] = { "\0" };
 
 	void updateScore(int points);
-
+	
 	////start and end stage anims
 	//void startstage();
 	//void endstage();

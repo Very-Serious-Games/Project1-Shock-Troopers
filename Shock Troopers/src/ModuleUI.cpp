@@ -123,15 +123,16 @@ Update_Status ModuleUI::PostUpdate()
 	App->render->Blit(textureP1, x, y, NULL);
 	App->render->Blit(textureWeapon, x + 10, y + 200, NULL);
 
+	//Mostramos por pantalla la anim inicial
+	App->render->Blit(textureSstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);
+
 	//Mostramos por pantalla el score
 	App->fonts->BlitText(20, 3, scoreFont, scoreText);
 	sprintf_s(scoreText, 10, "%7d", score);
 
-	//Mostramos por pantalla la anim inicial
-	App->render->Blit(textureSstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 0.1f);
-
 	return Update_Status::UPDATE_CONTINUE;
 }
+
 
 //void ModuleUI::startstage() {
 //

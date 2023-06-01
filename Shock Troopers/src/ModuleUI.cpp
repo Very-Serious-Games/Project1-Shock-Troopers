@@ -17,6 +17,17 @@ using namespace std;
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
+	//iterate the start stage animation, that has 29 frames per row and 3 rows
+	for (int row = 0; row < 3; row++) {
+		for (int col = 0; col < 29; col++) {
+			int frameX = col * SCREEN_WIDTH;
+			int frameY = row * SCREEN_HEIGHT;
+			startStage.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
+		}
+	}
+
+	startStage.speed = 0.1f;
+	path.PushBack({ 0.0f, 0.0f }, 1000, &startStage);
 }
 
 ModuleUI::~ModuleUI()
@@ -79,6 +90,8 @@ bool ModuleUI::Start()
 	// Starting sprite
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
+	textureSstage = App->textures->Load("Assets/sprites/ui/start-anim.png");
+	textureEstage = App->textures->Load("Assets/sprites/ui/stage-clear.png");
 
 	// Starting fonts
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
@@ -91,6 +104,8 @@ bool ModuleUI::Start()
 Update_Status ModuleUI::Update()
 {
 	updateHp();
+	startStage.Update();
+	path.Update();
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -112,5 +127,17 @@ Update_Status ModuleUI::PostUpdate()
 	App->fonts->BlitText(20, 3, scoreFont, scoreText);
 	sprintf_s(scoreText, 10, "%7d", score);
 
+	//Mostramos por pantalla la anim inicial
+	App->render->Blit(textureSstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 0.1f);
+
 	return Update_Status::UPDATE_CONTINUE;
 }
+
+//void ModuleUI::startstage() {
+//
+//}
+//
+//void ModuleUI::endstage() {
+//	App->textures->Load("Assets/sprites/background/stage-anim/stage-clear.png");
+//	endStage.PushBack({ 0, 0, SCREEN_HEIGHT, SCREEN_WIDTH });
+//}

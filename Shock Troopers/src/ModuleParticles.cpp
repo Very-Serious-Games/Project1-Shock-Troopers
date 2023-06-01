@@ -304,37 +304,29 @@ bool ModuleParticles::Start() {
     enemyMuzzleDownLeft.anim.PushBack(      { 15*2,  11, 15, 15 });
     enemyMuzzleDownLeft.anim.PushBack(      { 15*3,  11, 15, 15 });
 
-    enemyMuzzleUp.anim.loop = true;
+    enemyMuzzleUp.anim.loop = false;
     enemyMuzzleUp.anim.speed = 0.3;
-    enemyMuzzleUp.lifetime = 180;
 
-    enemyMuzzleDown.anim.loop = true;
+    enemyMuzzleDown.anim.loop = false;
     enemyMuzzleDown.anim.speed = 0.3;
-    enemyMuzzleDown.lifetime = 180;
 
-    enemyMuzzleLeft.anim.loop = true;
+    enemyMuzzleLeft.anim.loop = false;
     enemyMuzzleLeft.anim.speed = 0.3;
-    enemyMuzzleLeft.lifetime = 180;
 
-    enemyMuzzleRight.anim.loop = true;
+    enemyMuzzleRight.anim.loop = false;
     enemyMuzzleRight.anim.speed = 0.3;
-    enemyMuzzleRight.lifetime = 180;
 
-    enemyMuzzleUpRight.anim.loop = true;
+    enemyMuzzleUpRight.anim.loop = false;
     enemyMuzzleUpRight.anim.speed = 0.3;
-    enemyMuzzleUpRight.lifetime = 180;
 
-    enemyMuzzleUpLeft.anim.loop = true;
+    enemyMuzzleUpLeft.anim.loop = false;
     enemyMuzzleUpLeft.anim.speed = 0.3;
-    enemyMuzzleUpLeft.lifetime = 180;
 
-    enemyMuzzleDownRight.anim.loop = true;
+    enemyMuzzleDownRight.anim.loop = false;
     enemyMuzzleDownRight.anim.speed = 0.3;
-    enemyMuzzleDownRight.lifetime = 180;
 
-    enemyMuzzleDownLeft.anim.loop = true;
+    enemyMuzzleDownLeft.anim.loop = false;
     enemyMuzzleDownLeft.anim.speed = 0.3;
-    enemyMuzzleDownLeft.lifetime = 180;
 
     // Muzzle Flying Battleship
     flyingBattleshipMuzzle.anim.PushBack(   { 26*0, 49, 26, 29 });

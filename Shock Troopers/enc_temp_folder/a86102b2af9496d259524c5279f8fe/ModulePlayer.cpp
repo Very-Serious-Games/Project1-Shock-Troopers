@@ -606,7 +606,7 @@ void ModulePlayer::setRollAnimations() {
 		currentAnimationLegs = &rollAnimDown;
 		break;
 	case 8: //U
-		currentAnimationLegs = &rollAnimUp;
+		currentAnimationLegs = &winAnim;
 		break;
 	}
 }

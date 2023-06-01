@@ -5,48 +5,35 @@
 
 Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
 
-    spawnAnim.PushBack({ 0, 0, 118, 189 });
+    spawnAnim.PushBack({ 0, 0, 109, 178 });
 
-    idleAnim.PushBack({ 0, 0, 118, 189 });
+    idleAnim.PushBack({ 0, 0, 109, 178 });
 
     int disX = 0;
-    int disY = 0;
-    for (int i = 0; i < 36; ++i)
+    for (int i = 0; i < 35; ++i)
     {
-        if (i == 20)
-        {
-            disY += 191;
-            disX = 0;
-        }
-        brokenAnim.PushBack({ disX, disY, 118, 189 });
-        disX += 120;
+        brokenAnim.PushBack({ disX, 0, 109, 178 });
+        disX += 109;
     }
-    brokenAnim.speed = 0.2f;
+    brokenAnim.speed = 0.3f;
     brokenAnim.loop = false;
 
-    idlebrokenAnim.PushBack({ 0, 382, 118, 189 });
+    path.PushBack({ 0.0f, 0.0f }, 360, &brokenAnim);
 
-    disX = 0;
-    disY = 382;
-    for (int j = 0; j < 60; ++j)
+    idlebrokenAnim.PushBack({ disX, 0, 109, 178 });
+
+    for (int j = 0; j < 48; ++j)
     {
-        if (j == 20 and j == 40)
-        {
-            disY += 191;
-            disX = 0;
-        }
-        deathAnim.PushBack({ disX, disY, 118, 189 });
-        disX += 120;
+        deathAnim.PushBack({ disX, 0, 109, 178 });
+        disX += 109;
     }
     deathAnim.speed = 0.7f;
     deathAnim.loop = false;
 
-    path.PushBack({ 0.0f, 0.0f }, 300, &brokenAnim);
-
-    path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
+    path.PushBack({ 0.0f, 0.0f }, 480, &deathAnim);
 
     // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 10, 74, 97, 42 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    collider = App->collisions->AddCollider({ 0, 0, 98, 108 }, Collider::Type::OBJECT, (Module*)App->enemies);
     health = 20;
 }
 
@@ -54,7 +41,6 @@ void Enemy_Sandbag::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    currentAnim = path.GetCurrentAnimation();
     //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end
@@ -96,17 +82,17 @@ void Enemy_Sandbag::StateMachine() {
         idleAnimation();
         if (this->health <= 10)
         {
-            brokenAnimation();
-            if (brokenAnim.HasFinished()) {
-                state = Enemy_State::HIT;
-            }
+            state = Enemy_State::HIT;
         }
         break;
     case Enemy_State::HIT:
         LOG("Sandbag state changed to HIT");
-        idlebrokenAnimation();
-        if (this->health == 0) {
-            state = Enemy_State::DEATH;
+        brokenAnimation();
+        if (brokenAnim.HasFinished()) {
+            idlebrokenAnimation();
+            if (this->health == 0) {
+                state = Enemy_State::DEATH;
+            }
         }
         break;
     case Enemy_State::DEATH:

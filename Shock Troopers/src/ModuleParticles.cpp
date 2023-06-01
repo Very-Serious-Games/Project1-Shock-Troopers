@@ -333,9 +333,8 @@ bool ModuleParticles::Start() {
     flyingBattleshipMuzzle.anim.PushBack(   { 26*1, 49, 26, 29 });
     flyingBattleshipMuzzle.anim.PushBack(   { 26*2, 49, 26, 29 });
 
-    flyingBattleshipMuzzle.anim.loop = true;
+    flyingBattleshipMuzzle.anim.loop = false;
     flyingBattleshipMuzzle.anim.speed = 0.3;
-    flyingBattleshipMuzzle.lifetime = 180;
 
     return true;
 }

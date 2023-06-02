@@ -28,6 +28,27 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::WALL][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::WALL][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::WALL][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::WALL][Collider::Type::LANDMINE] = false;
+
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::WALL] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::PLAYER_WALL] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::LASER] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::HEAL] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::STOP_CAM_ZONE] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::STOP_CAM_TRIGGER] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::PLAYER_WALL] = false;
@@ -44,6 +65,9 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::PLAYER_WALL][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::PLAYER_WALL][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::PLAYER_WALL][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::PLAYER][Collider::Type::WALL] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_WALL] = false;
@@ -61,6 +85,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::MISSILE] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::LANDMINE] = true;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_WALL] = false;
@@ -78,6 +104,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_WALL] = false;
@@ -95,6 +123,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::MISSILE] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::BRIDGE] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_WALL] = false;
@@ -112,6 +142,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::LASER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::LASER][Collider::Type::PLAYER_WALL] = true;
@@ -121,7 +153,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::LASER][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::LASER][Collider::Type::HEAL] = false;
-	matrix[Collider::Type::LASER][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::LASER][Collider::Type::OBJECT] = true;
 	matrix[Collider::Type::LASER][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_ZONE_2] = false;
@@ -129,6 +161,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::LASER][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::LASER][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::HEAL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::HEAL][Collider::Type::PLAYER_WALL] = false;
@@ -146,6 +180,27 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::HEAL][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::HEAL][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::HEAL][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::HEAL][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::HEAL][Collider::Type::LANDMINE] = false;
+
+	matrix[Collider::Type::OBJECT][Collider::Type::WALL] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::PLAYER_WALL] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::LASER] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::OBJECT][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::OBJECT][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::HEAL] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::STOP_CAM_ZONE] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::STOP_CAM_TRIGGER] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::WALL] = false;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::PLAYER_WALL] = false;
@@ -162,6 +217,9 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::WALL] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::PLAYER_WALL] = false;
@@ -178,7 +236,9 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_TRIGGER] = true;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::MISSILE] = false;
-	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::LANDMINE] = false;
 
 	matrix[Collider::Type::MISSILE][Collider::Type::WALL] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER_WALL] = false;
@@ -196,20 +256,66 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::MISSILE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::MISSILE][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::MISSILE][Collider::Type::LANDMINE] = false;
 
-	// muzzle
-	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER_SHOT] = false;
-	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::MUZZLE][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::MUZZLE][Collider::Type::ENEMY_SHOT] = false;
+
 	matrix[Collider::Type::MUZZLE][Collider::Type::WALL] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER_WALL] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::LASER] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::MUZZLE][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::ENEMY_SHOT] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::HEAL] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::STOP_CAM_ZONE] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::STOP_CAM_TRIGGER] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::LANDMINE] = false;
 
-
+	matrix[Collider::Type::LANDMINE][Collider::Type::WALL] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::PLAYER_WALL] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::LASER] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::LANDMINE][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::LANDMINE][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::HEAL] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::STOP_CAM_ZONE] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::STOP_CAM_TRIGGER] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::LANDMINE] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::BRIDGE] = false;
+
+	matrix[Collider::Type::BRIDGE][Collider::Type::WALL] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::PLAYER_WALL] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::LASER] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::BRIDGE][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::HEAL] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::STOP_CAM_ZONE] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::STOP_CAM_TRIGGER] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::LANDMINE] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::BRIDGE] = false;
 }
 
 // Destructor
@@ -343,6 +449,12 @@ void ModuleCollisions::DebugDraw()
 				break;
 			case Collider::Type::MUZZLE: // white
 				App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+				break;
+			case Collider::Type::BRIDGE: // pink
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+				break;
+			case Collider::Type::LANDMINE: // red
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 				break;
 			default:
 				break;

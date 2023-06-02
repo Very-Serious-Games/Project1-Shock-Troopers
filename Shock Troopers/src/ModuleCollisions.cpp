@@ -316,6 +316,46 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::BRIDGE][Collider::Type::MUZZLE] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::LANDMINE] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::WALL] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::LASER] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::PICKUP_HP] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::PICKUP_DIAMOND] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::PICKUP_NODAMAGE] = false;
+
+
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::WALL] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::LASER] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PICKUP_DIAMOND] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PICKUP_NODAMAGE] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PICKUP_HP] = false;
+
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::WALL] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::LASER] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::PICKUP_NODAMAGE] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::PICKUP_DIAMOND] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::PICKUP_HP] = false;
+
 }
 
 // Destructor
@@ -423,7 +463,13 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::ENEMY_SHOT: // cian
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
 				break;
-			case Collider::Type::HEAL: // magenta
+			case Collider::Type::PICKUP_HP: // magenta
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+				break;
+			case Collider::Type::PICKUP_DIAMOND: // magenta
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
+				break;
+			case Collider::Type::PICKUP_NODAMAGE: // magenta
 				App->render->DrawQuad(colliders[i]->rect, 0, 255, 0, alpha);
 				break;
 			case Collider::Type::DETECTION_ZONE: // orange

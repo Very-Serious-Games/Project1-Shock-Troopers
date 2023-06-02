@@ -7,12 +7,20 @@
 struct SDL_Texture;
 struct Collider;
 
+enum class PickUpType
+{
+	NO_TYPE,
+	HP,
+	DIAMOND,
+	INVENCIBILITY
+};
+
 class PickUp
 {
 public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
-	PickUp(int x, int y);
+	PickUp(PickUpType type, int x, int y);
 
 	// Destructor
 	virtual ~PickUp();
@@ -26,6 +34,8 @@ public:
 
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
+
+	virtual void DrawColider(PickUpType type);
 
 	// Collision response
 	virtual void OnCollision(Collider* collider);
@@ -47,13 +57,17 @@ public:
 	bool pendingToDelete = false;
 
 	bool despawn = false;
+	bool isPicked = false;
 
 	// The pickUp collider
 	Collider* collider = nullptr;
 
-protected:
+	PickUpType type;
+
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+
+protected:
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;

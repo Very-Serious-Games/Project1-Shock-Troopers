@@ -497,7 +497,7 @@ void ModulePlayer::roll() {
 	lockControls = true;
 
 	//If the player is rolling, the speed is increased
-	speed = 3;
+	speed = 1.5;
 
 	//then the player moves
 	currentDirection = lastDirection;
@@ -506,7 +506,6 @@ void ModulePlayer::roll() {
 	//and when the player has moved 100 pixels, the roll ends
 	if ((abs(diferencia.x - position.x) > 100) || (abs(diferencia.y - position.y) > 100) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
 		isRolling = false;
-		lockControls = false;
 	}
 }
 
@@ -825,6 +824,7 @@ void ModulePlayer::stateMachine() {
 		if (!isRoll() and currentAnimationLegs->HasFinished()) {
 			currentAnimationLegs->Reset();
 			lockControls = false;
+			isRolling = false;
 			currentState = PlayerState::Idle;
 		}
 

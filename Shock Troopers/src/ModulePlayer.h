@@ -119,7 +119,7 @@ public:
 	bool isGodMode = false;
 
 	// The speed in which we move the player (pixels per frame)
-	int speed = 1;
+	float speed = 1;
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;

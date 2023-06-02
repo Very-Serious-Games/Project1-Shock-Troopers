@@ -96,32 +96,6 @@ bool SceneLevel1::Start()
 	return ret;
 }
 
-Update_Status SceneLevel1::Update()
-{
-	return Update_Status::UPDATE_CONTINUE;
-}
-
-Update_Status SceneLevel1::PostUpdate()
-{
-	App->render->Blit(bgTexture, 0, 0, NULL);
-
-	return Update_Status::UPDATE_CONTINUE;
-}
-
-bool SceneLevel1::CleanUp()
-{
-	App->player->Disable();
-	App->enemies->Disable();
-	App->sceneLevel_1->Disable();
-	App->pickUps->Disable();
-	App->collisions->Disable();
-	App->ui->Disable();
-
-	// TODO remove all memory leaks
-
-	return true;
-}
-
 void SceneLevel1::createMargenes() {
 	ifstream file("Assets/Sprites/colisionesMapa.csv");
 	string line;

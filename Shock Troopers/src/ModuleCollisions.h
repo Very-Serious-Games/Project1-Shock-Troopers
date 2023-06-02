@@ -43,8 +43,6 @@ public:
 	// Draws all existing colliders with some transparency
 	void DebugDraw();
 
-	bool Start() override;
-
 private:
 	// All existing colliders in the scene
 	Collider* colliders[MAX_COLLIDERS] = { nullptr };

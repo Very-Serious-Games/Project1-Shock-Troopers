@@ -1365,7 +1365,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	}
 
-	if (c1 == colliderR && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderR && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockR = true;
 		if (isRolling) {
 			position.x -= 2;
@@ -1374,7 +1374,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderU && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderU && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockU = true;
 		if (isRolling) {
 			position.y += 2;
@@ -1383,7 +1383,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderD && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderD && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockD = true;
 		if (isRolling) {
 			position.y -= 2;
@@ -1392,7 +1392,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderL && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderL && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockL = true;
 		if (isRolling) {
 			position.x += 2;
@@ -1401,25 +1401,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 	
-	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockR = true;
-		isRolling = false;
-	}
-
-	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockU = true;
-		isRolling = false;
-	}
-
-	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockD = true;
-		isRolling = false;
-	}
-
-	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockL = true;
-		isRolling = false;
-	}
 
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
 		hp += 10;

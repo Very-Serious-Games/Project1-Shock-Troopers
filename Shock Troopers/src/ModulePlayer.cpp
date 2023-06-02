@@ -1405,17 +1405,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		lockR = true;
 		isRolling = false;
 	}
-
 	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
 		lockU = true;
 		isRolling = false;
 	}
-
 	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
 		lockD = true;
 		isRolling = false;
 	}
-
 	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
 		lockL = true;
 		isRolling = false;

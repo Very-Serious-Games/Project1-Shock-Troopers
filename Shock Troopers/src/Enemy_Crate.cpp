@@ -62,14 +62,12 @@ void Enemy_Crate::StateMachine() {
         // Handle spawn state logic
         if (/* some condition for idle */true) {
             state = Enemy_State::IDLE;
-            LOG("state changed to IDLE");
         }
         break;
     case Enemy_State::IDLE:
         idleAnimation();
         if (this->health == 0) {
             state = Enemy_State::DEATH;
-            LOG("state changed to DEATH");
         }
         break;
     case Enemy_State::DEATH:
@@ -79,7 +77,7 @@ void Enemy_Crate::StateMachine() {
 
         if (deathAnimDelay == 0) {
             pendingToDelete = true;
-            LOG("pendingToDelete enemy");
+            LOG("pendingToDelete crate");
         }
         deathAnimDelay--;
 

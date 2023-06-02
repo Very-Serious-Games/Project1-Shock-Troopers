@@ -10,7 +10,6 @@ Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
     idleAnim.PushBack({ 0, 0, 63, 124 });
 
     int disX = 0;
-    int cont = 15;
     for (int i = 0; i < 24; i++)
     {
         deathAnim.PushBack({ disX, 0, 63, 124 });
@@ -20,14 +19,19 @@ Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
     for (int i = 0; i < 6; i++)
     {
         deathAnim.PushBack({ 1071, 0, 63, 124 });
+        deathAnim.PushBack({ 1071, 0, 63, 124 });
+        deathAnim.PushBack({ 1134, 0, 63, 124 });
         deathAnim.PushBack({ 1134, 0, 63, 124 });
         deathAnim.PushBack({ 1197, 0, 63, 124 });
+        deathAnim.PushBack({ 1197, 0, 63, 124 });
+        deathAnim.PushBack({ 1260, 0, 63, 124 });
         deathAnim.PushBack({ 1260, 0, 63, 124 });
         deathAnim.PushBack({ 1323, 0, 63, 124 });
         deathAnim.PushBack({ 1323, 0, 63, 124 });
         deathAnim.PushBack({ 1449, 0, 63, 124 });
+        deathAnim.PushBack({ 1449, 0, 63, 124 });
     }
-    deathAnim.speed = 0.3f;
+    deathAnim.speed = 0.4f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
@@ -68,7 +72,6 @@ void Enemy_Barrel::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
-        LOG("Barrel state changed to IDLE");
         idleAnimation();
         if (this->health == 0)
         {
@@ -76,7 +79,6 @@ void Enemy_Barrel::StateMachine() {
         }
         break;
     case Enemy_State::DEATH:
-        LOG("Barrel state changed to DEATH");
         deathAnimation();
 
         if (deathAnim.HasFinished()) {

@@ -210,6 +210,9 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 
 	matrix[Collider::Type::LANDMINE][Collider::Type::PLAYER_SHOT] = false;
+
+	matrix[Collider::Type::OBJECT][Collider::Type::PLAYER_SHOT] = true;
+	matrix[Collider::Type::OBJECT][Collider::Type::PLAYER_SHOT] = false;
 }
 
 // Destructor
@@ -328,6 +331,12 @@ void ModuleCollisions::DebugDraw()
 				break;
 			case Collider::Type::OBJECT: // pink
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+				break;
+			case Collider::Type::BRIDGE: // pink
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+				break;
+			case Collider::Type::LANDMINE: // red
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 				break;
 			case Collider::Type::STOP_CAM_ZONE_2: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);

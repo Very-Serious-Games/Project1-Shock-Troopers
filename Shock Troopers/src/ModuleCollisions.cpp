@@ -27,6 +27,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::WALL][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::WALL][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::WALL][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::WALL][Collider::Type::MUZZLE] = false;
 
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::PLAYER_WALL] = false;
@@ -48,7 +49,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_WALL] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::LASER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
 	matrix[Collider::Type::PLAYER][Collider::Type::HEAL] = true;
@@ -59,6 +60,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::MISSILE] = true;
+	matrix[Collider::Type::PLAYER][Collider::Type::MUZZLE] = false;
 
 	matrix[Collider::Type::ENEMY][Collider::Type::WALL] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_WALL] = false;
@@ -75,6 +77,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::MUZZLE] = false;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_WALL] = false;
@@ -91,6 +94,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::MISSILE] = true;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::MUZZLE] = false;
 
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::WALL] = true;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::PLAYER_WALL] = false;
@@ -107,6 +111,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::MUZZLE] = false;
 
 	matrix[Collider::Type::LASER][Collider::Type::WALL] = true;
 	matrix[Collider::Type::LASER][Collider::Type::PLAYER_WALL] = true;
@@ -123,6 +128,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::LASER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::LASER][Collider::Type::MUZZLE] = false;
 
 	matrix[Collider::Type::HEAL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::HEAL][Collider::Type::PLAYER_WALL] = false;
@@ -139,6 +145,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::HEAL][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::HEAL][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::HEAL][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::HEAL][Collider::Type::MUZZLE] = false;
 
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::WALL] = false;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::PLAYER_WALL] = false;
@@ -171,6 +178,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_TRIGGER] = true;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::MISSILE] = false;
 
 	matrix[Collider::Type::MISSILE][Collider::Type::WALL] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER_WALL] = false;
@@ -187,6 +195,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::MISSILE][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::MISSILE][Collider::Type::MUZZLE] = false;
 
 	// muzzle
 	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER_SHOT] = false;
@@ -198,14 +207,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::MUZZLE][Collider::Type::HEAL] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::MISSILE] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::PLAYER][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::ENEMY][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::WALL][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::LASER][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::HEAL][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::MISSILE][Collider::Type::MUZZLE] = false;
+
 
 }
 

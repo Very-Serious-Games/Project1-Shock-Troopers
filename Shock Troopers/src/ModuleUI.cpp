@@ -17,6 +17,17 @@ using namespace std;
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
+	hp100.PushBack({ 2, 2, 7, 131 });
+	hp90.PushBack({ 14, 2, 7, 131 });
+	hp80.PushBack({ 26, 2, 7, 131 });
+	hp70.PushBack({ 38, 2, 7, 131 });
+	hp60.PushBack({ 50, 2, 7, 131 });
+	hp50.PushBack({ 62, 2, 7, 131 });
+	hp40.PushBack({ 74, 2, 7, 131 });
+	hp30.PushBack({ 86, 2, 7, 131 });
+	hp20.PushBack({ 98, 2, 7, 131 });
+	hp10.PushBack({ 110, 2, 7, 131 });
+	hp0.PushBack({ 122, 2, 7, 131 });
 }
 
 ModuleUI::~ModuleUI()
@@ -27,40 +38,40 @@ void ModuleUI::updateHp() {
 	LOG("Updating HP Scorebar");
 	switch (App->player->hp) {
 	case 100:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
+		currentAnim = &hp100;
 		break;
 	case 90:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
+		currentAnim = &hp90;
 		break;
 	case 80:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
+		currentAnim = &hp80;
 		break;
 	case 70:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
+		currentAnim = &hp70;
 		break;
 	case 60:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
+		currentAnim = &hp60;
 		break;
 	case 50:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
+		currentAnim = &hp50;
 		break;
 	case 40:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
+		currentAnim = &hp40;
 		break;
 	case 30:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
+		currentAnim = &hp30;
 		break;
 	case 20:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
+		currentAnim = &hp20;
 		break;
 	case 10:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
+		currentAnim = &hp10;
 		break;
 	case 0:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
+		currentAnim = &hp0;
 		break;
 	default:
-		textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
+		currentAnim = &hp0;
 		break;
 	}
 }
@@ -77,9 +88,12 @@ bool ModuleUI::Start()
 
 	bool ret = true;
 
+	currentAnim = &hp100;
+
 	// Starting sprite
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
+	textureHp = App->textures->Load("Assets/sprites/ui/hp_bar.png");
 
 	// Starting fonts
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
@@ -93,6 +107,8 @@ Update_Status ModuleUI::Update()
 {
 	updateHp();
 
+	currentAnim->Update();
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 
@@ -105,7 +121,7 @@ Update_Status ModuleUI::PostUpdate()
 	y = App->render->camera.y + 2;
 
 	//Mostramos por pantalla la UI
-	App->render->Blit(textureHp, x + 3, y + 40, NULL);
+	App->render->Blit(textureHp, x + 3, y + 40, &currentAnim->GetCurrentFrame());
 	App->render->Blit(textureP1, x, y, NULL);
 	App->render->Blit(textureWeapon, x + 10, y + 200, NULL);
 

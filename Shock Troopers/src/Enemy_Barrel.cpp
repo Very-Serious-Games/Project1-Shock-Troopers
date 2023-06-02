@@ -10,28 +10,25 @@ Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
     idleAnim.PushBack({ 0, 0, 63, 124 });
 
     int disX = 0;
+    int con = 5;
     for (int i = 0; i < 24; i++)
     {
         deathAnim.PushBack({ disX, 0, 63, 124 });
-        deathAnim.PushBack({ disX, 0, 63, 124 });
         disX += 63;
     }
+    disX = 1071;
     for (int i = 0; i < 6; i++)
     {
-        deathAnim.PushBack({ 1071, 0, 63, 124 });
-        deathAnim.PushBack({ 1071, 0, 63, 124 });
-        deathAnim.PushBack({ 1134, 0, 63, 124 });
-        deathAnim.PushBack({ 1134, 0, 63, 124 });
-        deathAnim.PushBack({ 1197, 0, 63, 124 });
-        deathAnim.PushBack({ 1197, 0, 63, 124 });
-        deathAnim.PushBack({ 1260, 0, 63, 124 });
-        deathAnim.PushBack({ 1260, 0, 63, 124 });
-        deathAnim.PushBack({ 1323, 0, 63, 124 });
-        deathAnim.PushBack({ 1323, 0, 63, 124 });
-        deathAnim.PushBack({ 1449, 0, 63, 124 });
-        deathAnim.PushBack({ 1449, 0, 63, 124 });
+        deathAnim.PushBack({ disX, 0, 63, 124 });
+        disX += 63;
+        if (con != 0 and i == 6)
+        {
+            disX = 1071;
+            con--;
+            i = 0;
+        }
     }
-    deathAnim.speed = 0.4f;
+    deathAnim.speed = 0.2f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);

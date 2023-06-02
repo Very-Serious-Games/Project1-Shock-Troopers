@@ -17,6 +17,7 @@
 #include "Enemy_Sandbag.h"
 #include "Enemy_Barrel.h"
 #include "Enemy_BarrelGroup.h"
+#include "Enemy_Car.h"
 
 #define SPAWN_MARGIN 5000
 
@@ -40,12 +41,13 @@ bool ModuleEnemies::Start()
 	textureTank = App->textures->Load("Assets/Sprites/characters/tank_spritesheet.png");
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/Soldiers-Infantry.png");
-	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
-	textureLandmines = App->textures->Load("Assets/Sprites/characters/landmine.png");
+	textureCrate = App->textures->Load("Assets/Sprites/background/level1/crates.png");
+	textureLandmines = App->textures->Load("Assets/Sprites/background/level1/landmine.png");
 	textureBridge = App->textures->Load("Assets/Sprites/background/level1/stone-bridge.png");
 	textureSandbags = App->textures->Load("Assets/Sprites/background/level1/sandbags.png");
 	textureBarrel = App->textures->Load("Assets/Sprites/background/level1/barrel.png");
 	textureBarrelGroup = App->textures->Load("Assets/Sprites/background/level1/barrelGroup.png");
+	textureCar = App->textures->Load("Assets/Sprites/background/level1/car.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -226,6 +228,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_BarrelGroup(info.x, info.y);
 					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureBarrelGroup;
+					break;
+				case Enemy_Type::CAR:
+					enemies[i] = new Enemy_Car(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i]->texture = textureCar;
 					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;

@@ -10,7 +10,8 @@ using namespace std;
 
 ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
-	
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
+		colliders[i] = nullptr;
 }
 
 // Destructor
@@ -20,8 +21,7 @@ ModuleCollisions::~ModuleCollisions()
 }
 
 bool ModuleCollisions::Start() {
-	for (uint i = 0; i < MAX_COLLIDERS; ++i)
-		colliders[i] = nullptr;
+	
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
 	matrix[Collider::Type::WALL][Collider::Type::PLAYER_WALL] = false;

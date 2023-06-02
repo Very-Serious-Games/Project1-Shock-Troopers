@@ -23,6 +23,35 @@ SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled) {
 SceneLevel1::~SceneLevel1()
 {}
 
+void SceneLevel1::createMargenes() {
+	ifstream file("Assets/Sprites/colisionesMapa.csv");
+	string line;
+
+	while (getline(file, line)) {
+		int values[4];
+		int pos = 0;
+		string value;
+
+		for (int i = 0; i < line.size(); i++) {
+			if (line[i] == ';') {
+				values[pos] = stoi(value);
+				pos++;
+				value = "";
+			}
+			else {
+				value += line[i];
+			}
+		}
+
+		values[pos] = stoi(value);
+		App->collisions->AddCollider({ values[0], values[1], values[2], values[3] }, Collider::Type::WALL);
+
+		cout << endl;
+	}
+
+	file.close();
+}
+
 bool SceneLevel1::Start() {
 
 	LOG("Enabling modules");
@@ -41,6 +70,7 @@ bool SceneLevel1::Start() {
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 	App->ui->Enable();
 
+	
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
 	App->collisions->AddCollider({ 838, 1000, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
@@ -55,6 +85,7 @@ bool SceneLevel1::Start() {
 	createMargenes();
 
 	// Add enemies
+
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 128, 2900);
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20);
 	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1355, 70);
@@ -62,6 +93,7 @@ bool SceneLevel1::Start() {
 	
 	//TODO spawnear todas las minas
 	//Add landmines
+	
 	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 109, 2319);// start
 	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 300, 1547);// miniboss
 	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 211, 1590);// miniboss
@@ -70,8 +102,6 @@ bool SceneLevel1::Start() {
 	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1522, 803);// pre boss
 	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1639, 803);// pre boss
 
-	//TODO spawnear todos los objetos
-	//Add objects
 	App->enemies->AddEnemy(Enemy_Type::BRIDGE, 65, 2624);// start
 
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 131, 2267);// start
@@ -83,13 +113,14 @@ bool SceneLevel1::Start() {
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 1536, 1038);// post bridge
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 1325, 191);// boss
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 1441, 191);// boss
-
+	
+	
 	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 83, 2254);// start
 	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 228, 1231);//miniboss
 	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 83, 1283);//miniboss
 	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1472, 289);//boss
 	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1285, 289);//boss
-
+	
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 83, 1928);//near tank
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1257, 972);//post bridge
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1243, 940);//post bridge
@@ -177,33 +208,4 @@ bool SceneLevel1::CleanUp() {
 	App->particles->Disable();
 
 	return true;
-}
-
-void SceneLevel1::createMargenes() {
-	ifstream file("Assets/Sprites/colisionesMapa.csv");
-	string line;
-
-	while (getline(file, line)) {
-		int values[4];
-		int pos = 0;
-		string value;
-
-		for (int i = 0; i < line.size(); i++) {
-			if (line[i] == ';') {
-				values[pos] = stoi(value);
-				pos++;
-				value = "";
-			}
-			else {
-				value += line[i];
-			}
-		}
-
-		values[pos] = stoi(value);
-		App->collisions->AddCollider({ values[0], values[1], values[2], values[3] }, Collider::Type::WALL);
-
-		cout << endl;
-	}
-
-	file.close();
 }

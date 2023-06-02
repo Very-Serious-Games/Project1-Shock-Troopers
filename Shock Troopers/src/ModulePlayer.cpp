@@ -1272,6 +1272,7 @@ bool ModulePlayer::Start() {
 
 	winAnim.speed = animSpeed;
 
+
 	// Set the animations to spawn
 	setSpawnAnimations();
 
@@ -1330,6 +1331,16 @@ bool ModulePlayer::Start() {
 	//Setting up player hitbox
 	collider = App->collisions->AddCollider({ (int)position.x + 5,(int)position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
 
+
+
+
+	App->render->cameraDownCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
+	App->render->cameraLeftCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
+	App->render->cameraRightCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
+	App->render->cameraUpCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
+	App->render->stopCameraCollider = App->collisions->AddCollider({ 0, 0, 2, 2 }, Collider::Type::STOP_CAM_TRIGGER, App->render);
+	App->render->stopCameraCollider->AddListener(App->render);
+
 	return ret;
 }
 
@@ -1340,9 +1351,6 @@ Update_Status ModulePlayer::Update() {
 	stateMachine();
 
 	godMode();
-
-	cout << App->render->camera.x;
-	cout << App->render->camera.y;
 
 	//Collider update
 	collider->SetPos(position.x + 12, position.y + 10);
@@ -1355,7 +1363,11 @@ Update_Status ModulePlayer::Update() {
 	currentAnimationLegs->Update();
 	currentAnimationTorso->Update();
 
-	
+	App->render->cameraDownCollider->SetPos(App->render->camera.x, App->render->camera.y + SCREEN_HEIGHT);
+	App->render->cameraLeftCollider->SetPos(App->render->camera.x, App->render->camera.y);
+	App->render->cameraRightCollider->SetPos(App->render->camera.x + SCREEN_WIDTH, App->render->camera.y);
+	App->render->cameraUpCollider->SetPos(App->render->camera.x, App->render->camera.y);
+	App->render->stopCameraCollider->SetPos(App->render->camera.x + SCREEN_WIDTH / 2, App->render->camera.y + SCREEN_HEIGHT / 2);
 
 	//Reset variables
 	lockR = false;

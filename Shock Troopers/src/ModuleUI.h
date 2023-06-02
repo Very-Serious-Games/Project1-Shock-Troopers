@@ -7,6 +7,7 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "Path.h"
 
 using namespace std;
 
@@ -42,11 +43,16 @@ public:
 
 	void updateScore(int points);
 
+	Animation startStage;
+	Animation endStage;
+	Path path;
 public:
 
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;
+	SDL_Texture* textureSstage = nullptr;
+	SDL_Texture* textureEstage = nullptr;
 };
 
 #endif //!__MODULE_UI_H__

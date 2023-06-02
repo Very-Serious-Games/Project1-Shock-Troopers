@@ -1,41 +1,31 @@
-#include "Enemy_Crate.h"
+#include "Enemy_Landmine.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "Particle.h"
-#include "ModulePickUp.h"
+#include "ModuleParticles.h"
 
-Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
+Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
 
-    spawnAnim.PushBack({ 0, 0, 64, 54 });
+    idleAnim.PushBack({ 0, 0, 28, 16 });
+    idleAnim.PushBack({ 31, 0, 28, 16 });
+    idleAnim.PushBack({ 62, 0, 28, 16 });
+    idleAnim.PushBack({ 93, 0, 28, 16 });
 
-    idleAnim.PushBack({ 0, 0, 64, 54 });
-
-    deathAnim.PushBack({ 64, 0, 64, 54 });
-    deathAnim.PushBack({ 128, 0, 64, 54 });
-    deathAnim.PushBack({ 192, 0, 64, 54 });
-    deathAnim.PushBack({ 256, 0, 64, 54 });
-    deathAnim.PushBack({ 320, 0, 64, 54 });
-    deathAnim.PushBack({ 384, 0, 64, 54 });
-    deathAnim.PushBack({ 448, 0, 64, 54 });
-    deathAnim.PushBack({ 512, 0, 64, 54 });
-
-    deathAnim.speed = 0.1f;
-
-    //path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
-    //path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
-    path.PushBack({ 0.0f, 0.0f }, 80, &deathAnim);
+    idleAnim.speed = 0.1f;
+    
+    path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
 
     // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 0, 0, 47, 49 }, Collider::Type::OBJECT, (Module*)App->enemies);
-    
+    collider = App->collisions->AddCollider({ 0, 0, 28, 16 }, Collider::Type::LANDMINE, (Module*)App->enemies);
+
     health = 1;
 }
 
-void Enemy_Crate::Update() {
+void Enemy_Landmine::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
+    currentAnim = path.GetCurrentAnimation();
     //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end
@@ -43,19 +33,19 @@ void Enemy_Crate::Update() {
     Enemy::Update();
 }
 
-void Enemy_Crate::deathAnimation() {
+void Enemy_Landmine::deathAnimation() {
     currentAnim = &deathAnim;
 }
 
-void Enemy_Crate::spawnAnimation() {
+void Enemy_Landmine::spawnAnimation() {
     currentAnim = &spawnAnim;
 }
 
-void Enemy_Crate::idleAnimation() {
+void Enemy_Landmine::idleAnimation() {
     currentAnim = &idleAnim;
 }
 
-void Enemy_Crate::StateMachine() {
+void Enemy_Landmine::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
         spawnAnimation();
@@ -74,8 +64,6 @@ void Enemy_Crate::StateMachine() {
         break;
     case Enemy_State::DEATH:
         deathAnimation();
-        App->pickUps->SpawnPickUp({ PickUp_Type::HP, (int)position.x, (int)position.y });
-        //SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
 
         if (deathAnimDelay == 0) {
             pendingToDelete = true;
@@ -92,12 +80,13 @@ void Enemy_Crate::StateMachine() {
     }
 }
 
-void Enemy_Crate::OnCollision(Collider* collider) {
-    if (collider->type == Collider::Type::PLAYER_SHOT) {
-		health--;
+void Enemy_Landmine::OnCollision(Collider* collider) {
+    if (collider->type == Collider::Type::PLAYER) {
+        health--;
         if (health == 0) {
+            App->particles->AddParticle(App->particles->explosion, position.x, position.y, 11, Collider::Type::NONE);
             App->audio->PlayFx(destroyedFx);
             SetToDelete();
-		}
-	}
+        }
+    }
 }

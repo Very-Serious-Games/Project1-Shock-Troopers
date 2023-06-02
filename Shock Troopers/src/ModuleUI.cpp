@@ -17,6 +17,36 @@ using namespace std;
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
+	//iterate the start stage animation, that has 29 frames per row and 3 rows
+	for (int row = 0; row < 8; row++) {
+		for (int col = 0; col < 11; col++) {
+			int frameX = col * SCREEN_WIDTH;
+			int frameY = row * SCREEN_HEIGHT;
+			startStage.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
+		}
+	}
+
+	startStage.PushBack({ 0, 0, 0, 0 });
+	startStage.speed = 0.8f;
+	startStage.loop = false;
+	path.PushBack({ 0.0f, 0.0f }, 1000, &startStage);
+
+	//stage clear anim below
+	
+	////iterate the start stage animation, that has 6 frames per row and 14 rows
+	/*for (int row = 0; row < 14; row++) {
+		for (int col = 0; col < 6; col++) {
+			int frameX = col * SCREEN_WIDTH;
+			int frameY = row * SCREEN_HEIGHT;
+			endStage.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
+		}
+	}
+
+	endStage.PushBack({ 0, 0, 0, 0 });
+	endStage.speed = 1.0f;
+	endStage.loop = false;
+	path.PushBack({ 0.0f, 0.0f }, 1000, &endStage);*/
+	
 }
 
 ModuleUI::~ModuleUI()
@@ -79,6 +109,8 @@ bool ModuleUI::Start()
 	// Starting sprite
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
+	textureSstage = App->textures->Load("Assets/sprites/ui/start-anim.png");
+	textureEstage = App->textures->Load("Assets/sprites/ui/stage-clear.png");
 
 	// Starting fonts
 	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
@@ -91,6 +123,9 @@ bool ModuleUI::Start()
 Update_Status ModuleUI::Update()
 {
 	updateHp();
+	startStage.Update();
+	/*endStage.Update();*/
+	path.Update();
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -107,6 +142,10 @@ Update_Status ModuleUI::PostUpdate()
 	App->render->Blit(textureHp, x + 3, y + 40, NULL);
 	App->render->Blit(textureP1, x, y, NULL);
 	App->render->Blit(textureWeapon, x + 10, y + 200, NULL);
+
+	//Mostramos por pantalla la anim inicial
+	App->render->Blit(textureSstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);
+	/*App->render->Blit(textureEstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);*/
 
 	//Mostramos por pantalla el score
 	App->fonts->BlitText(20, 3, scoreFont, scoreText);

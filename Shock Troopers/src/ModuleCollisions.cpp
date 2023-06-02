@@ -209,6 +209,7 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::MUZZLE][Collider::Type::MUZZLE] = false;
 
 
+	matrix[Collider::Type::LANDMINE][Collider::Type::PLAYER_SHOT] = false;
 }
 
 // Destructor

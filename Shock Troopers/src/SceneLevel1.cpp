@@ -53,12 +53,43 @@ bool SceneLevel1::Start()
 
 	App->enemies->AddEnemy(Enemy_Type::TANK, 128, 2300);
 	
+	//TODO spawnear todas las minas
+	//Add landmines
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 109, 2319);// start
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 300, 1547);// miniboss
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 211, 1590);// miniboss
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 138, 1626);// miniboss
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1567, 863);// pre boss
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1522, 803);// pre boss
+	App->enemies->AddEnemy(Enemy_Type::LANDMINE, 1639, 803);// pre boss
+
+	//TODO spawnear todos los objetos
 	//Add objects
-	//App->enemies->AddEnemy(Enemy_Type::BRIDGE, 125, 1822);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 133, 1182);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 713);
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 333, 668);
-	
+	App->enemies->AddEnemy(Enemy_Type::BRIDGE, 65, 2624);// start
+
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 131, 2267);// start
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 314, 1783);// half
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 314, 1744);// half
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 114, 1111);// miniboss
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 246, 1111);// miniboss
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 628, 1116);// bridge
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1536, 1038);// post bridge
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1325, 191);// boss
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1441, 191);// boss
+
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 83, 2254);// start
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 228, 1231);//miniboss
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 83, 1283);//miniboss
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1472, 289);//boss
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1285, 289);//boss
+
+	App->enemies->AddEnemy(Enemy_Type::BARREL, 83, 1928);//near tank
+	App->enemies->AddEnemy(Enemy_Type::BARREL, 1257, 972);//post bridge
+	App->enemies->AddEnemy(Enemy_Type::BARREL, 1243, 940);//post bridge
+
+	App->render->camera.x = 220;
+	App->render->camera.y = 2800;
+
 	App->player->Enable();
 	App->enemies->Enable();
 	App->collisions->Enable();

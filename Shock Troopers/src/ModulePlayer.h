@@ -24,7 +24,7 @@ enum class PlayerState {
 	Death,
 	Damage,
 	ShootingMoving,
-	GrenadeMoving
+	GrenadeMoving,
 };
 
 class ModulePlayer : public Module {
@@ -190,6 +190,8 @@ public:
 	Animation deathAnim;				// Death animation
 
 	Animation damageAnim;				// Damage animation
+
+	Animation winAnim;					// Win animation
 
 	// Sound effects indices
 	uint laserFx = 0;

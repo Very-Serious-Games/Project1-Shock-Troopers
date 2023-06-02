@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <SDL/include/SDL_timer.h>
 #include "ModuleUI.h"
+#include "Pickup.h"
 
 using namespace std;
 
@@ -1307,8 +1308,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		isRolling = false;
 	}
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP) {
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_HP) {
+		if (hp < 100)
 		hp += 10;
+	}
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_DIAMOND) {
+		App->ui->updateScore(3000);
+	}
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_DIAMOND) {
+		// TODO Sistema invencibilidad
 	}
 
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY) {

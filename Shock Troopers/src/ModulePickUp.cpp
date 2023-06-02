@@ -60,15 +60,15 @@ ModulePickUp::ModulePickUp(bool startEnabled) : Module(startEnabled)
 	PickedNoDamage.PushBack({ 10 * 32, 16, 32, 16 });
 
 	Medkit.speed = 0.08f;
-	PickedMedkit.speed = 0.01;
+	PickedMedkit.speed = 0.05;
 	PickedMedkit.loop = false;
 
-	Diamond.speed = 0.1f;
-	PickedDiamond.speed = 0.01;
+	Diamond.speed = 0.08f;
+	PickedDiamond.speed = 0.05;
 	PickedDiamond.loop = false;
 
-	NoDamage.speed = 0.1f;
-	PickedNoDamage.speed = 0.01;
+	NoDamage.speed = 0.08f;
+	PickedNoDamage.speed = 0.05;
 	PickedNoDamage.loop = false;
 }
 
@@ -109,25 +109,23 @@ Update_Status ModulePickUp::PostUpdate()
 		{ 		
 			if (pickUp[i]->isPicked)
 			{
-				// TODO Condicion para determinar que Pickup es y cambiar su animación.
-
 				switch (pickUp[i]->type)
 				{
-					case PickUpType::HP:
-						pickUp[i]->currentAnim = &PickedMedkit;
-						break;
-					case PickUpType::DIAMOND:
-						pickUp[i]->currentAnim = &PickedDiamond;
-						break;
-					case PickUpType::INVENCIBILITY:
-						pickUp[i]->currentAnim = &PickedNoDamage;
-						break;
-					case PickUpType::NO_TYPE:
-						pickUp[i]->currentAnim = nullptr;
-						break;
-					default:
-						pickUp[i]->currentAnim = nullptr;
-						break;
+				case PickUpType::HP:
+					pickUp[i]->currentAnim = &PickedMedkit;
+					break;
+				case PickUpType::DIAMOND:
+					pickUp[i]->currentAnim = &PickedDiamond;
+					break;
+				case PickUpType::INVENCIBILITY:
+					pickUp[i]->currentAnim = &PickedNoDamage;
+					break;
+				case PickUpType::NO_TYPE:
+					pickUp[i]->currentAnim = nullptr;
+					break;
+				default:
+					pickUp[i]->currentAnim = nullptr;
+					break;
 				}
 			}
 
@@ -198,7 +196,7 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 					pickUp[i]->texture = texture;
 					pickUp[i]->currentAnim = &Medkit;
 
-					pickUp[i]->DrawColider();
+					pickUp[i]->DrawColider(PickUpType::HP);
 					
 					break;
 
@@ -208,7 +206,7 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 					pickUp[i]->texture = texture;
 					pickUp[i]->currentAnim = &Diamond;
 
-      					pickUp[i]->DrawColider();
+      					pickUp[i]->DrawColider(PickUpType::DIAMOND);
 
 					break;
 				case PickUp_Type::INVENCIBILITY:
@@ -217,7 +215,7 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 					pickUp[i]->texture = texture;
 					pickUp[i]->currentAnim = &NoDamage;
 
-					pickUp[i]->DrawColider();
+					pickUp[i]->DrawColider(PickUpType::INVENCIBILITY);
 
 					break;
 			}
@@ -260,12 +258,8 @@ void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 			// TODO Cuando colisiona con el player se cambia a isPicked true
 			pickUp[i]->isPicked = true;
 
-			if (pickUp[i]->currentAnim->HasFinished())
-			{
-				pickUp[i]->OnCollision(c2);
-			}
+			pickUp[i]->OnCollision(c2);
 			
-
 			break;
 		}
 	}

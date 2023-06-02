@@ -35,7 +35,7 @@ public:
 	// Called from ModuleEnemies' Update
 	virtual void Draw();
 
-	virtual void DrawColider();
+	virtual void DrawColider(PickUpType type);
 
 	// Collision response
 	virtual void OnCollision(Collider* collider);

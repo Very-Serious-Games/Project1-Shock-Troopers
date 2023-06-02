@@ -35,10 +35,28 @@ void PickUp::Draw()
 	App->render->Blit(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
 }
 
-void PickUp::DrawColider()
+void PickUp::DrawColider(PickUpType type)
 {
 	LOG("Drawing Colider");
-       collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP, App->pickUps);
+
+	switch (type)
+	{
+	case PickUpType::NO_TYPE:
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP_HP, App->pickUps);
+		break;
+	case PickUpType::HP:
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP_HP, App->pickUps);
+		break;
+	case PickUpType::DIAMOND:
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP_DIAMOND, App->pickUps);
+		break;
+	case PickUpType::INVENCIBILITY:
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP_NODAMAGE, App->pickUps);
+		break;
+	default:
+		collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP_HP, App->pickUps);
+		break;
+	}
 }
 
 void PickUp::OnCollision(Collider* collider)

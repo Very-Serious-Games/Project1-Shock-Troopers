@@ -32,17 +32,22 @@ bool SceneLevel1::Start()
 	App->ui->Enable();
 
 	// Add colliders
-//	App->collisions->AddCollider({ 0, 1909, 493, 16 }, Collider::Type::WALL);
-//	App->collisions->AddCollider({ 0, 0, 1, 1909 }, Collider::Type::WALL);
-//	App->collisions->AddCollider({ 490, 0, 1, 1909 }, Collider::Type::WALL);
+	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
+	App->collisions->AddCollider({ 838, 1000, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
+	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE);
+	App->collisions->AddCollider({ 500, 1085, 740, 6 }, Collider::Type::PLAYER_WALL);
+	App->collisions->AddCollider({ 500, 1190, 880, 6 }, Collider::Type::PLAYER_WALL);
 
+
+	App->render->camera.x = 66;
+	App->render->camera.y = 2800;
 
 	createMargenes();
 
 	// Add enemies
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 128, 2900);
 								
-	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20); // (493 / 2) - (128 / 2) = 183
+	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20);
 
 	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1355, 70);
 

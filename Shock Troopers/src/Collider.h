@@ -13,6 +13,7 @@ struct Collider
 	{
 		NONE = -1,
 		WALL,
+		PLAYER_WALL,
 		LASER,
 		PLAYER,
 		ENEMY,
@@ -21,6 +22,9 @@ struct Collider
 		HEAL,
 		OBJECT,
 		DETECTION_ZONE,
+		STOP_CAM_ZONE,
+		STOP_CAM_ZONE_2,
+		STOP_CAM_TRIGGER,
 		KNIFE,
 		MISSILE,
 		MUZZLE,

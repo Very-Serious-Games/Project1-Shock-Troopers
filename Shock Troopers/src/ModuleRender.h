@@ -37,6 +37,8 @@ public:
 	// Destroys the rendering context
 	bool CleanUp() override;
 
+	void OnCollision(Collider* c1, Collider* c2) override;
+
 	// Prints a texture to the rendering context
 	// Param texture	- A valid SDL Texture, validation checks are not performed
 	// Param x,y		- Position x,y in the screen (upper left axis)
@@ -57,6 +59,23 @@ public:
 	// The speed at which the camera will be moving
 	int cameraSpeed = 1;
 
+	int maxX = 0;
+	int maxY = 0;
+	int minX = 0;
+	int minY = 0;
+
+	Collider* cameraDownCollider = nullptr;
+	Collider* cameraLeftCollider = nullptr;
+	Collider* cameraRightCollider = nullptr;
+	Collider* cameraUpCollider = nullptr;
+	Collider* stopCameraCollider = nullptr;
+
+
+	bool leaveZone = false;
+
+
+	bool isInZone2 = false;
+	bool isInZone = false;
 };
 
 #endif //__MODULE_RENDER_H__

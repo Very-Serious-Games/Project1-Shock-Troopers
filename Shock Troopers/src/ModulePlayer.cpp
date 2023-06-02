@@ -878,36 +878,36 @@ void ModulePlayer::shoot() {
 		Particle* newParticleMuzzle = nullptr;
 		switch (lastDirection) {
 		case 1: // Up-Right
-			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 33, position.y + 6, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 33, position.y - 4, 0, Collider::Type::MUZZLE);
 			break;
 		case 2: // Up-Left
-			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 13, position.y + 0, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x + 3, position.y - 10, 0, Collider::Type::MUZZLE);
 			break;
 		case 3: // Down-Right
-			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 35, position.y + 35, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 28, position.y + 25, 0, Collider::Type::MUZZLE);
 			break;
 		case 4: // Down-Left
-			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x - 2, position.y + 30, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x - 2, position.y + 20, 0, Collider::Type::MUZZLE);
 			break;
 		case 5: // Right
-			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 43, position.y + 18, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 43, position.y + 10, 0, Collider::Type::MUZZLE);
 			break;
 		case 6: // Left
-			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x - 15, position.y + 16, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x - 15, position.y + 8, 0, Collider::Type::MUZZLE);
 			break;
 		case 7: // Down
-			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 20, position.y + 54, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 12, position.y + 34, 0, Collider::Type::MUZZLE);
 			break;
 		case 8: // Up
-			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 30, position.y - 6, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 21, position.y - 16, 0, Collider::Type::MUZZLE);
 			break;
 		}
 		newParticle->collider->AddListener(this);
@@ -936,50 +936,50 @@ void ModulePlayer::shootMoving() {
 		Particle* newParticleMuzzle = nullptr;
 		switch (shootDirection) {
 		case 1: // Up-Right
-			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 41, position.y - 2, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 41, position.y - 12, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		case 2: // Up-Left
-			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y - 8, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x - 5, position.y - 18, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		case 3: // Down-Right
-			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 43, position.y + 43, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 36, position.y + 33, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		case 4: // Down-Left
-			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x - 9, position.y + 39, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x - 9, position.y + 29, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		case 5: // Right
-			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 51, position.y + 18, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 51, position.y + 10, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		case 6: // Left
-			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x - 23, position.y + 16, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x - 23, position.y + 8, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		case 7: // Down
-			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 20, position.y + 60, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 12, position.y + 40, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		case 8: // Up
-			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 30, position.y - 13, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 21, position.y - 23, 0, Collider::Type::MUZZLE);
 			newParticle->collider->AddListener(this);
 			newParticleMuzzle->collider->AddListener(this);
 			break;
@@ -1365,7 +1365,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	}
 
-	if (c1 == colliderR && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderR && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockR = true;
 		if (isRolling) {
 			position.x -= 2;
@@ -1374,7 +1374,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderU && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderU && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockU = true;
 		if (isRolling) {
 			position.y += 2;
@@ -1383,7 +1383,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderD && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderD && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockD = true;
 		if (isRolling) {
 			position.y -= 2;
@@ -1392,7 +1392,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 
-	if (c1 == colliderL && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
+	if (c1 == colliderL && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockL = true;
 		if (isRolling) {
 			position.x += 2;
@@ -1401,22 +1401,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		cantRoll = true;
 	}
 	
-	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockR = true;
-		isRolling = false;
-	}
-	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockU = true;
-		isRolling = false;
-	}
-	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockD = true;
-		isRolling = false;
-	}
-	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
-		lockL = true;
-		isRolling = false;
-	}
 
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
 		hp += 10;

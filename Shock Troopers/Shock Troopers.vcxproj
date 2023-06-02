@@ -25,9 +25,9 @@
     <ClInclude Include="src\Enemy_Crate.h" />
     <ClInclude Include="src\Enemy_FlyingBattleship.h" />
     <ClInclude Include="src\Enemy_InfantrySoldier.h" />
+    <ClInclude Include="src\Enemy_Landmine.h" />
     <ClInclude Include="src\Enemy_Tank.h" />
     <ClInclude Include="src\Enemy_TankBoss.h" />
-    <ClInclude Include="src\Enemy_Landmine.h" />
     <ClInclude Include="src\Enemy_Sandbag.h" />
     <ClInclude Include="src\ModulePickUp.h" />
     <ClInclude Include="src\ModuleUI.h" />
@@ -63,9 +63,9 @@
     <ClCompile Include="src\Enemy_Crate.cpp" />
     <ClCompile Include="src\Enemy_FlyingBattleship.cpp" />
     <ClCompile Include="src\Enemy_InfantrySoldier.cpp" />
+    <ClCompile Include="src\Enemy_Landmine.cpp" />
     <ClCompile Include="src\Enemy_Tank.cpp" />
     <ClCompile Include="src\Enemy_TankBoss.cpp" />
-    <ClCompile Include="src\Enemy_Landmine.cpp" />
     <ClCompile Include="src\Enemy_Sandbag.cpp" />
     <ClCompile Include="src\ModulePickUp.cpp" />
     <ClCompile Include="src\ModuleUI.cpp" />

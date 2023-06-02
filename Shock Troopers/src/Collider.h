@@ -24,6 +24,8 @@ struct Collider
 		KNIFE,
 		MISSILE,
 		MUZZLE,
+		LANDMINE,
+		BRIDGE,
 
 		MAX
 	};

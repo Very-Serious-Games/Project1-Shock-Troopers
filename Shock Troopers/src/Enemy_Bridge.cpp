@@ -2,17 +2,12 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "Particle.h"
 
 Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
 
-    spawnAnim.PushBack({ 0, 0, 279, 87 });
-    spawnAnim.pingpong = false;
-    spawnAnim.speed = 0.2f;
+    spawnAnim.PushBack({ 0, 0, 224, 220 });
 
-    idleAnim.PushBack({ 0, 0 , 279, 87 });
-    
-    deathAnim.PushBack({ 360, 0, 279, 87 });
+    idleAnim.PushBack({ 0, 0, 224, 220 });
 
     int disX = 0;
     int disY = 0;
@@ -46,7 +41,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
     deathAnim.speed = 0.5f;
     deathAnim.loop = false;
 
-    path.PushBack({ 0.0f, 0.0f }, 330, &brokenAnim);
+    path.PushBack({ 0.0f, 0.0f }, 150, &brokenAnim);
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
@@ -59,8 +54,10 @@ void Enemy_Bridge::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    currentAnim = &spawnAnim;
+    //currentAnim = &spawnAnim;
 
+    // Call to the base class. It must be called at the end
+    // It will update the collider depending on the position
     Enemy::Update();
 }
 
@@ -70,6 +67,14 @@ void Enemy_Bridge::deathAnimation() {
 
 void Enemy_Bridge::spawnAnimation() {
     currentAnim = &spawnAnim;
+}
+
+void Enemy_Bridge::brokenAnimation() {
+    currentAnim = &brokenAnim;
+}
+
+void Enemy_Bridge::idlebrokenAnimation() {
+    currentAnim = &idlebrokenAnim;
 }
 
 void Enemy_Bridge::idleAnimation() {
@@ -83,7 +88,6 @@ void Enemy_Bridge::StateMachine() {
         // Handle spawn state logic
         if (/* some condition for idle */true) {
             state = Enemy_State::IDLE;
-            LOG("state changed to IDLE");
         }
         break;
     case Enemy_State::IDLE:

@@ -1429,4 +1429,14 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		App->ui->updateScore(300);
 	}
 
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
+
+		if (hp < 0) {
+			hp -= 20;
+		}
+
+		isHitted = true;
+
+	}
+
 }

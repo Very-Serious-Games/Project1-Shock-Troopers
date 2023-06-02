@@ -215,6 +215,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
 					enemies[i]->texture = textureBarrel;
 					break;
+				case Enemy_Type::LANDMINE:
+					enemies[i] = new Enemy_Landmine(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureLandmines;
+					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;

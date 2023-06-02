@@ -22,7 +22,7 @@ Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
-    // TODO cambiar tamaño collider//
+    // TODO cambiar tamaï¿½o collider//
     collider = App->collisions->AddCollider({ 0, 0, 40, 117 }, Collider::Type::OBJECT, (Module*)App->enemies);
 
     health = 1;
@@ -58,7 +58,6 @@ void Enemy_Barrel::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
-        LOG("Barrel state changed to IDLE");
         idleAnimation();
         if (this->health == 0)
         {
@@ -66,7 +65,6 @@ void Enemy_Barrel::StateMachine() {
         }
         break;
     case Enemy_State::DEATH:
-        LOG("Barrel state changed to DEATH");
         deathAnimation();
 
         if (deathAnim.HasFinished()) {
@@ -76,7 +74,6 @@ void Enemy_Barrel::StateMachine() {
         break;
     default:
         // Handle default state logic
-        LOG("ERROR STATE");
         break;
     }
 }

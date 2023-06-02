@@ -91,7 +91,6 @@ void Enemy_Bridge::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
-        LOG("Bridge state changed to IDLE");
         idleAnimation();
         if (this->health == 1)
         {
@@ -99,7 +98,6 @@ void Enemy_Bridge::StateMachine() {
         }
         break;
     case Enemy_State::HIT:
-        LOG("Bridge state changed to HIT");
         brokenAnimation();
         if (brokenAnim.HasFinished()) {
             idlebrokenAnimation();
@@ -109,17 +107,14 @@ void Enemy_Bridge::StateMachine() {
         }
         break;
     case Enemy_State::DEATH:
-        LOG("Bridge state changed to DEATH");
         deathAnimation();
 
         if (deathAnim.HasFinished()) {
             pendingToDelete = true;
-            LOG("pendingToDelete Bridge");
         }
         break;
     default:
         // Handle default state logic
-        LOG("ERROR STATE");
         break;
     }
 }

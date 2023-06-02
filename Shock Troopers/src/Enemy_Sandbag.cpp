@@ -32,7 +32,7 @@ Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
 
     path.PushBack({ 0.0f, 0.0f }, 480, &deathAnim);
 
-    // TODO cambiar tamaño collider
+    // TODO cambiar tamaï¿½o collider
     collider = App->collisions->AddCollider({ 0, 0, 98, 108 }, Collider::Type::OBJECT, (Module*)App->enemies);
     health = 20;
 }
@@ -78,7 +78,6 @@ void Enemy_Sandbag::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
-        LOG("Sandbag state changed to IDLE");
         idleAnimation();
         if (this->health <= 10)
         {
@@ -86,7 +85,6 @@ void Enemy_Sandbag::StateMachine() {
         }
         break;
     case Enemy_State::HIT:
-        LOG("Sandbag state changed to HIT");
         brokenAnimation();
         if (brokenAnim.HasFinished()) {
             idlebrokenAnimation();
@@ -96,17 +94,14 @@ void Enemy_Sandbag::StateMachine() {
         }
         break;
     case Enemy_State::DEATH:
-        LOG("Sandbag state changed to DEATH");
         deathAnimation();
 
         if (deathAnim.HasFinished()) {
             pendingToDelete = true;
-            LOG("pendingToDelete Sandbag");
         }
         break;
     default:
         // Handle default state logic
-        LOG("ERROR STATE");
         break;
     }
 }

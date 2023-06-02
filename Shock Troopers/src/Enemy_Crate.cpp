@@ -26,7 +26,7 @@ Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
     //path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
     path.PushBack({ 0.0f, 0.0f }, 80, &deathAnim);
 
-    // TODO cambiar tamaño collider
+    // TODO cambiar tamaï¿½o collider
     collider = App->collisions->AddCollider({ 0, 0, 47, 49 }, Collider::Type::OBJECT, (Module*)App->enemies);
     
     health = 1;
@@ -62,14 +62,12 @@ void Enemy_Crate::StateMachine() {
         // Handle spawn state logic
         if (/* some condition for idle */true) {
             state = Enemy_State::IDLE;
-            LOG("state changed to IDLE");
         }
         break;
     case Enemy_State::IDLE:
         idleAnimation();
         if (this->health == 0) {
             state = Enemy_State::DEATH;
-            LOG("state changed to DEATH");
         }
         break;
     case Enemy_State::DEATH:
@@ -84,7 +82,6 @@ void Enemy_Crate::StateMachine() {
                 App->pickUps->SpawnPickUp({ PickUp_Type::INVENCIBILITY, (int)position.x, (int)position.y });
             }
             pendingToDelete = true;
-            LOG("pendingToDelete enemy");
         }
         deathAnimDelay--;
 
@@ -92,7 +89,6 @@ void Enemy_Crate::StateMachine() {
 
     default:
         // Handle default state logic
-        LOG("ERROR STATE");
         break;
     }
 }

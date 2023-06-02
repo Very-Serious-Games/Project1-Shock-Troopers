@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
 
@@ -15,7 +16,7 @@ Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
     
     path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
 
-    // TODO cambiar tamaño collider
+    // TODO cambiar tamaï¿½o collider
     collider = App->collisions->AddCollider({ 0, 0, 28, 16 }, Collider::Type::LANDMINE, (Module*)App->enemies);
 
     health = 1;
@@ -52,14 +53,12 @@ void Enemy_Landmine::StateMachine() {
         // Handle spawn state logic
         if (/* some condition for idle */true) {
             state = Enemy_State::IDLE;
-            LOG("state changed to IDLE");
         }
         break;
     case Enemy_State::IDLE:
         idleAnimation();
         if (this->health == 0) {
             state = Enemy_State::DEATH;
-            LOG("state changed to DEATH");
         }
         break;
     case Enemy_State::DEATH:
@@ -67,7 +66,6 @@ void Enemy_Landmine::StateMachine() {
 
         if (deathAnimDelay == 0) {
             pendingToDelete = true;
-            LOG("pendingToDelete enemy");
         }
         deathAnimDelay--;
 
@@ -75,13 +73,13 @@ void Enemy_Landmine::StateMachine() {
 
     default:
         // Handle default state logic
-        LOG("ERROR STATE");
         break;
     }
 }
 
 void Enemy_Landmine::OnCollision(Collider* collider) {
-    if (collider->type == Collider::Type::PLAYER) {
+    
+    if (collider->type == Collider::Type::PLAYER and !App->player->isRolling) {
         health--;
         if (health == 0) {
             App->particles->AddParticle(App->particles->explosion, position.x, position.y, 11, Collider::Type::NONE);

@@ -6,10 +6,12 @@
 
 Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
 
-    idleAnim.PushBack({ 0, 0, 28, 16 });
-    idleAnim.PushBack({ 31, 0, 28, 16 });
-    idleAnim.PushBack({ 62, 0, 28, 16 });
-    idleAnim.PushBack({ 93, 0, 28, 16 });
+    int disX = 0;
+    for (int i = 0; i < 4; i++)
+    {
+        idleAnim.PushBack({ disX, 0, 28, 16 });
+        disX+= 28;
+    }
 
     idleAnim.speed = 0.1f;
     
@@ -25,7 +27,6 @@ void Enemy_Landmine::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
-    currentAnim = path.GetCurrentAnimation();
     //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end

@@ -65,23 +65,10 @@ ModulePickUp::~ModulePickUp()
 bool ModulePickUp::Start()
 {
 	SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
+
+	texture = App->textures->Load("Assets/Sprites/pickups/pickups_spritesheet.png");
+
 	return true;
-}
-
-
-Update_Status ModulePickUp::PreUpdate()
-{
-	// Remove all pickUp scheduled for deletion
-	for (uint i = 0; i < MAX_PICKUP; ++i)
-	{
-		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete)
-		{
-			delete pickUp[i];
-			pickUp[i] = nullptr;
-		}
-	}
-
-	return Update_Status::UPDATE_CONTINUE;
 }
 
 Update_Status ModulePickUp::Update()
@@ -179,13 +166,6 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 			break;
 		}
 	}
-}
-
-bool ModulePickUp::Start()
-{
-	texture = App->textures->Load("Assets/Sprites/pickups/pickups_spritesheet.png");
-
-	return true;
 }
 
 

@@ -14,6 +14,9 @@ enum class Enemy_Type
 	CRATE,
 	TANK_BOSS,
 	TANK,
+	SANDBAG,
+	LANDMINE,
+	BARREL,
 };
 
 struct EnemySpawnpoint
@@ -78,6 +81,10 @@ private:
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
+	// The audio fx for destroying an enemy
+	int enemyDestroyedFx = 0;
+
+public:
 	// The enemies sprite sheet
 	SDL_Texture* textureTankBoss = nullptr;
 	SDL_Texture* textureTank = nullptr;
@@ -85,9 +92,9 @@ private:
 	SDL_Texture* textureInfantrySoldier = nullptr;
 	SDL_Texture* textureBridge = nullptr;
 	SDL_Texture* textureCrate = nullptr;
-
-	// The audio fx for destroying an enemy
-	int enemyDestroyedFx = 0;
+	SDL_Texture* textureLandmines = nullptr;
+	SDL_Texture* textureSandbags = nullptr;
+	SDL_Texture* textureBarrel = nullptr;
 };
 
 #endif // __MODULE_ENEMIES_H__

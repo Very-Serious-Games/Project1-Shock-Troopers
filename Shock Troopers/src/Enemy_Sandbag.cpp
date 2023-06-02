@@ -1,56 +1,43 @@
-#include "Enemy_Bridge.h"
+#include "Enemy_Sandbag.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
+Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
 
-    spawnAnim.PushBack({ 0, 0, 224, 220 });
+    spawnAnim.PushBack({ 0, 0, 109, 178 });
 
-    idleAnim.PushBack({ 0, 0, 224, 220 });
+    idleAnim.PushBack({ 0, 0, 109, 178 });
 
     int disX = 0;
-    int disY = 0;
-    for (int i = 0; i < 37; ++i)
+    for (int i = 0; i < 35; ++i)
     {
-        if (i == 20)
-        {
-            disY += 222;
-            disX = 0;
-        }
-        brokenAnim.PushBack({ disX, disY, 224, 220 });
-        disX += 304;
+        brokenAnim.PushBack({ disX, 0, 109, 178 });
+        disX += 109;
     }
     brokenAnim.speed = 0.5f;
     brokenAnim.loop = false;
 
-    idlebrokenAnim.PushBack({ 0, 444, 224, 220 });
+    path.PushBack({ 0.0f, 0.0f }, 360, &brokenAnim);
 
-    disY = 444;
-    disX = 0;
-    for (int j = 0; j < 106; ++j)
+    idlebrokenAnim.PushBack({ disX, 0, 109, 178 });
+
+    for (int j = 0; j < 48; ++j)
     {
-        if (j == 20 or j == 40 or j == 60 or j == 80)
-        {
-            disY += 222;
-            disX = 0;
-        }
-        deathAnim.PushBack({ disX, disY, 224, 220 });
-        disX += 304;
+        deathAnim.PushBack({ disX, 0, 109, 178 });
+        disX += 109;
     }
     deathAnim.speed = 0.5f;
     deathAnim.loop = false;
 
-    path.PushBack({ 0.0f, 0.0f }, 150, &brokenAnim);
-
-    path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
+    path.PushBack({ 0.0f, 0.0f }, 480, &deathAnim);
 
     // TODO cambiar tama�o collider
-    collider = App->collisions->AddCollider({ 0, 0, 224, 86 }, Collider::Type::BRIDGE, (Module*)App->enemies);
-    health = 2;
+    collider = App->collisions->AddCollider({ 0, 0, 98, 108 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    health = 20;
 }
 
-void Enemy_Bridge::Update() {
+void Enemy_Sandbag::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
@@ -61,27 +48,27 @@ void Enemy_Bridge::Update() {
     Enemy::Update();
 }
 
-void Enemy_Bridge::deathAnimation() {
+void Enemy_Sandbag::deathAnimation() {
     currentAnim = &deathAnim;
 }
 
-void Enemy_Bridge::spawnAnimation() {
+void Enemy_Sandbag::spawnAnimation() {
     currentAnim = &spawnAnim;
 }
 
-void Enemy_Bridge::brokenAnimation() {
+void Enemy_Sandbag::brokenAnimation() {
     currentAnim = &brokenAnim;
 }
 
-void Enemy_Bridge::idlebrokenAnimation() {
+void Enemy_Sandbag::idlebrokenAnimation() {
     currentAnim = &idlebrokenAnim;
 }
 
-void Enemy_Bridge::idleAnimation() {
+void Enemy_Sandbag::idleAnimation() {
     currentAnim = &idleAnim;
 }
 
-void Enemy_Bridge::StateMachine() {
+void Enemy_Sandbag::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
         spawnAnimation();
@@ -92,7 +79,7 @@ void Enemy_Bridge::StateMachine() {
         break;
     case Enemy_State::IDLE:
         idleAnimation();
-        if (this->health == 1)
+        if (this->health <= 10)
         {
             state = Enemy_State::HIT;
         }
@@ -119,9 +106,9 @@ void Enemy_Bridge::StateMachine() {
     }
 }
 
-void Enemy_Bridge::OnCollision(Collider* collider) {
+void Enemy_Sandbag::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
-        health--;
+        health -= 10;
         if (health == 0) {
             App->audio->PlayFx(destroyedFx);
             SetToDelete();

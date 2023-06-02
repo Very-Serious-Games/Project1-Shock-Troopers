@@ -112,9 +112,10 @@ public:
 
 	Particle flyingBattleshipMuzzle;
 
-private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture;
+
+private:
 
 	// An array to store and handle all the particles
 	Particle* particles[MAX_ACTIVE_PARTICLES] = { nullptr };

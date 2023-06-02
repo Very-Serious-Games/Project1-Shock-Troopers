@@ -120,6 +120,8 @@ protected:
 	Animation idleAnim;
 	Animation attackAnim;
 	Animation moveAnim;
+	Animation idlebrokenAnim;
+	Animation brokenAnim;
 
 	// The enemy's collider
 	Collider* collider = nullptr;

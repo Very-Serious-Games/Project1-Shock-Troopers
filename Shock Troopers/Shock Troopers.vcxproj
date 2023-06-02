@@ -20,12 +20,15 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h" />
+    <ClInclude Include="src\Enemy_Barrel.h" />
     <ClInclude Include="src\Enemy_Bridge.h" />
     <ClInclude Include="src\Enemy_Crate.h" />
     <ClInclude Include="src\Enemy_FlyingBattleship.h" />
     <ClInclude Include="src\Enemy_InfantrySoldier.h" />
+    <ClInclude Include="src\Enemy_Landmine.h" />
     <ClInclude Include="src\Enemy_Tank.h" />
     <ClInclude Include="src\Enemy_TankBoss.h" />
+    <ClInclude Include="src\Enemy_Sandbag.h" />
     <ClInclude Include="src\ModulePickUp.h" />
     <ClInclude Include="src\ModuleUI.h" />
     <ClInclude Include="src\PickUp.h" />
@@ -55,12 +58,15 @@
     <ClInclude Include="src\SceneLevel1.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Enemy_Barrel.cpp" />
     <ClCompile Include="src\Enemy_Bridge.cpp" />
     <ClCompile Include="src\Enemy_Crate.cpp" />
     <ClCompile Include="src\Enemy_FlyingBattleship.cpp" />
     <ClCompile Include="src\Enemy_InfantrySoldier.cpp" />
+    <ClCompile Include="src\Enemy_Landmine.cpp" />
     <ClCompile Include="src\Enemy_Tank.cpp" />
     <ClCompile Include="src\Enemy_TankBoss.cpp" />
+    <ClCompile Include="src\Enemy_Sandbag.cpp" />
     <ClCompile Include="src\ModulePickUp.cpp" />
     <ClCompile Include="src\ModuleUI.cpp" />
     <ClCompile Include="src\PickUp.cpp" />
@@ -178,6 +184,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <WholeProgramOptimization>false</WholeProgramOptimization>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

@@ -1,7 +1,7 @@
 #include "ModuleRender.h"
 
 #include "Application.h"
-
+#include "ModuleCollisions.h"
 #include "ModuleWindow.h"
 #include "ModuleTextures.h"
 #include "ModulePlayer.h"
@@ -32,6 +32,8 @@ bool ModuleRender::Init()
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
 
+
+
 	if (renderer == nullptr)
 	{
 		LOG("Renderer could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -55,26 +57,56 @@ Update_Status ModuleRender::PreUpdate()
 
 Update_Status ModuleRender::Update()
 {
-	//Handle positive vertical movement
+	int nextCameraY = App->player->position.y - 100;
+	int nextCameraX = App->player->position.x - 120;
 
-	camera.y = App->player->position.y - 100;
-	camera.x = App->player->position.x - 120;
+	if (nextCameraY <= camera.y) {
+		camera.y = App->player->position.y - 100;
+	}
+	if (App->player->IsEnabled()) {
+		if (camera.y <= 980 && camera.x < 1100) {
+			if (nextCameraX > camera.x && leaveZone) {
+				camera.x = nextCameraX;
+			}
+		} else if (!isInZone2) {
+			camera.x = nextCameraX;
+		}
+	}
+
+
+	if (isInZone) {
+		camera.y = nextCameraY;
+		camera.x = nextCameraX;
+		if (camera.x < minX) {
+			camera.x = minX;
+		}
+		else if (camera.x + camera.w > maxX) {
+			camera.x = maxX - camera.w;
+		}
+		if (camera.y < minY) {
+			camera.y = minY;
+		}
+		else if (camera.y + camera.h > maxY) {
+			camera.y = maxY - camera.h;
+		}
+	}
+
 
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 		camera.y -= cameraSpeed * SCREEN_HEIGHT;
 
 	//Handle negative vertical movement
-	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT)
-		camera.y += cameraSpeed * SCREEN_HEIGHT;
+	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT) camera.y += cameraSpeed * SCREEN_HEIGHT;
 
-	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
-		camera.x -= cameraSpeed;
+	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT) camera.x -= cameraSpeed;
+
 	if (camera.x < 0) camera.x = 0;
 
 	if (camera.y < 0) camera.y = 0;
 
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
-		camera.x += cameraSpeed;
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)	camera.x += cameraSpeed;
+
+	if (App->input->keys[SDL_SCANCODE_M] == KEY_DOWN) leaveZone = !leaveZone;
 
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -97,6 +129,52 @@ bool ModuleRender::CleanUp()
 		SDL_DestroyRenderer(renderer);
 
 	return true;
+}
+
+void ModuleRender::OnCollision(Collider* c1, Collider* c2)
+{
+	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE) {
+
+		if (c1->rect.y < c2->rect.y + c2->rect.h && !isInZone) {
+			camera.y--;
+		}
+
+		if (camera.y + camera.h <= c2->rect.y + c2->rect.h || camera.y == c2->rect.y) {
+			isInZone = true;
+		}
+
+		minX = c2->rect.x;
+		minY = c2->rect.y;
+		maxX = c2->rect.x + c2->rect.w;
+		maxY = c2->rect.y + c2->rect.h;
+
+		if (leaveZone) {
+			c2->pendingToDelete = true;
+			isInZone = !isInZone;
+		}
+	}
+	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE_2) {
+		isInZone2 = true;
+		if (c1->rect.x + c1->rect.w > c2->rect.x && !isInZone) {
+			camera.x++;
+		}
+
+		if (camera.x >= c2->rect.x || camera.x == c2->rect.x) {
+			isInZone = true;
+		}
+
+		minX = c2->rect.x;
+		minY = c2->rect.y;
+		maxX = c2->rect.x + c2->rect.w;
+		maxY = c2->rect.y + c2->rect.h;
+
+		if (leaveZone) {
+			c2->pendingToDelete = true;
+			isInZone2 = !isInZone2;
+			isInZone = !isInZone;
+		}
+
+	}
 }
 
 // Blit to screen

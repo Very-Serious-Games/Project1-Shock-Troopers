@@ -4,14 +4,14 @@
 #include "Module.h"
 #include "Animation.h"
 
-#define MAX_PICKUP 10
+#define MAX_PICKUP 20
 
 enum class PickUp_Type
 {
 	NO_TYPE,
 	HP,
 	DIAMOND,
-	INVENCIBILIDAD
+	INVENCIBILITY
 };
 
 
@@ -74,9 +74,6 @@ private:
 	// All spawned PickUp in the scene
 	PickUp* pickUp[MAX_PICKUP] = { nullptr };
 
-	// The PickUp sprite sheet
-	SDL_Texture* texture = nullptr;
-
 	// The audio fx for destroying an PickUp
 	int pickUpDestroyedFx = 0;
 
@@ -86,6 +83,10 @@ private:
 	Animation PickedDiamond;
 	Animation NoDamage;
 	Animation PickedNoDamage;
+
+public:
+	// The PickUp sprite sheet
+	SDL_Texture* texture = nullptr;
 };
 
 #endif // __MODULE_PickUp_H__

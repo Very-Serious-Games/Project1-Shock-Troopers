@@ -27,11 +27,15 @@ ModulePlayer::~ModulePlayer() {
 }
 
 void ModulePlayer::updateHp() {
-
+		
 	if (!isInvulnerable) {
 		isInvulnerable = true;
 		invulnerabilityTimer = 0.0f;
 		hp -= 10;
+	}
+	if (!hitIsInvulnerable) {
+		hitIsInvulnerable = true;
+		hitInvulnerabilityTimer = 0.0f;
 	}
 }
 
@@ -714,7 +718,7 @@ void ModulePlayer::stateMachine() {
 		}
 
 		saveLastPosition();
-
+		invulnerability();
 		break;
 
 	case PlayerState::ShootingMoving:
@@ -822,7 +826,7 @@ void ModulePlayer::stateMachine() {
 
 		roll();
 
-		if (!isRoll() and currentAnimationLegs->HasFinished()) {
+		if (!isRoll() /* and currentAnimationLegs->HasFinished()*/) {
 			currentAnimationLegs->Reset();
 			lockControls = false;
 			currentState = PlayerState::Idle;
@@ -869,16 +873,16 @@ void ModulePlayer::stateMachine() {
 		// Damage logic
 		updateHp();
 
-		if (isInvulnerable) {
+		if (hitIsInvulnerable) {
 			// Check if the invulnerability period has ended
-			if (invulnerabilityTimer >= invulnerabilityDuration) {
+			if (hitInvulnerabilityTimer >= hitInvulnerabilityDuration) {
 				// Make the player vulnerable again
-				isInvulnerable = false;
+				hitIsInvulnerable = false;
 				isHitted = false;
 			}
 
 			// Update the invulnerability timer
-			invulnerabilityTimer += 1;
+			hitInvulnerabilityTimer += 1;
 		}
 
 		if (hp == 0) {
@@ -1377,6 +1381,14 @@ Update_Status ModulePlayer::Update() {
 	App->render->cameraUpCollider->SetPos(App->render->camera.x, App->render->camera.y);
 	App->render->stopCameraCollider->SetPos(App->render->camera.x + SCREEN_WIDTH / 2, App->render->camera.y + SCREEN_HEIGHT / 2);
 
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	if (App->input->keys[SDL_SCANCODE_G] == Key_State::KEY_REPEAT)
+	{
+		App->pickUps->SpawnPickUp({PickUp_Type::INVENCIBILITY, (int)position.x + 10, (int)position.y + 10 });
+	}
+	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 	//Reset variables
 	lockR = false;
 	lockU = false;
@@ -1414,16 +1426,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 	if (!isInvulnerable) {
 		// Ignore collision while invulnerable
-		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY && isRolling == false && !isGodMode) {
-
-			if (hp < 0) {
-				hp -= 10;
-			}
-
-			isHitted = true;
-
-		}
-
 		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !isGodMode) {
 
 			if (hp < 0) {

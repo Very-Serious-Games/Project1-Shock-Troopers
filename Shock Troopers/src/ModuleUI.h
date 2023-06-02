@@ -53,6 +53,20 @@ public:
 	SDL_Texture* textureWeapon = nullptr;
 	SDL_Texture* textureSstage = nullptr;
 	SDL_Texture* textureEstage = nullptr;
+
+	Animation* currentAnim = nullptr;
+
+	Animation hp100;
+	Animation hp90;
+	Animation hp80;
+	Animation hp70;
+	Animation hp60;
+	Animation hp50;
+	Animation hp40;
+	Animation hp30;
+	Animation hp20;
+	Animation hp10;
+	Animation hp0;
 };
 
 #endif //!__MODULE_UI_H__

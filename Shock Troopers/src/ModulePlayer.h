@@ -77,6 +77,8 @@ public:
 	void shoot();
 	void grenade();
 	void shootMoving();
+	
+	void invulnerability();
 
 	void getLastDirection();
 
@@ -106,7 +108,11 @@ public:
 
 	bool isInvulnerable = false;
 	float invulnerabilityTimer = 0.0f;
-	const float invulnerabilityDuration = 50.0f;  // set invulnerability duration
+	const float invulnerabilityDuration = 50.0f;
+
+	bool hitIsInvulnerable = false;
+	float hitInvulnerabilityTimer = 0.0f;
+	const float hitInvulnerabilityDuration = 500.0f;
 
 	bool isHitted = false;
 

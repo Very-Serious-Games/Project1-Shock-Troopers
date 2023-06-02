@@ -13,6 +13,7 @@
 #include <stdio.h>
 #include <SDL/include/SDL_timer.h>
 #include "ModuleUI.h"
+#include "Pickup.h"
 
 using namespace std;
 
@@ -565,7 +566,7 @@ void ModulePlayer::grenade() {
 	App->particles->playerShot.setDirection(lastDirection);
 	//TODO a�adir direccion
 	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
-	newParticle->collider->AddListener(this);
+ 	newParticle->collider->AddListener(this);
 	newParticle->granada = true;
 	*/
 	App->audio->PlayFx(laserFx);
@@ -738,6 +739,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Roll;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Moving:
@@ -764,6 +766,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Shooting:
@@ -788,6 +791,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Grenade:
@@ -809,6 +813,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Roll:
@@ -885,6 +890,21 @@ void ModulePlayer::stateMachine() {
 		}
 
 		break;
+	}
+}
+
+void ModulePlayer::invulnerability() {
+
+	if (isInvulnerable) {
+		// Check if the invulnerability period has ended
+		if (invulnerabilityTimer >= invulnerabilityDuration) {
+			// Make the player vulnerable again
+			isInvulnerable = false;
+			isHitted = false;
+		}
+
+		// Update the invulnerability timer
+		invulnerabilityTimer += 1;
 	}
 }
 
@@ -1433,8 +1453,15 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 	
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::HEAL) {
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_HP) {
+		if (hp < 100)
 		hp += 10;
+	}
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_DIAMOND) {
+		App->ui->updateScore(3000);
+	}
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_NODAMAGE) {
+			isInvulnerable = true;
 	}
 
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY) {

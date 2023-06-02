@@ -74,10 +74,15 @@ void Enemy_Crate::StateMachine() {
         break;
     case Enemy_State::DEATH:
         deathAnimation();
-        App->pickUps->SpawnPickUp({ PickUp_Type::HP, (int)position.x, (int)position.y });
-        //SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
+        
 
         if (deathAnimDelay == 0) {
+            if (rand() % 2 == 0) {
+                App->pickUps->SpawnPickUp({ PickUp_Type::HP, (int)position.x, (int)position.y });
+            }
+            else {
+                App->pickUps->SpawnPickUp({ PickUp_Type::INVENCIBILITY, (int)position.x, (int)position.y });
+            }
             pendingToDelete = true;
             LOG("pendingToDelete enemy");
         }

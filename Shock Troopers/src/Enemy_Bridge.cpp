@@ -14,11 +14,45 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
     
     deathAnim.PushBack({ 360, 0, 279, 87 });
 
-    path.PushBack({ 1.0f, 0.0f }, 150, &idleAnim);
-    path.PushBack({ -1.0f, 0.0f }, 150, &idleAnim);
+    int disX = 0;
+    int disY = 0;
+    for (int i = 0; i < 37; ++i)
+    {
+        if (i == 20)
+        {
+            disY += 222;
+            disX = 0;
+        }
+        brokenAnim.PushBack({ disX, disY, 224, 220 });
+        disX += 304;
+    }
+    brokenAnim.speed = 0.5f;
+    brokenAnim.loop = false;
 
-    // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 0, 0, 279, 87 }, Collider::Type::ENEMY, (Module*)App->enemies);
+    idlebrokenAnim.PushBack({ 0, 444, 224, 220 });
+
+    disY = 444;
+    disX = 0;
+    for (int j = 0; j < 106; ++j)
+    {
+        if (j == 20 or j == 40 or j == 60 or j == 80)
+        {
+            disY += 222;
+            disX = 0;
+        }
+        deathAnim.PushBack({ disX, disY, 224, 220 });
+        disX += 304;
+    }
+    deathAnim.speed = 0.5f;
+    deathAnim.loop = false;
+
+    path.PushBack({ 0.0f, 0.0f }, 330, &brokenAnim);
+
+    path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
+
+    // TODO cambiar tamaï¿½o collider
+    collider = App->collisions->AddCollider({ 0, 0, 224, 86 }, Collider::Type::BRIDGE, (Module*)App->enemies);
+    health = 2;
 }
 
 void Enemy_Bridge::Update() {
@@ -53,26 +87,45 @@ void Enemy_Bridge::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
+        LOG("Bridge state changed to IDLE");
         idleAnimation();
-        if (this->health == 0) {
-            state = Enemy_State::DEATH;
-            LOG("state changed to DEATH");
+        if (this->health == 1)
+        {
+            state = Enemy_State::HIT;
+        }
+        break;
+    case Enemy_State::HIT:
+        LOG("Bridge state changed to HIT");
+        brokenAnimation();
+        if (brokenAnim.HasFinished()) {
+            idlebrokenAnimation();
+            if (this->health == 0) {
+                state = Enemy_State::DEATH;
+            }
         }
         break;
     case Enemy_State::DEATH:
+        LOG("Bridge state changed to DEATH");
         deathAnimation();
 
-        if (deathAnimDelay == 0) {
+        if (deathAnim.HasFinished()) {
             pendingToDelete = true;
-            LOG("pendingToDelete enemy");
+            LOG("pendingToDelete Bridge");
         }
-        deathAnimDelay--;
-
         break;
-
     default:
         // Handle default state logic
         LOG("ERROR STATE");
         break;
+    }
+}
+
+void Enemy_Bridge::OnCollision(Collider* collider) {
+    if (collider->type == Collider::Type::PLAYER_SHOT) {
+        health--;
+        if (health == 0) {
+            App->audio->PlayFx(destroyedFx);
+            SetToDelete();
+        }
     }
 }

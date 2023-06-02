@@ -13,6 +13,9 @@
 #include "Enemy_Crate.h"
 #include "Enemy_TankBoss.h"
 #include "Enemy_Tank.h"
+#include "Enemy_Landmine.h"
+#include "Enemy_Sandbag.h"
+#include "Enemy_Barrel.h"
 
 #define SPAWN_MARGIN 5000
 
@@ -37,7 +40,10 @@ bool ModuleEnemies::Start()
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/Soldiers-Infantry.png");
 	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
-	//textureBridge = App->textures->Load("Assets/Sprites/backgorund/level1/stone-bridge-first-hit.png");
+	textureLandmines = App->textures->Load("Assets/Sprites/characters/landmine.png");
+	textureBridge = App->textures->Load("Assets/Sprites/background/level1/stone-bridge.png");
+	textureSandbags = App->textures->Load("Assets/Sprites/background/level1/sandbags.png");
+	textureBarrel = App->textures->Load("Assets/Sprites/background/level1/barrel.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -198,6 +204,16 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_Tank(info.x, info.y);
 					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureTank;
+					break;
+				case Enemy_Type::SANDBAG:
+					enemies[i] = new Enemy_Sandbag(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureSandbags;
+					break;
+				case Enemy_Type::BARREL:
+					enemies[i] = new Enemy_Barrel(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->texture = textureBarrel;
 					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;

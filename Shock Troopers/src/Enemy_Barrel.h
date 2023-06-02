@@ -1,14 +1,14 @@
-#ifndef __ENEMY_BRIDGE_H__
-#define __ENEMY_BRIDGE_H__
+#ifndef __ENEMY_BARREL_H__
+#define __ENEMY_BARREL_H__
 
 #include "Enemy.h"
 #include "Path.h"
 #include "Module.h"
 
-class Enemy_Bridge : public Enemy {
+class Enemy_Barrel : public Enemy {
 public:
 
-	Enemy_Bridge(int x, int y);
+	Enemy_Barrel(int x, int y);
 
 
 	void Update() override;
@@ -21,12 +21,14 @@ public:
 
 	void StateMachine() override;
 
+	void OnCollision(Collider* collider) override;
+
 private:
 
 	Path path;
 
-	SDL_Texture* textureBridge = nullptr;
+	SDL_Texture* textureBarrel = nullptr;
 
 };
 
-#endif // __ENEMY_BRIDGE_H__
+#endif

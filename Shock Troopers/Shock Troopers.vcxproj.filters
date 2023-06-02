@@ -123,19 +123,31 @@
     <ClInclude Include="src\Enemy_Bridge.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="src\ModuleUI.h">
       <Filter>Source Files\modules\core</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enemy_Crate.h">
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_TankBoss.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enemy_Landmine.h">
+    <ClInclude Include="src\Enemy_Tank.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_Crate.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy_Sandbag.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy_Barrel.h">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy_Landmine.h">
       <Filter>Source Files\entities\enemies</Filter>
     </ClInclude>
   </ItemGroup>
@@ -224,16 +236,22 @@
     <ClCompile Include="src\ModuleUI.cpp">
       <Filter>Source Files\modules\core</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy_Crate.cpp">
+    <ClCompile Include="src\Enemy_TankBoss.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
-    <ClCompile Include="src\Enemy_Landmine.cpp">
+    <ClCompile Include="src\Enemy_Tank.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Crate.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy_Sandbag.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy_Barrel.cpp">
+      <Filter>Source Files\entities\enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy_Landmine.cpp">
       <Filter>Source Files\entities\enemies</Filter>
     </ClCompile>
   </ItemGroup>

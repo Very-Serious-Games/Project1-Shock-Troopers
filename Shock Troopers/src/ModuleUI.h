@@ -3,10 +3,13 @@
 
 #include <string>
 #include <cmath>
-using namespace std;
+
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "Path.h"
+
+using namespace std;
 
 struct SDL_Texture;
 
@@ -33,16 +36,23 @@ public:
 
 	void updateHp();
 
+	// Font score index
+	uint score = 010;
+	int scoreFont = -1;
+	char scoreText[10] = { "\0" };
+
+	void updateScore(int points);
+
+	Animation startStage;
+	Animation endStage;
+	Path path;
 public:
-	// Position of the player in the map
-	iPoint position;
-	SDL_Rect rectA = { 0, 0 , 25, 25 };
 
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;
-
-
+	SDL_Texture* textureSstage = nullptr;
+	SDL_Texture* textureEstage = nullptr;
 };
 
 #endif //!__MODULE_UI_H__

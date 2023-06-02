@@ -3,7 +3,7 @@
 
 #include "Enemy.h"
 #include "Path.h"
-
+		
 #pragma once
 class Enemy_InfantrySoldier : public Enemy {
 public:
@@ -17,13 +17,25 @@ public:
 
 	void deathAnimation() override;
 
-	void idleAnimation() override;
+	void idleAnimation(int direction);
 
-	void spawnAnimation() override;
+	void spawnAnimation(int direction);
+
+	void moveAnimation(int direction);
+
+	void attackAnimation(int direction) override;
+
+	void attackMeleAnimation(int direction);
 
 	void StateMachine() override;
 
 	void Attack() override;
+
+	void Shoot();
+
+	void Knife();
+
+	void move() override;
 
 private:
 	
@@ -35,26 +47,58 @@ private:
 	Animation spawnAnimRight;
 	Animation spawnAnimLeft;
 
-	Animation upAnim;
-	Animation downAnim;
-	Animation leftAnim;
-	Animation rightAnim;
-	Animation upLeftAnim;
-	Animation upRightAnim;
-	Animation downLeftAnim;
-	Animation downRightAnim;
-
+	//Death Animations
+	Animation leftDeathAnim;
+	Animation rightDeathAnim;
 	Animation deathAnim;
+	
+	//Gun
+	//movement
+	Animation gunUpAnim;
+	Animation gunDownAnim;
+	Animation gunLeftAnim;
+	Animation gunRightAnim;
+	Animation gunUpLeftAnim;
+	Animation gunUpRightAnim;
+	Animation gunDownLeftAnim;
+	Animation gunDownRightAnim;
 
-	Animation idleUpAnim;
-	Animation idleDownAnim;
-	Animation idleLeftAnim;
-	Animation idleRightAnim;
-	Animation idleUpLeftAnim;
-	Animation idleUpRightAnim;
-	Animation idleDownLeftAnim;
-	Animation idleDownRightAnim;
+	//idle
+	Animation gunIdleUpAnim;
+	Animation gunIdle2UpAnim;
+	Animation gunIdleDownAnim;
+	Animation gunIdle2DownAnim;
+	Animation gunIdlePointDownAnim;
+	Animation gunIdleLeftAnim;
+	Animation gunIdleRightAnim;
+	Animation gunIdleUpLeftAnim;
+	Animation gunIdleUpRightAnim;
+	Animation gunIdleDownLeftAnim;
+	Animation gunIdleDownRightAnim;
 
+	//idle pointing
+	Animation gunPointUp;
+	Animation gunPointDown;
+	Animation gunPointLeft;
+	Animation gunPointRight;
+	Animation gunPointUpRight;
+	Animation gunPointUpLeft;
+	Animation gunPointDownLeft;
+	Animation gunPointDownRight;
+
+	//gun hit
+	Animation gunHitRightAnim;
+	Animation gunHitLeftAnim;
+	Animation gunHitUpAnim;
+	Animation gunHitUpLeftAnim;
+	Animation gunHitUpRightAnim;
+	Animation gunHitDownAnim;
+	Animation gunHitDownRightAnim;
+	Animation gunHitDownLeftAnim;
+
+	//falling soldiers
+	Animation fallRightAnim;
+	Animation fallLeftAnim;
 };
 
 #endif // __ENEMY_INFANTRYSOLDIER_H__

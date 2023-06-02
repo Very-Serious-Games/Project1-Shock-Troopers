@@ -19,9 +19,9 @@ public:
 
 	void spawnAnimation() override;
 
-	void brokenAnimation() ;
+	void brokenAnimation();
 
-	void idlebrokenAnimation() ;
+	void idlebrokenAnimation();
 
 	void StateMachine() override;
 

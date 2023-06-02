@@ -12,10 +12,13 @@
 #include <iostream>
 #include <stdio.h>
 #include <SDL/include/SDL_timer.h>
+#include "ModuleUI.h"
 
 using namespace std;
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
+
+	lastDirection = 8;
 
 	//Setting up the player animations
 	// Empty animation
@@ -186,14 +189,14 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	rollAnimDownLeft.PushBack({ 378, 208, 54, 52 });
 	rollAnimDownLeft.PushBack({ 432, 208, 54, 52 });
 
-	rollAnimDownRight.PushBack({ 486, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 540, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 594, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 648, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 702, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 756, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 810, 416, 54, 52 });
-	rollAnimDownRight.PushBack({ 864, 416, 54, 52 });
+	rollAnimDownRight.PushBack({ 9 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 10 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 11 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 12 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 13 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 14 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 15 * 54, 7 * 52, 54, 52 }); 
+	rollAnimDownRight.PushBack({ 16 * 54, 7 * 52, 54, 52 }); 
 
 	rollAnimUpLeft.PushBack({ 0,   156, 54, 52 });
 	rollAnimUpLeft.PushBack({ 54,  156, 54, 52 });
@@ -313,6 +316,25 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	deathAnim.PushBack({ 810, 416, 54, 52 });
 	deathAnim.PushBack({ 864, 416, 54, 52 });
 
+	// Win Animations
+	winAnim.PushBack({ 0, 786, 54, 52 });
+	winAnim.PushBack({ 54, 786, 54, 52 });
+	winAnim.PushBack({ 108, 786, 54, 52 });
+	winAnim.PushBack({ 162, 786, 54, 52 });
+	winAnim.PushBack({ 216, 786, 54, 52 });
+	winAnim.PushBack({ 270, 786, 54, 52 });
+	winAnim.PushBack({ 324, 786, 54, 52 });
+	winAnim.PushBack({ 378, 786, 54, 52 });
+	winAnim.PushBack({ 432, 786, 54, 52 });
+	winAnim.PushBack({ 486, 786, 54, 52 });
+	winAnim.PushBack({ 540, 786, 54, 52 });
+	winAnim.PushBack({ 594, 786, 54, 52 });
+	winAnim.PushBack({ 648, 786, 54, 52 });
+	winAnim.PushBack({ 702, 786, 54, 52 });
+	winAnim.PushBack({ 756, 786, 54, 52 });
+	winAnim.PushBack({ 810, 786, 54, 52 });
+	winAnim.PushBack({ 864, 786, 54, 52 });
+
 	idleAnimUpTorso.speed = animSpeed;
 	idleAnimDownTorso.speed = animSpeed;
 	idleAnimLeftTorso.speed = animSpeed;
@@ -350,8 +372,11 @@ ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 	shootAnimUpRight.speed = animSpeed;
 
 	deathAnim.speed = animSpeed;
+	deathAnim.loop = false;
 
 	damageAnim.speed = animSpeed;
+
+	winAnim.speed = animSpeed;
 }
 
 ModulePlayer::~ModulePlayer() {
@@ -363,49 +388,7 @@ void ModulePlayer::updateHp() {
 	if (!isInvulnerable) {
 		isInvulnerable = true;
 		invulnerabilityTimer = 0.0f;
-	}
-
-	//Carga sprite en base a la vida del jugador
-	switch (hp) {
-		case 100:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_100.png");
-			break;
-		case 90:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_90.png");
-			break;
-		case 80:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_80.png");
-			break;
-		case 70:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_70.png");
-			break;
-		case 60:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_60.png");
-			break;
-		case 50:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_50.png");
-			break;
-		case 40:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_40.png");
-			break;
-		case 30:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_30.png");
-			break;
-		case 20:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_20.png");
-			break;
-		case 10:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_10.png");
-			break;
-		case 0:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-			destroyed = true;
-			//TODO  poner esto donde toque
-			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
-			break;
-		default:
-			textureHp = App->textures->Load("Assets/Sprites/ui/HpBar_00.png");
-			break;
+		hp -= 10;
 	}
 }
 
@@ -419,6 +402,12 @@ void ModulePlayer::godMode() {
 	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
 		App->player->position.x = 232;
 		App->player->position.y = 190;
+	}
+
+	// TP player to the tank boss (for testing purposes)
+	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
+		App->player->position.x = 1430;
+		App->player->position.y = 250;
 	}
 
 	// Damage player 
@@ -441,7 +430,7 @@ void ModulePlayer::godMode() {
 
 	// Spawn power up
 	if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-		App->pickUps->SpawnPickUp({ PickUp_Type::HP,position.x - 90, position.y , true });
+		App->pickUps->SpawnPickUp({ PickUp_Type::HP,(int)position.x - 90, (int)position.y , true });
 	}
 }
 
@@ -625,7 +614,8 @@ void ModulePlayer::setRollAnimations() {
 }
 
 void ModulePlayer::setWinAnimations() {
-	// TODO
+	currentAnimationTorso = &emptyAnimation;
+	currentAnimationLegs = &winAnim;
 }
 
 void ModulePlayer::setSpawnAnimations() {
@@ -856,6 +846,9 @@ void ModulePlayer::move() {
 
 void ModulePlayer::roll() {
 
+	if (cantRoll) {
+		return;
+	}
 	isRolling = true;
 
 	lockControls = true;
@@ -875,11 +868,50 @@ void ModulePlayer::roll() {
 }
 
 void ModulePlayer::shoot() {
+	if (!isShootingMoving()) {
+		shootDirection = lastDirection;
+	}
+
 	delay--;
 	if (delay == 0) {
-		//App->particles->laser.setDirection(lastDirection);
-		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+		Particle* newParticle = nullptr;
+		Particle* newParticleMuzzle = nullptr;
+		switch (lastDirection) {
+		case 1: // Up-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 2: // Up-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 3: // Down-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 4: // Down-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 5: // Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 6: // Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 7: // Down
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 8: // Up
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		}
 		newParticle->collider->AddListener(this);
+		newParticleMuzzle->collider->AddListener(this);
 		App->audio->PlayFx(laserFx);
 
 		delay = 10;
@@ -887,20 +919,71 @@ void ModulePlayer::shoot() {
 }
 
 void ModulePlayer::grenade() {
+	/*
 	App->particles->playerShot.setDirection(lastDirection);
 	//TODO a�adir direccion
 	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 	newParticle->collider->AddListener(this);
 	newParticle->granada = true;
+	*/
 	App->audio->PlayFx(laserFx);
 }
 
 void ModulePlayer::shootMoving() {
 	delay--;
 	if (delay == 0) {
-		//App->particles->laser.setDirection(lastDirection);
-		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-		newParticle->collider->AddListener(this);
+		Particle* newParticle = nullptr;
+		Particle* newParticleMuzzle = nullptr;
+		switch (shootDirection) {
+		case 1: // Up-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 2: // Up-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 3: // Down-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 4: // Down-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 5: // Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 6: // Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 7: // Down
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 8: // Up
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		}
 		App->audio->PlayFx(laserFx);
 
 		delay = 10;
@@ -989,8 +1072,6 @@ void ModulePlayer::stateMachine() {
 
 		saveLastPosition();
 
-		LOG("idle state");
-
 		break;
 
 	case PlayerState::ShootingMoving:
@@ -1014,8 +1095,6 @@ void ModulePlayer::stateMachine() {
 		if (isRoll()) {
 			currentState = PlayerState::Roll;
 		}
-
-		LOG("shooting moving state");
 
 		break;
 
@@ -1043,12 +1122,10 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
-		LOG("moving state");
-
 		break;
 
 	case PlayerState::Shooting:
-
+		
 		setShootingAnimations();
 
 		shoot();
@@ -1068,8 +1145,6 @@ void ModulePlayer::stateMachine() {
 		if (!isShooting()) {
 			currentState = PlayerState::Idle;
 		}
-
-		LOG("shooting state");
 
 		break;
 
@@ -1092,8 +1167,6 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
-		LOG("grenade state");
-
 		break;
 
 	case PlayerState::Roll:
@@ -1108,8 +1181,6 @@ void ModulePlayer::stateMachine() {
 
 		}
 
-		LOG("roll state");
-
 		break;
 
 	case PlayerState::Win:
@@ -1118,8 +1189,6 @@ void ModulePlayer::stateMachine() {
 
 		// Win logic
 		// TODO
-
-		LOG("win state");
 
 		break;
 
@@ -1133,17 +1202,16 @@ void ModulePlayer::stateMachine() {
 		// enter idle state
 		currentState = PlayerState::Idle;
 
-		LOG("spawn state");
-
 		break;
 
 	case PlayerState::Death:
 
 		setDeathAnimations();
 
-		// TODO Death logic
-
-		LOG("death state");
+		if (deathAnim.HasFinished()) {
+			// TODO Arreglar para que haga la transición entre escenas correctamente
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
+		}
 
 		break;
 
@@ -1173,9 +1241,6 @@ void ModulePlayer::stateMachine() {
 		if (!isHitted) {
 			currentState = PlayerState::Idle;
 		}
-		
-
-		LOG("damage state");
 
 		break;
 	}
@@ -1203,21 +1268,17 @@ bool ModulePlayer::Start() {
 	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
 
 	//Setting up player position
-	position.x = 220;
-	position.y = 2800;
+	position.x = 186;
+	position.y = 2900;
 	
 	//Setting up player wall coliders
-	colliderL = App->collisions->AddCollider({ position.x + 5, position.y + 2, 2, 43 }, Collider::Type::LASER, this);
-	colliderU = App->collisions->AddCollider({ position.x + 5, position.y + 8, 22, 2 }, Collider::Type::LASER, this);
-	colliderD = App->collisions->AddCollider({ position.x + 5, position.y + 51, 22, 2 }, Collider::Type::LASER, this);
-	colliderR = App->collisions->AddCollider({ position.x + 32, position.y + 2, 2,43 }, Collider::Type::LASER, this);
+	colliderL = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 2, 2, 43 }, Collider::Type::LASER, this);
+	colliderU = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 8, 22, 2 }, Collider::Type::LASER, this);
+	colliderD = App->collisions->AddCollider({ (int)position.x + 5, (int)position.y + 51, 22, 2 }, Collider::Type::LASER, this);
+	colliderR = App->collisions->AddCollider({ (int)position.x + 32, (int)position.y + 2, 2,43 }, Collider::Type::LASER, this);
 
 	//Setting up player hitbox
-	collider = App->collisions->AddCollider({ position.x + 5,position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
-
-
-	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/fonts/rtype_font3.png", lookupTable, 2);
+	collider = App->collisions->AddCollider({ (int)position.x + 5,(int)position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
 
 	return ret;
 }
@@ -1234,10 +1295,10 @@ Update_Status ModulePlayer::Update() {
 
 	//Collider update
 	collider->SetPos(position.x + 12, position.y + 10);
-	colliderU->SetPos(position.x + 12, position.y + 8);
 	colliderR->SetPos(position.x + 34, position.y + 10);
 	colliderD->SetPos(position.x + 12, position.y + 53);
-	colliderL->SetPos(position.x + 10, position.y + 10);
+	colliderL->SetPos(position.x + 10 , position.y + 10);
+	colliderU->SetPos(position.x + 12, position.y +8);
 
 	//We update the current animation
 	currentAnimationLegs->Update();
@@ -1250,6 +1311,7 @@ Update_Status ModulePlayer::Update() {
 	lockU = false;
 	lockD = false;
 	lockL = false;
+	cantRoll = false;
 	speed = 1;
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -1272,16 +1334,7 @@ Update_Status ModulePlayer::PostUpdate() {
 		//Obtenemos position de las diferentes partes de la UI en base al jugador y la camara
 		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
 		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
-
-		//Mostramos por pantalla la UI
-		App->render->Blit(textureHp,x - 10, y, NULL);
-		App->render->Blit(textureP1, x - 20, y - 50, NULL);
-		App->render->Blit(textureWeapon, x + 10, y + 150, NULL);
 	}
-
-	//Mostramos por pantalla el score
-	sprintf_s(scoreText, 10, "%7d", score);
-	App->fonts->BlitText(30, 5, scoreFont, scoreText);
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -1310,36 +1363,42 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 		}
 
-		if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
-
-			if (hp < 0) {
-				hp -= 20;
-			}
-
-			isHitted = true;
-
-		}
-
 	}
 
-	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderR && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockR = true;
+		if (isRolling) {
+			position.x -= 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 
-	if (c1 == colliderU && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderU && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockU = true;
+		if (isRolling) {
+			position.y += 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 
-	if (c1 == colliderD && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderD && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockD = true;
+		if (isRolling) {
+			position.y -= 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 
-	if (c1 == colliderL && destroyed == false && c2->type == Collider::Type::WALL && !isGodMode) {
+	if (c1 == colliderL && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL) && !isGodMode) {
 		lockL = true;
+		if (isRolling) {
+			position.x += 2;
+		}
 		isRolling = false;
+		cantRoll = true;
 	}
 	
 	if (c1 == colliderR && destroyed == false && c2->type == Collider::Type::OBJECT && !isGodMode) {
@@ -1367,7 +1426,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	}
 
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY) {
-		score += 23;
+		App->ui->updateScore(300);
+	}
+
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
+
+		if (hp < 0) {
+			hp -= 20;
+		}
+
+		isHitted = true;
+
 	}
 
 }

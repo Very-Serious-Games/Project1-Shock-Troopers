@@ -3,10 +3,11 @@
 
 #include <string>
 #include <cmath>
-using namespace std;
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+
+using namespace std;
 
 struct SDL_Texture;
 struct Collider;
@@ -23,7 +24,7 @@ enum class PlayerState {
 	Death,
 	Damage,
 	ShootingMoving,
-	GrenadeMoving
+	GrenadeMoving,
 };
 
 class ModulePlayer : public Module {
@@ -83,7 +84,7 @@ public:
 
 public:
 	// Position of the player in the map
-	iPoint position;
+	fPoint position;
 
 	// Player current state
 	PlayerState currentState;
@@ -190,6 +191,8 @@ public:
 
 	Animation damageAnim;				// Damage animation
 
+	Animation winAnim;					// Win animation
+
 	// Sound effects indices
 	uint laserFx = 0;
 	uint explosionFx = 0;
@@ -208,12 +211,7 @@ public:
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
 
-
-	// Font score index
-	uint score = 010;
-	int scoreFont = -1;
-	char scoreText[10] = { "\0" };
-
+	bool cantRoll = false;
 };
 
 #endif //!__MODULE_PLAYER_H__

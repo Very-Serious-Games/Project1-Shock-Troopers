@@ -12,6 +12,8 @@ enum class Enemy_Type
 	FLYING_BATTLESHIP,
 	BRIDGE,
 	CRATE,
+	TANK_BOSS,
+	TANK,
 	SANDBAG,
 	LANDMINE,
 	BARREL,
@@ -80,7 +82,10 @@ private:
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
+	SDL_Texture* textureTankBoss = nullptr;
+	SDL_Texture* textureTank = nullptr;
 	SDL_Texture* textureFlyingBattleship = nullptr;
+	SDL_Texture* textureInfantrySoldier = nullptr;
 	SDL_Texture* textureBridge = nullptr;
 	SDL_Texture* textureCrate = nullptr;
 	SDL_Texture* textureLandmines = nullptr;

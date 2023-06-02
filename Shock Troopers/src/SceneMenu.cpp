@@ -260,3 +260,9 @@ Update_Status SceneMenu::PostUpdate()
 
 	return Update_Status::UPDATE_CONTINUE;
 }
+
+bool SceneMenu::CleanUp() {
+	App->textures->Unload(sprites);
+	App->sceneMenu->Disable();
+	return true;
+}

@@ -73,7 +73,7 @@ Update_Status SceneIntro::PostUpdate()
 
 bool SceneIntro::CleanUp()
 {
-	// TODO Remove All Memory Leaks
+	App->textures->Unload(textures);
 	App->sceneIntro->Disable();
 
 	return true;

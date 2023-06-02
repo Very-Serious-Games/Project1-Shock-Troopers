@@ -168,7 +168,6 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 	}
 }
 
-
 Update_Status ModulePickUp::PreUpdate()
 {
 	// Remove all pickUp scheduled for deletion

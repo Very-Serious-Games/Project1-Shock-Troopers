@@ -81,6 +81,10 @@ private:
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
+	// The audio fx for destroying an enemy
+	int enemyDestroyedFx = 0;
+
+public:
 	// The enemies sprite sheet
 	SDL_Texture* textureTankBoss = nullptr;
 	SDL_Texture* textureTank = nullptr;
@@ -91,9 +95,6 @@ private:
 	SDL_Texture* textureLandmines = nullptr;
 	SDL_Texture* textureSandbags = nullptr;
 	SDL_Texture* textureBarrel = nullptr;
-
-	// The audio fx for destroying an enemy
-	int enemyDestroyedFx = 0;
 };
 
 #endif // __MODULE_ENEMIES_H__

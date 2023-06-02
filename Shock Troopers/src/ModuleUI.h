@@ -38,7 +38,6 @@ public:
 
 	// Font score index
 	uint score = 010;
-	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 
 	void updateScore(int points);
@@ -48,6 +47,7 @@ public:
 	Path path;
 public:
 
+	int scoreFont = -1;
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;

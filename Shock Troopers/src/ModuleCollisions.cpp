@@ -5,11 +5,22 @@
 #include "ModuleRender.h"
 #include "ModuleInput.h"
 #include "SDL/include/SDL_Scancode.h"
+
 using namespace std;
 
 ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 {
-	for(uint i = 0; i < MAX_COLLIDERS; ++i)
+	
+}
+
+// Destructor
+ModuleCollisions::~ModuleCollisions()
+{
+
+}
+
+bool ModuleCollisions::Start() {
+	for (uint i = 0; i < MAX_COLLIDERS; ++i)
 		colliders[i] = nullptr;
 
 	matrix[Collider::Type::WALL][Collider::Type::WALL] = false;
@@ -316,12 +327,8 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::BRIDGE][Collider::Type::MUZZLE] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::LANDMINE] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::BRIDGE] = false;
-}
 
-// Destructor
-ModuleCollisions::~ModuleCollisions()
-{
-
+	return true;
 }
 
 Update_Status ModuleCollisions::PreUpdate()

@@ -13,17 +13,27 @@ using namespace std;
 #include "ModuleEnemies.h"
 #include "ModulePlayer.h"
 #include "ModuleUI.h"
+#include "ModuleFonts.h"
+#include "ModuleParticles.h"
  
-SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled)
-{}
+SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled) {
+
+}
 
 SceneLevel1::~SceneLevel1()
 {}
 
-bool SceneLevel1::Start()
-{
-	LOG("Loading background assets");
+bool SceneLevel1::Start() {
 
+	LOG("Enabling modules");
+	App->player->Enable();
+	App->enemies->Enable();
+	App->collisions->Enable();
+	App->pickUps->Enable();
+	App->ui->Enable();
+	App->particles->Enable();
+
+	LOG("Loading background assets");
 	bool ret = true;
 
 	// Load textures and fx
@@ -87,11 +97,6 @@ bool SceneLevel1::Start()
 	App->render->camera.x = 220;
 	App->render->camera.y = 2800;
 
-	App->player->Enable();
-	App->enemies->Enable();
-	App->collisions->Enable();
-	App->pickUps->Enable();
-
 	return ret;
 }
 
@@ -107,16 +112,69 @@ Update_Status SceneLevel1::PostUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-bool SceneLevel1::CleanUp()
-{
+bool SceneLevel1::CleanUp() {
+
+	// Player
+	LOG("Unloading player texture");
+	App->textures->Unload(App->player->texture);
+	LOG("Disabiling player");
 	App->player->Disable();
+
+	// Enemies
+	LOG("Unloading barrel texture");
+	App->textures->Unload(App->enemies->textureBarrel);
+	LOG("Unloading bridge texture");
+	App->textures->Unload(App->enemies->textureBridge);
+	LOG("Unloading crate texture");
+	App->textures->Unload(App->enemies->textureCrate);
+	LOG("Unloading flying battleship texture");
+	App->textures->Unload(App->enemies->textureFlyingBattleship);
+	LOG("Unloading infantry soldier texture");
+	App->textures->Unload(App->enemies->textureInfantrySoldier);
+	LOG("Unloading landmines texture");
+	App->textures->Unload(App->enemies->textureLandmines);
+	LOG("Unloading sandbags texture");
+	App->textures->Unload(App->enemies->textureSandbags);
+	LOG("Unloading tank texture");
+	App->textures->Unload(App->enemies->textureTank);
+	LOG("Unloading tank boss texture");
+	App->textures->Unload(App->enemies->textureTankBoss);
+
+	LOG("Disabiling enemies");
 	App->enemies->Disable();
+	// Scene Level 1
+	LOG("Unloading background texture");
+	App->textures->Unload(bgTexture);
+	LOG("Disabiling sceneLevel_1");
 	App->sceneLevel_1->Disable();
+
+	// PickUps
+	LOG("Unloading pickUps texture");
+	App->textures->Unload(App->pickUps->texture);
+	LOG("Disabiling pickUps");
 	App->pickUps->Disable();
+
+	// Collisions
+	LOG("Disabiling collisions");
 	App->collisions->Disable();
+
+	// UI
+	App->textures->Unload(App->ui->textureEstage);
+	App->textures->Unload(App->ui->textureHp);
+	App->textures->Unload(App->ui->textureP1);
+	App->textures->Unload(App->ui->textureSstage);
+	App->textures->Unload(App->ui->textureWeapon);
+	LOG("Disabiling ui");
 	App->ui->Disable();
 
-	// TODO remove all memory leaks
+	// Fonts
+	App->fonts->UnLoad(App->ui->scoreFont);
+
+	// Particles
+	LOG("Unloading particles texture");
+	App->textures->Unload(App->particles->texture);
+	LOG("Disabiling particles");
+	App->particles->Disable();
 
 	return true;
 }

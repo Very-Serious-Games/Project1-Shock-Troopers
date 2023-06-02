@@ -1344,7 +1344,6 @@ bool ModulePlayer::Start() {
 	return ret;
 }
 
-
 Update_Status ModulePlayer::Update() {
 
 	// Update the state machine
@@ -1480,14 +1479,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		App->ui->updateScore(300);
 	}
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
+	if (!isRolling) {
+		if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
 
-		if (hp < 0) {
-			hp -= 20;
+			if (hp < 0) {
+				hp -= 20;
+			}
+
+			isHitted = true;
+
 		}
-
-		isHitted = true;
-
 	}
 
 }

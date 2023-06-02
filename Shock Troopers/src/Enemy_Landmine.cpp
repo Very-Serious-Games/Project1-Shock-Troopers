@@ -79,12 +79,14 @@ void Enemy_Landmine::StateMachine() {
 
 void Enemy_Landmine::OnCollision(Collider* collider) {
     
-    if (collider->type == Collider::Type::PLAYER and !App->player->isRolling) {
-        health--;
-        if (health == 0) {
-            App->particles->AddParticle(App->particles->explosion, position.x, position.y, 11, Collider::Type::NONE);
-            App->audio->PlayFx(destroyedFx);
-            SetToDelete();
+    if (!App->player->isRolling) {
+        if (collider->type == Collider::Type::PLAYER and !App->player->isRolling) {
+            health--;
+            if (health == 0) {
+                App->particles->AddParticle(App->particles->explosion, position.x, position.y, 11, Collider::Type::NONE);
+                App->audio->PlayFx(destroyedFx);
+                SetToDelete();
+            }
         }
     }
 }

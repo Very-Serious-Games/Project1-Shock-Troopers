@@ -23,8 +23,22 @@ SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled) {
 SceneLevel1::~SceneLevel1()
 {}
 
-bool SceneLevel1::Start()
-{
+bool SceneLevel1::Start() {
+
+	LOG("Enabling player");
+	App->player->Enable();
+	LOG("Enabling enemies");
+	App->enemies->Enable();
+	LOG("Enabling collisions");
+	App->collisions->Enable();
+	LOG("Enabling pickups");
+	App->pickUps->Enable();
+	LOG("Enabling UI");
+	App->ui->Enable();
+	LOG("Enabling particles");
+	App->particles->Enable();
+
+
 	LOG("Loading background assets");
 
 	bool ret = true;
@@ -86,12 +100,6 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 83, 1928);//near tank
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1257, 972);//post bridge
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1243, 940);//post bridge
-
-
-	App->player->Enable();
-	App->enemies->Enable();
-	App->collisions->Enable();
-	App->pickUps->Enable();
 
 	return ret;
 }
@@ -164,9 +172,9 @@ bool SceneLevel1::CleanUp() {
 	App->textures->Unload(App->enemies->textureTank);
 	LOG("Unloading tank boss texture");
 	App->textures->Unload(App->enemies->textureTankBoss);
-
 	LOG("Disabiling enemies");
 	App->enemies->Disable();
+
 	// Scene Level 1
 	LOG("Unloading background texture");
 	App->textures->Unload(bgTexture);

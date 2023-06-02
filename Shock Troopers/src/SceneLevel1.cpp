@@ -61,16 +61,16 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 314, 1744);// half
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 114, 1111);// miniboss
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 246, 1111);// miniboss
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 628, 1116);// bridge
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 537, 1116);// bridge
 	App->enemies->AddEnemy(Enemy_Type::CRATE, 1536, 1038);// post bridge
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 1325, 191);// boss
-	App->enemies->AddEnemy(Enemy_Type::CRATE, 1441, 191);// boss
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1325, 221);// boss
+	App->enemies->AddEnemy(Enemy_Type::CRATE, 1441, 221);// boss
 
-	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 83, 2254);// start
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 83, 2269);// start
 	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 228, 1231);//miniboss
 	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 83, 1283);//miniboss
-	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1472, 289);//boss
-	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1285, 289);//boss
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1472, 300);//boss
+	App->enemies->AddEnemy(Enemy_Type::SANDBAG, 1285, 300);//boss
 
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 83, 1928);//near tank
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1257, 972);//post bridge

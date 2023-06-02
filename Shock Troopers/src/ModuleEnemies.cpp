@@ -15,7 +15,7 @@
 #include "Enemy_Sandbag.h"
 #include "Enemy_Barrel.h"
 
-#define SPAWN_MARGIN 50
+#define SPAWN_MARGIN 5000
 
 
 ModuleEnemies::ModuleEnemies(bool startEnabled) : Module(startEnabled)

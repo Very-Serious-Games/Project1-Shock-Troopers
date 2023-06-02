@@ -41,7 +41,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
     deathAnim.speed = 0.5f;
     deathAnim.loop = false;
 
-    path.PushBack({ 0.0f, 0.0f }, 330, &brokenAnim);
+    path.PushBack({ 0.0f, 0.0f }, 150, &brokenAnim);
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 

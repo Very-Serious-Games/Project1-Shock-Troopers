@@ -29,6 +29,8 @@ public:
 	// Draw all colliders (if debug mode is enabled)
 	Update_Status PostUpdate();
 
+	bool Start() override;
+
 	// Removes all existing colliders
 	bool CleanUp();
 

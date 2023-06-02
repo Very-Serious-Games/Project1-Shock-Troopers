@@ -32,7 +32,7 @@ bool ModuleRender::Init()
 
 	renderer = SDL_CreateRenderer(App->window->window, -1, flags);
 
-	cameraDownCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT +10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
+  	cameraDownCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT +10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
 	cameraLeftCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
 	cameraRightCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
 	cameraUpCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);

@@ -84,8 +84,6 @@ bool SceneLevel1::Start()
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1257, 972);//post bridge
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1243, 940);//post bridge
 
-	App->render->camera.x = 220;
-	App->render->camera.y = 2800;
 
 	App->player->Enable();
 	App->enemies->Enable();

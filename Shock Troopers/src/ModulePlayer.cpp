@@ -1097,6 +1097,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Roll;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Moving:
@@ -1123,6 +1124,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Shooting:
@@ -1147,6 +1149,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Grenade:
@@ -1168,6 +1171,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		invulnerability();
 		break;
 
 	case PlayerState::Roll:
@@ -1244,6 +1248,21 @@ void ModulePlayer::stateMachine() {
 		}
 
 		break;
+	}
+}
+
+void ModulePlayer::invulnerability() {
+
+	if (isInvulnerable) {
+		// Check if the invulnerability period has ended
+		if (invulnerabilityTimer >= invulnerabilityDuration) {
+			// Make the player vulnerable again
+			isInvulnerable = false;
+			isHitted = false;
+		}
+
+		// Update the invulnerability timer
+		invulnerabilityTimer += 1;
 	}
 }
 
@@ -1410,8 +1429,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_DIAMOND) {
 		App->ui->updateScore(3000);
 	}
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_DIAMOND) {
-		// TODO Sistema invencibilidad
+	if (c1 == collider && destroyed == false && c2->type == Collider::Type::PICKUP_NODAMAGE) {
+			isInvulnerable = true;
 	}
 
 	if (c1->type == Collider::Type::PLAYER_SHOT && c2->type == Collider::Type::ENEMY) {

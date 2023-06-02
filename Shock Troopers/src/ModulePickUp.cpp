@@ -77,11 +77,11 @@ ModulePickUp::~ModulePickUp()
 
 }
 
+
+
 bool ModulePickUp::Start()
 {
-	SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
-
-	texture = App->textures->Load("Assets/Sprites/pickups/pickups_spritesheet.png");
+	texture = App->textures->Load("Assets/sprites/pickups/pickups_spritesheet.png");
 
 	return true;
 }
@@ -232,14 +232,6 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 			break;
 		}
 	}
-}
-
-
-bool ModulePickUp::Start()
-{
-	texture = App->textures->Load("Assets/sprites/pickups/pickups_spritesheet.png");
-
-	return true;
 }
 
 

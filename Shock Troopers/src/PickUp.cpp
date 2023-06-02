@@ -4,10 +4,12 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
+#include "ModulePickUp.h"
 
-PickUp::PickUp(int x, int y) : position(x, y)
+PickUp::PickUp(PickUpType type1, int x, int y) : position(x, y)
 {
 	spawnPos = position;
+	type = type1;
 }
 
 PickUp::~PickUp()
@@ -36,7 +38,7 @@ void PickUp::Draw()
 void PickUp::DrawColider()
 {
 	LOG("Drawing Colider");
-	App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP);
+       collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PICKUP, App->pickUps);
 }
 
 void PickUp::OnCollision(Collider* collider)

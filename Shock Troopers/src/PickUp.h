@@ -7,12 +7,20 @@
 struct SDL_Texture;
 struct Collider;
 
+enum class PickUpType
+{
+	NO_TYPE,
+	HP,
+	DIAMOND,
+	INVENCIBILITY
+};
+
 class PickUp
 {
 public:
 	// Constructor
 	// Saves the spawn position for later movement calculations
-	PickUp(int x, int y);
+	PickUp(PickUpType type, int x, int y);
 
 	// Destructor
 	virtual ~PickUp();
@@ -53,6 +61,8 @@ public:
 
 	// The pickUp collider
 	Collider* collider = nullptr;
+
+	PickUpType type;
 
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;

@@ -4,7 +4,7 @@
 #include "Module.h"
 #include "Animation.h"
 
-#define MAX_PICKUP 10
+#define MAX_PICKUP 20
 
 enum class PickUp_Type
 {

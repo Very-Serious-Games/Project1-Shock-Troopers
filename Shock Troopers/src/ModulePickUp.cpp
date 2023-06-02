@@ -26,6 +26,11 @@ ModulePickUp::ModulePickUp(bool startEnabled) : Module(startEnabled)
 	Medkit.PushBack({ 8 * 32, 16 * 2, 32, 16 });
 	Medkit.PushBack({ 9 * 32, 16 * 2, 32, 16 });
 
+	// Anim Picked Medkit
+	PickedMedkit.PushBack({ 0, 16 * 3, 32, 16 });
+	PickedMedkit.PushBack({ 32, 16 * 3, 32, 16 });
+	PickedMedkit.PushBack({ 32 * 2, 16 * 3, 32, 16 });
+
 	// Anim DiamondP
 	Diamond.PushBack({ 0, 0, 32, 16 });
 	Diamond.PushBack({ 32, 0, 32, 16 });
@@ -49,19 +54,22 @@ ModulePickUp::ModulePickUp(bool startEnabled) : Module(startEnabled)
 	NoDamage.PushBack({ 6 * 32, 16, 32, 16 });
 	NoDamage.PushBack({ 7 * 32, 16, 32, 16 });
 
-	// Anim PickedDiamondP
+	// Anim Picked NoDamage 
 	PickedNoDamage.PushBack({ 8 * 32, 16, 32, 16 });
 	PickedNoDamage.PushBack({ 9 * 32, 16, 32, 16 });
 	PickedNoDamage.PushBack({ 10 * 32, 16, 32, 16 });
 
-	Medkit.speed = 0.05f;
-	PickedMedkit.speed = 0.1f;
+	Medkit.speed = 0.08f;
+	PickedMedkit.speed = 0.01;
+	PickedMedkit.loop = false;
 
 	Diamond.speed = 0.1f;
-	PickedDiamond.speed = 0.1f;
+	PickedDiamond.speed = 0.01;
+	PickedDiamond.loop = false;
 
 	NoDamage.speed = 0.1f;
-	PickedNoDamage.speed = 0.1f;
+	PickedNoDamage.speed = 0.01;
+	PickedNoDamage.loop = false;
 }
 
 ModulePickUp::~ModulePickUp()
@@ -84,6 +92,10 @@ Update_Status ModulePickUp::Update()
 	Diamond.Update();
 	NoDamage.Update();
 
+	PickedMedkit.Update();
+	PickedDiamond.Update();
+	PickedNoDamage.Update();
+
 	HandlePickUpDespawn();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -98,6 +110,25 @@ Update_Status ModulePickUp::PostUpdate()
 			if (pickUp[i]->isPicked)
 			{
 				// TODO Condicion para determinar que Pickup es y cambiar su animación.
+
+				switch (pickUp[i]->type)
+				{
+					case PickUpType::HP:
+						pickUp[i]->currentAnim = &PickedMedkit;
+						break;
+					case PickUpType::DIAMOND:
+						pickUp[i]->currentAnim = &PickedDiamond;
+						break;
+					case PickUpType::INVENCIBILITY:
+						pickUp[i]->currentAnim = &PickedNoDamage;
+						break;
+					case PickUpType::NO_TYPE:
+						pickUp[i]->currentAnim = nullptr;
+						break;
+					default:
+						pickUp[i]->currentAnim = nullptr;
+						break;
+				}
 			}
 
 			pickUp[i]->Draw();
@@ -162,7 +193,7 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 			switch (info.type)
 			{
 				case PickUp_Type::HP:
-					pickUp[i] = new PickUp(info.x, info.y);
+					pickUp[i] = new PickUp(PickUpType::HP, info.x, info.y);
 
 					pickUp[i]->texture = texture;
 					pickUp[i]->currentAnim = &Medkit;
@@ -172,16 +203,16 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 					break;
 
 				case PickUp_Type::DIAMOND:
-					pickUp[i] = new PickUp(info.x, info.y);
+					pickUp[i] = new PickUp(PickUpType::DIAMOND, info.x, info.y);
 
 					pickUp[i]->texture = texture;
 					pickUp[i]->currentAnim = &Diamond;
 
-					pickUp[i]->DrawColider();
+      					pickUp[i]->DrawColider();
 
 					break;
 				case PickUp_Type::INVENCIBILITY:
-					pickUp[i] = new PickUp(info.x, info.y);
+					pickUp[i] = new PickUp(PickUpType::INVENCIBILITY, info.x, info.y);
 
 					pickUp[i]->texture = texture;
 					pickUp[i]->currentAnim = &NoDamage;
@@ -226,9 +257,14 @@ void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER)
 		{
-			pickUp[i]->OnCollision(c2);
-			
 			// TODO Cuando colisiona con el player se cambia a isPicked true
+			pickUp[i]->isPicked = true;
+
+			if (pickUp[i]->currentAnim->HasFinished())
+			{
+				pickUp[i]->OnCollision(c2);
+			}
+			
 
 			break;
 		}

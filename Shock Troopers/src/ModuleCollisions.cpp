@@ -55,6 +55,16 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 
 
 	matrix[Collider::Type::PICKUP][Collider::Type::PLAYER] = true;
+	matrix[Collider::Type::PICKUP][Collider::Type::WALL] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::LASER] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::PICKUP] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::PICKUP][Collider::Type::DETECTION_ZONE] = false;
+
 }
 
 // Destructor

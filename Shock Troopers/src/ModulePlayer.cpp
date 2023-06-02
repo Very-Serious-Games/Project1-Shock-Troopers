@@ -859,7 +859,7 @@ void ModulePlayer::grenade() {
 	App->particles->playerShot.setDirection(lastDirection);
 	//TODO a�adir direccion
 	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
-	newParticle->collider->AddListener(this);
+ 	newParticle->collider->AddListener(this);
 	newParticle->granada = true;
 	App->audio->PlayFx(laserFx);
 }

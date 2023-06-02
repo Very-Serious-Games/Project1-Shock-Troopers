@@ -503,8 +503,8 @@ void ModulePlayer::roll() {
 	currentDirection = lastDirection;
 	move();
 
-	//and when the player has moved 50 pixels, the roll ends
-	if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
+	//and when the player has moved 100 pixels, the roll ends
+	if ((abs(diferencia.x - position.x) > 100) || (abs(diferencia.y - position.y) > 100) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
 		isRolling = false;
 		lockControls = false;
 	}
@@ -822,10 +822,10 @@ void ModulePlayer::stateMachine() {
 
 		roll();
 
-		if (!isRoll()) {
+		if (!isRoll() and currentAnimationLegs->HasFinished()) {
+			currentAnimationLegs->Reset();
 			lockControls = false;
 			currentState = PlayerState::Idle;
-
 		}
 
 		break;
@@ -1255,6 +1255,15 @@ bool ModulePlayer::Start() {
 	rollAnimDownRight.speed = animSpeed;
 	rollAnimUpLeft.speed = animSpeed;
 	rollAnimUpRight.speed = animSpeed;
+
+	rollAnimUp.loop = false;
+	rollAnimDown.loop = false;
+	rollAnimLeft.loop = false;
+	rollAnimRight.loop = false;
+	rollAnimDownLeft.loop = false;
+	rollAnimDownRight.loop = false;
+	rollAnimUpLeft.loop = false;
+	rollAnimUpRight.loop = false;
 
 	shootAnimUp.speed = animSpeed;
 	shootAnimDown.speed = animSpeed;

@@ -104,7 +104,7 @@ bool ModuleParticles::Start() {
     enemyShot.anim.speed = 0.3;
     enemyShot.lifetime = 180;
 
-    // Tank shots
+    // Tank missile
     tankMissileUp.anim.PushBack(            { 53*0, 206, 53, 53 });
     tankMissileUp.anim.PushBack(            { 53*1, 206, 53, 53 });
     tankMissileUp.anim.PushBack(            { 53*2, 206, 53, 53 });
@@ -228,6 +228,48 @@ bool ModuleParticles::Start() {
     tankShotDownLeft.anim.speed = 0.3;
     tankShotDownLeft.lifetime = 180;
 
+    // Mini Tank shots
+    miniTankShotUp.anim.PushBack(           { 48*6, 110, 48, 48 }); // TODO put coords 
+    miniTankShotDown.anim.PushBack(         { 48*7, 110, 48, 48 }); // TODO put coords
+    miniTankShotLeft.anim.PushBack(         { 48*1, 110, 48, 48 }); // TODO put coords
+    miniTankShotRight.anim.PushBack(        { 48*0, 110, 48, 48 }); // TODO put coords
+    miniTankShotUpRight.anim.PushBack(      { 48*4, 110, 48, 48 }); // TODO put coords
+    miniTankShotUpLeft.anim.PushBack(       { 48*3, 110, 48, 48 }); // TODO put coords
+    miniTankShotDownRight.anim.PushBack(    { 48*2, 110, 48, 48 }); // TODO put coords
+    miniTankShotDownLeft.anim.PushBack(     { 48*5, 110, 48, 48 }); // TODO put coords
+
+    miniTankShotUp.anim.loop = true;
+    miniTankShotUp.anim.speed = 0.3;
+    miniTankShotUp.lifetime = 180;
+
+    miniTankShotDown.anim.loop = true;
+    miniTankShotDown.anim.speed = 0.3;
+    miniTankShotDown.lifetime = 180;
+
+    miniTankShotLeft.anim.loop = true;
+    miniTankShotLeft.anim.speed = 0.3;
+    miniTankShotLeft.lifetime = 180;
+
+    miniTankShotRight.anim.loop = true;
+    miniTankShotRight.anim.speed = 0.3;
+    miniTankShotRight.lifetime = 180;
+
+    miniTankShotUpRight.anim.loop = true;
+    miniTankShotUpRight.anim.speed = 0.3;
+    miniTankShotUpRight.lifetime = 180;
+
+    miniTankShotUpLeft.anim.loop = true;
+    miniTankShotUpLeft.anim.speed = 0.3;
+    miniTankShotUpLeft.lifetime = 180;
+
+    miniTankShotDownRight.anim.loop = true;
+    miniTankShotDownRight.anim.speed = 0.3;
+    miniTankShotDownRight.lifetime = 180;
+
+    miniTankShotDownLeft.anim.loop = true;
+    miniTankShotDownLeft.anim.speed = 0.3;
+    miniTankShotDownLeft.lifetime = 180;
+
     // Grenades
     playerGrenade.anim.PushBack(            {});
 
@@ -335,6 +377,40 @@ bool ModuleParticles::Start() {
 
     flyingBattleshipMuzzle.anim.loop = false;
     flyingBattleshipMuzzle.anim.speed = 0.3;
+
+    // Muzzle Mini Tank
+    miniTankMuzzleDown.anim.PushBack(       { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleUp.anim.PushBack(         { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleLeft.anim.PushBack(       { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleRight.anim.PushBack(      { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleDownLeft.anim.PushBack(   { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleDownRight.anim.PushBack(  { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleUpLeft.anim.PushBack(     { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleUpRight.anim.PushBack(    { 15*0,  0, 15, 15 }); // TODO put coords
+
+    miniTankMuzzleDown.anim.loop = false;
+    miniTankMuzzleDown.anim.speed = 0.3;
+
+    miniTankMuzzleUp.anim.loop = false;
+    miniTankMuzzleUp.anim.speed = 0.3;
+
+    miniTankMuzzleLeft.anim.loop = false;
+    miniTankMuzzleLeft.anim.speed = 0.3;
+
+    miniTankMuzzleRight.anim.loop = false;
+    miniTankMuzzleRight.anim.speed = 0.3;
+
+    miniTankMuzzleDownLeft.anim.loop = false;
+    miniTankMuzzleDownLeft.anim.speed = 0.3;
+
+    miniTankMuzzleDownRight.anim.loop = false;
+    miniTankMuzzleDownRight.anim.speed = 0.3;
+
+    miniTankMuzzleUpLeft.anim.loop = false;
+    miniTankMuzzleUpLeft.anim.speed = 0.3;
+
+    miniTankMuzzleUpRight.anim.loop = false;
+    miniTankMuzzleUpRight.anim.speed = 0.3;
 
     return true;
 }

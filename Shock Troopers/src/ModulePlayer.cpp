@@ -497,16 +497,15 @@ void ModulePlayer::roll() {
 	lockControls = true;
 
 	//If the player is rolling, the speed is increased
-	speed = 3;
+	speed = 1.5;
 
 	//then the player moves
 	currentDirection = lastDirection;
 	move();
 
-	//and when the player has moved 50 pixels, the roll ends
-	if ((abs(diferencia.x - position.x) > 50) || (abs(diferencia.y - position.y) > 50) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
+	//and when the player has moved 100 pixels, the roll ends
+	if ((abs(diferencia.x - position.x) > 100) || (abs(diferencia.y - position.y) > 100) || ((abs(diferencia.x - position.x) == 0) && (abs(diferencia.y - position.y) == 0))) {
 		isRolling = false;
-		lockControls = false;
 	}
 }
 
@@ -822,10 +821,11 @@ void ModulePlayer::stateMachine() {
 
 		roll();
 
-		if (!isRoll()) {
+		if (!isRoll() and currentAnimationLegs->HasFinished()) {
+			currentAnimationLegs->Reset();
 			lockControls = false;
+			isRolling = false;
 			currentState = PlayerState::Idle;
-
 		}
 
 		break;
@@ -1256,6 +1256,15 @@ bool ModulePlayer::Start() {
 	rollAnimUpLeft.speed = animSpeed;
 	rollAnimUpRight.speed = animSpeed;
 
+	rollAnimUp.loop = false;
+	rollAnimDown.loop = false;
+	rollAnimLeft.loop = false;
+	rollAnimRight.loop = false;
+	rollAnimDownLeft.loop = false;
+	rollAnimDownRight.loop = false;
+	rollAnimUpLeft.loop = false;
+	rollAnimUpRight.loop = false;
+
 	shootAnimUp.speed = animSpeed;
 	shootAnimDown.speed = animSpeed;
 	shootAnimLeft.speed = animSpeed;
@@ -1343,7 +1352,6 @@ bool ModulePlayer::Start() {
 
 	return ret;
 }
-
 
 Update_Status ModulePlayer::Update() {
 
@@ -1480,14 +1488,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		App->ui->updateScore(300);
 	}
 
-	if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
+	if (!isRolling) {
+		if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
 
-		if (hp < 0) {
-			hp -= 20;
+			if (hp < 0) {
+				hp -= 20;
+			}
+
+			isHitted = true;
+
 		}
-
-		isHitted = true;
-
 	}
 
 }

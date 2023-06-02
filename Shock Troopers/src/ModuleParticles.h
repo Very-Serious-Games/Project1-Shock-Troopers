@@ -88,6 +88,15 @@ public:
 	Particle tankShotDownRight;
 	Particle tankShotDownLeft;
 
+	Particle miniTankShotUp;
+	Particle miniTankShotDown;
+	Particle miniTankShotLeft;
+	Particle miniTankShotRight;
+	Particle miniTankShotUpRight;
+	Particle miniTankShotUpLeft;
+	Particle miniTankShotDownRight;
+	Particle miniTankShotDownLeft;
+
 	// Grenades
 	Particle playerGrenade;
 
@@ -111,6 +120,15 @@ public:
 	Particle enemyMuzzleDownLeft;
 
 	Particle flyingBattleshipMuzzle;
+
+	Particle miniTankMuzzleUp;
+	Particle miniTankMuzzleDown;
+	Particle miniTankMuzzleLeft;
+	Particle miniTankMuzzleRight;
+	Particle miniTankMuzzleUpRight;
+	Particle miniTankMuzzleUpLeft;
+	Particle miniTankMuzzleDownRight;
+	Particle miniTankMuzzleDownLeft;
 
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture;

@@ -208,33 +208,43 @@ void Enemy_Tank::Attack() {
     if (delayShoot == 0) {
 
         Particle* newParticle = nullptr;
+        Particle* newParticleMuzzle = nullptr;
 		switch (GetPlayerDirection()) {
 		case 1: // Up-Right
-			newParticle = App->particles->AddParticle(App->particles->tankShotUpRight, position.x + 50, position.y - 8, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotUpRight, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleUpRight, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		case 2: // Up-Left
-			newParticle = App->particles->AddParticle(App->particles->tankShotUpLeft, position.x - 5, position.y - 10, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotUpLeft, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleUpLeft, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		case 3: // Down-Right
-			newParticle = App->particles->AddParticle(App->particles->tankShotDownRight, position.x + 55, position.y + 40, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotDownRight, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleRight, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		case 4: // Down-Left
-			newParticle = App->particles->AddParticle(App->particles->tankShotDownLeft, position.x - 5, position.y + 40, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotDownLeft, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleDownLeft, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		case 5: // Right
-			newParticle = App->particles->AddParticle(App->particles->tankShotRight, position.x + 60, position.y + 10, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotRight, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleRight, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		case 6: // Left
-			newParticle = App->particles->AddParticle(App->particles->tankShotLeft, position.x + 0, position.y + 25, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotLeft, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleLeft, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		case 7: // Down
-			newParticle = App->particles->AddParticle(App->particles->tankShotDown, position.x + 20, position.y + 50, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotDown, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleDown, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		case 8: // Up
-			newParticle = App->particles->AddParticle(App->particles->tankShotUp, position.x + 30, position.y - 5, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+			newParticle = App->particles->AddParticle(App->particles->miniTankShotUp, position.x + (collider->rect.w/2), position.y + (collider->rect.h/2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleUp, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
 			break;
 		}
 
+        newParticleMuzzle->collider->AddListener(NULL);
         newParticle->collider->AddListener(NULL);
 
         App->audio->PlayFx(/*sound effect*/NULL);

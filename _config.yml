@@ -1,1 +1,7 @@
 theme: jekyll-theme-cayman
+description: [A short description of your site's purpose]
+show_downloads: true
+
+github:
+  zip_url: http://example.com/download.zip
+  tar_url: http://example.com/download.zip

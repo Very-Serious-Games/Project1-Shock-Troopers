@@ -17,6 +17,7 @@ using namespace std;
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
+
 	//iterate the start stage animation, that has 29 frames per row and 3 rows
 	for (int row = 0; row < 8; row++) {
 		for (int col = 0; col < 11; col++) {
@@ -111,8 +112,11 @@ void ModuleUI::updateScore(int points)
 	score += points;
 }
 
-bool ModuleUI::Start()
-{
+bool ModuleUI::Start() {
+
+	// Reset the score
+	score = 0;
+
 	LOG("Loading UI textures");
 
 	bool ret = true;

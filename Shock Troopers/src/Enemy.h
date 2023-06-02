@@ -102,13 +102,15 @@ public:
 
 	int delay = 15;
 	int delayShoot = 700;
-	int delayCanon= 700;
+	int delayCanon = 700;
+	int delayMissile = 700;
 	int delayKnife = 500;
 	int deathAnimDelay = 50;
 
 protected:
 	// A ptr to the current animation
 	Animation* currentAnim = nullptr;
+	Animation* currentAnim2 = nullptr;
 	Animation* topCurrentAnim = nullptr;
 	Animation* midCurrentAnim = nullptr;
 	Animation* botCurrentAnim = nullptr;

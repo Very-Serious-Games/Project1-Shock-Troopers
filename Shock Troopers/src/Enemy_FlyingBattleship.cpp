@@ -57,16 +57,11 @@ void Enemy_FlyingBattleship::Attack() {
         delay--;
         if (delay == 0) {
             LOG("Rocket attack");
-            // TODO add rocket attack
-            // TODO add explosion when shooting
-            // TODO change particle used to the correct one
-            /*
-            Particle* rocket1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            rocket1->collider->AddListener(NULL);
-            Particle* rocket2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            rocket2->collider->AddListener(NULL);
-            App->audio->PlayFx(/*sound effectNULL);
-            */
+            Particle* newParticle = App->particles->AddParticle(App->particles->tankMissileUp, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            Particle* newParticle2 = App->particles->AddParticle(App->particles->tankMissileUp, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
+            App->audio->PlayFx(NULL);
             
             delay = 15;
         }
@@ -75,13 +70,20 @@ void Enemy_FlyingBattleship::Attack() {
         delay--;
         if (delay == 0) {
             LOG("Normal attack");
-            // TODO add explosion when shooting
-            // TODO change particle used to the correct one
-            Particle* shot1 = App->particles->AddParticle(App->particles->playerShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            shot1->collider->AddListener(NULL);
-            Particle* shot2 = App->particles->AddParticle(App->particles->playerShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            shot2->collider->AddListener(NULL);
-            App->audio->PlayFx(/*sound effect*/NULL);
+            
+            Particle* newParticle = nullptr;
+            Particle* newParticleMuzzle = nullptr;
+
+            newParticle = App->particles->AddParticle(App->particles->flyingbattleshipShot, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->flyingBattleshipMuzzle, position.x + 27, position.y + 70, 0, Collider::Type::MUZZLE);
+            
+            newParticle = App->particles->AddParticle(App->particles->flyingbattleshipShot, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->flyingBattleshipMuzzle, position.x + 87, position.y + 70, 0, Collider::Type::MUZZLE);
+
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            App->audio->PlayFx(NULL);
+            
             delay = 15;
         }
     }

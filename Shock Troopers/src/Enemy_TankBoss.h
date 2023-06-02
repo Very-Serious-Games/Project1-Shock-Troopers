@@ -33,6 +33,10 @@ public:
 
 	void grenade();
 
+	void missileRain();
+
+	void missileLaunch();
+
 private:
 	// The path that will define the position in the world
 	Path path;

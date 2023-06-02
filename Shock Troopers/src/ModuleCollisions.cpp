@@ -53,8 +53,30 @@ ModuleCollisions::ModuleCollisions(bool startEnabled) : Module(startEnabled)
 	matrix[Collider::Type::LASER][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::LASER][Collider::Type::LASER] = false;
 
-
 	matrix[Collider::Type::HEAL][Collider::Type::PLAYER] = true;
+
+	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER] = true; // TODO revisar
+	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER_SHOT] = true;
+
+	// muzzle
+	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::WALL] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::LASER] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::HEAL] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::WALL][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::LASER][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::HEAL][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::MISSILE][Collider::Type::MUZZLE] = false;
+
 }
 
 // Destructor
@@ -173,7 +195,9 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::KNIFE: // brown
 				App->render->DrawQuad(colliders[i]->rect, 165, 42, 42, alpha);
 				break;
-
+			case Collider::Type::MUZZLE: // white
+				App->render->DrawQuad(colliders[i]->rect, 255, 255, 255, alpha);
+				break;
 			default:
 				break;
 		}

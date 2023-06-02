@@ -36,79 +36,55 @@ void Enemy::Update() {
     StateMachine();
 }
 
+#include <cmath>
+
 int Enemy::GetPlayerDirection() {
-	// Get the player position
-	fPoint playerPos = App->player->position;
+    // Get the player position
+    fPoint playerPos = App->player->position;
 
-	// Calculate the direction vector from enemy position to player position
-	fPoint enemyPos = position;
-	fPoint direction = playerPos - enemyPos;
+    // Calculate the direction vector from enemy position to player position
+    fPoint enemyPos = position;
+    fPoint direction = playerPos - enemyPos;
 
-	// Determine the player direction based on the direction vector
-	int playerDirection = 0;
+    // Calculate the angle between the enemy and the player
+    float angle = atan2(direction.y, direction.x);
 
-	if (direction.y < 0) {
-		// Player is above the enemy
-		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
+    // Convert the angle to degrees
+    float angleDegrees = angle * (180.0f / M_PI);
 
-			playerDirection = 8; // Up
+    // Determine the player direction based on the angle
+    int playerDirection = 0;
 
-		}
-		else if (direction.x < 0) {
+    if (angleDegrees >= -22.5f && angleDegrees < 22.5f) {
+        playerDirection = 5; // Right
+    }
+    else if (angleDegrees >= 22.5f && angleDegrees < 67.5f) {
+        playerDirection = 3; // Down-Right
+    }
+    else if (angleDegrees >= 67.5f && angleDegrees < 112.5f) {
+        playerDirection = 7; // Down
+    }
+    else if (angleDegrees >= 112.5f && angleDegrees < 157.5f) {
+        playerDirection = 4; // Down-Left
+    }
+    else if (angleDegrees >= 157.5f || angleDegrees < -157.5f) {
+        playerDirection = 6; // Left
+    }
+    else if (angleDegrees >= -157.5f && angleDegrees < -112.5f) {
+        playerDirection = 2; // Up-Left
+    }
+    else if (angleDegrees >= -112.5f && angleDegrees < -67.5f) {
+        playerDirection = 8; // Up
+    }
+    else if (angleDegrees >= -67.5f && angleDegrees < -22.5f) {
+        playerDirection = 1; // Up-Right
+    }
 
-			playerDirection = 2; // Up-Left
-
-		}
-		else {
-
-			playerDirection = 1; // Up-Right
-
-		}
-
-	}
-	else if (direction.y > 0) {
-
-		// Player is below the enemy
-		if (fabsf(direction.x) <= fabsf(direction.y) * 0.5f) {
-
-			playerDirection = 7; // Down
-
-		}
-		else if (direction.x < 0) {
-
-			playerDirection = 4; // Down-Left
-
-		}
-		else {
-
-			playerDirection = 3; // Down-Right
-		}
-
-	}
-	else {
-		// Player is at the same height as the enemy
-		if (direction.x < 0) {
-
-			playerDirection = 6; // Left
-
-		}
-		else if (direction.x > 0) {
-
-			playerDirection = 5; // Right
-
-		}
-		else {
-
-			// Player is at the exact position as the enemy (unlikely scenario)
-			playerDirection = 0; // No direction
-
-		}
-
-	}
-
-	// Return the player direction
-	return playerDirection;
+    // Return the player direction
+    return playerDirection;
 }
+
+
 
 int Enemy::GetPlayerDirectionBelow() {
     // Get the player position
@@ -126,29 +102,20 @@ int Enemy::GetPlayerDirectionBelow() {
 
         float angle = atan2f(direction.y, direction.x) * 180.0f / M_PI;
 
-        LOG("angle: %f", angle);
-
         if (angle > 120 && angle <= 135) {
             playerDirection = 6; // Down-Left-Diagonal 
-            LOG("down-left-diagonal");
         } else if (angle >= 30 && angle < 40) {
             playerDirection = 5; // Down-Right-Diagonal
-            LOG("down-right-diagonal");
         } else if (angle < 65 && angle >= 40) {
-            playerDirection = 1; // Down-Right (60°)
-            LOG("down-right");
+            playerDirection = 9; // Down-Right
         } else if (angle > 105 && angle <= 120) {
-            playerDirection = 2; // Down-Left (120°)
-            LOG("down-left");
+            playerDirection = 10; // Down-Left
         } else if (angle > 135 || angle < -135) {
-            playerDirection = 4; // Left (1800°)
-            LOG("left");
+            playerDirection = 4; // Left
         } else if (angle < 30 && angle > -30) {
-            playerDirection = 3; // Right (0°)
-            LOG("right");
+            playerDirection = 3; // Right
         } else if (angle >= 65 && angle <= 105) {
-            playerDirection = 7; // Below (90°)
-            LOG("below");
+            playerDirection = 7; // Below
         }
     }
 
@@ -200,23 +167,72 @@ void Enemy::attackAnimation(int direction)
 
 void Enemy::Draw()
 {
+	if (currentAnim2 != nullptr)
+		App->render->Blit(texture, position.x, position.y, &(currentAnim2->GetCurrentFrame()));
+
 	if (currentAnim != nullptr)
 		App->render->Blit(texture, position.x, position.y, &(currentAnim->GetCurrentFrame()));
-
-	// TODO ajustar posicion a la q se renderizan las partes del boss
 
 	if (botCurrentAnim != nullptr) {
 		App->render->Blit(texture, position.x, position.y, &(botCurrentAnim->GetCurrentFrame()));
 	}
 
 	if (midCurrentAnim != nullptr) {
-		App->render->Blit(texture, position.x, position.y, &(midCurrentAnim->GetCurrentFrame()));
+		App->render->Blit(texture, position.x+3, position.y+10, &(midCurrentAnim->GetCurrentFrame()));
 	}
 
-	if (topCurrentAnim != nullptr) {
-		App->render->Blit(texture, position.x, position.y, &(topCurrentAnim->GetCurrentFrame()));
+	switch (GetPlayerDirectionBelow()) {
+	case 9: // Down-Right
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x+48, position.y+22, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 10: // Down-Left
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x+48, position.y+23, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 3: // Right
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x+32, position.y+16, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 4: // Left
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x+36, position.y+32, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 5: // Down-Right-Diagonal
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x+42, position.y+16, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 6: // Down-Left-Diagonal
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x+45, position.y+33, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	case 7: // Below
+		if (topCurrentAnim != nullptr) {
+			App->render->Blit(texture, position.x+48, position.y+22, &(topCurrentAnim->GetCurrentFrame()));
+		}
+		break;
+	default:
+		switch (GetPlayerDirection()) {
+		case 1:
+			if (topCurrentAnim != nullptr) {
+				App->render->Blit(texture, position.x + 32, position.y + 16, &(topCurrentAnim->GetCurrentFrame()));
+			}
+			break;
+		case 2:
+			if (topCurrentAnim != nullptr) {
+				App->render->Blit(texture, position.x + 36, position.y + 32, &(topCurrentAnim->GetCurrentFrame()));
+			}
+			break;
+		}
+		break;
 	}
-	
+
 }
 
 void Enemy::OnCollision(Collider* collider)

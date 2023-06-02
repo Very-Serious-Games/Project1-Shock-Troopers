@@ -18,6 +18,8 @@ using namespace std;
 
 ModulePlayer::ModulePlayer(bool startEnabled) : Module(startEnabled) {
 
+	lastDirection = 8;
+
 	//Setting up the player animations
 	// Empty animation
 	emptyAnimation.PushBack({ 0,0,0,0 });
@@ -844,11 +846,50 @@ void ModulePlayer::roll() {
 }
 
 void ModulePlayer::shoot() {
+	if (!isShootingMoving()) {
+		shootDirection = lastDirection;
+	}
+
 	delay--;
 	if (delay == 0) {
-		//App->particles->laser.setDirection(lastDirection);
-		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+		Particle* newParticle = nullptr;
+		Particle* newParticleMuzzle = nullptr;
+		switch (lastDirection) {
+		case 1: // Up-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 2: // Up-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 3: // Down-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 4: // Down-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 5: // Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 6: // Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 7: // Down
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		case 8: // Up
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, lastDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			break;
+		}
 		newParticle->collider->AddListener(this);
+		newParticleMuzzle->collider->AddListener(this);
 		App->audio->PlayFx(laserFx);
 
 		delay = 10;
@@ -856,20 +897,71 @@ void ModulePlayer::shoot() {
 }
 
 void ModulePlayer::grenade() {
+	/*
 	App->particles->playerShot.setDirection(lastDirection);
 	//TODO a�adir direccion
 	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
 	newParticle->collider->AddListener(this);
 	newParticle->granada = true;
+	*/
 	App->audio->PlayFx(laserFx);
 }
 
 void ModulePlayer::shootMoving() {
 	delay--;
 	if (delay == 0) {
-		//App->particles->laser.setDirection(lastDirection);
-		Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
-		newParticle->collider->AddListener(this);
+		Particle* newParticle = nullptr;
+		Particle* newParticleMuzzle = nullptr;
+		switch (shootDirection) {
+		case 1: // Up-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 2: // Up-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotUpLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUpLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 3: // Down-Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 4: // Down-Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotDownLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDownLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 5: // Right
+			newParticle = App->particles->AddParticle(App->particles->playerShotRight, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleRight, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 6: // Left
+			newParticle = App->particles->AddParticle(App->particles->playerShotLeft, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleLeft, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 7: // Down
+			newParticle = App->particles->AddParticle(App->particles->playerShotDown, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleDown, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		case 8: // Up
+			newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x + 5, position.y + 20, shootDirection, Collider::Type::PLAYER_SHOT);
+			newParticleMuzzle = App->particles->AddParticle(App->particles->playerMuzzleUp, position.x + 5, position.y + 20, 0, Collider::Type::MUZZLE);
+			newParticle->collider->AddListener(this);
+			newParticleMuzzle->collider->AddListener(this);
+			break;
+		}
 		App->audio->PlayFx(laserFx);
 
 		delay = 10;
@@ -1011,7 +1103,7 @@ void ModulePlayer::stateMachine() {
 		break;
 
 	case PlayerState::Shooting:
-
+		
 		setShootingAnimations();
 
 		shoot();

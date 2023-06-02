@@ -22,6 +22,8 @@ struct Collider
 		OBJECT,
 		DETECTION_ZONE,
 		KNIFE,
+		MISSILE,
+		MUZZLE,
 
 		MAX
 	};

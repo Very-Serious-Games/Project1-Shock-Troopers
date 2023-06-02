@@ -26,36 +26,15 @@ public:
 	// Sets flag for deletion and for the collider aswell
 	void SetToDelete();
 
-	void setDirection(int direction);
-
-	int parabole(int x, int direction_x);
-
 public:
 	// Defines the position in the screen
 	iPoint position;
-
-
-	bool granada = false;
-	int inicio = 0;
-
-	int direccion;
 
 	// Defines the speed at which the particle will move (pixels per second)
 	iPoint speed;
 
 	// A set of rectangle sprites
 	Animation anim;
-
-	Animation* currentAnimation;
-
-	Animation bullet_U;
-	Animation bullet_D;
-	Animation bullet_L;
-	Animation bullet_R;
-	Animation bullet_U_R;
-	Animation bullet_U_L;
-	Animation bullet_D_R;
-	Animation bullet_D_L;
 
 	// Defines wether the particle is alive or not
 	// Particles will be set to not alive until "spawnTime" is reached
@@ -73,6 +52,8 @@ public:
 
 	// A flag for the particle removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
+
+	int playerDirection;
 };
 
 #endif //__PARTICLE_H__

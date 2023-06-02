@@ -151,8 +151,10 @@ void Enemy_TankBoss::canon() {
     delayCanon--;
     if (delayCanon == 0) {
         // TODO modify shot to be an enemy shot
-        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+        /*
+        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
         shot->collider->AddListener(NULL);
+        */
         App->audio->PlayFx(/*sound effect*/NULL);
         delayCanon = 700;
     }
@@ -176,8 +178,10 @@ void Enemy_TankBoss::shot() {
     delayShoot--;
     if (delayShoot == 0) {
         // TODO modify shot to be an enemy shot
-        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+        /*
+        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
         shot->collider->AddListener(NULL);
+        */
         App->audio->PlayFx(/*sound effect*/NULL);
         delayShoot = 700;
     }
@@ -187,12 +191,56 @@ void Enemy_TankBoss::grenade() {
 
 }
 
-void Enemy_TankBoss::Attack() {
+void Enemy_TankBoss::missileRain() {
+    int numMissiles = rand() % 8 + 3; // Generate a random number between 3 and 10
 
+    delayShoot--;
+    if (delayShoot == 0) {
+        for (int i = 0; i < numMissiles; ++i) {
+            /*
+            Particle* missile = App->particles->AddParticle(App->particles->playerShot, position.x + (rand() % SCREEN_WIDTH), position.y + 10 + (rand() % (SCREEN_WIDTH/2)), 7, Collider::Type::ENEMY_SHOT);
+            missile->collider->AddListener(NULL);
+            missile->speed.y = 1;
+            */
+            App->audio->PlayFx(/*sound effect*/NULL);
+        }
+        delayShoot = 700;
+    }
+}
+
+void Enemy_TankBoss::missileLaunch() {
+    // Get the player position
+    fPoint playerPos = App->player->position;
+
+    // Calculate the direction vector from enemy position to player position
+    fPoint enemyPos = position;
+    fPoint direction = playerPos - enemyPos;
+
+    // Normalize the direction vector
+    float length = sqrtf(direction.x * direction.x + direction.y * direction.y);
+    if (length != 0) {
+        direction.x /= length;
+        direction.y /= length;
+    }
+
+    delayMissile--;
+    if (delayMissile == 0) {
+        // TODO modify shot to be an missile
+        /*
+        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+        shot->collider->AddListener(NULL);
+        */
+        App->audio->PlayFx(/*sound effect*/NULL);
+        delayMissile = 700;
+    }
+}
+
+void Enemy_TankBoss::Attack() {
     canon();
     shot();
-    grenade();
-
+    //grenade();
+    missileRain();
+    missileLaunch();
 }
 
 void Enemy_TankBoss::deathAnimation() {
@@ -204,36 +252,53 @@ void Enemy_TankBoss::deathAnimation() {
 void Enemy_TankBoss::idleAnimation(int direction, int directionBelow) {
     botCurrentAnim = &botAnimMoving;
     switch (direction) {
-    case 1: //UR - Down-Right (60°)
+    case 1: //UR
         topCurrentAnim = &topAnimUpRight;
-        midCurrentAnim = &midAnimDownRight;
         break;
-    case 2: //UL - Down-Left (120°)
+    case 2: //UL
         topCurrentAnim = &topAnimUpLeft;
-        midCurrentAnim = &midAnimDownLeft;
         break;
-    case 3: //DR - Right (180°)
+    case 3: //DR
         topCurrentAnim = &topAnimDownRight;
-        midCurrentAnim = &midAnimRight;
         break;
-    case 4: //DL - Left (0°)
+    case 4: //DL
         topCurrentAnim = &topAnimDownLeft;
-        midCurrentAnim = &midAnimLeft;
         break;
-    case 5: //R - Down-Right-Diagonal (135°)
+    case 5: //R
         topCurrentAnim = &topAnimRight;
-        midCurrentAnim = &midAnimDownRightDiagonal;
         break;
-    case 6: //L - Down-Left-Diagonal (45°)
+    case 6: //L
         topCurrentAnim = &topAnimLeft;
-        midCurrentAnim = &midAnimDownLeftDiagonal;
         break;
-    case 7: //D - Below (90°)
+    case 7: //D
         topCurrentAnim = &topAnimDown;
-        midCurrentAnim = &midAnimDown;
         break;
     case 8: //U
         topCurrentAnim = &topAnimUp;
+        break;
+    }
+
+    switch (directionBelow) {
+    case 9: // Down-Right
+        midCurrentAnim = &midAnimDownRight;
+        break;
+    case 10: // Down-Left
+        midCurrentAnim = &midAnimDownLeft;
+        break;
+    case 3: // Right
+        midCurrentAnim = &midAnimRight;
+        break;
+    case 4: // Left
+        midCurrentAnim = &midAnimLeft;
+        break;
+    case 5: // Down-Right-Diagonal
+        midCurrentAnim = &midAnimDownRightDiagonal;
+        break;
+    case 6: // Down-Left-Diagonal
+        midCurrentAnim = &midAnimDownLeftDiagonal;
+        break;
+    case 7: // Below
+        midCurrentAnim = &midAnimDown;
         break;
     }
 }
@@ -241,36 +306,53 @@ void Enemy_TankBoss::idleAnimation(int direction, int directionBelow) {
 void Enemy_TankBoss::hitAnimation(int direction, int directionBelow) {
     botCurrentAnim = &hitBotAnimMoving;
     switch (direction) {
-    case 1: //UR - Down-Right (60°)
+    case 1: // UR
         topCurrentAnim = &hitTopAnimUpRight;
+        break;
+    case 2: // UL
+        topCurrentAnim = &hitTopAnimUpLeft;
+        break;
+    case 3: // DR
+        topCurrentAnim = &hitTopAnimDownRight;
+        break;
+    case 4: // DL
+        topCurrentAnim = &hitTopAnimDownLeft;
+        break;
+    case 5: // R
+        topCurrentAnim = &hitTopAnimRight;
+        break;
+    case 6: // L
+        topCurrentAnim = &hitTopAnimLeft;
+        break;
+    case 7: // D
+        topCurrentAnim = &hitTopAnimDown;
+        break;
+    case 8: // U
+        topCurrentAnim = &hitTopAnimUp;
+        break;
+    };
+
+    switch (directionBelow) {
+    case 9: // Down-Right
         midCurrentAnim = &hitMidAnimDownRight;
         break;
-    case 2: //UL - Down-Left (120°)
-        topCurrentAnim = &hitTopAnimUpLeft;
+    case 10: // Down-Left
         midCurrentAnim = &hitMidAnimDownLeft;
         break;
-    case 3: //DR - Right (180°)
-        topCurrentAnim = &hitTopAnimDownRight;
+    case 3: // Right
         midCurrentAnim = &hitMidAnimRight;
         break;
-    case 4: //DL - Left (0°)
-        topCurrentAnim = &hitTopAnimDownLeft;
+    case 4: // Left
         midCurrentAnim = &hitMidAnimLeft;
         break;
-    case 5: //R - Down-Right-Diagonal (135°)
-        topCurrentAnim = &hitTopAnimRight;
+    case 5: // Down-Right-Diagonal
         midCurrentAnim = &hitMidAnimDownRightDiagonal;
         break;
-    case 6: //L - Down-Left-Diagonal (45°)
-        topCurrentAnim = &hitTopAnimLeft;
+    case 6: // Down-Left-Diagonal
         midCurrentAnim = &hitMidAnimDownLeftDiagonal;
         break;
-    case 7: //D - Below (90°)
-        topCurrentAnim = &hitTopAnimDown;
+    case 7: // Below
         midCurrentAnim = &hitMidAnimDown;
-        break;
-    case 8: //U
-        topCurrentAnim = &hitTopAnimUp;
         break;
     };
 }
@@ -294,7 +376,7 @@ void Enemy_TankBoss::StateMachine() {
         break;
     case Enemy_State::ATTACK:
         idleAnimation(GetPlayerDirection(), GetPlayerDirectionBelow());
-        //Attack();
+        Attack();
         if (!PlayerIsNear()) {
             state = Enemy_State::IDLE;
             //LOG("state changed to IDLE");

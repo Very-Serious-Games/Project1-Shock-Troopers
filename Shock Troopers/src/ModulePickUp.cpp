@@ -62,6 +62,28 @@ ModulePickUp::~ModulePickUp()
 
 }
 
+bool ModulePickUp::Start()
+{
+	SpawnPickUp({ PickUp_Type::HP, 220, 1800 });
+	return true;
+}
+
+
+Update_Status ModulePickUp::PreUpdate()
+{
+	// Remove all pickUp scheduled for deletion
+	for (uint i = 0; i < MAX_PICKUP; ++i)
+	{
+		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete)
+		{
+			delete pickUp[i];
+			pickUp[i] = nullptr;
+		}
+	}
+
+	return Update_Status::UPDATE_CONTINUE;
+}
+
 Update_Status ModulePickUp::Update()
 {
 	HandlePickUpSpawn();
@@ -82,8 +104,8 @@ Update_Status ModulePickUp::PostUpdate()
 {
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr)
-			pickUp[i]->Draw();
+		//if (pickUp[i] != nullptr)
+			//pickUp[i]->Draw();
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

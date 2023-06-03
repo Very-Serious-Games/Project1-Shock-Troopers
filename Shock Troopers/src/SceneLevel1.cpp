@@ -64,7 +64,7 @@ bool SceneLevel1::Start() {
 	// Add enemies
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 128, 2900);
 	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20);
-	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1355, 70);
+	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1350, 10);
 	App->enemies->AddEnemy(Enemy_Type::TANK, 385, 2100);
 	
 	//TODO spawnear todas las minas

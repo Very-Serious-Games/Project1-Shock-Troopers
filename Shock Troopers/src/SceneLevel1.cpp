@@ -47,6 +47,7 @@ bool SceneLevel1::Start() {
 
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain_full.png");
+	bgSky = App->textures->Load("Assets/Sprites/background/level1/background_sky.png");
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 
 	// Add colliders
@@ -120,7 +121,7 @@ bool SceneLevel1::Start() {
 	
 
 	// Battleship boss
-	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 183, 20);
+	App->enemies->AddEnemy(Enemy_Type::FLYING_BATTLESHIP, 140, 965);
 
 	// Tank miniboss
 	App->enemies->AddEnemy(Enemy_Type::TANK, 1385, 275);// 3rd
@@ -200,6 +201,21 @@ void SceneLevel1::createMargenes() {
 	file.close();
 }
 
+void SceneLevel1::moveSky() {
+
+	int cameraX = App->render->camera.x;
+	int speedX = 1;
+	int maxX = 225;
+
+	cameraX += speedX;
+
+	if (cameraX >= maxX) {
+		cameraX = maxX;
+	}
+
+	App->render->Blit(bgSky, cameraX, 960, NULL);
+}
+
 Update_Status SceneLevel1::Update()
 {
 	return Update_Status::UPDATE_CONTINUE;
@@ -207,6 +223,7 @@ Update_Status SceneLevel1::Update()
 
 Update_Status SceneLevel1::PostUpdate()
 {
+	moveSky();
 	App->render->Blit(bgTexture, 0, 0, NULL);
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -249,6 +266,8 @@ bool SceneLevel1::CleanUp() {
 	// Scene Level 1
 	LOG("Unloading background texture");
 	App->textures->Unload(bgTexture);
+	LOG("Unloading sky background texture");
+	App->textures->Unload(bgSky);
 	LOG("Disabiling sceneLevel_1");
 	App->sceneLevel_1->Disable();
 

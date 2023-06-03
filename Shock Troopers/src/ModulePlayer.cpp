@@ -398,13 +398,14 @@ ModulePlayer::~ModulePlayer() {
 void ModulePlayer::updateHp() {
 		
 	if (!isInvulnerable) {
-		isInvulnerable = true;
+		// TODO revisar esta invulnerabilidad
 		invulnerabilityTimer = 0.0f;
-		hp -= 10;
+		
 	}
 	if (!hitIsInvulnerable) {
 		hitIsInvulnerable = true;
 		hitInvulnerabilityTimer = 0.0f;
+	
 	}
 }
 
@@ -1304,7 +1305,7 @@ void ModulePlayer::stateMachine() {
 
 void ModulePlayer::invulnerability() {
 
-	if (isInvulnerable) {
+	if (isInvulnerable && !hitIsInvulnerable) {
 		// Check if the invulnerability period has ended
 		if (invulnerabilityTimer >= invulnerabilityDuration) {
 			// Make the player vulnerable again
@@ -1465,7 +1466,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		// Ignore collision while invulnerable
 		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !isGodMode) {
 
-			if (hp < 0) {
+			if (hp > 0) {
 				hp -= 10;
 			}
 

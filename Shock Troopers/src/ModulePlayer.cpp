@@ -416,8 +416,8 @@ void ModulePlayer::godMode() {
 
 	// TP player to the flying battleship (for testing purposes)
 	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
-		App->player->position.x = 232;
-		App->player->position.y = 190;
+		App->player->position.x = 200;
+		App->player->position.y = 1365;
 	}
 
 	// TP player to the tank boss (for testing purposes)

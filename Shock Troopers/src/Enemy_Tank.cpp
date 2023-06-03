@@ -42,6 +42,8 @@ Enemy_Tank::Enemy_Tank(int x, int y) : Enemy(x, y) {
 
     collider = App->collisions->AddCollider({ 0, 0, 86, 69 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
+    this->health = 150;
+
 }
 
 void Enemy_Tank::OnCollision(Collider* collider) {

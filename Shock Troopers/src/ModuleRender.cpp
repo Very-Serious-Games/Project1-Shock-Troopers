@@ -60,10 +60,12 @@ Update_Status ModuleRender::Update()
 	int nextCameraY = App->player->position.y - 100;
 	int nextCameraX = App->player->position.x - 120;
 
-	if (nextCameraY <= camera.y) {
-		camera.y = App->player->position.y - 100;
-	}
 	if (App->player->IsEnabled()) {
+
+		if (nextCameraY <= camera.y) {
+			camera.y = App->player->position.y - 100;
+		}
+	
 		if (camera.y <= 980 && camera.x < 1100) {
 			if (nextCameraX > camera.x && leaveZone) {
 				camera.x = nextCameraX;
@@ -71,26 +73,24 @@ Update_Status ModuleRender::Update()
 		} else if (!isInZone2) {
 			camera.x = nextCameraX;
 		}
-	}
 
-
-	if (isInZone) {
-		camera.y = nextCameraY;
-		camera.x = nextCameraX;
-		if (camera.x < minX) {
-			camera.x = minX;
+		if (isInZone) {
+			camera.y = nextCameraY;
+			camera.x = nextCameraX;
+			if (camera.x < minX) {
+				camera.x = minX;
+			}
+			else if (camera.x + camera.w > maxX) {
+				camera.x = maxX - camera.w;
+			}
+			if (camera.y < minY) {
+				camera.y = minY;
+			}
+			else if (camera.y + camera.h > maxY) {
+				camera.y = maxY - camera.h;
+			}
 		}
-		else if (camera.x + camera.w > maxX) {
-			camera.x = maxX - camera.w;
-		}
-		if (camera.y < minY) {
-			camera.y = minY;
-		}
-		else if (camera.y + camera.h > maxY) {
-			camera.y = maxY - camera.h;
-		}
-	}
-
+	} 
 
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
 		camera.y -= cameraSpeed * SCREEN_HEIGHT;
@@ -100,9 +100,9 @@ Update_Status ModuleRender::Update()
 
 	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT) camera.x -= cameraSpeed;
 
-	if (camera.x < 0) camera.x = 0;
+	//if (camera.x < 0) camera.x = 0;
 
-	if (camera.y < 0) camera.y = 0;
+	//if (camera.y < 0) camera.y = 0;
 
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)	camera.x += cameraSpeed;
 

@@ -11,6 +11,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleFonts.h"
+#include "ModuleEnemies.h"
 #include <iostream>
 
 using namespace std;
@@ -43,9 +44,8 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	}
 
 	endStage.PushBack({ 0, 0, 0, 0 });
-	endStage.speed = 1.0f;
+	endStage.speed = 0.5f;
 	endStage.loop = false;
-	//path.PushBack({ 0.0f, 0.0f }, 1000, &endStage);
 	
 	hp100.PushBack({ 2, 2, 7, 131 });
 	hp90.PushBack({ 14, 2, 7, 131 });
@@ -113,10 +113,6 @@ void ModuleUI::updateScore(int points)
 
 bool ModuleUI::Start() {
 
-	//Obtenemos la posicion de la camara
-	x = App->render->camera.x + 2;
-	y = App->render->camera.y + 2;
-
 	// Reset the score
 	score = 0;
 
@@ -153,11 +149,15 @@ bool ModuleUI::Start() {
 	return ret;
 }
 
-Update_Status ModuleUI::Update()
-{
+Update_Status ModuleUI::Update() {
+
 	updateHp();
+
 	startStage.Update();
-	endStage.Update();
+
+	if (App->enemies->winCondition) {
+		endStage.Update();
+	}
 
 	currentAnim->Update();
 
@@ -165,6 +165,10 @@ Update_Status ModuleUI::Update()
 }
 
 Update_Status ModuleUI::PostUpdate() {
+
+	//Obtenemos la posicion de la camara
+	x = App->render->camera.x + 2;
+	y = App->render->camera.y + 2;
 
 	//Mostramos por pantalla la UI
 	App->render->Blit(textureHp, x + 3, y + 40, &currentAnim->GetCurrentFrame());
@@ -175,7 +179,10 @@ Update_Status ModuleUI::PostUpdate() {
 	//Mostramos por pantalla la anim inicial
 	App->render->Blit(textureSstage, x, y, &(startStage.GetCurrentFrame()), 1.0f);
 
-	App->render->Blit(textureSstage, x, y, &(endStage.GetCurrentFrame()), 1.0f);
+	//Mostramos por pantalla la anim final de stage
+	if (App->enemies->winCondition) {
+  		App->render->Blit(textureEstage, x, y, &(endStage.GetCurrentFrame()), 1.0f);
+	}
 
 	//Mostramos por pantalla el score
 	sprintf_s(scoreText, 10, "%08d", score);

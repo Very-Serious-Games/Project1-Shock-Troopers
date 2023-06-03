@@ -855,7 +855,7 @@ void ModulePlayer::stateMachine() {
 
 		setWinAnimations();
 
-		if (winAnim.HasFinished()) {
+		if (winAnim.HasFinished() and App->ui->endStage.HasFinished()) {
 
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 

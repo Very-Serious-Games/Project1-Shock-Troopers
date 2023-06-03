@@ -64,7 +64,7 @@ bool ModuleParticles::Start() {
 
     playerShotUp.anim.loop = true;
     playerShotUp.anim.speed = 0.3;
-    playerShotUp.lifetime = 180; 
+    playerShotUp.lifetime = 180;
 
     playerShotDown.anim.loop = true;
     playerShotDown.anim.speed = 0.3;

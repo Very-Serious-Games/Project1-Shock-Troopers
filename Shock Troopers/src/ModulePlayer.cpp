@@ -397,10 +397,9 @@ ModulePlayer::~ModulePlayer() {
 
 void ModulePlayer::updateHp() {
 		
+
 	if (!isInvulnerable) {
-		isInvulnerable = true;
 		invulnerabilityTimer = 0.0f;
-		hp -= 10;
 	}
 	if (!hitIsInvulnerable) {
 		hitIsInvulnerable = true;
@@ -1293,7 +1292,7 @@ void ModulePlayer::stateMachine() {
 
 void ModulePlayer::invulnerability() {
 
-	if (isInvulnerable) {
+	if (isInvulnerable && !hitIsInvulnerable) {
 		// Check if the invulnerability period has ended
 		if (invulnerabilityTimer >= invulnerabilityDuration) {
 			// Make the player vulnerable again

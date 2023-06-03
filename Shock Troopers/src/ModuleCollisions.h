@@ -51,6 +51,7 @@ private:
 	// If set two false, collider 1 will ignore collider 2
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];
 
+public:
 	// Simple debugging flag to draw all colliders
 	bool debug = false;
 };

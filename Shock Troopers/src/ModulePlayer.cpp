@@ -851,8 +851,9 @@ void ModulePlayer::stateMachine() {
 
 		setSpawnAnimations();
 
-		// Spawn logic
-		// TODO
+		// reset camera position
+		App->render->camera.x = 66;
+		App->render->camera.y = 2800;
 
 		// enter idle state
 		currentState = PlayerState::Idle;
@@ -864,7 +865,7 @@ void ModulePlayer::stateMachine() {
 		setDeathAnimations();
 
 		if (deathAnim.HasFinished()) {
-			// TODO Arreglar para que haga la transición entre escenas correctamente
+			
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 		}
 

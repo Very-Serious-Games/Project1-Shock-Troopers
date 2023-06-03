@@ -114,8 +114,11 @@ bool SceneMenu::Start()
 	return ret;
 }
 
-Update_Status SceneMenu::Update()
-{
+Update_Status SceneMenu::Update() {
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	selectionAnimation.Update();
 	GamePad& pad = App->input->pads[0];
 

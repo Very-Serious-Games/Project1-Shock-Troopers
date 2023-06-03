@@ -137,6 +137,9 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 
 		if (c1->rect.y < c2->rect.y + c2->rect.h && !isInZone) {
 			camera.y--;
+			if (App->player->colliderD->rect.y > cameraDownCollider->rect.y) {
+				App->player->position.y--;
+			}
 		}
 
 		if (camera.y + camera.h <= c2->rect.y + c2->rect.h || camera.y == c2->rect.y) {
@@ -157,6 +160,9 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 		isInZone2 = true;
 		if (c1->rect.x + c1->rect.w > c2->rect.x && !isInZone) {
 			camera.x++;
+			if (App->player->colliderL->rect.x < cameraLeftCollider->rect.x) {
+				App->player->position.x++;
+			}
 		}
 
 		if (camera.x >= c2->rect.x || camera.x == c2->rect.x) {

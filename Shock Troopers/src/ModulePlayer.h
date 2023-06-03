@@ -102,9 +102,12 @@ public:
 	int shootDirection;
 
 	iPoint diferencia;
+	iPoint granadeLastPosition;
 
 	bool isRolling = false;
 	bool lockControls = false;
+
+	uint* liveTime = nullptr;
 
 	bool isInvulnerable = false;
 	float invulnerabilityTimer = 0.0f;

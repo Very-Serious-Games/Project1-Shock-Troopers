@@ -51,8 +51,10 @@ public:
 
 	Animation startStage;
 	Animation endStage;
-	Path path;
+	
 public:
+
+	int x, y;
 
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;

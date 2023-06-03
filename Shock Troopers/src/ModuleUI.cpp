@@ -30,7 +30,6 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	startStage.PushBack({ 0, 0, 0, 0 });
 	startStage.speed = 0.8f;
 	startStage.loop = false;
-	path.PushBack({ 0.0f, 0.0f }, 1000, &startStage);
 
 	//stage clear anim below
 	
@@ -114,8 +113,17 @@ void ModuleUI::updateScore(int points)
 
 bool ModuleUI::Start() {
 
+	//Obtenemos la posicion de la camara
+	x = App->render->camera.x + 2;
+	y = App->render->camera.y + 2;
+
 	// Reset the score
 	score = 0;
+
+	// Reset animations
+
+	startStage.Reset();
+	endStage.Reset();
 
 	LOG("Loading UI textures");
 
@@ -150,20 +158,13 @@ Update_Status ModuleUI::Update()
 	updateHp();
 	startStage.Update();
 	endStage.Update();
-	path.Update();
 
 	currentAnim->Update();
 
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-Update_Status ModuleUI::PostUpdate()
-{
-	int x, y;
-
-	//Obtenemos la posicion de la camara
-	x = App->render->camera.x + 2;
-	y = App->render->camera.y + 2;
+Update_Status ModuleUI::PostUpdate() {
 
 	//Mostramos por pantalla la UI
 	App->render->Blit(textureHp, x + 3, y + 40, &currentAnim->GetCurrentFrame());
@@ -172,7 +173,9 @@ Update_Status ModuleUI::PostUpdate()
 	App->render->Blit(timerTextTexture, x + 132, y + 2, NULL);
 
 	//Mostramos por pantalla la anim inicial
-	App->render->Blit(textureSstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);
+	App->render->Blit(textureSstage, x, y, &(startStage.GetCurrentFrame()), 1.0f);
+
+	App->render->Blit(textureSstage, x, y, &(endStage.GetCurrentFrame()), 1.0f);
 
 	//Mostramos por pantalla el score
 	sprintf_s(scoreText, 10, "%08d", score);

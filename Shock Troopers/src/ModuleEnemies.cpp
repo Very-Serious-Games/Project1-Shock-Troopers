@@ -32,8 +32,11 @@ ModuleEnemies::~ModuleEnemies()
 
 }
 
-bool ModuleEnemies::Start()
-{
+bool ModuleEnemies::Start() {
+
+	// Reset win condition
+	winCondition = false;
+
 	// TODO cargar texturas y fx enemigos
 	textureTankBoss = App->textures->Load("Assets/Sprites/characters/tank_boss.png");
 	textureTank = App->textures->Load("Assets/Sprites/characters/tank_spritesheet.png");

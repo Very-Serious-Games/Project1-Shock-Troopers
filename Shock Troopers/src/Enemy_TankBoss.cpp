@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 
 Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
 
@@ -510,6 +511,7 @@ void Enemy_TankBoss::StateMachine() {
     case Enemy_State::DEATH:
         deathAnimation();
         if (deathAnimDelay == 0) {
+            App->enemies->winCondition = true;
             pendingToDelete = true;
             LOG("pendingToDelete enemy");
         }

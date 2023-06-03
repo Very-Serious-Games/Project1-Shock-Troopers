@@ -14,6 +14,7 @@
 #include <SDL/include/SDL_timer.h>
 #include "ModuleUI.h"
 #include "Pickup.h"
+#include "ModuleEnemies.h"
 
 using namespace std;
 
@@ -708,7 +709,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Death;
 		}
 
-		if (false/*win condition*/) {
+		if (App->enemies->winCondition) {
 			currentState = PlayerState::Win;
 		}
 
@@ -746,6 +747,10 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Roll;
 		}
 
+		if (App->enemies->winCondition) {
+			currentState = PlayerState::Win;
+		}
+
 		invulnerability();
 		break;
 
@@ -773,6 +778,10 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Idle;
 		}
 
+		if (App->enemies->winCondition) {
+			currentState = PlayerState::Win;
+		}
+
 		invulnerability();
 		break;
 
@@ -796,6 +805,10 @@ void ModulePlayer::stateMachine() {
 
 		if (!isShooting()) {
 			currentState = PlayerState::Idle;
+		}
+
+		if (App->enemies->winCondition) {
+			currentState = PlayerState::Win;
 		}
 
 		invulnerability();
@@ -829,7 +842,7 @@ void ModulePlayer::stateMachine() {
 
 		roll();
 
-		if (!isRoll() /* and currentAnimationLegs->HasFinished()*/) {
+		if (!isRoll()) {
 			currentAnimationLegs->Reset();
 			lockControls = false;
 			isRolling = false;
@@ -842,8 +855,11 @@ void ModulePlayer::stateMachine() {
 
 		setWinAnimations();
 
-		// Win logic
-		// TODO
+		if (winAnim.HasFinished()) {
+
+			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
+
+		}
 
 		break;
 
@@ -921,7 +937,11 @@ bool ModulePlayer::Start() {
 	// start and reset some variables
 	lastDirection = 8;
 	hp = 100;
+
 	currentState = PlayerState::Spawn;
+
+	App->render->camera.x = 66;
+	App->render->camera.y = 2800;
 
 	//Setting up the player animations
 	// Empty animation
@@ -1237,6 +1257,8 @@ bool ModulePlayer::Start() {
 	winAnim.PushBack({ 756, 786, 54, 52 });
 	winAnim.PushBack({ 810, 786, 54, 52 });
 	winAnim.PushBack({ 864, 786, 54, 52 });
+
+	winAnim.loop = false;
 
 	idleAnimUpTorso.speed = animSpeed;
 	idleAnimDownTorso.speed = animSpeed;

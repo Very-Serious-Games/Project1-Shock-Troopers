@@ -95,6 +95,8 @@ public:
 	SDL_Texture* textureLandmines = nullptr;
 	SDL_Texture* textureSandbags = nullptr;
 	SDL_Texture* textureBarrel = nullptr;
+
+	bool winCondition = false;
 };
 
 #endif // __MODULE_ENEMIES_H__

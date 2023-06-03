@@ -98,8 +98,11 @@ SceneMenu::~SceneMenu()
 }
 
 // Load assets
-bool SceneMenu::Start()
-{
+bool SceneMenu::Start() {
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	LOG("Loading menu assets");
 
 	bool ret = true;
@@ -108,14 +111,14 @@ bool SceneMenu::Start()
 
 	sprites = App->textures->Load("Assets/Sprites/ui/characterSelection.png");
 
-	App->render->camera.x = 0;
-	App->render->camera.y = 0;
-
 	return ret;
 }
 
-Update_Status SceneMenu::Update()
-{
+Update_Status SceneMenu::Update() {
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	selectionAnimation.Update();
 	GamePad& pad = App->input->pads[0];
 

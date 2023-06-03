@@ -36,8 +36,9 @@ public:
 
 	void updateHp();
 
-	// Font score index
-	uint score = 010;
+	// Font and text Score
+	uint score = 000;
+	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 	char scoreText2[1000] = { "F1  - Enable/Disable Debug Mode \n F2 - God Mode\n F3 - Take Damage\n F4 - Heal\n F5 - Instant Death\n F6 - Instant Win\n F7 - Teleport MiniBoss\n F8 - Teleport FinalBoss\n F9 - Spawn Score PickUp\n F10 - Spawn No Damage P�ckUp\n F11 - Spawn Heal PickUp\n " };
 
@@ -51,15 +52,17 @@ public:
 
 	Animation startStage;
 	Animation endStage;
-	Path path;
+	Animation gameOver;
+	
 public:
 
-	int scoreFont = -1;
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;
+	SDL_Texture* timerTextTexture = nullptr;
 	SDL_Texture* textureSstage = nullptr;
 	SDL_Texture* textureEstage = nullptr;
+	SDL_Texture* textureGameOver = nullptr;
 
 	Animation* currentAnim = nullptr;
 

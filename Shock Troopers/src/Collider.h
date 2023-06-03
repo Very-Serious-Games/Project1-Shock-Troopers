@@ -32,7 +32,6 @@ struct Collider
 		MUZZLE,
 		LANDMINE,
 		BRIDGE,
-		EXPLOSION,
 
 		MAX
 	};

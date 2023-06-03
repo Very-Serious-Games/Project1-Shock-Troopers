@@ -31,13 +31,13 @@ void PickUp::Update()
 
 void PickUp::Draw()
 {
-	LOG("Drawing Pickup");
+	
 	App->render->Blit(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
 }
 
 void PickUp::DrawColider(PickUpType type)
 {
-	LOG("Drawing Colider");
+	
 
 	switch (type)
 	{

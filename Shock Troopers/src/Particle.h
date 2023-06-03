@@ -23,11 +23,8 @@ public:
 	// Returns false when the particle reaches its lifetime
 	bool Update();
 
-
 	// Sets flag for deletion and for the collider aswell
 	void SetToDelete();
-
-	int parabole(int x, int direction_x);
 
 public:
 	// Defines the position in the screen
@@ -57,9 +54,6 @@ public:
 	bool pendingToDelete = false;
 
 	int playerDirection;
-
-	bool granada = false;
-	int inicio = 0;
 };
 
 #endif //__PARTICLE_H__

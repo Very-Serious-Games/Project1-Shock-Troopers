@@ -69,9 +69,9 @@ public:
 	virtual void SetToDelete();
 
 	// Check if the player is near
-	bool PlayerIsNear();
+	virtual bool PlayerIsNear();
 
-	bool PlayerIsAttackRange();
+	virtual bool PlayerIsAttackRange();
 
 	// Check if the player is mele
 	bool PlayerIsMele();
@@ -101,9 +101,10 @@ public:
 	int health = 100;
 
 	int delay = 15;
-	int delayShoot = 700;
+	int delayShoot = 100;
 	int delayCanon = 700;
 	int delayMissile = 700;
+	int delayMissileRain = 700;
 	int delayKnife = 500;
 	int deathAnimDelay = 50;
 
@@ -125,6 +126,7 @@ protected:
 
 	// The enemy's collider
 	Collider* collider = nullptr;
+	Collider* colliderBarrelGroup = nullptr;
 
 	// Original spawn position. Stored for movement calculations
 	fPoint spawnPos;

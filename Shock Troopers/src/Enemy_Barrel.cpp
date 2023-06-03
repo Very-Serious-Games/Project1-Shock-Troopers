@@ -10,21 +10,32 @@ Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
     idleAnim.PushBack({ 0, 0, 63, 124 });
 
     int disX = 0;
-    int cont = 5;
-    for (int i = 0; i < 35; ++i)
+    int con = 5;
+    for (int i = 0; i < 24; i++)
     {
-        deathAnim.PushBack({ disX, 0, 63, 124 });
         deathAnim.PushBack({ disX, 0, 63, 124 });
         disX += 63;
     }
-    deathAnim.speed = 0.3f;
+    disX = 1071;
+    for (int i = 0; i < 6; i++)
+    {
+        deathAnim.PushBack({ disX, 0, 63, 124 });
+        disX += 63;
+        if (con != 0 and i == 6)
+        {
+            disX = 1071;
+            con--;
+            i = 0;
+        }
+    }
+    deathAnim.speed = 0.2f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
     // TODO cambiar tama�o collider//
-    collider = App->collisions->AddCollider({ 0, 0, 40, 117 }, Collider::Type::OBJECT, (Module*)App->enemies);
-
+    collider = App->collisions->AddCollider({ 0, 0, 19, 32 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    collider->SetPos(position.x+21, position.y+85);
     health = 1;
 }
 

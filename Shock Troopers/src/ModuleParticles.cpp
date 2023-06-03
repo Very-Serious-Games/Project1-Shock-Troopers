@@ -64,7 +64,7 @@ bool ModuleParticles::Start() {
 
     playerShotUp.anim.loop = true;
     playerShotUp.anim.speed = 0.3;
-    playerShotUp.lifetime = 180; 
+    playerShotUp.lifetime = 180;
 
     playerShotDown.anim.loop = true;
     playerShotDown.anim.speed = 0.3;
@@ -229,14 +229,45 @@ bool ModuleParticles::Start() {
     tankShotDownLeft.lifetime = 180;
 
     // Mini Tank shots
-    miniTankShotUp.anim.PushBack(           { 48*6, 110, 48, 48 }); // TODO put coords 
-    miniTankShotDown.anim.PushBack(         { 48*7, 110, 48, 48 }); // TODO put coords
-    miniTankShotLeft.anim.PushBack(         { 48*1, 110, 48, 48 }); // TODO put coords
-    miniTankShotRight.anim.PushBack(        { 48*0, 110, 48, 48 }); // TODO put coords
-    miniTankShotUpRight.anim.PushBack(      { 48*4, 110, 48, 48 }); // TODO put coords
-    miniTankShotUpLeft.anim.PushBack(       { 48*3, 110, 48, 48 }); // TODO put coords
-    miniTankShotDownRight.anim.PushBack(    { 48*2, 110, 48, 48 }); // TODO put coords
-    miniTankShotDownLeft.anim.PushBack(     { 48*5, 110, 48, 48 }); // TODO put coords
+    miniTankShotUp.anim.PushBack(           { 32*1, 535, 32, 32 });  
+    miniTankShotUp.anim.PushBack(           { 32*2, 535, 32, 32 });  
+    miniTankShotUp.anim.PushBack(           { 32*3, 535, 32, 32 });  
+    miniTankShotUp.anim.PushBack(           { 32*4, 535, 32, 32 });  
+
+    miniTankShotDown.anim.PushBack(         { 32*1, 567, 32, 32 }); 
+    miniTankShotDown.anim.PushBack(         { 32*2, 567, 32, 32 }); 
+    miniTankShotDown.anim.PushBack(         { 32*3, 567, 32, 32 }); 
+    miniTankShotDown.anim.PushBack(         { 32*4, 567, 32, 32 }); 
+    
+    miniTankShotLeft.anim.PushBack(         { 32*1, 631, 32, 32 }); 
+    miniTankShotLeft.anim.PushBack(         { 32*2, 631, 32, 32 }); 
+    miniTankShotLeft.anim.PushBack(         { 32*3, 631, 32, 32 }); 
+    miniTankShotLeft.anim.PushBack(         { 32*4, 631, 32, 32 }); 
+
+    miniTankShotRight.anim.PushBack(        { 32*1, 599, 32, 32 }); 
+    miniTankShotRight.anim.PushBack(        { 32*2, 599, 32, 32 }); 
+    miniTankShotRight.anim.PushBack(        { 32*3, 599, 32, 32 }); 
+    miniTankShotRight.anim.PushBack(        { 32*4, 599, 32, 32 }); 
+
+    miniTankShotUpRight.anim.PushBack(      { 32*1, 695, 32, 32 }); 
+    miniTankShotUpRight.anim.PushBack(      { 32*2, 695, 32, 32 }); 
+    miniTankShotUpRight.anim.PushBack(      { 32*3, 695, 32, 32 }); 
+    miniTankShotUpRight.anim.PushBack(      { 32*4, 695, 32, 32 }); 
+
+    miniTankShotUpLeft.anim.PushBack(       { 32*1, 663, 32, 32 }); 
+    miniTankShotUpLeft.anim.PushBack(       { 32*2, 663, 32, 32 }); 
+    miniTankShotUpLeft.anim.PushBack(       { 32*3, 663, 32, 32 }); 
+    miniTankShotUpLeft.anim.PushBack(       { 32*4, 663, 32, 32 }); 
+
+    miniTankShotDownRight.anim.PushBack(    { 32*1, 759, 32, 32 }); 
+    miniTankShotDownRight.anim.PushBack(    { 32*2, 759, 32, 32 }); 
+    miniTankShotDownRight.anim.PushBack(    { 32*3, 759, 32, 32 }); 
+    miniTankShotDownRight.anim.PushBack(    { 32*4, 759, 32, 32 }); 
+
+    miniTankShotDownLeft.anim.PushBack(     { 32*1, 727, 32, 32 }); 
+    miniTankShotDownLeft.anim.PushBack(     { 32*2, 727, 32, 32 }); 
+    miniTankShotDownLeft.anim.PushBack(     { 32*3, 727, 32, 32 }); 
+    miniTankShotDownLeft.anim.PushBack(     { 32*4, 727, 32, 32 }); 
 
     miniTankShotUp.anim.loop = true;
     miniTankShotUp.anim.speed = 0.3;
@@ -379,14 +410,45 @@ bool ModuleParticles::Start() {
     flyingBattleshipMuzzle.anim.speed = 0.3;
 
     // Muzzle Mini Tank
-    miniTankMuzzleDown.anim.PushBack(       { 15*0,  0, 15, 15 }); // TODO put coords
-    miniTankMuzzleUp.anim.PushBack(         { 15*0,  0, 15, 15 }); // TODO put coords
-    miniTankMuzzleLeft.anim.PushBack(       { 15*0,  0, 15, 15 }); // TODO put coords
-    miniTankMuzzleRight.anim.PushBack(      { 15*0,  0, 15, 15 }); // TODO put coords
-    miniTankMuzzleDownLeft.anim.PushBack(   { 15*0,  0, 15, 15 }); // TODO put coords
-    miniTankMuzzleDownRight.anim.PushBack(  { 15*0,  0, 15, 15 }); // TODO put coords
-    miniTankMuzzleUpLeft.anim.PushBack(     { 15*0,  0, 15, 15 }); // TODO put coords
-    miniTankMuzzleUpRight.anim.PushBack(    { 15*0,  0, 15, 15 }); // TODO put coords
+    miniTankMuzzleDown.anim.PushBack(       { 32*1,  790, 32, 32 }); 
+    miniTankMuzzleDown.anim.PushBack(       { 32*2,  790, 32, 32 }); 
+    miniTankMuzzleDown.anim.PushBack(       { 32*3,  790, 32, 32 }); 
+    miniTankMuzzleDown.anim.PushBack(       { 32*4,  790, 32, 32 }); 
+
+    miniTankMuzzleUp.anim.PushBack(         { 32*1, 1014, 32, 32 }); 
+    miniTankMuzzleUp.anim.PushBack(         { 32*2, 1014, 32, 32 }); 
+    miniTankMuzzleUp.anim.PushBack(         { 32*3, 1014, 32, 32 }); 
+    miniTankMuzzleUp.anim.PushBack(         { 32*4, 1014, 32, 32 }); 
+
+    miniTankMuzzleLeft.anim.PushBack(       { 32*1,  886, 32, 32 }); 
+    miniTankMuzzleLeft.anim.PushBack(       { 32*2,  886, 32, 32 }); 
+    miniTankMuzzleLeft.anim.PushBack(       { 32*3,  886, 32, 32 }); 
+    miniTankMuzzleLeft.anim.PushBack(       { 32*4,  886, 32, 32 }); 
+
+    miniTankMuzzleRight.anim.PushBack(      { 32*1,  918, 32, 32 }); 
+    miniTankMuzzleRight.anim.PushBack(      { 32*2,  918, 32, 32 }); 
+    miniTankMuzzleRight.anim.PushBack(      { 32*3,  918, 32, 32 }); 
+    miniTankMuzzleRight.anim.PushBack(      { 32*4,  918, 32, 32 }); 
+
+    miniTankMuzzleDownLeft.anim.PushBack(   { 32*1,  822, 32, 32 }); 
+    miniTankMuzzleDownLeft.anim.PushBack(   { 32*2,  822, 32, 32 }); 
+    miniTankMuzzleDownLeft.anim.PushBack(   { 32*3,  822, 32, 32 }); 
+    miniTankMuzzleDownLeft.anim.PushBack(   { 32*4,  822, 32, 32 }); 
+
+    miniTankMuzzleDownRight.anim.PushBack(  { 32*1,  854, 32, 32 }); 
+    miniTankMuzzleDownRight.anim.PushBack(  { 32*2,  854, 32, 32 }); 
+    miniTankMuzzleDownRight.anim.PushBack(  { 32*3,  854, 32, 32 }); 
+    miniTankMuzzleDownRight.anim.PushBack(  { 32*4,  854, 32, 32 }); 
+
+    miniTankMuzzleUpLeft.anim.PushBack(     { 32*1,  982, 32, 32 }); 
+    miniTankMuzzleUpLeft.anim.PushBack(     { 32*2,  982, 32, 32 }); 
+    miniTankMuzzleUpLeft.anim.PushBack(     { 32*3,  982, 32, 32 }); 
+    miniTankMuzzleUpLeft.anim.PushBack(     { 32*4,  982, 32, 32 }); 
+
+    miniTankMuzzleUpRight.anim.PushBack(    { 32*1,  950, 32, 32 }); 
+    miniTankMuzzleUpRight.anim.PushBack(    { 32*2,  950, 32, 32 }); 
+    miniTankMuzzleUpRight.anim.PushBack(    { 32*3,  950, 32, 32 }); 
+    miniTankMuzzleUpRight.anim.PushBack(    { 32*4,  950, 32, 32 }); 
 
     miniTankMuzzleDown.anim.loop = false;
     miniTankMuzzleDown.anim.speed = 0.3;
@@ -411,6 +473,14 @@ bool ModuleParticles::Start() {
 
     miniTankMuzzleUpRight.anim.loop = false;
     miniTankMuzzleUpRight.anim.speed = 0.3;
+    
+    // Landmine Explosion
+    for (int i = 0; i < 29; i++)
+    {
+        landmineExplosion.anim.PushBack({ (66 * i)-i, 260, 66, 65 });
+        }
+    landmineExplosion.anim.loop = false;
+    landmineExplosion.anim.speed = 0.3;
 
     return true;
 }
@@ -514,7 +584,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
             switch (playerDirection)
             {
             case 1: // Up-Right
-                newParticle->speed.x = 5;   // Set appropriate values for x and y based on the direction
+                newParticle->speed.x = 5;
                 newParticle->speed.y = -5;
                 break;
             case 2: // Up-Left
@@ -522,12 +592,12 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
                 newParticle->speed.y = -5;
                 break;
             case 3: // Down-Right
-                newParticle->speed.x = 5;
-                newParticle->speed.y = 5;
+                newParticle->speed.x = 4;
+                newParticle->speed.y = 6;
                 break;
             case 4: // Down-Left
-                newParticle->speed.x = -5;
-                newParticle->speed.y = 5;
+                newParticle->speed.x = -4;
+                newParticle->speed.y = 6;
                 break;
             case 5: // Right
                 newParticle->speed.x = 5;
@@ -544,6 +614,14 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
             case 8: // Up
                 newParticle->speed.x = 0;
                 newParticle->speed.y = -5;
+                break;
+            case 9: // Down-Right
+                newParticle->speed.x = 3;
+                newParticle->speed.y = 7;
+                break;
+            case 10: // Down-Left
+                newParticle->speed.x = -3;
+                newParticle->speed.y = 7;
                 break;
             default: // Invalid direction
                 newParticle->speed.SetToZero();

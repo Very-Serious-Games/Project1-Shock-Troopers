@@ -16,6 +16,8 @@
 #include "Enemy_Landmine.h"
 #include "Enemy_Sandbag.h"
 #include "Enemy_Barrel.h"
+#include "Enemy_BarrelGroup.h"
+#include "Enemy_Car.h"
 
 #define SPAWN_MARGIN 5000
 
@@ -32,18 +34,23 @@ ModuleEnemies::~ModuleEnemies()
 
 }
 
-bool ModuleEnemies::Start()
-{
+bool ModuleEnemies::Start() {
+
+	// Reset win condition
+	winCondition = false;
+
 	// TODO cargar texturas y fx enemigos
 	textureTankBoss = App->textures->Load("Assets/Sprites/characters/tank_boss.png");
 	textureTank = App->textures->Load("Assets/Sprites/characters/tank_spritesheet.png");
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
 	textureInfantrySoldier = App->textures->Load("Assets/Sprites/characters/Soldiers-Infantry.png");
-	textureCrate = App->textures->Load("Assets/Sprites/characters/crates.png");
-	textureLandmines = App->textures->Load("Assets/Sprites/characters/landmine.png");
+	textureCrate = App->textures->Load("Assets/Sprites/background/level1/crates.png");
+	textureLandmines = App->textures->Load("Assets/Sprites/background/level1/landmine.png");
 	textureBridge = App->textures->Load("Assets/Sprites/background/level1/stone-bridge.png");
 	textureSandbags = App->textures->Load("Assets/Sprites/background/level1/sandbags.png");
 	textureBarrel = App->textures->Load("Assets/Sprites/background/level1/barrel.png");
+	textureBarrelGroup = App->textures->Load("Assets/Sprites/background/level1/barrelGroup.png");
+	textureCar = App->textures->Load("Assets/Sprites/background/level1/car.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	return true;
@@ -74,7 +81,6 @@ Update_Status ModuleEnemies::Update()
 		if(enemies[i] != nullptr)
 			enemies[i]->Update();
 	}
-
 	HandleEnemiesDespawn();
 
 	return Update_Status::UPDATE_CONTINUE;
@@ -207,18 +213,28 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					break;
 				case Enemy_Type::SANDBAG:
 					enemies[i] = new Enemy_Sandbag(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureSandbags;
 					break;
 				case Enemy_Type::BARREL:
 					enemies[i] = new Enemy_Barrel(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureBarrel;
 					break;
 				case Enemy_Type::LANDMINE:
 					enemies[i] = new Enemy_Landmine(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN; // TODO crear funcion para cambiar estado de los enemigos
+					enemies[i]->state = Enemy_State::SPAWN;
 					enemies[i]->texture = textureLandmines;
+					break;
+				case Enemy_Type::BARRELGROUP:
+					enemies[i] = new Enemy_BarrelGroup(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i]->texture = textureBarrelGroup;
+					break;
+				case Enemy_Type::CAR:
+					enemies[i] = new Enemy_Car(info.x, info.y);
+					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i]->texture = textureCar;
 					break;
 			}
 			enemies[i]->destroyedFx = enemyDestroyedFx;

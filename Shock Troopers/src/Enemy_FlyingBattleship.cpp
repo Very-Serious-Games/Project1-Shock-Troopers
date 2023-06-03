@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "Particle.h"
+#include "ModuleRender.h"
 
 Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 	
@@ -136,6 +137,7 @@ void Enemy_FlyingBattleship::StateMachine() {
 
         if (deathAnimDelay == 0) {
             pendingToDelete = true;
+            App->render->leaveZone = true;
             LOG("pendingToDelete enemy");
         }
 

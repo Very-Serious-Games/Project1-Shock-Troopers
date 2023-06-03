@@ -30,8 +30,12 @@ void Enemy::Update() {
 	if (currentAnim != nullptr)
 		currentAnim->Update();
 
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+    if (collider != nullptr) {
+        if (collider->type != Collider::Type::OBJECT)
+        {
+            collider->SetPos(position.x, position.y);
+        }
+    }
 
     StateMachine();
 }
@@ -103,17 +107,17 @@ int Enemy::GetPlayerDirectionBelow() {
         float angle = atan2f(direction.y, direction.x) * 180.0f / M_PI;
 
         if (angle > 120 && angle <= 135) {
-            playerDirection = 6; // Down-Left-Diagonal 
+            playerDirection = 4; // Down-Left-Diagonal 
         } else if (angle >= 30 && angle < 40) {
-            playerDirection = 5; // Down-Right-Diagonal
+            playerDirection = 3; // Down-Right-Diagonal
         } else if (angle < 65 && angle >= 40) {
             playerDirection = 9; // Down-Right
         } else if (angle > 105 && angle <= 120) {
             playerDirection = 10; // Down-Left
         } else if (angle > 135 || angle < -135) {
-            playerDirection = 4; // Left
+            playerDirection = 6; // Left
         } else if (angle < 30 && angle > -30) {
-            playerDirection = 3; // Right
+            playerDirection = 5; // Right
         } else if (angle >= 65 && angle <= 105) {
             playerDirection = 7; // Below
         }

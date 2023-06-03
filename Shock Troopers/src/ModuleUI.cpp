@@ -58,6 +58,22 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	hp20.PushBack({ 98, 2, 7, 131 });
 	hp10.PushBack({ 110, 2, 7, 131 });
 	hp0.PushBack({ 122, 2, 7, 131 });
+
+	//iterate the start stage animation, that has 48 frames per row and 8 rows
+	for (int i = 0; i < 20; i++) {
+		gameOver.PushBack({ 0,0,0,0 });
+	}
+	for (int row = 0; row < 48; row++) {
+		for (int col = 0; col < 8; col++) {
+			int frameX = col * SCREEN_WIDTH;
+			int frameY = row * SCREEN_HEIGHT;
+			gameOver.PushBack({ frameX, frameY, SCREEN_WIDTH, SCREEN_HEIGHT });
+		}
+	}
+
+	gameOver.loop = false;
+	gameOver.speed = 1.0f;
+
 }
 
 ModuleUI::~ModuleUI()
@@ -120,6 +136,7 @@ bool ModuleUI::Start() {
 
 	startStage.Reset();
 	endStage.Reset();
+	gameOver.Reset();
 
 	LOG("Loading UI textures");
 
@@ -136,6 +153,7 @@ bool ModuleUI::Start() {
 	textureEstage = App->textures->Load("Assets/sprites/ui/stage-clear.png");
 	textureHp = App->textures->Load("Assets/sprites/ui/hp_bar.png");
 	timerTextTexture = App->textures->Load("Assets/Fonts/TIME_text.png");
+	textureGameOver = App->textures->Load("Assets/sprites/ui/game_over.png");
 
 	// Starting font points
 	char lookupTable[] = { "0123456789:;(=)? abcdefghijklmnopqrstuvwxyz@!.-." };
@@ -157,6 +175,10 @@ Update_Status ModuleUI::Update() {
 
 	if (App->enemies->winCondition) {
 		endStage.Update();
+	}
+
+	if (App->player->deathAnim.HasFinished()) {
+		gameOver.Update();
 	}
 
 	currentAnim->Update();
@@ -182,6 +204,10 @@ Update_Status ModuleUI::PostUpdate() {
 	//Mostramos por pantalla la anim final de stage
 	if (App->enemies->winCondition) {
   		App->render->Blit(textureEstage, x, y, &(endStage.GetCurrentFrame()), 1.0f);
+	}
+
+	if (App->player->deathAnim.HasFinished()) {
+		App->render->Blit(textureGameOver, x-2, y-2, &(gameOver.GetCurrentFrame()), 1.0f);
 	}
 
 	//Mostramos por pantalla el score

@@ -51,6 +51,7 @@ public:
 
 	Animation startStage;
 	Animation endStage;
+	Animation gameOver;
 	
 public:
 
@@ -62,6 +63,7 @@ public:
 	SDL_Texture* timerTextTexture = nullptr;
 	SDL_Texture* textureSstage = nullptr;
 	SDL_Texture* textureEstage = nullptr;
+	SDL_Texture* textureGameOver = nullptr;
 
 	Animation* currentAnim = nullptr;
 

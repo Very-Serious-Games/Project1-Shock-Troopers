@@ -104,6 +104,8 @@ Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
     //path.PushBack({0,0}, 200, &botAnimMoving);
     //path.PushBack({0,-100}, 200, &botAnimMoving);
 
+    this->health = 2000;
+
 }
 
 void Enemy_TankBoss::Update() {
@@ -457,16 +459,16 @@ void Enemy_TankBoss::hitAnimation(int direction, int directionBelow) {
     case 10: // Down-Left
         midCurrentAnim = &hitMidAnimDownLeft;
         break;
-    case 3: // Right
+    case 5: // Right
         midCurrentAnim = &hitMidAnimRight;
         break;
-    case 4: // Left
+    case 6: // Left
         midCurrentAnim = &hitMidAnimLeft;
         break;
-    case 5: // Down-Right-Diagonal
+    case 3: // Down-Right-Diagonal
         midCurrentAnim = &hitMidAnimDownRightDiagonal;
         break;
-    case 6: // Down-Left-Diagonal
+    case 4: // Down-Left-Diagonal
         midCurrentAnim = &hitMidAnimDownLeftDiagonal;
         break;
     case 7: // Below

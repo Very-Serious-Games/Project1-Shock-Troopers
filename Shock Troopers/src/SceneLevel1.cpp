@@ -239,6 +239,10 @@ bool SceneLevel1::CleanUp() {
 	App->textures->Unload(App->enemies->textureTank);
 	LOG("Unloading tank boss texture");
 	App->textures->Unload(App->enemies->textureTankBoss);
+	LOG("Unloading car texture");
+	App->textures->Unload(App->enemies->textureCar);
+	LOG("Unloading group barrel texture");
+	App->textures->Unload(App->enemies->textureBarrelGroup);
 	LOG("Disabiling enemies");
 	App->enemies->Disable();
 
@@ -264,6 +268,7 @@ bool SceneLevel1::CleanUp() {
 	App->textures->Unload(App->ui->textureP1);
 	App->textures->Unload(App->ui->textureSstage);
 	App->textures->Unload(App->ui->textureWeapon);
+	App->textures->Unload(App->ui->textureGameOver);
 	LOG("Disabiling ui");
 	App->ui->Disable();
 

@@ -222,8 +222,6 @@ Update_Status ModuleUI::PostUpdate() {
 	// Mostramos por pantalla el timer
 	sprintf_s(timerCounterText, 10, "%3d", timerCounter);
 	App->fonts->BlitText(137.5, 15, timerFont, timerCounterText);
-	App->fonts->BlitText(20, 3, scoreFont, scoreText);
-	sprintf_s(scoreText, 10, "%7d", score);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

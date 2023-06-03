@@ -54,11 +54,12 @@ public:
 	Path path;
 public:
 
-	int scoreFont = -1;
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;
 	SDL_Texture* timerTextTexture = nullptr;
+	SDL_Texture* textureSstage = nullptr;
+	SDL_Texture* textureEstage = nullptr;
 
 	Animation* currentAnim = nullptr;
 

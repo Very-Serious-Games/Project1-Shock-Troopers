@@ -414,32 +414,14 @@ void ModulePlayer::godMode() {
 		isGodMode = !isGodMode;
 	}
 
-	// TP player to the flying battleship (for testing purposes)
-	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
-		App->player->position.x = 180;
-		App->player->position.y = 1400;
-		App->render->camera.x = 180;
-		App->render->camera.y = 1400;
-	}
-
-	// TP player to the tank boss (for testing purposes)
-	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
-		App->player->position.x = 1430;
-		App->player->position.y = 250;
-		App->render->camera.x = 1430;
-		App->render->camera.y = 250;
-	}
-
 	// Damage player 
 	if (App->input->keys[SDL_SCANCODE_F3] == Key_State::KEY_DOWN) {
 		hp -= 10;
-
 	}
 
 	// Heal player
 	if (App->input->keys[SDL_SCANCODE_F4] == Key_State::KEY_DOWN && hp < 100) {
 		hp += 10;
-
 	}
 
 	// Kill player
@@ -448,10 +430,42 @@ void ModulePlayer::godMode() {
 		hp = 0;
 	}
 
-	// Spawn power up
-	if (App->input->keys[SDL_SCANCODE_B] == Key_State::KEY_DOWN) {
-		App->pickUps->SpawnPickUp({ PickUp_Type::HP,(int)position.x - 90, (int)position.y , true });
+	// Win game
+	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
+		App->enemies->winCondition = true;
 	}
+
+	// TP player to the flying battleship (for testing purposes)
+	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
+		App->player->position.x = 180;
+		App->player->position.y = 1400;
+		App->render->camera.x = 180;
+		App->render->camera.y = 1400;
+	}
+
+	// TP player to the tank boss (for testing purposes)
+	if (App->input->keys[SDL_SCANCODE_F8] == Key_State::KEY_DOWN) {
+		App->player->position.x = 1430;
+		App->player->position.y = 250;
+		App->render->camera.x = 1430;
+		App->render->camera.y = 250;
+	}
+
+	// Spawn score pick up
+	if (App->input->keys[SDL_SCANCODE_F9] == Key_State::KEY_DOWN) {
+		App->pickUps->SpawnPickUp({ PickUp_Type::DIAMOND,(int)position.x, (int)position.y - 50 , false });
+	}
+
+	// Spawn No Damage pick up
+	if (App->input->keys[SDL_SCANCODE_F10] == Key_State::KEY_DOWN) {
+		App->pickUps->SpawnPickUp({ PickUp_Type::INVENCIBILITY,(int)position.x, (int)position.y - 50 , false });
+	}
+
+	// Spawn heal pick up
+	if (App->input->keys[SDL_SCANCODE_F11] == Key_State::KEY_DOWN) {
+		App->pickUps->SpawnPickUp({ PickUp_Type::HP,(int)position.x, (int)position.y - 50 , false });
+	}
+
 }
 
 void ModulePlayer::setIdleAnimations() {

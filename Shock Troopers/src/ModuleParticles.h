@@ -130,6 +130,9 @@ public:
 	Particle miniTankMuzzleDownRight;
 	Particle miniTankMuzzleDownLeft;
 
+	Particle landmineExplosion;
+
+private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture;
 

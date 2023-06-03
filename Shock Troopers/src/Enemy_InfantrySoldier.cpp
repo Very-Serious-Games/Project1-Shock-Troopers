@@ -264,6 +264,37 @@ void Enemy_InfantrySoldier::Update() {
 	Enemy::Update();
 }
 
+bool Enemy_InfantrySoldier::PlayerIsNear() {
+
+	int detectionDistance = 150; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+	int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
+
+
+	// TODO print debug mode detection zone
+	/*
+	SDL_Rect rect = { position.x, position.y, detectionDistance, detectionDistance };
+	App->collisions->AddCollider(rect, Collider::Type::DETECTION_ZONE);
+	*/
+
+	if (distance <= detectionDistance) {
+		return true;
+	}
+
+	return false;
+}
+
+bool Enemy_InfantrySoldier::PlayerIsAttackRange() {
+
+	int detectionDistance = 100; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+	int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
+
+	if (distance <= detectionDistance) {
+		return true;
+	}
+
+	return false;
+}
+
 void Enemy_InfantrySoldier::deathAnimation() {
 	currentAnim = &deathAnim;
 }

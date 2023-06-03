@@ -17,6 +17,8 @@ enum class Enemy_Type
 	SANDBAG,
 	LANDMINE,
 	BARREL,
+	BARRELGROUP,
+	CAR,
 };
 
 struct EnemySpawnpoint
@@ -95,6 +97,8 @@ public:
 	SDL_Texture* textureLandmines = nullptr;
 	SDL_Texture* textureSandbags = nullptr;
 	SDL_Texture* textureBarrel = nullptr;
+	SDL_Texture* textureBarrelGroup = nullptr;
+	SDL_Texture* textureCar = nullptr;
 
 	bool winCondition = false;
 };

@@ -1,45 +1,32 @@
-#include "Enemy_Barrel.h"
+#include "Enemy_BarrelGroup.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
+Enemy_BarrelGroup::Enemy_BarrelGroup(int x, int y) : Enemy(x, y) {
 
-    spawnAnim.PushBack({ 0, 0, 63, 124 });
+    spawnAnim.PushBack({ 0, 0, 90, 126 });
 
-    idleAnim.PushBack({ 0, 0, 63, 124 });
+    idleAnim.PushBack({ 0, 0, 90, 126 });
 
     int disX = 0;
-    int con = 5;
-    for (int i = 0; i < 24; i++)
+    for (int i = 0; i < 54; i++)
     {
-        deathAnim.PushBack({ disX, 0, 63, 124 });
-        disX += 63;
+        deathAnim.PushBack({ disX, 0, 90, 126 });
+        disX += 90;
     }
-    disX = 1071;
-    for (int i = 0; i < 6; i++)
-    {
-        deathAnim.PushBack({ disX, 0, 63, 124 });
-        disX += 63;
-        if (con != 0 and i == 6)
-        {
-            disX = 1071;
-            con--;
-            i = 0;
-        }
-    }
-    deathAnim.speed = 0.2f;
+    deathAnim.speed = 0.4f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
-    // TODO cambiar tamaï¿½o collider//
-    collider = App->collisions->AddCollider({ 0, 0, 19, 32 }, Collider::Type::OBJECT, (Module*)App->enemies);
-    collider->SetPos(position.x+21, position.y+85);
-    health = 1;
+    // TODO cambiar tamaño collider//
+    collider = App->collisions->AddCollider({ 0, 0, 70, 56 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    collider->SetPos(position.x + 7, position.y + 64);
+    health = 5;
 }
 
-void Enemy_Barrel::Update() {
+void Enemy_BarrelGroup::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
@@ -47,19 +34,19 @@ void Enemy_Barrel::Update() {
     Enemy::Update();
 }
 
-void Enemy_Barrel::deathAnimation() {
+void Enemy_BarrelGroup::deathAnimation() {
     currentAnim = &deathAnim;
 }
 
-void Enemy_Barrel::spawnAnimation() {
+void Enemy_BarrelGroup::spawnAnimation() {
     currentAnim = &spawnAnim;
 }
 
-void Enemy_Barrel::idleAnimation() {
+void Enemy_BarrelGroup::idleAnimation() {
     currentAnim = &idleAnim;
 }
 
-void Enemy_Barrel::StateMachine() {
+void Enemy_BarrelGroup::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
         spawnAnimation();
@@ -69,6 +56,7 @@ void Enemy_Barrel::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
+        LOG("Barrel state changed to IDLE");
         idleAnimation();
         if (this->health == 0)
         {
@@ -76,6 +64,7 @@ void Enemy_Barrel::StateMachine() {
         }
         break;
     case Enemy_State::DEATH:
+        LOG("Barrel state changed to DEATH");
         deathAnimation();
 
         if (deathAnim.HasFinished()) {
@@ -85,11 +74,12 @@ void Enemy_Barrel::StateMachine() {
         break;
     default:
         // Handle default state logic
+        LOG("ERROR STATE");
         break;
     }
 }
 
-void Enemy_Barrel::OnCollision(Collider* collider) {
+void Enemy_BarrelGroup::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
         health--;
         if (health == 0) {

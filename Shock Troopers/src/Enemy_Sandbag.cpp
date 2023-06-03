@@ -33,8 +33,9 @@ Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
     path.PushBack({ 0.0f, 0.0f }, 480, &deathAnim);
 
     // TODO cambiar tama�o collider
-    collider = App->collisions->AddCollider({ 0, 0, 98, 108 }, Collider::Type::OBJECT, (Module*)App->enemies);
-    health = 20;
+    collider = App->collisions->AddCollider({ 0, 0, 94, 42 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    collider->SetPos(position.x + 4, position.y + 66);
+    health = 10;
 }
 
 void Enemy_Sandbag::Update() {
@@ -79,7 +80,7 @@ void Enemy_Sandbag::StateMachine() {
         break;
     case Enemy_State::IDLE:
         idleAnimation();
-        if (this->health <= 10)
+        if (this->health <= 5)
         {
             state = Enemy_State::HIT;
         }
@@ -108,7 +109,7 @@ void Enemy_Sandbag::StateMachine() {
 
 void Enemy_Sandbag::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
-        health -= 10;
+        health --;
         if (health == 0) {
             App->audio->PlayFx(destroyedFx);
             SetToDelete();

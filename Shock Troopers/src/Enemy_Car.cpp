@@ -1,45 +1,32 @@
-#include "Enemy_Barrel.h"
+#include "Enemy_Car.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
+Enemy_Car::Enemy_Car(int x, int y) : Enemy(x, y) {
 
-    spawnAnim.PushBack({ 0, 0, 63, 124 });
+    spawnAnim.PushBack({ 0, 0, 120, 112 });
 
-    idleAnim.PushBack({ 0, 0, 63, 124 });
+    idleAnim.PushBack({ 0, 0, 120, 112 });
 
     int disX = 0;
-    int con = 5;
-    for (int i = 0; i < 24; i++)
+    for (int i = 0; i < 62; i++)
     {
-        deathAnim.PushBack({ disX, 0, 63, 124 });
-        disX += 63;
+        deathAnim.PushBack({ disX, 0, 120, 112 });
+        disX += 120;
     }
-    disX = 1071;
-    for (int i = 0; i < 6; i++)
-    {
-        deathAnim.PushBack({ disX, 0, 63, 124 });
-        disX += 63;
-        if (con != 0 and i == 6)
-        {
-            disX = 1071;
-            con--;
-            i = 0;
-        }
-    }
-    deathAnim.speed = 0.2f;
+    deathAnim.speed = 0.3f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
-    // TODO cambiar tamaï¿½o collider//
-    collider = App->collisions->AddCollider({ 0, 0, 19, 32 }, Collider::Type::OBJECT, (Module*)App->enemies);
-    collider->SetPos(position.x+21, position.y+85);
-    health = 1;
+    // TODO cambiar tamaño collider//
+    collider = App->collisions->AddCollider({ 0, 0, 92, 61 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    collider->SetPos(position.x + 14, position.y + 39);
+    health = 7;
 }
 
-void Enemy_Barrel::Update() {
+void Enemy_Car::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
@@ -47,19 +34,19 @@ void Enemy_Barrel::Update() {
     Enemy::Update();
 }
 
-void Enemy_Barrel::deathAnimation() {
+void Enemy_Car::deathAnimation() {
     currentAnim = &deathAnim;
 }
 
-void Enemy_Barrel::spawnAnimation() {
+void Enemy_Car::spawnAnimation() {
     currentAnim = &spawnAnim;
 }
 
-void Enemy_Barrel::idleAnimation() {
+void Enemy_Car::idleAnimation() {
     currentAnim = &idleAnim;
 }
 
-void Enemy_Barrel::StateMachine() {
+void Enemy_Car::StateMachine() {
     switch (state) {
     case Enemy_State::SPAWN:
         spawnAnimation();
@@ -80,16 +67,17 @@ void Enemy_Barrel::StateMachine() {
 
         if (deathAnim.HasFinished()) {
             pendingToDelete = true;
-            LOG("pendingToDelete Barrel");
+            LOG("pendingToDelete Car");
         }
         break;
     default:
         // Handle default state logic
+        LOG("ERROR STATE");
         break;
     }
 }
 
-void Enemy_Barrel::OnCollision(Collider* collider) {
+void Enemy_Car::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
         health--;
         if (health == 0) {

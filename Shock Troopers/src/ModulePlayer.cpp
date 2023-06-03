@@ -47,14 +47,18 @@ void ModulePlayer::godMode() {
 
 	// TP player to the flying battleship (for testing purposes)
 	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
-		App->player->position.x = 232;
-		App->player->position.y = 190;
+		App->player->position.x = 180;
+		App->player->position.y = 1400;
+		App->render->camera.x = 180;
+		App->render->camera.y = 1400;
 	}
 
 	// TP player to the tank boss (for testing purposes)
 	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
 		App->player->position.x = 1430;
 		App->player->position.y = 250;
+		App->render->camera.x = 1430;
+		App->render->camera.y = 250;
 	}
 
 	// Damage player 

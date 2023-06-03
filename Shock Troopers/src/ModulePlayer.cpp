@@ -1406,8 +1406,6 @@ Update_Status ModulePlayer::Update() {
 
 Update_Status ModulePlayer::PostUpdate() {
 
-	int x, y;
-
 	if (!destroyed) {
 
 		//Obtenemos el rectangulo actual de la animacion
@@ -1417,10 +1415,7 @@ Update_Status ModulePlayer::PostUpdate() {
 		//Mostramos por pantalla el frame de la animacion
 		App->render->Blit(texture, position.x, position.y, &rectLegs);
 		App->render->Blit(texture, position.x, position.y, &rectTorso);
-		
-		//Obtenemos position de las diferentes partes de la UI en base al jugador y la camara
-		x = (position.x >= 302) ? 203 : (position.x <= 134) ? 34 : position.x - 100;
-		y = (position.y >= 1786) ? 1740 : (position.y <= 100) ? 55 : position.y - 45;
+
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

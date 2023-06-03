@@ -512,6 +512,7 @@ void Enemy_TankBoss::StateMachine() {
         deathAnimation();
         if (deathAnimDelay == 0) {
             App->enemies->winCondition = true;
+            App->render->leaveZone = true;
             pendingToDelete = true;
             LOG("pendingToDelete enemy");
         }

@@ -881,7 +881,9 @@ void ModulePlayer::stateMachine() {
 		setDeathAnimations();
 
 		if (deathAnim.HasFinished()) {
-			
+			App->render->leaveZone = true;
+			App->render->isInZone = false;
+			App->render->isInZone2 = false;
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 		}
 

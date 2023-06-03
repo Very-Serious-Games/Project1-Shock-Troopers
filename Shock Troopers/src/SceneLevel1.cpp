@@ -43,6 +43,8 @@ bool SceneLevel1::Start() {
 
 	bool ret = true;
 
+	App->render->leaveZone = false;
+
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain_full.png");
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);

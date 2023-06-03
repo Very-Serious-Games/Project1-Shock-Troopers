@@ -177,12 +177,50 @@ void Enemy_TankBoss::shot() {
 
     delayShoot--;
     if (delayShoot == 0) {
-        // TODO modify shot to be an enemy shot
-        /*
-        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
-        shot->collider->AddListener(NULL);
-        */
-        App->audio->PlayFx(/*sound effect*/NULL);
+
+        Particle* newParticle = nullptr;
+        Particle* newParticleMuzzle = nullptr;
+
+        switch (GetPlayerDirection()) {
+        case 1: // Up-Right
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, position.x + 30, position.y - 2, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleUpRight, position.x + 30, position.y - 2, 0, Collider::Type::MUZZLE);
+            break;
+        case 2: // Up-Left
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, position.x - 3, position.y - 3, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleUpLeft, position.x - 3, position.y - 3, 0, Collider::Type::MUZZLE);
+            break;
+        case 3: // Down-Right
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, position.x + 10, position.y + 25, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleDownRight, position.x + 10, position.y + 25, 0, Collider::Type::MUZZLE);
+            break;
+        case 4: // Down-Left
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, position.x + 5, position.y + 25, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleDownLeft, position.x + 0, position.y + 25, 0, Collider::Type::MUZZLE);
+            break;
+        case 5: // Right
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleRight, position.x + 35, position.y + 8, 0, Collider::Type::MUZZLE);
+            break;
+        case 6: // Left
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, position.x - 10, position.y + 15, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleLeft, position.x - 10, position.y + 10, 0, Collider::Type::MUZZLE);
+            break;
+        case 7: // Down
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, position.x + 10, position.y + 30, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleDown, position.x + 5, position.y + 30, 0, Collider::Type::MUZZLE);
+            break;
+        case 8: // Up
+            newParticle = App->particles->AddParticle(App->particles->enemyShot, position.x + 0, position.y - 10, GetPlayerDirection(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->enemyMuzzleUp, position.x + 0, position.y - 10, 0, Collider::Type::MUZZLE);
+            break;
+        }
+
+        newParticle->collider->AddListener(NULL);
+        newParticleMuzzle->collider->AddListener(NULL);
+
+        App->audio->PlayFx(NULL);
+
         delayShoot = 700;
     }
 }
@@ -366,7 +404,6 @@ void Enemy_TankBoss::StateMachine() {
         idleAnimation(GetPlayerDirection(), GetPlayerDirectionBelow());
         if (PlayerIsNear()) {
             state = Enemy_State::ATTACK;
-            //LOG("state changed to ATTACK");
         }
 
         if (isHitted) {
@@ -376,10 +413,11 @@ void Enemy_TankBoss::StateMachine() {
         break;
     case Enemy_State::ATTACK:
         idleAnimation(GetPlayerDirection(), GetPlayerDirectionBelow());
+
         Attack();
+
         if (!PlayerIsNear()) {
             state = Enemy_State::IDLE;
-            //LOG("state changed to IDLE");
         }
 
         if (isHitted) {
@@ -388,14 +426,13 @@ void Enemy_TankBoss::StateMachine() {
 
         if (this->health == 0) {
             state = Enemy_State::DEATH;
-            //LOG("state changed to DEATH");
         }
         break;
     case Enemy_State::DEATH:
         deathAnimation();
         if (deathAnimDelay == 0) {
             pendingToDelete = true;
-            //LOG("pendingToDelete enemy");
+            LOG("pendingToDelete enemy");
         }
 
         deathAnimDelay--;
@@ -406,10 +443,6 @@ void Enemy_TankBoss::StateMachine() {
         hitAnimation(GetPlayerDirection(), GetPlayerDirectionBelow());
         isHitted = false;
         state = Enemy_State::IDLE;
-        break;
-    default:
-        // Handle default state logic
-        //LOG("ERROR STATE");
         break;
     }
 }

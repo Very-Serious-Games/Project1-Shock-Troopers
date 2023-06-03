@@ -64,6 +64,7 @@ public:
 	SDL_Texture* textureSstage = nullptr;
 	SDL_Texture* textureEstage = nullptr;
 	SDL_Texture* textureGameOver = nullptr;
+	SDL_Texture* textureDebugLegend = nullptr;
 
 	Animation* currentAnim = nullptr;
 

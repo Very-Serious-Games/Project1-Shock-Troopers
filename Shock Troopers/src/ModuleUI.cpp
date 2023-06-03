@@ -156,6 +156,7 @@ bool ModuleUI::Start() {
 	textureHp = App->textures->Load("Assets/sprites/ui/hp_bar.png");
 	timerTextTexture = App->textures->Load("Assets/Fonts/TIME_text.png");
 	textureGameOver = App->textures->Load("Assets/sprites/ui/game_over.png");
+	textureDebugLegend = App->textures->Load("Assets/sprites/ui/debug_info.png");
 
 	// Starting font points
 	char lookupTable[] = { "0123456789:;(=)? abcdefghijklmnopqrstuvwxyz@!.-." };
@@ -231,6 +232,10 @@ Update_Status ModuleUI::PostUpdate() {
 	// Mostramos por pantalla el timer
 	sprintf_s(timerCounterText, 10, "%3d", timerCounter);
 	App->fonts->BlitText(137.5, 15, timerFont, timerCounterText);
+
+	if (App->player->isGodMode) {
+		App->render->Blit(textureDebugLegend, x, y, NULL);
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

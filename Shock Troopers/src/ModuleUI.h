@@ -36,9 +36,16 @@ public:
 
 	void updateHp();
 
-	// Font score index
-	uint score = 010;
+	// Font and text Score
+	uint score = 000;
+	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
+
+
+	// Font and text Timer
+	int timerFont = -1;
+	int timerCounter;
+	char timerCounterText[10] = { "\0" };
 
 	void updateScore(int points);
 
@@ -51,8 +58,7 @@ public:
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;
-	SDL_Texture* textureSstage = nullptr;
-	SDL_Texture* textureEstage = nullptr;
+	SDL_Texture* timerTextTexture = nullptr;
 
 	Animation* currentAnim = nullptr;
 

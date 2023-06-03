@@ -123,16 +123,23 @@ bool ModuleUI::Start() {
 
 	currentAnim = &hp100;
 
+	timerCounter = 360;
+
 	// Starting sprite
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
 	textureSstage = App->textures->Load("Assets/sprites/ui/start-anim.png");
 	textureEstage = App->textures->Load("Assets/sprites/ui/stage-clear.png");
 	textureHp = App->textures->Load("Assets/sprites/ui/hp_bar.png");
+	timerTextTexture = App->textures->Load("Assets/Fonts/TIME_text.png");
 
-	// Starting fonts
-	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
-	scoreFont = App->fonts->Load("Assets/fonts/rtype_font3.png", lookupTable, 2);
+	// Starting font points
+	char lookupTable[] = { "0123456789:;(=)? abcdefghijklmnopqrstuvwxyz@!.-." };
+	scoreFont = App->fonts->Load("Assets/fonts/orange_font.png", lookupTable, 3);
+
+	// Starting font timer
+	char lookupTableTimer[] = { "0123456789" };
+	timerFont = App->fonts->Load("Assets/Fonts/green_font.png", lookupTableTimer);
 
 
 	return ret;
@@ -162,13 +169,21 @@ Update_Status ModuleUI::PostUpdate()
 	App->render->Blit(textureHp, x + 3, y + 40, &currentAnim->GetCurrentFrame());
 	App->render->Blit(textureP1, x, y, NULL);
 	App->render->Blit(textureWeapon, x + 10, y + 200, NULL);
+	App->render->Blit(timerTextTexture, x + 132, y + 2, NULL);
 
 	//Mostramos por pantalla la anim inicial
 	App->render->Blit(textureSstage, x, y, &(path.GetCurrentAnimation()->GetCurrentFrame()), 1.0f);
 
 	//Mostramos por pantalla el score
-	App->fonts->BlitText(20, 3, scoreFont, scoreText);
-	sprintf_s(scoreText, 10, "%7d", score);
+	sprintf_s(scoreText, 10, "%08d", score);
+	App->fonts->BlitText(34, 3, scoreFont, scoreText);
+
+	// Actualizamos timer
+	// TODO Timer
+
+	// Mostramos por pantalla el timer
+	sprintf_s(timerCounterText, 10, "%3d", timerCounter);
+	App->fonts->BlitText(137.5, 15, timerFont, timerCounterText);
 
 	return Update_Status::UPDATE_CONTINUE;
 }

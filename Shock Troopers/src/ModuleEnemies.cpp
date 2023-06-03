@@ -78,7 +78,6 @@ Update_Status ModuleEnemies::Update()
 		if(enemies[i] != nullptr)
 			enemies[i]->Update();
 	}
-
 	HandleEnemiesDespawn();
 
 	return Update_Status::UPDATE_CONTINUE;

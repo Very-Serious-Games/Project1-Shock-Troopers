@@ -71,7 +71,7 @@ public:
 	// Check if the player is near
 	virtual bool PlayerIsNear();
 
-	bool PlayerIsAttackRange();
+	virtual bool PlayerIsAttackRange();
 
 	// Check if the player is mele
 	bool PlayerIsMele();

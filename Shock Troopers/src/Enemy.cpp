@@ -30,8 +30,12 @@ void Enemy::Update() {
 	if (currentAnim != nullptr)
 		currentAnim->Update();
 
-	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+    if (collider != nullptr) {
+        if (collider->type != Collider::Type::OBJECT)
+        {
+            collider->SetPos(position.x, position.y);
+        }
+    }
 
     StateMachine();
 }

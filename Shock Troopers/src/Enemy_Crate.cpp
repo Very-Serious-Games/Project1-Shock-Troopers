@@ -27,8 +27,8 @@ Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
     path.PushBack({ 0.0f, 0.0f }, 80, &deathAnim);
 
     // TODO cambiar tamaño collider
-    collider = App->collisions->AddCollider({ 0, 0, 47, 49 }, Collider::Type::OBJECT, (Module*)App->enemies);
-    
+    collider = App->collisions->AddCollider({ 0, 0, 27, 36 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    collider->SetPos(position.x + 20, position.y + 13);
     health = 1;
 }
 

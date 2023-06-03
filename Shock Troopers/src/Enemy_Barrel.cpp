@@ -34,8 +34,8 @@ Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
     // TODO cambiar tamaño collider//
-    collider = App->collisions->AddCollider({ 0, 0, 40, 117 }, Collider::Type::OBJECT, (Module*)App->enemies);
-
+    collider = App->collisions->AddCollider({ 0, 0, 19, 32 }, Collider::Type::OBJECT, (Module*)App->enemies);
+    collider->SetPos(position.x+21, position.y+85);
     health = 1;
 }
 

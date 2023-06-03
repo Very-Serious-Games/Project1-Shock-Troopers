@@ -108,11 +108,11 @@ public:
 
 	bool isInvulnerable = false;
 	float invulnerabilityTimer = 0.0f;
-	const float invulnerabilityDuration = 50.0f;
+	const float invulnerabilityDuration = 400.0f;
 
 	bool hitIsInvulnerable = false;
 	float hitInvulnerabilityTimer = 0.0f;
-	const float hitInvulnerabilityDuration = 500.0f;
+	const float hitInvulnerabilityDuration = 50.0f;
 
 	bool isHitted = false;
 

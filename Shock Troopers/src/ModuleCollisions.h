@@ -52,6 +52,8 @@ private:
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];
 
 	// Simple debugging flag to draw all colliders
+
+public:
 	bool debug = false;
 };
 

@@ -443,7 +443,28 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PICKUP_DIAMOND] = false;
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PICKUP_HP] = false;
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::PICKUP_NODAMAGE] = false;
-	
+
+	matrix[Collider::Type::EXPLOSION][Collider::Type::WALL] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::PLAYER_WALL] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::LASER] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::ENEMY] = true;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::OBJECT] = true;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::STOP_CAM_ZONE] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::STOP_CAM_TRIGGER] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::MISSILE] = true;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::LANDMINE] = true;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::BRIDGE] = true;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::PICKUP_DIAMOND] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::PICKUP_HP] = false;
+	matrix[Collider::Type::EXPLOSION][Collider::Type::PICKUP_NODAMAGE] = false;
+
 	return ret;
 }
 
@@ -583,6 +604,9 @@ void ModuleCollisions::DebugDraw()
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
 				break;
 			case Collider::Type::LANDMINE: // red
+				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
+				break;
+			case Collider::Type::EXPLOSION: // red
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 				break;
 			default:

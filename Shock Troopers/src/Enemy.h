@@ -101,9 +101,10 @@ public:
 	int health = 100;
 
 	int delay = 15;
-	int delayShoot = 700;
+	int delayShoot = 100;
 	int delayCanon = 700;
 	int delayMissile = 700;
+	int delayMissileRain = 700;
 	int delayKnife = 500;
 	int deathAnimDelay = 50;
 

@@ -576,7 +576,7 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
             switch (playerDirection)
             {
             case 1: // Up-Right
-                newParticle->speed.x = 5;   // Set appropriate values for x and y based on the direction
+                newParticle->speed.x = 5;
                 newParticle->speed.y = -5;
                 break;
             case 2: // Up-Left
@@ -584,12 +584,12 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
                 newParticle->speed.y = -5;
                 break;
             case 3: // Down-Right
-                newParticle->speed.x = 5;
-                newParticle->speed.y = 5;
+                newParticle->speed.x = 4;
+                newParticle->speed.y = 6;
                 break;
             case 4: // Down-Left
-                newParticle->speed.x = -5;
-                newParticle->speed.y = 5;
+                newParticle->speed.x = -4;
+                newParticle->speed.y = 6;
                 break;
             case 5: // Right
                 newParticle->speed.x = 5;
@@ -606,6 +606,14 @@ Particle* ModuleParticles::AddParticle(const Particle& particle, int x, int y, i
             case 8: // Up
                 newParticle->speed.x = 0;
                 newParticle->speed.y = -5;
+                break;
+            case 9: // Down-Right
+                newParticle->speed.x = 3;
+                newParticle->speed.y = 7;
+                break;
+            case 10: // Down-Left
+                newParticle->speed.x = -3;
+                newParticle->speed.y = 7;
                 break;
             default: // Invalid direction
                 newParticle->speed.SetToZero();

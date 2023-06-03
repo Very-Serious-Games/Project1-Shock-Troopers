@@ -150,11 +150,56 @@ void Enemy_TankBoss::canon() {
 
     delayCanon--;
     if (delayCanon == 0) {
-        // TODO modify shot to be an enemy shot
-        /*
-        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
-        shot->collider->AddListener(NULL);
-        */
+        Particle* newParticle = nullptr;
+        Particle* newParticleMuzzle = nullptr;
+
+        switch (GetPlayerDirectionBelow()) {
+        case 9: // Down-Right
+            newParticle = App->particles->AddParticle(App->particles->tankShotDownRight, position.x + 65, position.y - 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleDownRight, position.x + 65, position.y - 10, 0, Collider::Type::MUZZLE);
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            break;
+        case 10: // Down-Left
+            newParticle = App->particles->AddParticle(App->particles->tankShotDownLeft, position.x - 10, position.y - 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleDownLeft, position.x - 10, position.y - 10, 0, Collider::Type::MUZZLE);
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            break;
+        case 5: // Down-Right-Diagonal
+            newParticle = App->particles->AddParticle(App->particles->tankShotDownRight, position.x + 63, position.y + 28, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleDownRight, position.x + 63, position.y + 28, 0, Collider::Type::MUZZLE);
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            break;
+        case 6: // Down-Left-Diagonal
+            newParticle = App->particles->AddParticle(App->particles->tankShotDownLeft, position.x - 10, position.y + 35, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleDownLeft, position.x - 10, position.y + 35, 0, Collider::Type::MUZZLE);
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            break;
+        case 3: // Right
+            newParticle = App->particles->AddParticle(App->particles->tankShotRight, position.x + 70, position.y + 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleRight, position.x + 70, position.y + 10, 0, Collider::Type::MUZZLE);
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            break;
+        case 4: // Left
+            newParticle = App->particles->AddParticle(App->particles->tankShotLeft, position.x - 20, position.y + 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleLeft, position.x - 20, position.y + 10, 0, Collider::Type::MUZZLE);
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            break;
+        case 7: // Down
+            newParticle = App->particles->AddParticle(App->particles->tankShotDown, position.x + 24, position.y + 50, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticleMuzzle = App->particles->AddParticle(App->particles->miniTankMuzzleDown, position.x + 24, position.y + 50, 0, Collider::Type::MUZZLE);
+            newParticle->collider->AddListener(NULL);
+            newParticleMuzzle->collider->AddListener(NULL);
+            break;
+        default:
+            LOG("Pleyer above boss");
+			break;
+        }
         App->audio->PlayFx(/*sound effect*/NULL);
         delayCanon = 700;
     }
@@ -221,7 +266,7 @@ void Enemy_TankBoss::shot() {
 
         App->audio->PlayFx(NULL);
 
-        delayShoot = 700;
+        delayShoot = 100;
     }
 }
 
@@ -232,8 +277,8 @@ void Enemy_TankBoss::grenade() {
 void Enemy_TankBoss::missileRain() {
     int numMissiles = rand() % 8 + 3; // Generate a random number between 3 and 10
 
-    delayShoot--;
-    if (delayShoot == 0) {
+    delayMissileRain--;
+    if (delayMissileRain == 0) {
         for (int i = 0; i < numMissiles; ++i) {
             /*
             Particle* missile = App->particles->AddParticle(App->particles->playerShot, position.x + (rand() % SCREEN_WIDTH), position.y + 10 + (rand() % (SCREEN_WIDTH/2)), 7, Collider::Type::ENEMY_SHOT);
@@ -242,7 +287,7 @@ void Enemy_TankBoss::missileRain() {
             */
             App->audio->PlayFx(/*sound effect*/NULL);
         }
-        delayShoot = 700;
+        delayMissileRain = 700;
     }
 }
 
@@ -323,16 +368,16 @@ void Enemy_TankBoss::idleAnimation(int direction, int directionBelow) {
     case 10: // Down-Left
         midCurrentAnim = &midAnimDownLeft;
         break;
-    case 3: // Right
+    case 5: // Right
         midCurrentAnim = &midAnimRight;
         break;
-    case 4: // Left
+    case 6: // Left
         midCurrentAnim = &midAnimLeft;
         break;
-    case 5: // Down-Right-Diagonal
+    case 3: // Down-Right-Diagonal
         midCurrentAnim = &midAnimDownRightDiagonal;
         break;
-    case 6: // Down-Left-Diagonal
+    case 4: // Down-Left-Diagonal
         midCurrentAnim = &midAnimDownLeftDiagonal;
         break;
     case 7: // Below

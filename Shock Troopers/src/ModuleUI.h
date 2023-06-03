@@ -41,6 +41,8 @@ public:
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
 
+	int delayTimer = 200;
+
 
 	// Font and text Timer
 	int timerFont = -1;

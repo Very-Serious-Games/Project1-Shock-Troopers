@@ -1069,7 +1069,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Shooting;
 		}
 
-		if (hp == 0) {
+		if (hp == 0 or App->ui->timerCounter == 0) {
 			currentState = PlayerState::Death;
 		}
 
@@ -1272,7 +1272,7 @@ void ModulePlayer::stateMachine() {
 			hitInvulnerabilityTimer += 1;
 		}
 
-		if (hp == 0) {
+		if (hp == 0 || App->ui->timerCounter == 0) {
 			currentState = PlayerState::Death;
 		}
 		

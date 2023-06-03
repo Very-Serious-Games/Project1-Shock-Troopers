@@ -132,8 +132,12 @@ bool ModuleUI::Start() {
 	// Reset the score
 	score = 0;
 
-	// Reset animations
+	// Reset timer
+	delayTimer = 200;
+	timerCounter = 233;
+	
 
+	// Reset animations
 	startStage.Reset();
 	endStage.Reset();
 	gameOver.Reset();
@@ -143,8 +147,6 @@ bool ModuleUI::Start() {
 	bool ret = true;
 
 	currentAnim = &hp100;
-
-	timerCounter = 360;
 
 	// Starting sprite
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
@@ -218,6 +220,13 @@ Update_Status ModuleUI::PostUpdate() {
 
 	// Actualizamos timer
 	// TODO Timer
+	if (timerCounter > 0) {
+		delayTimer--;
+		if (delayTimer == 0) {
+			timerCounter--;
+			delayTimer = 100;
+		}
+	}
 
 	// Mostramos por pantalla el timer
 	sprintf_s(timerCounterText, 10, "%3d", timerCounter);

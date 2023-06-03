@@ -25,6 +25,8 @@ public:
 
 	void attackAnimation(int direction) override;
 
+	bool PlayerIsNear() override;
+
 	void attackMeleAnimation(int direction);
 
 	void StateMachine() override;

@@ -34,7 +34,7 @@ Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
 
     // TODO cambiar tamaño collider
     collider = App->collisions->AddCollider({ 0, 0, 98, 108 }, Collider::Type::OBJECT, (Module*)App->enemies);
-    health = 20;
+    health = 10;
 }
 
 void Enemy_Sandbag::Update() {
@@ -80,7 +80,7 @@ void Enemy_Sandbag::StateMachine() {
     case Enemy_State::IDLE:
         LOG("Sandbag state changed to IDLE");
         idleAnimation();
-        if (this->health <= 10)
+        if (this->health <= 5)
         {
             state = Enemy_State::HIT;
         }
@@ -113,7 +113,7 @@ void Enemy_Sandbag::StateMachine() {
 
 void Enemy_Sandbag::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
-        health -= 10;
+        health --;
         if (health == 0) {
             App->audio->PlayFx(destroyedFx);
             SetToDelete();

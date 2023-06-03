@@ -112,6 +112,8 @@ public:
 
 	Particle flyingBattleshipMuzzle;
 
+	Particle landmineExplosion;
+
 private:
 	// Particles spritesheet loaded into an SDL Texture
 	SDL_Texture* texture;

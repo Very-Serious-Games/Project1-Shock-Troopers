@@ -336,6 +336,14 @@ bool ModuleParticles::Start() {
     flyingBattleshipMuzzle.anim.loop = false;
     flyingBattleshipMuzzle.anim.speed = 0.3;
 
+    // Landmine Explosion
+    for (int i = 0; i < 29; i++)
+    {
+        landmineExplosion.anim.PushBack({ (66 * i)-i, 260, 66, 65 });
+        }
+    landmineExplosion.anim.loop = false;
+    landmineExplosion.anim.speed = 0.3;
+
     return true;
 }
 

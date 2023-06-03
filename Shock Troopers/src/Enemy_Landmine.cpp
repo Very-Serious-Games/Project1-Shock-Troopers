@@ -2,7 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
-#include "ModuleParticles.h"
+#include "Particle.h"
 
 Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
 
@@ -67,6 +67,8 @@ void Enemy_Landmine::StateMachine() {
         deathAnimation();
 
         if (deathAnimDelay == 0) {
+            Particle* newParticle = nullptr;
+            newParticle = App->particles->AddParticle(App->particles->landmineExplosion, this->position.x-14, this->position.y-24, Collider::Type::NONE);
             pendingToDelete = true;
             LOG("pendingToDelete enemy");
         }
@@ -85,7 +87,6 @@ void Enemy_Landmine::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER) {
         health--;
         if (health == 0) {
-            App->particles->AddParticle(App->particles->explosion, position.x, position.y, 11, Collider::Type::NONE);
             App->audio->PlayFx(destroyedFx);
             SetToDelete();
         }

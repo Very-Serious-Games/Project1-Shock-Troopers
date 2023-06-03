@@ -21,6 +21,8 @@ public:
 
 	void createMargenes();
 
+	void moveSky();
+
 	// Called at the middle of the application loop
 	// Updates the scene's background animations
 	Update_Status Update() override;
@@ -36,6 +38,7 @@ public:
 	
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
+	SDL_Texture* bgSky = nullptr;
 };
 
 #endif

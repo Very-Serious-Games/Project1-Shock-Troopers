@@ -188,6 +188,8 @@ Update_Status ModuleUI::Update() {
 
 Update_Status ModuleUI::PostUpdate() {
 
+	int x, y;
+
 	//Obtenemos la posicion de la camara
 	x = App->render->camera.x + 2;
 	y = App->render->camera.y + 2;

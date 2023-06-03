@@ -55,8 +55,6 @@ public:
 	
 public:
 
-	int x, y;
-
 	SDL_Texture* textureHp = nullptr;
 	SDL_Texture* textureP1 = nullptr;
 	SDL_Texture* textureWeapon = nullptr;

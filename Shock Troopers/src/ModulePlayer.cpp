@@ -418,15 +418,7 @@ bool ModulePlayer::isGrenade() {
 
 	}
 	else if(liveTime == 0){
-/*
-		Collider* c = App->collisions->AddCollider({ granadeLastPosition.x, granadeLastPosition.y, 50, 50 }, Collider::Type::EXPLOSION, this);
 
-		Collider* c2 = App->collisions->AddCollider({ c->rect.x + c->rect.w, c->rect.y - c->rect.h, 50, 50 }, Collider::Type::EXPLOSION, this);
-		App->collisions->AddCollider({ c2->rect.x + c2->rect.w, c2->rect.y - c2->rect.h, 50, 50 }, Collider::Type::EXPLOSION, this);
-
-		c2 = App->collisions->AddCollider({ c->rect.x + c->rect.w, c->rect.y + c->rect.h, 50, 50 }, Collider::Type::EXPLOSION, this);
-		App->collisions->AddCollider({ c2->rect.x + c2->rect.w, c2->rect.y + c2->rect.h, 50, 50 }, Collider::Type::EXPLOSION, this);
-		*/
 		return false;
 
 	}
@@ -586,15 +578,6 @@ void ModulePlayer::shoot() {
 
 void ModulePlayer::grenade() {
 
-	//TODO a�adir direccion
-	Particle* newParticle = App->particles->AddParticle(App->particles->playerShotUp, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
- 	newParticle->collider->AddListener(this);
-	newParticle->granada = true;
-	liveTime = &newParticle->lifetime;
-
-	if (newParticle->lifetime <= 1) {
-		granadeLastPosition = newParticle->position;
-	}
 }
 
 void ModulePlayer::shootMoving() {
@@ -821,13 +804,13 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::Grenade:
 
-		setGrenadeAnimations();
-
+		//setGrenadeAnimations();
+		/*
 		// Grenade logic
 		if (liveTime == nullptr) {
 			grenade();
 		}
-
+		*/
 		if (isHitted) {
 			currentState = PlayerState::Damage;
 		}

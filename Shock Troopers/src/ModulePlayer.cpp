@@ -1240,7 +1240,7 @@ void ModulePlayer::stateMachine() {
 
 		if (playStageClearOnce < 1) {
 			playStageClearOnce++;
-			App->audio->PlayMusic("Assets/Audio/Music/05_Shock_Troopers_stage_clear.ogg", 0.1f);
+			App->audio->PlayMusic("Assets/Music/05_Shock_Troopers_stage_clear.ogg", 0.1f);
 		}
 
 		if (winAnim.HasFinished() and App->ui->endStage.HasFinished()) {

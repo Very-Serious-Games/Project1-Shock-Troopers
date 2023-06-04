@@ -56,7 +56,6 @@ void Enemy_BarrelGroup::StateMachine() {
         }
         break;
     case Enemy_State::IDLE:
-        LOG("Barrel state changed to IDLE");
         idleAnimation();
         if (this->health == 0)
         {
@@ -64,7 +63,6 @@ void Enemy_BarrelGroup::StateMachine() {
         }
         break;
     case Enemy_State::DEATH:
-        LOG("Barrel state changed to DEATH");
         deathAnimation();
 
         if (deathAnim.HasFinished()) {

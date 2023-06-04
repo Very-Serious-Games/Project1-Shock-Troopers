@@ -41,6 +41,7 @@ public:
 	SDL_Texture* bgSky = nullptr;
 
 	int musicPlayOnce = 0;
+	int playStageClearOnce = 0;
 };
 
 #endif

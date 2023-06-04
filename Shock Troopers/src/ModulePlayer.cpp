@@ -1393,8 +1393,8 @@ bool ModulePlayer::Start() {
 	collider = App->collisions->AddCollider({ (int)position.x + 5,(int)position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
 
 	App->render->cameraDownCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
-	App->render->cameraLeftCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
-	App->render->cameraRightCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
+	App->render->cameraLeftCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT - 50 }, Collider::Type::WALL, App->render);
+	App->render->cameraRightCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT, 5, SCREEN_HEIGHT - 50 }, Collider::Type::WALL, App->render);
 	App->render->cameraUpCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
 	App->render->stopCameraCollider = App->collisions->AddCollider({ 0, 0, 2, 2 }, Collider::Type::STOP_CAM_TRIGGER, App->render);
 	App->render->stopCameraCollider->AddListener(App->render);

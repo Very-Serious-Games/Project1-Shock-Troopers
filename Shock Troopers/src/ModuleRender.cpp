@@ -66,17 +66,42 @@ Update_Status ModuleRender::Update()
 			camera.y = App->player->position.y - 100;
 		}
 	
-		if (camera.y <= 980 && camera.x < 1100) {
+		if (camera.y <= 975 && camera.x < 1100) {
 			if (nextCameraX > camera.x && leaveZone) {
+				camera.y = 975;
+				if (nextCameraX > camera.x && !blockRight) {
+					camera.x = nextCameraX;
+				}
+				else if (nextCameraX < camera.x && !blockLeft) {
+					camera.x = nextCameraX;
+				}
+			}
+			else if (!isInZone2) {
+				if (nextCameraX > camera.x && !blockRight) {
+					camera.x = nextCameraX;
+				}
+				else if (nextCameraX < camera.x && !blockLeft) {
+					camera.x = nextCameraX;
+				}
+			}
+		}
+		else if (!isInZone2) {
+			if (nextCameraX > camera.x && !blockRight) {
 				camera.x = nextCameraX;
 			}
-		} else if (!isInZone2) {
-			camera.x = nextCameraX;
+			else if (nextCameraX < camera.x && !blockLeft) {
+				camera.x = nextCameraX;
+			}
 		}
 
 		if (isInZone) {
 			camera.y = nextCameraY;
-			camera.x = nextCameraX;
+			if (nextCameraX > camera.x && !blockRight) {
+				camera.x = nextCameraX;
+			}
+			else if (nextCameraX < camera.x && !blockLeft) {
+				camera.x = nextCameraX;
+			}
 			if (camera.x < minX) {
 				camera.x = minX;
 			}
@@ -100,14 +125,20 @@ Update_Status ModuleRender::Update()
 
 	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT) camera.x -= cameraSpeed;
 
-	//if (camera.x < 0) camera.x = 0;
+	if (camera.x < 0) camera.x = 0;
 
-	//if (camera.y < 0) camera.y = 0;
+	if (camera.x + camera.w > 1748) camera.x = 1748 - camera.w;
+
+	if (camera.y < 0) camera.y = 0;
+
+	if (camera.y + camera.h > 2999) camera.y = 2999 - camera.h;
 
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)	camera.x += cameraSpeed;
 
 	if (App->input->keys[SDL_SCANCODE_M] == KEY_DOWN) leaveZone = !leaveZone;
 
+	blockLeft = false;
+	blockRight = false;
 
 	return Update_Status::UPDATE_CONTINUE;
 }
@@ -149,6 +180,7 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 		maxY = c2->rect.y + c2->rect.h;
 
 		if (leaveZone) {
+			camera.y = 975;
 			c2->pendingToDelete = true;
 			leaveZone = false;
 			isInZone = !isInZone;
@@ -198,6 +230,12 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 			isInZone = !isInZone;
 		}
 
+	}	
+	if (c1 == cameraRightCollider && c2->type == Collider::Type::CAMERA_LIMIT) {
+		blockRight = true;
+	}
+	if (c1 == cameraLeftCollider && c2->type == Collider::Type::CAMERA_LIMIT) {
+		blockLeft = true;
 	}
 }
 

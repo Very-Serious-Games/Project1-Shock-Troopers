@@ -88,7 +88,13 @@ Update_Status Application::Update()
 	//Sync
 	SDL_Delay(16.66666 / speedMultiplier);
 
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_DOWN) {
+		ret = Update_Status::UPDATE_STOP;
+		LOG("Closing Game. alacama");
+	}
+
 	return ret;
+
 }
  
 bool Application::CleanUp()

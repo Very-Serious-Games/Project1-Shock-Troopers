@@ -310,11 +310,6 @@ void Enemy_TankBoss::missileLaunch() {
 
     delayMissile--;
     if (delayMissile == 0) {
-        // TODO modify shot to be an missile
-        /*
-        Particle* shot = App->particles->AddParticle(App->particles->playerShot, position.x + (collider->rect.w / 2), position.y + (collider->rect.h / 2), GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
-        shot->collider->AddListener(NULL);
-        */
         Particle* newParticle = nullptr;
 
         switch (GetPlayerDirectionBelow()) {
@@ -359,7 +354,7 @@ void Enemy_TankBoss::Attack() {
     canon();
     shot();
     //grenade();
-    //missileRain();
+    missileRain();
     missileLaunch();
 }
 

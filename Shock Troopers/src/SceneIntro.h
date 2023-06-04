@@ -32,10 +32,14 @@ public:
 
 public:
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* textures = nullptr;
-	Animation introAnimation;
-	Path path;
+	SDL_Texture* vsgIntroTexture = nullptr;
+	SDL_Texture* stIntro = nullptr;
+	SDL_Texture* currentTexture = nullptr;
+	Animation vsgIntroAnimation;
+	Animation stAnimation;
+	Animation* currentAnimation = nullptr;
 	
+	int musicPlayOnce = 0;
 };
 
 #endif

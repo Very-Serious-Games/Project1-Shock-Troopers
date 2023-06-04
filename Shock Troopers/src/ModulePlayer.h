@@ -200,8 +200,7 @@ public:
 	Animation winAnim;					// Win animation
 
 	// Sound effects indices
-	uint laserFx = 0;
-	uint explosionFx = 0;
+	uint playerShot = 0;
 
 	// The player's collider
 	Collider* collider = nullptr;

@@ -153,6 +153,28 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 			isInZone = !isInZone;
 		}
 	}
+
+	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE_3) {
+
+		if (c1->rect.y < c2->rect.y + c2->rect.h && !isInZone) {
+			camera.y--;
+		}
+
+		if (camera.y + camera.h <= c2->rect.y + c2->rect.h || camera.y == c2->rect.y) {
+			isInZone3 = true;
+		}
+
+		minX = c2->rect.x;
+		minY = c2->rect.y;
+		maxX = c2->rect.x + c2->rect.w;
+		maxY = c2->rect.y + c2->rect.h;
+
+		if (leaveZone) {
+			c2->pendingToDelete = true;
+			isInZone = !isInZone;
+		}
+	}
+
 	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE_2) {
 		isInZone2 = true;
 		if (c1->rect.x + c1->rect.w > c2->rect.x && !isInZone) {

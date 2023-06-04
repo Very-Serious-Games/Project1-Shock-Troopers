@@ -946,7 +946,7 @@ void ModulePlayer::shoot() {
 		}
 		newParticle->collider->AddListener(this);
 		newParticleMuzzle->collider->AddListener(this);
-		App->audio->PlayFx(laserFx);
+		App->audio->PlayFx(playerShot);
 
 		delay = 10;
 	}
@@ -958,9 +958,9 @@ void ModulePlayer::grenade() {
 	//TODO a�adir direccion
 	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
  	newParticle->collider->AddListener(this);
-	newParticle->granada = true;
-	*/
+	newParticle->granada = true
 	App->audio->PlayFx(laserFx);
+	*/
 }
 
 void ModulePlayer::shootMoving() {
@@ -1018,7 +1018,7 @@ void ModulePlayer::shootMoving() {
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		}
-		App->audio->PlayFx(laserFx);
+		App->audio->PlayFx(playerShot);
 
 		delay = 10;
 	}
@@ -1238,6 +1238,8 @@ void ModulePlayer::stateMachine() {
 
 		setWinAnimations();
 
+		App->audio->PlayMusic("Assets/Audio/Music/05_Shock_Troopers_stage_clear.ogg", 1.0f);
+
 		if (winAnim.HasFinished() and App->ui->endStage.HasFinished()) {
 
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
@@ -1362,17 +1364,10 @@ bool ModulePlayer::Start() {
 	}
 
 	// Load sound effects
-	laserFx = App->audio->LoadFx("Assets/fx/laser.wav");
-	if (laserFx == -1)
+	playerShot = App->audio->LoadFx("Assets/fx/disparoMilky.wav");
+	if (playerShot == -1)
 	{
-		LOG("Failed to load laser.wav sound effect");
-		ret = false;
-	}
-
-	explosionFx = App->audio->LoadFx("Assets/fx/ExplosionGranada.wav");
-	if (explosionFx == -1)
-	{
-		LOG("Failed to load ExplosionGranada.wav sound effect");
+		LOG("Failed to load disparoMilky.wav sound effect");
 		ret = false;
 	}
 

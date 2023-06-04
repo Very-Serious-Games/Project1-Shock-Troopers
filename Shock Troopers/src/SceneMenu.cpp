@@ -111,6 +111,8 @@ bool SceneMenu::Start() {
 
 	sprites = App->textures->Load("Assets/Sprites/ui/characterSelection.png");
 
+	App->audio->PlayMusic("Assets/Music/02_Shock_Troopers_menu.ogg", 1.0f);
+
 	return ret;
 }
 

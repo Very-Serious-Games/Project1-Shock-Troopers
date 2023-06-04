@@ -36,6 +36,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::WALL][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::WALL][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::WALL][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::WALL][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::WALL][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::WALL][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::WALL][Collider::Type::MISSILE] = false;
@@ -57,6 +58,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::DETECTION_ZONE][Collider::Type::MISSILE] = false;
@@ -78,6 +80,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::PLAYER_WALL][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER_WALL][Collider::Type::MISSILE] = false;
@@ -99,6 +102,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PLAYER][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::PLAYER][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER][Collider::Type::MISSILE] = true;
@@ -120,6 +124,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::ENEMY][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::ENEMY][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::ENEMY][Collider::Type::MISSILE] = false;
@@ -141,6 +146,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::MISSILE] = true;
@@ -162,6 +168,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::ENEMY_SHOT][Collider::Type::MISSILE] = false;
@@ -183,6 +190,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::LASER][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::LASER][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::LASER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::MISSILE] = false;
@@ -204,6 +212,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::MISSILE] = false;
@@ -225,6 +234,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::OBJECT][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::OBJECT][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::OBJECT][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::OBJECT][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::OBJECT][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::OBJECT][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::OBJECT][Collider::Type::MISSILE] = false;
@@ -246,6 +256,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_ZONE] = true;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_ZONE_2] = true;
+	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_ZONE_3] = true;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::STOP_CAM_TRIGGER][Collider::Type::MISSILE] = false;
@@ -267,6 +278,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::STOP_CAM_TRIGGER] = true;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE][Collider::Type::MISSILE] = false;
@@ -288,6 +300,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::STOP_CAM_TRIGGER] = true;
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::MISSILE] = false;
@@ -296,6 +309,28 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::LANDMINE] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::PICKUP_DIAMOND] = false;
 	matrix[Collider::Type::STOP_CAM_ZONE_2][Collider::Type::PICKUP_NODAMAGE] = false;
+
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::WALL] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::PLAYER_WALL] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::LASER] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::ENEMY] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::PLAYER_SHOT] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::ENEMY_SHOT] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::PICKUP_HP] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::OBJECT] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::DETECTION_ZONE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::STOP_CAM_ZONE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::STOP_CAM_ZONE_3] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::STOP_CAM_TRIGGER] = true;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::KNIFE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::MISSILE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::MUZZLE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::BRIDGE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::LANDMINE] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::PICKUP_DIAMOND] = false;
+	matrix[Collider::Type::STOP_CAM_ZONE_3][Collider::Type::PICKUP_NODAMAGE] = false;
 
 	matrix[Collider::Type::MISSILE][Collider::Type::WALL] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::PLAYER_WALL] = false;
@@ -309,6 +344,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::MISSILE][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::MISSILE][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::MISSILE][Collider::Type::MISSILE] = false;
@@ -330,6 +366,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::MUZZLE][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::MUZZLE][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::MUZZLE][Collider::Type::MISSILE] = false;
@@ -351,6 +388,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::LANDMINE][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::LANDMINE][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::LANDMINE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::LANDMINE][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::LANDMINE][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::LANDMINE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::LANDMINE][Collider::Type::MISSILE] = false;
@@ -372,6 +410,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::BRIDGE][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::BRIDGE][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::BRIDGE][Collider::Type::MISSILE] = false;
@@ -392,6 +431,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PICKUP_HP][Collider::Type::MISSILE] = false;
@@ -413,6 +453,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PICKUP_NODAMAGE][Collider::Type::MISSILE] = false;
@@ -434,6 +475,7 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::DETECTION_ZONE] = false;
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::STOP_CAM_ZONE] = false;
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::STOP_CAM_ZONE_2] = false;
+	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::STOP_CAM_ZONE_3] = false;
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::STOP_CAM_TRIGGER] = false;
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::KNIFE] = false;
 	matrix[Collider::Type::PICKUP_DIAMOND][Collider::Type::MISSILE] = false;
@@ -563,6 +605,9 @@ void ModuleCollisions::DebugDraw()
 				break;
 			case Collider::Type::OBJECT: // pink
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 255, alpha);
+				break;
+			case Collider::Type::STOP_CAM_ZONE_3: // orange
+				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);
 				break;
 			case Collider::Type::STOP_CAM_ZONE_2: // orange
 				App->render->DrawQuad(colliders[i]->rect, 255, 100, 100, alpha);

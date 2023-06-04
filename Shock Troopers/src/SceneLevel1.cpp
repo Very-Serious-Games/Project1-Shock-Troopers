@@ -1,9 +1,5 @@
 #include "SceneLevel1.h"
-#include <fstream>
-#include <iostream>
-#include <string>
 
-using namespace std;
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -15,7 +11,12 @@ using namespace std;
 #include "ModuleUI.h"
 #include "ModuleFonts.h"
 #include "ModuleParticles.h"
- 
+#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
 SceneLevel1::SceneLevel1(bool startEnabled) : Module(startEnabled) {
 
 }
@@ -48,12 +49,12 @@ bool SceneLevel1::Start() {
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain_full.png");
 	bgSky = App->textures->Load("Assets/Sprites/background/level1/background_sky.png");
-	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/03_Shock_Troopers_stage1.ogg", 1.0f);
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
 	App->collisions->AddCollider({ 838, 1000, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
-	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE);
+	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE_3);
 	App->collisions->AddCollider({ 500, 1085, 740, 6 }, Collider::Type::PLAYER_WALL);
 	App->collisions->AddCollider({ 500, 1190, 880, 6 }, Collider::Type::PLAYER_WALL);
 
@@ -218,6 +219,11 @@ void SceneLevel1::moveSky() {
 
 Update_Status SceneLevel1::Update()
 {
+
+	if (App->render->isInZone3) {
+		App->audio->PlayMusic("Assets/Music/04_Shock_Troopers_boss.ogg", 1.0f);
+	}
+
 	return Update_Status::UPDATE_CONTINUE;
 }
 

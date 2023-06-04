@@ -132,8 +132,12 @@ bool ModuleUI::Start() {
 	// Reset the score
 	score = 0;
 
-	// Reset animations
+	// Reset timer
+	delayTimer = 200;
+	timerCounter = 233;
+	
 
+	// Reset animations
 	startStage.Reset();
 	endStage.Reset();
 	gameOver.Reset();
@@ -144,8 +148,6 @@ bool ModuleUI::Start() {
 
 	currentAnim = &hp100;
 
-	timerCounter = 360;
-
 	// Starting sprite
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
@@ -154,6 +156,7 @@ bool ModuleUI::Start() {
 	textureHp = App->textures->Load("Assets/sprites/ui/hp_bar.png");
 	timerTextTexture = App->textures->Load("Assets/Fonts/TIME_text.png");
 	textureGameOver = App->textures->Load("Assets/sprites/ui/game_over.png");
+	textureDebugLegend = App->textures->Load("Assets/sprites/ui/debug_info.png");
 
 	// Starting font points
 	char lookupTable[] = { "0123456789:;(=)? abcdefghijklmnopqrstuvwxyz@!.-." };
@@ -218,13 +221,20 @@ Update_Status ModuleUI::PostUpdate() {
 
 	// Actualizamos timer
 	// TODO Timer
+	if (timerCounter > 0) {
+		delayTimer--;
+		if (delayTimer == 0) {
+			timerCounter--;
+			delayTimer = 100;
+		}
+	}
 
 	// Mostramos por pantalla el timer
 	sprintf_s(timerCounterText, 10, "%3d", timerCounter);
 	App->fonts->BlitText(137.5, 15, timerFont, timerCounterText);
 
-	if (App->collisions->debug) {
-		App->fonts->BlitText(20, 3, scoreFont, scoreText2);
+	if (App->player->isGodMode) {
+		App->render->Blit(textureDebugLegend, x, y, NULL);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

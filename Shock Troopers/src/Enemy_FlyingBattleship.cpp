@@ -26,6 +26,8 @@ Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 
 	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 121, 124 }, Collider::Type::ENEMY, (Module*)App->enemies);
+
+    this->health = 300;
 }
 
 void Enemy_FlyingBattleship::Update() {

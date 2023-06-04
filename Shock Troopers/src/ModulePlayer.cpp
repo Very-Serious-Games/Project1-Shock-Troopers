@@ -397,13 +397,15 @@ ModulePlayer::~ModulePlayer() {
 
 void ModulePlayer::updateHp() {
 		
-
 	if (!isInvulnerable) {
+		// TODO revisar esta invulnerabilidad
 		invulnerabilityTimer = 0.0f;
+		
 	}
 	if (!hitIsInvulnerable) {
 		hitIsInvulnerable = true;
 		hitInvulnerabilityTimer = 0.0f;
+	
 	}
 }
 
@@ -431,19 +433,23 @@ void ModulePlayer::godMode() {
 
 	// Win game
 	if (App->input->keys[SDL_SCANCODE_F6] == Key_State::KEY_DOWN) {
-		//WINCONDITION TRUE JAJAJJAJAJ EKISDE ESTOY LOCOOOO LOCOOOOOOOOOOOOOOOO
+		App->enemies->winCondition = true;
 	}
 
 	// TP player to the flying battleship (for testing purposes)
 	if (App->input->keys[SDL_SCANCODE_F7] == Key_State::KEY_DOWN) {
-		App->player->position.x = 200;
-		App->player->position.y = 1365;
+		App->player->position.x = 180;
+		App->player->position.y = 1400;
+		App->render->camera.x = 180;
+		App->render->camera.y = 1400;
 	}
 
 	// TP player to the tank boss (for testing purposes)
 	if (App->input->keys[SDL_SCANCODE_F8] == Key_State::KEY_DOWN) {
 		App->player->position.x = 1430;
 		App->player->position.y = 250;
+		App->render->camera.x = 1430;
+		App->render->camera.y = 250;
 	}
 
 	// Spawn score pick up
@@ -460,6 +466,7 @@ void ModulePlayer::godMode() {
 	if (App->input->keys[SDL_SCANCODE_F11] == Key_State::KEY_DOWN) {
 		App->pickUps->SpawnPickUp({ PickUp_Type::HP,(int)position.x, (int)position.y - 50 , false });
 	}
+
 }
 
 void ModulePlayer::setIdleAnimations() {
@@ -946,6 +953,14 @@ void ModulePlayer::shoot() {
 }
 
 void ModulePlayer::grenade() {
+	/*
+	App->particles->playerShot.setDirection(lastDirection);
+	//TODO a�adir direccion
+	Particle* newParticle = App->particles->AddParticle(App->particles->playerShot, position.x, position.y, lastDirection, Collider::Type::PLAYER_SHOT);
+ 	newParticle->collider->AddListener(this);
+	newParticle->granada = true;
+	*/
+	App->audio->PlayFx(laserFx);
 }
 
 void ModulePlayer::shootMoving() {
@@ -1073,7 +1088,7 @@ void ModulePlayer::stateMachine() {
 			currentState = PlayerState::Shooting;
 		}
 
-		if (hp == 0) {
+		if (hp == 0 or App->ui->timerCounter == 0) {
 			currentState = PlayerState::Death;
 		}
 
@@ -1184,13 +1199,11 @@ void ModulePlayer::stateMachine() {
 
 	case PlayerState::Grenade:
 
-		//setGrenadeAnimations();
-		/*
+		setGrenadeAnimations();
+
 		// Grenade logic
-		if (liveTime == nullptr) {
-			grenade();
-		}
-		*/
+		grenade();
+
 		if (isHitted) {
 			currentState = PlayerState::Damage;
 		}
@@ -1278,7 +1291,7 @@ void ModulePlayer::stateMachine() {
 			hitInvulnerabilityTimer += 1;
 		}
 
-		if (hp == 0) {
+		if (hp == 0 || App->ui->timerCounter == 0) {
 			currentState = PlayerState::Death;
 		}
 		
@@ -1453,7 +1466,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		// Ignore collision while invulnerable
 		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !isGodMode) {
 
-			if (hp < 0) {
+			if (hp > 0) {
 				hp -= 10;
 			}
 

@@ -249,6 +249,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunHitDownAnim.speed = 0.1f;
 	gunHitDownRightAnim.speed = 0.1f;
 	gunHitDownLeftAnim.speed = 0.1f;
+
+	this->health = 10;
 }
 
 void Enemy_InfantrySoldier::Update() {

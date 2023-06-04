@@ -55,8 +55,9 @@ bool SceneLevel1::Start() {
 	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
 	App->collisions->AddCollider({ 838, 1000, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
 	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE_3);
-	App->collisions->AddCollider({ 500, 1085, 740, 6 }, Collider::Type::PLAYER_WALL);
-	App->collisions->AddCollider({ 500, 1190, 880, 6 }, Collider::Type::PLAYER_WALL);
+	App->collisions->AddCollider({ 100, 1078, 1170, 6 }, Collider::Type::PLAYER_WALL);
+    App->collisions->AddCollider({ 6, 1105, 100, 6 }, Collider::Type::PLAYER_WALL);
+    App->collisions->AddCollider({ 500, 1190, 880, 6 }, Collider::Type::PLAYER_WALL);
 
 	createMargenes();
 

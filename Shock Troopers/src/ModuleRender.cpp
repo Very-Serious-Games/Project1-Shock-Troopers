@@ -150,6 +150,7 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 
 		if (leaveZone) {
 			c2->pendingToDelete = true;
+			leaveZone = false;
 			isInZone = !isInZone;
 		}
 	}
@@ -192,6 +193,7 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 
 		if (leaveZone) {
 			c2->pendingToDelete = true;
+			leaveZone = false;
 			isInZone2 = !isInZone2;
 			isInZone = !isInZone;
 		}

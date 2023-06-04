@@ -40,6 +40,7 @@ public:
 	uint score = 000;
 	int scoreFont = -1;
 	char scoreText[10] = { "\0" };
+	char scoreText2[1000] = { "F1  - Enable/Disable Debug Mode \n F2 - God Mode\n F3 - Take Damage\n F4 - Heal\n F5 - Instant Death\n F6 - Instant Win\n F7 - Teleport MiniBoss\n F8 - Teleport FinalBoss\n F9 - Spawn Score PickUp\n F10 - Spawn No Damage P�ckUp\n F11 - Spawn Heal PickUp\n " };
 
 	int delayTimer = 200;
 

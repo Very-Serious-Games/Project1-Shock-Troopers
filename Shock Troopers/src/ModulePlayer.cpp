@@ -466,6 +466,11 @@ void ModulePlayer::godMode() {
 	if (App->input->keys[SDL_SCANCODE_F11] == Key_State::KEY_DOWN) {
 		App->pickUps->SpawnPickUp({ PickUp_Type::HP,(int)position.x, (int)position.y - 50 , false });
 	}
+
+	// Spawn Enemy
+	if (App->input->keys[SDL_SCANCODE_0] == Key_State::KEY_DOWN) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, (int)position.x, (int)position.y-50);
+	}
 }
 
 void ModulePlayer::setIdleAnimations() {

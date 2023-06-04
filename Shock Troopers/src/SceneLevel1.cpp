@@ -134,7 +134,7 @@ bool SceneLevel1::Start() {
 	App->enemies->AddEnemy(Enemy_Type::TANK, 385, 2100);// 1st
 
 	// Tank finalboss
-	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1355, 70);
+	App->enemies->AddEnemy(Enemy_Type::TANK_BOSS, 1355, 10);
 	
 	//Add objects
 	//Add bridge
@@ -160,8 +160,8 @@ bool SceneLevel1::Start() {
 
 	//Add barrels
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 83, 1928);//near tank
-	App->enemies->AddEnemy(Enemy_Type::BARREL, 1257, 972);//post bridge
 	App->enemies->AddEnemy(Enemy_Type::BARREL, 1243, 940);//post bridge
+	App->enemies->AddEnemy(Enemy_Type::BARREL, 1257, 972);//post bridge
 
 	App->enemies->AddEnemy(Enemy_Type::BARRELGROUP, 189, 1976);
 

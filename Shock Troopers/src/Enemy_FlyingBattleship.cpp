@@ -61,8 +61,8 @@ void Enemy_FlyingBattleship::Attack() {
         delay--;
         if (delay == 0) {
             LOG("Rocket attack");
-            Particle* newParticle = App->particles->AddParticle(App->particles->tankMissileUp, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
-            Particle* newParticle2 = App->particles->AddParticle(App->particles->tankMissileUp, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            Particle* newParticle = App->particles->AddParticle(App->particles->tankMissileDown, position.x + 27, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
+            Particle* newParticle2 = App->particles->AddParticle(App->particles->tankMissileDown, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
             newParticle2->collider->AddListener(NULL);
             App->audio->PlayFx(App->enemies->flyingBattleshipMissile);

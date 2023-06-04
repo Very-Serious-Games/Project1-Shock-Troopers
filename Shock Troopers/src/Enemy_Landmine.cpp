@@ -65,8 +65,7 @@ void Enemy_Landmine::StateMachine() {
         deathAnimation();
 
         if (deathAnimDelay == 0) {
-            Particle* newParticle = nullptr;
-            newParticle = App->particles->AddParticle(App->particles->landmineExplosion, this->position.x-14, this->position.y-24, Collider::Type::NONE);
+            
             pendingToDelete = true;
         }
         deathAnimDelay--;
@@ -84,6 +83,8 @@ void Enemy_Landmine::OnCollision(Collider* collider) {
         health--;
         if (health == 0) {
             App->audio->PlayFx(NULL);
+            Particle* newParticle = nullptr;
+            newParticle = App->particles->AddParticle(App->particles->landmineExplosion, this->position.x - 14, this->position.y - 24, Collider::Type::NONE);
             SetToDelete();
         }
     }

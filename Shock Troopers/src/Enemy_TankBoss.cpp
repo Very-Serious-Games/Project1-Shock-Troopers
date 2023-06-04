@@ -316,35 +316,50 @@ void Enemy_TankBoss::missileLaunch() {
         shot->collider->AddListener(NULL);
         */
         Particle* newParticle = nullptr;
+        Particle* newParticle2 = nullptr;
 
         switch (GetPlayerDirectionBelow()) {
         case 9: // Down-Right
-            newParticle = App->particles->AddParticle(App->particles->tankMissileRight, position.x + 65, position.y - 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle = App->particles->AddParticle(App->particles->tankMissileDownRight, position.x + 15, position.y - 5, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle2 = App->particles->AddParticle(App->particles->tankMissileDownRight, position.x + 70, position.y - 5, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
             break;
         case 10: // Down-Left
-            newParticle = App->particles->AddParticle(App->particles->tankMissileLeft, position.x - 10, position.y - 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle = App->particles->AddParticle(App->particles->tankMissileDownLeft, position.x - 15, position.y - 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle2 = App->particles->AddParticle(App->particles->tankMissileDownLeft, position.x + 30, position.y + 5, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
             break;
         case 3: // Down-Right-Diagonal 
-            newParticle = App->particles->AddParticle(App->particles->tankMissileRight, position.x + 63, position.y + 28, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle = App->particles->AddParticle(App->particles->tankMissileDownRight, position.x + 43, position.y + 33, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle2 = App->particles->AddParticle(App->particles->tankMissileDownRight, position.x + 73, position.y + 13, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
             break;
         case 4: // Down-Left-Diagonal 
-            newParticle = App->particles->AddParticle(App->particles->tankMissileLeft, position.x - 10, position.y + 35, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle = App->particles->AddParticle(App->particles->tankMissileDownLeft, position.x - 5, position.y + 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle2 = App->particles->AddParticle(App->particles->tankMissileDownLeft, position.x + 15, position.y + 50, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
             break;
         case 5: // Right 
-            newParticle = App->particles->AddParticle(App->particles->tankMissileDownRight, position.x + 55, position.y + 15, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle = App->particles->AddParticle(App->particles->tankMissileRight, position.x + 50, position.y + 25, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle2 = App->particles->AddParticle(App->particles->tankMissileRight, position.x + 50, position.y + 15, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
             break;
         case 6: // Left 
-            newParticle = App->particles->AddParticle(App->particles->tankMissileDownLeft, position.x - 20, position.y + 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle = App->particles->AddParticle(App->particles->tankMissileLeft, position.x - 10, position.y + 10, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle2 = App->particles->AddParticle(App->particles->tankMissileLeft, position.x - 10, position.y + 50, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
             break;
         case 7: // Down
-            newParticle = App->particles->AddParticle(App->particles->tankMissileDown, position.x - 5, position.y + 50, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle = App->particles->AddParticle(App->particles->tankMissileDown, position.x - 10, position.y + 45, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
+            newParticle2 = App->particles->AddParticle(App->particles->tankMissileDown, position.x + 70, position.y + 45, GetPlayerDirectionBelow(), Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
+            newParticle2->collider->AddListener(NULL);
             break;
         default:
             LOG("Pleyer above boss");

@@ -105,46 +105,53 @@ bool ModuleParticles::Start() {
     enemyShot.lifetime = 180;
 
     // Tank missile
-    tankMissileUp.anim.PushBack(            { 53*0, 206, 53, 53 });
-    tankMissileUp.anim.PushBack(            { 53*1, 206, 53, 53 });
-    tankMissileUp.anim.PushBack(            { 53*2, 206, 53, 53 });
-    tankMissileUp.anim.PushBack(            { 53*3, 206, 53, 53 });
-    tankMissileUp.anim.PushBack(            { 53*4, 206, 53, 53 });
-    tankMissileDown.anim.PushBack(          { 53*5, 206, 53, 53 });
-    tankMissileDown.anim.PushBack(          { 53*6, 206, 53, 53 });
-    tankMissileDown.anim.PushBack(          { 53*7, 206, 53, 53 });
-    tankMissileDown.anim.PushBack(          { 53*8, 206, 53, 53 });
-    tankMissileDown.anim.PushBack(          { 53*9, 206, 53, 53 });
+    tankMissileDown.anim.PushBack(            { 53*0, 206, 53, 53 });
+    tankMissileDown.anim.PushBack(            { 53*1, 206, 53, 53 });
+    tankMissileDown.anim.PushBack(            { 53*2, 206, 53, 53 });
+    tankMissileDown.anim.PushBack(            { 53*3, 206, 53, 53 });
+    tankMissileDown.anim.PushBack(            { 53*4, 206, 53, 53 });
+
+    tankMissileUp.anim.PushBack(          { 53*5, 206, 53, 53 });
+    tankMissileUp.anim.PushBack(          { 53*6, 206, 53, 53 });
+    tankMissileUp.anim.PushBack(          { 53*7, 206, 53, 53 });
+    tankMissileUp.anim.PushBack(          { 53*8, 206, 53, 53 });
+    tankMissileUp.anim.PushBack(          { 53*9, 206, 53, 53 });
+
     tankMissileLeft.anim.PushBack(          { 53*10, 206, 53, 53 });
     tankMissileLeft.anim.PushBack(          { 53*11, 206, 53, 53 });
     tankMissileLeft.anim.PushBack(          { 53*12, 206, 53, 53 });
     tankMissileLeft.anim.PushBack(          { 53*13, 206, 53, 53 });
     tankMissileLeft.anim.PushBack(          { 53*14, 206, 53, 53 });
+
     tankMissileRight.anim.PushBack(         { 53*15, 206, 53, 53 });
     tankMissileRight.anim.PushBack(         { 53*16, 206, 53, 53 });
     tankMissileRight.anim.PushBack(         { 53*17, 206, 53, 53 });
     tankMissileRight.anim.PushBack(         { 53*18, 206, 53, 53 });
     tankMissileRight.anim.PushBack(         { 53*19, 206, 53, 53 });
-    tankMissileUpRight.anim.PushBack(       { 53*20, 206, 53, 53 });
-    tankMissileUpRight.anim.PushBack(       { 53*21, 206, 53, 53 });
-    tankMissileUpRight.anim.PushBack(       { 53*22, 206, 53, 53 });
-    tankMissileUpRight.anim.PushBack(       { 53*23, 206, 53, 53 });
-    tankMissileUpRight.anim.PushBack(       { 53*24, 206, 53, 53 });
-    tankMissileUpLeft.anim.PushBack(        { 53*25, 206, 53, 53 });
-    tankMissileUpLeft.anim.PushBack(        { 53*26, 206, 53, 53 });
-    tankMissileUpLeft.anim.PushBack(        { 53*27, 206, 53, 53 });
-    tankMissileUpLeft.anim.PushBack(        { 53*28, 206, 53, 53 });
-    tankMissileUpLeft.anim.PushBack(        { 53*29, 206, 53, 53 });
-    tankMissileDownRight.anim.PushBack(     { 53*30, 206, 53, 53 });
-    tankMissileDownRight.anim.PushBack(     { 53*31, 206, 53, 53 });
-    tankMissileDownRight.anim.PushBack(     { 53*32, 206, 53, 53 });
-    tankMissileDownRight.anim.PushBack(     { 53*33, 206, 53, 53 });
-    tankMissileDownRight.anim.PushBack(     { 53*34, 206, 53, 53 });
-    tankMissileDownLeft.anim.PushBack(      { 53*35, 206, 53, 53 });
-    tankMissileDownLeft.anim.PushBack(      { 53*36, 206, 53, 53 });
-    tankMissileDownLeft.anim.PushBack(      { 53*37, 206, 53, 53 });
-    tankMissileDownLeft.anim.PushBack(      { 53*38, 206, 53, 53 });
-    tankMissileDownLeft.anim.PushBack(      { 53*39, 206, 53, 53 });
+
+    tankMissileDownLeft.anim.PushBack(       { 53*20, 206, 53, 53 });
+    tankMissileDownLeft.anim.PushBack(       { 53*21, 206, 53, 53 });
+    tankMissileDownLeft.anim.PushBack(       { 53*22, 206, 53, 53 });
+    tankMissileDownLeft.anim.PushBack(       { 53*23, 206, 53, 53 });
+    tankMissileDownLeft.anim.PushBack(       { 53*24, 206, 53, 53 });
+
+    tankMissileDownRight.anim.PushBack(        { 53*25, 206, 53, 53 });
+    tankMissileDownRight.anim.PushBack(        { 53*26, 206, 53, 53 });
+    tankMissileDownRight.anim.PushBack(        { 53*27, 206, 53, 53 });
+    tankMissileDownRight.anim.PushBack(        { 53*28, 206, 53, 53 });
+    tankMissileDownRight.anim.PushBack(        { 53*29, 206, 53, 53 });
+
+    tankMissileUpLeft.anim.PushBack(     { 53*30, 206, 53, 53 });
+    tankMissileUpLeft.anim.PushBack(     { 53*31, 206, 53, 53 });
+    tankMissileUpLeft.anim.PushBack(     { 53*32, 206, 53, 53 });
+    tankMissileUpLeft.anim.PushBack(     { 53*33, 206, 53, 53 });
+    tankMissileUpLeft.anim.PushBack(     { 53*34, 206, 53, 53 });
+
+    tankMissileUpRight.anim.PushBack(      { 53*35, 206, 53, 53 });
+    tankMissileUpRight.anim.PushBack(      { 53*36, 206, 53, 53 });
+    tankMissileUpRight.anim.PushBack(      { 53*37, 206, 53, 53 });
+    tankMissileUpRight.anim.PushBack(      { 53*38, 206, 53, 53 });
+    tankMissileUpRight.anim.PushBack(      { 53*39, 206, 53, 53 });
 
     tankMissileUp.anim.loop = true;
     tankMissileUp.anim.speed = 0.2;

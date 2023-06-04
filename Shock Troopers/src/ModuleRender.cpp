@@ -66,23 +66,9 @@ Update_Status ModuleRender::Update()
 			camera.y = App->player->position.y - 100;
 		}
 	
-		if (camera.y <= 975 && camera.x < 1100) {
-			if (nextCameraX > camera.x && leaveZone) {
-				camera.y = 975;
-				if (nextCameraX > camera.x && !blockRight) {
-					camera.x = nextCameraX;
-				}
-				else if (nextCameraX < camera.x && !blockLeft) {
-					camera.x = nextCameraX;
-				}
-			}
-			else if (!isInZone2) {
-				if (nextCameraX > camera.x && !blockRight) {
-					camera.x = nextCameraX;
-				}
-				else if (nextCameraX < camera.x && !blockLeft) {
-					camera.x = nextCameraX;
-				}
+		if (camera.y == 975 && camera.x < 1100) {
+			if (nextCameraX > camera.x) {
+				camera.x = nextCameraX;
 			}
 		}
 		else if (!isInZone2) {
@@ -94,7 +80,7 @@ Update_Status ModuleRender::Update()
 			}
 		}
 
-		if (isInZone) {
+		if (isInZone|| isInZone3) {
 			camera.y = nextCameraY;
 			if (nextCameraX > camera.x && !blockRight) {
 				camera.x = nextCameraX;
@@ -159,6 +145,9 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 
 		if (c1->rect.y < c2->rect.y + c2->rect.h && !isInZone) {
 			camera.y--;
+			if (App->player->colliderD->rect.y > camera.y + camera.h) {
+				App->player->position.y--;
+			}
 		}
 
 		if (camera.y + camera.h <= c2->rect.y + c2->rect.h || camera.y == c2->rect.y) {
@@ -171,38 +160,18 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 		maxY = c2->rect.y + c2->rect.h;
 
 		if (leaveZone) {
-			camera.y = 975;
 			c2->pendingToDelete = true;
 			leaveZone = false;
 			isInZone = !isInZone;
 		}
-	}
-
-	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE_3) {
-
-		if (c1->rect.y < c2->rect.y + c2->rect.h && !isInZone) {
-			camera.y--;
-		}
-
-		if (camera.y + camera.h <= c2->rect.y + c2->rect.h || camera.y == c2->rect.y) {
-			isInZone3 = true;
-		}
-
-		minX = c2->rect.x;
-		minY = c2->rect.y;
-		maxX = c2->rect.x + c2->rect.w;
-		maxY = c2->rect.y + c2->rect.h;
-
-		if (leaveZone) {
-			c2->pendingToDelete = true;
-			isInZone = !isInZone;
-		}
-	}
-
+	} 
 	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE_2) {
 		isInZone2 = true;
 		if (c1->rect.x + c1->rect.w > c2->rect.x && !isInZone) {
 			camera.x++;
+			if (App->player->colliderL->rect.x < camera.x ) {
+				App->player->position.x++;
+			}
 		}
 
 		if (camera.x >= c2->rect.x || camera.x == c2->rect.x) {
@@ -221,7 +190,31 @@ void ModuleRender::OnCollision(Collider* c1, Collider* c2)
 			isInZone = !isInZone;
 		}
 
-	}	
+	}
+	if (c1 == stopCameraCollider && c2->type == Collider::Type::STOP_CAM_ZONE_3) {
+
+		if (c1->rect.y < c2->rect.y + c2->rect.h && !isInZone) {
+			camera.y--;
+			if (App->player->colliderD->rect.y > camera.y + camera.h) {
+				App->player->position.y--;
+			}
+		}
+
+		if (camera.y + camera.h <= c2->rect.y + c2->rect.h || camera.y == c2->rect.y) {
+			isInZone3 = true;
+		}
+
+		minX = c2->rect.x;
+		minY = c2->rect.y;
+		maxX = c2->rect.x + c2->rect.w;
+		maxY = c2->rect.y + c2->rect.h;
+
+		if (leaveZone) {
+			c2->pendingToDelete = true;
+			leaveZone = false;
+			isInZone = !isInZone;
+		}
+	}
 	if (c1 == cameraRightCollider && c2->type == Collider::Type::CAMERA_LIMIT) {
 		blockRight = true;
 	}

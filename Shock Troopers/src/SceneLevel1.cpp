@@ -52,8 +52,8 @@ bool SceneLevel1::Start() {
 	App->audio->PlayMusic("Assets/Music/03_Shock_Troopers_stage1.ogga", 1.0f);
 
 	// Add colliders
-	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
-	App->collisions->AddCollider({ 838, 1000, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
+	App->collisions->AddCollider({ 0, 975, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
+	App->collisions->AddCollider({ 838, 975, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
 	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE_3);
 	App->collisions->AddCollider({ 100, 1078, 1170, 6 }, Collider::Type::PLAYER_WALL);
 	App->collisions->AddCollider({ 6, 1105, 100, 6 }, Collider::Type::PLAYER_WALL);

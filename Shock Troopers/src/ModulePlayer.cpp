@@ -466,7 +466,6 @@ void ModulePlayer::godMode() {
 	if (App->input->keys[SDL_SCANCODE_F11] == Key_State::KEY_DOWN) {
 		App->pickUps->SpawnPickUp({ PickUp_Type::HP,(int)position.x, (int)position.y - 50 , false });
 	}
-
 }
 
 void ModulePlayer::setIdleAnimations() {

@@ -223,7 +223,7 @@ Update_Status SceneLevel1::Update() {
 	
 	if (App->render->isInZone3 and musicPlayOnce < 1) {
 		musicPlayOnce++;
-		App->audio->PlayMusic("Assets/Music/04_Shock_Troopers_boss.ogg", 1.0f);
+		App->audio->PlayMusic("Assets/Music/04_Shock_Troopers_boss.ogg", 0.5f);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

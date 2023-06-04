@@ -117,14 +117,6 @@ Update_Status ModuleRender::Update()
 		}
 	} 
 
-	if (App->input->keys[SDL_SCANCODE_UP] == KEY_REPEAT)
-		camera.y -= cameraSpeed * SCREEN_HEIGHT;
-
-	//Handle negative vertical movement
-	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_REPEAT) camera.y += cameraSpeed * SCREEN_HEIGHT;
-
-	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT) camera.x -= cameraSpeed;
-
 	if (camera.x < 0) camera.x = 0;
 
 	if (camera.x + camera.w > 1748) camera.x = 1748 - camera.w;
@@ -133,7 +125,6 @@ Update_Status ModuleRender::Update()
 
 	if (camera.y + camera.h > 2999) camera.y = 2999 - camera.h;
 
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)	camera.x += cameraSpeed;
 
 	if (App->input->keys[SDL_SCANCODE_M] == KEY_DOWN) leaveZone = !leaveZone;
 

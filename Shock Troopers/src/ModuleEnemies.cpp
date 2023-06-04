@@ -53,6 +53,13 @@ bool ModuleEnemies::Start() {
 	textureCar = App->textures->Load("Assets/Sprites/background/level1/car.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
+	// Load sound effects
+	soldierShot = App->audio->LoadFx("Assets/fx/DisparoSoldado.wav");
+	if (soldierShot == -1)
+	{
+		LOG("Failed to load DisparoSoldado.wav sound effect");
+	}
+
 	return true;
 }
 

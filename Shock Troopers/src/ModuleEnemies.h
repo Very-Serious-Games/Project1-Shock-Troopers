@@ -101,6 +101,9 @@ public:
 	SDL_Texture* textureCar = nullptr;
 
 	bool winCondition = false;
+
+	// Sound effects indices
+	uint soldierShot = 0;
 };
 
 #endif // __MODULE_ENEMIES_H__

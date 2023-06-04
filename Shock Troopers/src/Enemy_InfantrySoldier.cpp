@@ -6,6 +6,7 @@
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
 #include "ModulePickup.h"
+#include "ModuleEnemies.h"
 
 
 Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
@@ -574,7 +575,7 @@ void Enemy_InfantrySoldier::Shoot() {
 
 		newParticle->collider->AddListener(NULL);
 		newParticleMuzzle->collider->AddListener(NULL);
-		App->audio->PlayFx(NULL);
+		App->audio->PlayFx(App->enemies->soldierShot);
 
 		delayShoot = 700;
 	}

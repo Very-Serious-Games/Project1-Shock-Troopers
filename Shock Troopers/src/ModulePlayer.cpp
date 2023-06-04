@@ -1323,11 +1323,13 @@ bool ModulePlayer::Start() {
 	lastDirection = 8;
 	hp = 100;
 	deathAnim.Reset();
-
+	isInvulnerable = false;
+	hitIsInvulnerable = false;
 	currentState = PlayerState::Spawn;
-
 	App->render->camera.x = 66;
 	App->render->camera.y = 2800;
+
+
 
 	// Set the animations to spawn
 	setSpawnAnimations();
@@ -1386,9 +1388,6 @@ bool ModulePlayer::Start() {
 
 	//Setting up player hitbox
 	collider = App->collisions->AddCollider({ (int)position.x + 5,(int)position.y + 10, 22, 43 }, Collider::Type::PLAYER, this);
-
-
-
 
 	App->render->cameraDownCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, SCREEN_WIDTH, 5 }, Collider::Type::WALL);
 	App->render->cameraLeftCollider = App->collisions->AddCollider({ SCREEN_WIDTH, SCREEN_HEIGHT + 10, 5, SCREEN_HEIGHT }, Collider::Type::WALL);
@@ -1462,7 +1461,7 @@ Update_Status ModulePlayer::PostUpdate() {
 
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
-	if (!isInvulnerable) {
+	if (!hitIsInvulnerable && !isInvulnerable) {
 		// Ignore collision while invulnerable
 		if (c1 == collider && destroyed == false && c2->type == Collider::Type::ENEMY_SHOT && isRolling == false && !isGodMode) {
 

@@ -74,9 +74,6 @@ private:
 	// All spawned PickUp in the scene
 	PickUp* pickUp[MAX_PICKUP] = { nullptr };
 
-	// The audio fx for destroying an PickUp
-	int pickUpDestroyedFx = 0;
-
 	Animation Medkit;
 	Animation PickedMedkit;
 	Animation Diamond;

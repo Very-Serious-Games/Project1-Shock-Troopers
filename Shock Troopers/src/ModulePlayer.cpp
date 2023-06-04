@@ -1238,10 +1238,16 @@ void ModulePlayer::stateMachine() {
 
 		setWinAnimations();
 
-		App->audio->PlayMusic("Assets/Audio/Music/05_Shock_Troopers_stage_clear.ogg", 1.0f);
+		if (playStageClearOnce < 1) {
+			playStageClearOnce++;
+			App->audio->PlayMusic("Assets/Audio/Music/05_Shock_Troopers_stage_clear.ogg", 0.1f);
+		}
 
 		if (winAnim.HasFinished() and App->ui->endStage.HasFinished()) {
-
+			App->render->leaveZone = true;
+			App->render->isInZone = false;
+			App->render->isInZone2 = false;
+			App->render->isInZone3 = false;
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 60);
 
 		}
@@ -1269,6 +1275,7 @@ void ModulePlayer::stateMachine() {
 			App->render->leaveZone = true;
 			App->render->isInZone = false;
 			App->render->isInZone2 = false;
+			App->render->isInZone3 = false;
 			App->fade->FadeToBlack((Module*)App->sceneLevel_1, (Module*)App->sceneMenu, 200);
 		}
 
@@ -1330,6 +1337,7 @@ bool ModulePlayer::Start() {
 	currentState = PlayerState::Spawn;
 	App->render->camera.x = 66;
 	App->render->camera.y = 2800;
+	playStageClearOnce = 0;
 
 
 

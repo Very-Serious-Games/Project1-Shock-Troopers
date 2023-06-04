@@ -91,6 +91,8 @@ public:
 	// Player current state
 	PlayerState currentState;
 
+	int playStageClearOnce = 0;
+
 	int lastDirection;
 
 	int delay = 10;

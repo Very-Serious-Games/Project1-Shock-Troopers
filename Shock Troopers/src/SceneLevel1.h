@@ -39,6 +39,8 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* bgTexture = nullptr;
 	SDL_Texture* bgSky = nullptr;
+
+	int musicPlayOnce = 0;
 };
 
 #endif

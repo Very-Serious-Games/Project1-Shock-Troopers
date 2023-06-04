@@ -26,6 +26,8 @@ SceneLevel1::~SceneLevel1()
 
 bool SceneLevel1::Start() {
 
+	musicPlayOnce = 0;
+
 	LOG("Enabling player");
 	App->player->Enable();
 	LOG("Enabling enemies");
@@ -218,10 +220,10 @@ void SceneLevel1::moveSky() {
 	App->render->Blit(bgSky, cameraX, 960, NULL);
 }
 
-Update_Status SceneLevel1::Update()
-{
+Update_Status SceneLevel1::Update() {
 
-	if (App->render->isInZone3) {
+	if (App->render->isInZone3 and musicPlayOnce < 1) {
+		musicPlayOnce++;
 		App->audio->PlayMusic("Assets/Music/04_Shock_Troopers_boss.ogg", 1.0f);
 	}
 

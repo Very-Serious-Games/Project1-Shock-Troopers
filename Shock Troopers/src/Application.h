@@ -71,6 +71,8 @@ public:
 	ModuleFonts* fonts = nullptr;
 
 	ModuleRender* render = nullptr;
+
+	uint speedMultiplier = 1;
 };
 
 // Global var made extern for Application ---

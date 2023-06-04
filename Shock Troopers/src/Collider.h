@@ -32,6 +32,7 @@ struct Collider
 		MUZZLE,
 		LANDMINE,
 		BRIDGE,
+		CAMERA_LIMIT,
 
 		MAX
 	};

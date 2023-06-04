@@ -72,7 +72,8 @@ public:
 
 
 	bool leaveZone = false;
-
+	bool blockRight = false;
+	bool blockLeft = false;
 
 	bool isInZone2 = false;
 	bool isInZone = false;

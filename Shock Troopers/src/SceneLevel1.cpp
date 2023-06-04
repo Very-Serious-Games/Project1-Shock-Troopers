@@ -46,17 +46,20 @@ bool SceneLevel1::Start() {
 	App->render->leaveZone = false;
 
 	// Load textures and fx
-	bgTexture = App->textures->Load("Assets/Sprites/background/level1/background_mountain_full.png");
+	bgTexture = App->textures->Load("Assets/sprites/background/level1/background_mountain_full.png");
 	bgSky = App->textures->Load("Assets/Sprites/background/level1/background_sky.png");
 	App->audio->PlayMusic("Assets/Music/mountain1.ogg", 1.0f);
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
-	App->collisions->AddCollider({ 838, 1000, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
+	App->collisions->AddCollider({ 838, 965, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
 	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE);
-	App->collisions->AddCollider({ 100, 1085, 1170, 6 }, Collider::Type::PLAYER_WALL);
+	App->collisions->AddCollider({ 100, 1078, 1170, 6 }, Collider::Type::PLAYER_WALL);
 	App->collisions->AddCollider({ 6, 1105, 100, 6 }, Collider::Type::PLAYER_WALL);
 	App->collisions->AddCollider({ 500, 1190, 880, 6 }, Collider::Type::PLAYER_WALL);
+	App->collisions->AddCollider({ 487, 1198, 10, 1804 }, Collider::Type::CAMERA_LIMIT);
+	App->collisions->AddCollider({ 1619, 0, 10, 330 }, Collider::Type::CAMERA_LIMIT);
+	App->collisions->AddCollider({ 1251, 0, 10, 824 }, Collider::Type::CAMERA_LIMIT);
 
 	createMargenes();
 

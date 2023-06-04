@@ -6,6 +6,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 
 Enemy_Tank::Enemy_Tank(int x, int y) : Enemy(x, y) {
 
@@ -55,7 +56,7 @@ void Enemy_Tank::OnCollision(Collider* collider) {
 
     if (health <= 0) {
         App->particles->AddParticle(App->particles->explosion, position.x, position.y, 0);
-        App->audio->PlayFx(destroyedFx);
+        App->audio->PlayFx(App->enemies->tankDestroyed);
         SetToDelete();
     }
 }
@@ -249,7 +250,7 @@ void Enemy_Tank::Attack() {
         newParticleMuzzle->collider->AddListener(NULL);
         newParticle->collider->AddListener(NULL);
 
-        App->audio->PlayFx(/*sound effect*/NULL);
+        App->audio->PlayFx(App->enemies->tankShot);
         delayShoot = 700;
     }
 }

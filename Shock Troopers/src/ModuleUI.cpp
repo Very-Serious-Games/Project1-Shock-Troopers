@@ -129,6 +129,15 @@ void ModuleUI::updateScore(int points)
 
 bool ModuleUI::Start() {
 
+	gameOverSound = 0;
+	// Load sound effects
+	gameOverSound = App->audio->LoadFx("Assets/fx/ui_game_over.wav");
+	if (gameOverSound == -1) {
+		LOG("Failed to load ui_game_over.wav sound effect");
+	}
+
+	playOnce = false;
+	
 	// Reset the score
 	score = 0;
 
@@ -182,6 +191,10 @@ Update_Status ModuleUI::Update() {
 
 	if (App->player->deathAnim.HasFinished()) {
 		gameOver.Update();
+		if (!playOnce) {
+			App->audio->PlayFx(gameOverSound);
+			playOnce = true;
+		}
 	}
 
 	currentAnim->Update();

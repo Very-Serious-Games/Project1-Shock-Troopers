@@ -81,7 +81,7 @@ void Enemy_BarrelGroup::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
         health--;
         if (health == 0) {
-            App->audio->PlayFx(destroyedFx);
+            App->audio->PlayFx(NULL);
             SetToDelete();
         }
     }

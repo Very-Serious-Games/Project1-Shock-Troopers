@@ -102,6 +102,8 @@ private:
 	//falling soldiers
 	Animation fallRightAnim;
 	Animation fallLeftAnim;
+
+	bool playOnce = false;
 };
 
 #endif // __ENEMY_INFANTRYSOLDIER_H__

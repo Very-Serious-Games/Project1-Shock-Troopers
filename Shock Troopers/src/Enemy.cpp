@@ -88,8 +88,6 @@ int Enemy::GetPlayerDirection() {
     return playerDirection;
 }
 
-
-
 int Enemy::GetPlayerDirectionBelow() {
     // Get the player position
     fPoint playerPos = App->player->position;
@@ -126,8 +124,6 @@ int Enemy::GetPlayerDirectionBelow() {
     // Return the player direction
     return playerDirection;
 }
-
-
 
 void Enemy::StateMachine()
 {
@@ -247,7 +243,6 @@ void Enemy::OnCollision(Collider* collider)
    
         if (health <= 0) {
             App->particles->AddParticle(App->particles->explosion, position.x, position.y,0);
-            App->audio->PlayFx(destroyedFx);
             SetToDelete();
         }
 

@@ -100,6 +100,28 @@ SceneMenu::~SceneMenu()
 // Load assets
 bool SceneMenu::Start() {
 
+	acceptSelection = 0;
+	changeSelection = 0;
+	milkySelection = 0;
+
+	acceptSelection = App->audio->LoadFx("Assets/fx/ui_accept_selection.wav");
+	if (milkySelection == -1)
+	{
+		LOG("Failed to load ui_accept_selection.wav sound effect");
+	}
+
+	changeSelection = App->audio->LoadFx("Assets/fx/ui_change_selection.wav");
+	if (milkySelection == -1)
+	{
+		LOG("Failed to load ui_change_selection.wav sound effect");
+	}
+
+	milkySelection = App->audio->LoadFx("Assets/fx/ui_milky_character_selection.wav");
+	if (milkySelection == -1)
+	{
+		LOG("Failed to load ui_milky_character_selection.wav sound effect");
+	}
+
 	App->render->camera.x = 0;
 	App->render->camera.y = 0;
 
@@ -128,14 +150,18 @@ Update_Status SceneMenu::Update() {
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN and currentCharacter == 1 || pad.a == true and currentCharacter == 1)
 	{
 		App->fade->FadeToBlack(this, (Module*)App->sceneLevel_1, 90);
+		App->audio->PlayFx(acceptSelection);
+		App->audio->PlayFx(milkySelection);
 	}
 
 	if (App->input->keys[SDL_SCANCODE_D] == Key_State::KEY_DOWN || pad.right == true) {
 		currentCharacter++;
+		App->audio->PlayFx(changeSelection);
 	}
 
 	if (App->input->keys[SDL_SCANCODE_A] == Key_State::KEY_DOWN || pad.left == true) {
 		currentCharacter--;
+		App->audio->PlayFx(changeSelection);
 	}
 
 	if (App->player->isGodMode == true) {

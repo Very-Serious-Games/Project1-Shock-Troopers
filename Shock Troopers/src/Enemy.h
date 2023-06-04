@@ -92,9 +92,6 @@ public:
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;
 
-	// Sound fx when destroyed
-	int destroyedFx = 0;
-
 	// A flag for the enemy removal. Important! We do not delete objects instantly
 	bool pendingToDelete = false;
 

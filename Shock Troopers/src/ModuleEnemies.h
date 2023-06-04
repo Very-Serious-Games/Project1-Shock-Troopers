@@ -83,9 +83,6 @@ private:
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
-	// The audio fx for destroying an enemy
-	int enemyDestroyedFx = 0;
-
 public:
 	// The enemies sprite sheet
 	SDL_Texture* textureTankBoss = nullptr;
@@ -104,6 +101,15 @@ public:
 
 	// Sound effects indices
 	uint soldierShot = 0;
+	uint soldierKnife = 0;
+	uint soldierDamaged1 = 0;
+	uint soldierDamaged2 = 0;
+
+	uint tankShot = 0;
+	uint tankDestroyed = 0;
+
+	uint flyingBattleshipShot = 0;
+	uint flyingBattleshipMissile = 0;
 };
 
 #endif // __MODULE_ENEMIES_H__

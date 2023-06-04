@@ -49,7 +49,7 @@ bool SceneLevel1::Start() {
 	// Load textures and fx
 	bgTexture = App->textures->Load("Assets/sprites/background/level1/background_mountain_full.png");
 	bgSky = App->textures->Load("Assets/Sprites/background/level1/background_sky.png");
-	App->audio->PlayMusic("Assets/Music/03_Shock_Troopers_stage1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Music/03_Shock_Troopers_stage1.ogga", 1.0f);
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 1000, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);

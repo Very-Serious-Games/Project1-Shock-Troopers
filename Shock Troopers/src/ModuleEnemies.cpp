@@ -39,6 +39,17 @@ bool ModuleEnemies::Start() {
 	// Reset win condition
 	winCondition = false;
 
+	soldierShot = 0;
+	soldierKnife = 0;
+	soldierDamaged1 = 0;
+	soldierDamaged2 = 0;
+
+	tankShot = 0;
+	tankDestroyed = 0;
+
+	flyingBattleshipShot = 0;
+	flyingBattleshipMissile = 0;
+
 	// TODO cargar texturas y fx enemigos
 	textureTankBoss = App->textures->Load("Assets/Sprites/characters/tank_boss.png");
 	textureTank = App->textures->Load("Assets/Sprites/characters/tank_spritesheet.png");
@@ -51,13 +62,54 @@ bool ModuleEnemies::Start() {
 	textureBarrel = App->textures->Load("Assets/Sprites/background/level1/barrel.png");
 	textureBarrelGroup = App->textures->Load("Assets/Sprites/background/level1/barrelGroup.png");
 	textureCar = App->textures->Load("Assets/Sprites/background/level1/car.png");
-	enemyDestroyedFx = App->audio->LoadFx("Assets/Fx/explosion.wav");
 
 	// Load sound effects
-	soldierShot = App->audio->LoadFx("Assets/fx/DisparoSoldado.wav");
+	soldierShot = App->audio->LoadFx("Assets/fx/infantry_soldier_shot.wav");
 	if (soldierShot == -1)
 	{
-		LOG("Failed to load DisparoSoldado.wav sound effect");
+		LOG("Failed to load infantry_soldier_shot.wav sound effect");
+	}
+
+	soldierKnife = App->audio->LoadFx("Assets/fx/infantry_soldier_knife.wav");
+	if (soldierKnife == -1)
+	{
+		LOG("Failed to load infantry_soldier_knife.wav sound effect");
+	}
+
+	soldierDamaged1 = App->audio->LoadFx("Assets/fx/infantry_soldier_damaged_1.wav");
+	if (soldierDamaged1 == -1)
+	{
+		LOG("Failed to load infantry_soldier_damaged_1.wav sound effect");
+	}
+
+	soldierDamaged2 = App->audio->LoadFx("Assets/fx/infantry_soldier_damaged_2.wav");
+	if (soldierDamaged2 == -1)
+	{
+		LOG("Failed to load infantry_soldier_damaged_2.wav sound effect");
+	}
+
+	tankShot = App->audio->LoadFx("Assets/fx/tank_shot.wav");
+	if (tankShot == -1)
+	{
+		LOG("Failed to load tank_shot.wav sound effect");
+	}
+
+	tankDestroyed = App->audio->LoadFx("Assets/fx/tank_destroyed.wav");
+	if (tankDestroyed == -1)
+	{
+		LOG("Failed to load tank_destroyed.wav sound effect");
+	}
+
+	flyingBattleshipShot = App->audio->LoadFx("Assets/fx/flyingbattleship_shot.wav");
+	if (flyingBattleshipShot == -1)
+	{
+		LOG("Failed to load flyingbattleship_shot.wav sound effect");
+	}
+	
+	flyingBattleshipMissile = App->audio->LoadFx("Assets/fx/flyingbattleship_missile.wav");
+	if (flyingBattleshipMissile == -1)
+	{
+		LOG("Failed to load flyingbattleship_shot.wav sound effect");
 	}
 
 	return true;
@@ -244,7 +296,6 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->texture = textureCar;
 					break;
 			}
-			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}
 	}

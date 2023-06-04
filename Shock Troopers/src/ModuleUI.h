@@ -36,6 +36,9 @@ public:
 
 	void updateHp();
 
+	// Audio
+	uint gameOverSound = 0;
+
 	// Font and text Score
 	uint score = 000;
 	int scoreFont = -1;
@@ -44,11 +47,12 @@ public:
 
 	int delayTimer = 200;
 
-
 	// Font and text Timer
 	int timerFont = -1;
 	int timerCounter;
 	char timerCounterText[10] = { "\0" };
+
+	bool playOnce = false;
 
 	void updateScore(int points);
 

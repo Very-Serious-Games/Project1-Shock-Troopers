@@ -1240,6 +1240,7 @@ void ModulePlayer::stateMachine() {
 
 		if (playStageClearOnce < 1) {
 			playStageClearOnce++;
+			App->audio->PlayFx(playerWin);
 			App->audio->PlayMusic("Assets/Music/05_Shock_Troopers_stage_clear.ogg", 0.1f);
 		}
 
@@ -1270,6 +1271,11 @@ void ModulePlayer::stateMachine() {
 	case PlayerState::Death:
 
 		setDeathAnimations();
+
+		if (playDeathOnce < 1) {
+			playDeathOnce++;
+			App->audio->PlayFx(playerDeath);
+		}
 
 		if (deathAnim.HasFinished()) {
 			App->render->leaveZone = true;
@@ -1338,6 +1344,14 @@ bool ModulePlayer::Start() {
 	App->render->camera.x = 66;
 	App->render->camera.y = 2800;
 	playStageClearOnce = 0;
+	playDeathOnce = 0;
+
+	playerShot = 0;
+	playerDamaged = 0;
+	playerDeath = 0;
+	playerGrenadeExplosion = 0;
+	playerGrenadeThrow = 0;
+	playerWin = 0;
 
 
 
@@ -1372,10 +1386,45 @@ bool ModulePlayer::Start() {
 	}
 
 	// Load sound effects
-	playerShot = App->audio->LoadFx("Assets/fx/disparoMilky.wav");
+	playerShot = App->audio->LoadFx("Assets/fx/milky_shot.wav");
 	if (playerShot == -1)
 	{
-		LOG("Failed to load disparoMilky.wav sound effect");
+		LOG("Failed to load milky_shot.wav sound effect");
+		ret = false;
+	}
+
+	playerDamaged = App->audio->LoadFx("Assets/fx/milky_damaged.wav");
+	if (playerDamaged == -1)
+	{
+		LOG("Failed to load milky_damaged.wav sound effect");
+		ret = false;
+	}
+
+	playerDeath = App->audio->LoadFx("Assets/fx/milky_death.wav");
+	if (playerDeath == -1)
+	{
+		LOG("Failed to load milky_death.wav sound effect");
+		ret = false;
+	}
+
+	playerGrenadeExplosion = App->audio->LoadFx("Assets/fx/milky_grenade_explosion.wav");
+	if (playerGrenadeExplosion == -1)
+	{
+		LOG("Failed to load milky_grenade_explosion.wav sound effect");
+		ret = false;
+	}
+
+	playerGrenadeThrow = App->audio->LoadFx("Assets/fx/milky_grenade_throw.wav");
+	if (playerGrenadeThrow == -1)
+	{
+		LOG("Failed to load milky_grenade_throw.wav sound effect");
+		ret = false;
+	}
+
+	playerWin = App->audio->LoadFx("Assets/fx/milky_win.wav");
+	if (playerWin == -1)
+	{
+		LOG("Failed to load milky_win.wav sound effect");
 		ret = false;
 	}
 
@@ -1470,6 +1519,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 
 			if (hp > 0) {
 				hp -= 10;
+				App->audio->PlayFx(playerDamaged);
 			}
 
 			isHitted = true;

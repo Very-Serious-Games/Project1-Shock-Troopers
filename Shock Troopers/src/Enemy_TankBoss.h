@@ -94,6 +94,7 @@ private:
 	Animation soldierPointAnim;
 	Animation soldierUpAnim;
 
+	bool playOnce = false;
 };
 
 #endif // __ENEMY_TANKBOSS_H__

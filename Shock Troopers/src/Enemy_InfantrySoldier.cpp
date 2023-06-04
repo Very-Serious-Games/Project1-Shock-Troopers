@@ -473,9 +473,21 @@ void Enemy_InfantrySoldier::StateMachine() {
 
 			deathAnimation();
 
+			// rand number between 0 and 1
+			if (!playOnce) {
+				if ((rand() % 2) == 0) {
+					App->audio->PlayFx(App->enemies->soldierDamaged1);
+				} else {
+					App->audio->PlayFx(App->enemies->soldierDamaged2);
+				}
+				playOnce = true;
+			}
+			
+
 			if (deathAnimDelay == 0) {
 				App->pickUps->SpawnPickUp({ PickUp_Type::DIAMOND, (int)position.x, (int)position.y });
 				pendingToDelete = true;
+				
 				LOG("pendingToDelete enemy");
 			}
 

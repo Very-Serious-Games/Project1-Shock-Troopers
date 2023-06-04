@@ -92,6 +92,7 @@ public:
 	PlayerState currentState;
 
 	int playStageClearOnce = 0;
+	int playDeathOnce = 0;
 
 	int lastDirection;
 
@@ -203,6 +204,11 @@ public:
 
 	// Sound effects indices
 	uint playerShot = 0;
+	uint playerDamaged = 0;
+	uint playerDeath = 0;
+	uint playerGrenadeExplosion = 0;
+	uint playerGrenadeThrow = 0;
+	uint playerWin = 0;
 
 	// The player's collider
 	Collider* collider = nullptr;

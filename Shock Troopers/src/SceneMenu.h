@@ -48,6 +48,11 @@ public:
 	SDL_Rect availableCharacterMiky;
 
 	SDL_Rect characterName;
+
+	uint acceptSelection = 0;
+	uint changeSelection = 0;
+	uint milkySelection = 0;
+
 };
 
 #endif

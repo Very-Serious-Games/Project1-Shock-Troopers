@@ -97,7 +97,7 @@ void Enemy_Crate::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
 		health--;
         if (health == 0) {
-            App->audio->PlayFx(destroyedFx);
+            App->audio->PlayFx(NULL);
             SetToDelete();
 		}
 	}

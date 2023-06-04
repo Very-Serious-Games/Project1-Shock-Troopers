@@ -31,6 +31,8 @@ private:
 
 	SDL_Texture* textureFlyingBattleship = nullptr;
 
+	bool playOnce = false;
+
 };
 
 #endif // __ENEMY_FLYINGBATTLESHIP_H__

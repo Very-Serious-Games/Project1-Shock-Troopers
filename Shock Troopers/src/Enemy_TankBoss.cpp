@@ -131,7 +131,7 @@ void Enemy_TankBoss::OnCollision(Collider* collider) {
 
     if (health <= 0) {
         App->particles->AddParticle(App->particles->explosion, position.x, position.y, 0);
-        App->audio->PlayFx(destroyedFx);
+        App->audio->PlayFx(NULL);
         SetToDelete();
     }
 }
@@ -203,7 +203,7 @@ void Enemy_TankBoss::canon() {
             LOG("Pleyer above boss");
 			break;
         }
-        App->audio->PlayFx(/*sound effect*/NULL);
+        App->audio->PlayFx(App->enemies->tankShot);
         delayCanon = 700;
     }
 }
@@ -267,7 +267,7 @@ void Enemy_TankBoss::shot() {
         newParticle->collider->AddListener(NULL);
         newParticleMuzzle->collider->AddListener(NULL);
 
-        App->audio->PlayFx(NULL);
+        App->audio->PlayFx(App->enemies->soldierShot);
 
         delayShoot = 100;
     }
@@ -287,7 +287,7 @@ void Enemy_TankBoss::missileRain() {
             Particle* missile = App->particles->AddParticle(App->particles->tankMissileUp, position.x + (rand() % SCREEN_WIDTH), position.y + 10 + (rand() % (SCREEN_WIDTH/2)), 7, Collider::Type::ENEMY_SHOT);
             missile->collider->AddListener(NULL);
             missile->speed.y = 1;
-            App->audio->PlayFx(/*sound effect*/NULL);
+            App->audio->PlayFx(App->enemies->flyingBattleshipMissile);
         }
         delayMissileRain = 700;
     }
@@ -360,7 +360,7 @@ void Enemy_TankBoss::missileLaunch() {
             LOG("Pleyer above boss");
             break;
         }
-        App->audio->PlayFx(/*sound effect*/NULL);
+        App->audio->PlayFx(App->enemies->flyingBattleshipMissile);
         delayMissile = 700;
     }
 }
@@ -522,6 +522,12 @@ void Enemy_TankBoss::StateMachine() {
         break;
     case Enemy_State::DEATH:
         deathAnimation();
+
+        if (!playOnce) {
+            App->audio->PlayFx(App->enemies->tankDestroyed);
+			playOnce = true;
+        }
+
         if (deathAnimDelay == 0) {
             App->enemies->winCondition = true;
             App->render->leaveZone = true;

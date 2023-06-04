@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "Particle.h"
 #include "ModuleRender.h"
+#include "ModuleEnemies.h"
 
 Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 	
@@ -64,7 +65,7 @@ void Enemy_FlyingBattleship::Attack() {
             Particle* newParticle2 = App->particles->AddParticle(App->particles->tankMissileUp, position.x + 87, position.y + 70, 7, Collider::Type::ENEMY_SHOT);
             newParticle->collider->AddListener(NULL);
             newParticle2->collider->AddListener(NULL);
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->flyingBattleshipMissile);
             
             delay = 15;
         }
@@ -85,7 +86,7 @@ void Enemy_FlyingBattleship::Attack() {
 
             newParticle->collider->AddListener(NULL);
             newParticleMuzzle->collider->AddListener(NULL);
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->flyingBattleshipShot);
             
             delay = 15;
         }
@@ -136,6 +137,12 @@ void Enemy_FlyingBattleship::StateMachine() {
         break;
     case Enemy_State::DEATH:
         deathAnimation();
+
+        if (!playOnce) {
+            App->audio->PlayFx(App->enemies->tankDestroyed);
+            playOnce = true;
+        }
+        
 
         if (deathAnimDelay == 0) {
             pendingToDelete = true;

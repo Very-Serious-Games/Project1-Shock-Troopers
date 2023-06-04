@@ -147,35 +147,35 @@ bool ModuleParticles::Start() {
     tankMissileDownLeft.anim.PushBack(      { 53*39, 206, 53, 53 });
 
     tankMissileUp.anim.loop = true;
-    tankMissileUp.anim.speed = 0.3;
+    tankMissileUp.anim.speed = 0.2;
     tankMissileUp.lifetime = 180;
 
     tankMissileDown.anim.loop = true;
-    tankMissileDown.anim.speed = 0.3;
+    tankMissileDown.anim.speed = 0.2;
     tankMissileDown.lifetime = 180;
 
     tankMissileLeft.anim.loop = true;
-    tankMissileLeft.anim.speed = 0.3;
+    tankMissileLeft.anim.speed = 0.2;
     tankMissileLeft.lifetime = 180;
 
     tankMissileRight.anim.loop = true;
-    tankMissileRight.anim.speed = 0.3;
+    tankMissileRight.anim.speed = 0.2;
     tankMissileRight.lifetime = 180;
 
     tankMissileUpRight.anim.loop = true;
-    tankMissileUpRight.anim.speed = 0.3;
+    tankMissileUpRight.anim.speed = 0.2;
     tankMissileUpRight.lifetime = 180;
 
     tankMissileUpLeft.anim.loop = true;
-    tankMissileUpLeft.anim.speed = 0.3;
+    tankMissileUpLeft.anim.speed = 0.2;
     tankMissileUpLeft.lifetime = 180;
 
     tankMissileDownRight.anim.loop = true;
-    tankMissileDownRight.anim.speed = 0.3;
+    tankMissileDownRight.anim.speed = 0.2;
     tankMissileDownRight.lifetime = 180;
 
     tankMissileDownLeft.anim.loop = true;
-    tankMissileDownLeft.anim.speed = 0.3;
+    tankMissileDownLeft.anim.speed = 0.2;
     tankMissileDownLeft.lifetime = 180;
 
     // Tank shots

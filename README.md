@@ -15,7 +15,7 @@ The game comprises eight challenging missions, with each level having a distinct
 
 ## Demo
 
-[Demo video](https://www.youtube.com/embed/DSSk5Oo9IO0)
+[Demo video](https://www.youtube.com/watch?v=DSSk5Oo9IO0)
 
 ## Setup
 
@@ -23,5 +23,24 @@ The game comprises eight challenging missions, with each level having a distinct
 # Setup Game directory
 Debug > Shock Troopers Debug Properties > Debugging > Working Directory > $(SolutionDir)/game
 ```
+
+## Links
+
+- [Github Repository](https://github.com/Very-Serious-Games/Project1-Shock-Troopers)
+- [Github Wiki](https://github.com/Very-Serious-Games/Project1-Shock-Troopers/wiki)
+- [Website](https://very-serious-games.github.io/Project1-Shock-Troopers/)
+
+## Controls
+
+- **Movement:** W A S D
+- **Dodge:** SHIFT
+- **Menu Controller Movement:** W D
+- **Menu Controller Selection:** SPACE
+- **Exit Game:** ESC
+- **Debug Tools:**
+
+![](https://github.com/Very-Serious-Games/Project1-Shock-Troopers/blob/main/Shock%20Troopers/game/Assets/sprites/ui/debug_info.png)
+
+## License
 
 [MIT](https://choosealicense.com/licenses/mit/)

@@ -18,8 +18,7 @@ using namespace std;
 
 ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 {
-
-	//iterate the start stage animation, that has 29 frames per row and 3 rows
+	// iterate the start stage animation, that has 29 frames per row and 3 rows
 	for (int row = 0; row < 8; row++) {
 		for (int col = 0; col < 11; col++) {
 			int frameX = col * SCREEN_WIDTH;
@@ -34,7 +33,7 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 
 	//stage clear anim below
 	
-	//iterate the start stage animation, that has 6 frames per row and 14 rows
+	// iterate the start stage animation, that has 6 frames per row and 14 rows
 	for (int row = 0; row < 14; row++) {
 		for (int col = 0; col < 6; col++) {
 			int frameX = col * SCREEN_WIDTH;
@@ -59,7 +58,7 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	hp10.PushBack({ 110, 2, 7, 131 });
 	hp0.PushBack({ 122, 2, 7, 131 });
 
-	//iterate the start stage animation, that has 48 frames per row and 8 rows
+	// iterate the start stage animation, that has 48 frames per row and 8 rows
 	for (int i = 0; i < 20; i++) {
 		gameOver.PushBack({ 0,0,0,0 });
 	}
@@ -157,7 +156,7 @@ bool ModuleUI::Start() {
 
 	currentAnim = &hp100;
 
-	// Starting sprite
+	// Starting sprites
 	textureP1 = App->textures->Load("Assets/sprites/ui/Player1_Milky.png");
 	textureWeapon = App->textures->Load("Assets/sprites/ui/Weapon_Normal.png");
 	textureSstage = App->textures->Load("Assets/sprites/ui/start-anim.png");
@@ -166,6 +165,8 @@ bool ModuleUI::Start() {
 	timerTextTexture = App->textures->Load("Assets/Fonts/TIME_text.png");
 	textureGameOver = App->textures->Load("Assets/sprites/ui/game_over.png");
 	textureDebugLegend = App->textures->Load("Assets/sprites/ui/debug_info.png");
+	textureGoUP = App->textures->Load("Assets/sprites/ui/goUp.png");
+	textureGoRIGTH = App->textures->Load("Assets/sprites/ui/goRight.png");
 
 	// Starting font points
 	char lookupTable[] = { "0123456789:;(=)? abcdefghijklmnopqrstuvwxyz@!.-." };
@@ -206,34 +207,34 @@ Update_Status ModuleUI::PostUpdate() {
 
 	int x, y;
 
-	//Obtenemos la posicion de la camara
+	// Get camera position
 	x = App->render->camera.x + 2;
 	y = App->render->camera.y + 2;
 
-	//Mostramos por pantalla la UI
+	// Showing UI
 	App->render->Blit(textureHp, x + 3, y + 40, &currentAnim->GetCurrentFrame());
 	App->render->Blit(textureP1, x, y, NULL);
 	App->render->Blit(textureWeapon, x + 10, y + 200, NULL);
 	App->render->Blit(timerTextTexture, x + 132, y + 2, NULL);
 
-	//Mostramos por pantalla la anim inicial
+	// Showing end stage animation screen
 	App->render->Blit(textureSstage, x, y, &(startStage.GetCurrentFrame()), 1.0f);
 
-	//Mostramos por pantalla la anim final de stage
+	// Showing end stage animation screen
 	if (App->enemies->winCondition) {
   		App->render->Blit(textureEstage, x, y, &(endStage.GetCurrentFrame()), 1.0f);
 	}
 
+	// Showing Game over screen 
 	if (App->player->deathAnim.HasFinished()) {
 		App->render->Blit(textureGameOver, x-2, y-2, &(gameOver.GetCurrentFrame()), 1.0f);
 	}
 
-	//Mostramos por pantalla el score
+	// Showing score
 	sprintf_s(scoreText, 10, "%08d", score);
 	App->fonts->BlitText(34, 3, scoreFont, scoreText);
 
-	// Actualizamos timer
-	// TODO Timer
+	// Update timer
 	if (timerCounter > 0) {
 		delayTimer--;
 		if (delayTimer == 0) {
@@ -242,10 +243,11 @@ Update_Status ModuleUI::PostUpdate() {
 		}
 	}
 
-	// Mostramos por pantalla el timer
+	// Showing timer 
 	sprintf_s(timerCounterText, 10, "%3d", timerCounter);
 	App->fonts->BlitText(137.5, 15, timerFont, timerCounterText);
 
+	// Showing debug legend when godmode is on
 	if (App->player->isGodMode) {
 		App->render->Blit(textureDebugLegend, x, y, NULL);
 	}

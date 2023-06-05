@@ -101,6 +101,7 @@ public:
 	SDL_Texture* textureCar = nullptr;
 
 	bool winCondition = false;
+	bool miniBossKilled = false;
 
 	// Sound effects indices
 	uint soldierShot = 0;

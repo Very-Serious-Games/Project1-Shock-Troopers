@@ -145,6 +145,7 @@ void Enemy_FlyingBattleship::StateMachine() {
         
 
         if (deathAnimDelay == 0) {
+            App->enemies->miniBossKilled = true;
             pendingToDelete = true;
             App->render->leaveZone = true;
             LOG("pendingToDelete enemy");

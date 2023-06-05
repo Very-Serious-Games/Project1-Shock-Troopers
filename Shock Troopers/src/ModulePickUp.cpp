@@ -60,15 +60,15 @@ ModulePickUp::ModulePickUp(bool startEnabled) : Module(startEnabled)
 	PickedNoDamage.PushBack({ 10 * 32, 16, 32, 16 });
 
 	Medkit.speed = 0.08f;
-	PickedMedkit.speed = 0.05;
+	PickedMedkit.speed = 0.17f;
 	PickedMedkit.loop = false;
 
 	Diamond.speed = 0.08f;
-	PickedDiamond.speed = 0.05;
+	PickedDiamond.speed = 0.14f;
 	PickedDiamond.loop = false;
 
 	NoDamage.speed = 0.08f;
-	PickedNoDamage.speed = 0.05;
+	PickedNoDamage.speed = 0.12f;
 	PickedNoDamage.loop = false;
 }
 
@@ -89,28 +89,38 @@ bool ModulePickUp::Start()
 		LOG("Failed to load infantry_soldier_shot.wav sound effect");
 	}
 	
-
 	return true;
 }
 
 Update_Status ModulePickUp::Update()
 {
-	HandlePickUpSpawn();
-
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr){
+		if (pickUp[i] != nullptr) {
+
+			if (pickUp[i]->isPicked && pickUp[i]->type == PickUpType::HP)
+			{
+				PickedMedkit.Update();
+			}
+
+			if (pickUp[i]->isPicked && pickUp[i]->type == PickUpType::DIAMOND)
+			{
+				PickedDiamond.Update();
+			}
+
+			if (pickUp[i]->isPicked && pickUp[i]->type == PickUpType::INVENCIBILITY)
+			{
+				PickedNoDamage.Update();
+			}
+
 			pickUp[i]->Update();
 		}
+
 	}
 
 	Medkit.Update();
 	Diamond.Update();
 	NoDamage.Update();
-
-	PickedMedkit.Update();
-	PickedDiamond.Update();
-	PickedNoDamage.Update();
 
 	HandlePickUpDespawn();
 
@@ -122,7 +132,7 @@ Update_Status ModulePickUp::PostUpdate()
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
 		if (pickUp[i] != nullptr)
-		{ 		
+		{
 			if (pickUp[i]->isPicked)
 			{
 				switch (pickUp[i]->type)
@@ -188,11 +198,11 @@ void ModulePickUp::HandlePickUpDespawn()
 		if (pickUp[i] != nullptr)
 		{
 			if ((abs(pickUp[i]->position.x - App->player->position.x) > 400 || abs(pickUp[i]->position.y - App->player->position.y) > 200))
-				{
-					LOG("DeSpawning pickUp at %d", pickUp[i]->position.x * SCREEN_SIZE);
+			{
+				LOG("DeSpawning pickUp at %d", pickUp[i]->position.x * SCREEN_SIZE);
 
-					pickUp[i]->SetToDelete();
-				}
+				pickUp[i]->SetToDelete();
+			}
 		}
 	}
 }
@@ -206,36 +216,36 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case PickUp_Type::HP:
-					pickUp[i] = new PickUp(PickUpType::HP, info.x, info.y);
+			case PickUp_Type::HP:
+				pickUp[i] = new PickUp(PickUpType::HP, info.x, info.y);
 
-					pickUp[i]->texture = texture;
-					pickUp[i]->currentAnim = &Medkit;
+				pickUp[i]->texture = texture;
+				pickUp[i]->currentAnim = &Medkit;
 
-					pickUp[i]->DrawColider(PickUpType::HP);
-					
-					break;
+				pickUp[i]->DrawColider(PickUpType::HP);
 
-				case PickUp_Type::DIAMOND:
-					pickUp[i] = new PickUp(PickUpType::DIAMOND, info.x, info.y);
+				break;
 
-					pickUp[i]->texture = texture;
-					pickUp[i]->currentAnim = &Diamond;
+			case PickUp_Type::DIAMOND:
+				pickUp[i] = new PickUp(PickUpType::DIAMOND, info.x, info.y);
 
-      					pickUp[i]->DrawColider(PickUpType::DIAMOND);
+				pickUp[i]->texture = texture;
+				pickUp[i]->currentAnim = &Diamond;
 
-					break;
-				case PickUp_Type::INVENCIBILITY:
-					pickUp[i] = new PickUp(PickUpType::INVENCIBILITY, info.x, info.y);
+				pickUp[i]->DrawColider(PickUpType::DIAMOND);
 
-					pickUp[i]->texture = texture;
-					pickUp[i]->currentAnim = &NoDamage;
+				break;
+			case PickUp_Type::INVENCIBILITY:
+				pickUp[i] = new PickUp(PickUpType::INVENCIBILITY, info.x, info.y);
 
-					pickUp[i]->DrawColider(PickUpType::INVENCIBILITY);
+				pickUp[i]->texture = texture;
+				pickUp[i]->currentAnim = &NoDamage;
 
-					break;
+				pickUp[i]->DrawColider(PickUpType::INVENCIBILITY);
+
+				break;
 			}
-			
+
 			break;
 		}
 	}
@@ -246,8 +256,9 @@ Update_Status ModulePickUp::PreUpdate()
 	// Remove all pickUp scheduled for deletion
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete)
+		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete && pickUp[i]->currentAnim->HasFinished())
 		{
+			pickUp[i]->currentAnim->Reset();			
 			delete pickUp[i];
 			pickUp[i] = nullptr;
 		}
@@ -256,7 +267,7 @@ Update_Status ModulePickUp::PreUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-void ModulePickUp::OnCollision(Collider* c1, Collider* c2) 
+void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{

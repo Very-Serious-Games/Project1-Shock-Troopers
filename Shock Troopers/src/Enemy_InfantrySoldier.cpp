@@ -522,7 +522,9 @@ void Enemy_InfantrySoldier::StateMachine() {
 			
 
 			if (deathAnimDelay == 0) {
-				App->pickUps->SpawnPickUp({ PickUp_Type::DIAMOND, (int)position.x, (int)position.y });
+				if ((rand() % 10) <= 3) { // 30% chance to drop a diamond
+					App->pickUps->SpawnPickUp({ PickUp_Type::DIAMOND, (int)position.x, (int)position.y });
+				}
 				pendingToDelete = true;
 				
 				LOG("pendingToDelete enemy");

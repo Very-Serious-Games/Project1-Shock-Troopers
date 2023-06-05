@@ -131,7 +131,7 @@ void Enemy_TankBoss::OnCollision(Collider* collider) {
 
     if (health <= 0) {
         App->particles->AddParticle(App->particles->explosion, position.x, position.y, 0);
-        App->audio->PlayFx(NULL);
+        App->audio->PlayFx(App->enemies->tankDestroyed);
         SetToDelete();
     }
 }

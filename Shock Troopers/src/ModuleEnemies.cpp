@@ -47,6 +47,11 @@ bool ModuleEnemies::Start() {
 	tankShot = 0;
 	tankDestroyed = 0;
 
+	bridgeDestroyed = 0;
+	bridgeDamaged = 0;
+	crateDestroyed = 0;
+	landmineExplosion = 0;
+
 	flyingBattleshipShot = 0;
 	flyingBattleshipMissile = 0;
 
@@ -110,6 +115,30 @@ bool ModuleEnemies::Start() {
 	if (flyingBattleshipMissile == -1)
 	{
 		LOG("Failed to load flyingbattleship_shot.wav sound effect");
+	}
+
+	bridgeDestroyed = App->audio->LoadFx("Assets/fx/bridge_destroyed.wav");
+	if (bridgeDestroyed == -1)
+	{
+		LOG("Failed to load bridge_destroyed.wav sound effect");
+	}
+
+	bridgeDamaged = App->audio->LoadFx("Assets/fx/bridge_damaged.wav");
+	if (bridgeDamaged == -1)
+	{
+		LOG("Failed to load bridge_damaged.wav sound effect");
+	}
+
+	crateDestroyed = App->audio->LoadFx("Assets/fx/crate_destroyed.wav");
+	if (crateDestroyed == -1)
+	{
+		LOG("Failed to load crate_destroyed.wav sound effect");
+	}
+
+	landmineExplosion = App->audio->LoadFx("Assets/fx/milky_grenade_explosion.wav");
+	if (landmineExplosion == -1)
+	{
+		LOG("Failed to load milky_grenade_explosion.wav sound effect");
 	}
 
 	return true;

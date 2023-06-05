@@ -74,6 +74,8 @@ private:
 	// All spawned PickUp in the scene
 	PickUp* pickUp[MAX_PICKUP] = { nullptr };
 
+	uint pickUpAudio = 0;
+
 	Animation Medkit;
 	Animation PickedMedkit;
 	Animation Diamond;

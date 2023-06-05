@@ -77,11 +77,18 @@ ModulePickUp::~ModulePickUp()
 
 }
 
-
-
 bool ModulePickUp::Start()
 {
+	pickUpAudio = 0;
+
 	texture = App->textures->Load("Assets/sprites/pickups/pickups_spritesheet.png");
+
+	pickUpAudio = App->audio->LoadFx("Assets/audio/fx/pickup_diamond.wav");
+	if (pickUpAudio == -1)
+	{
+		LOG("Failed to load infantry_soldier_shot.wav sound effect");
+	}
+	
 
 	return true;
 }
@@ -255,10 +262,10 @@ void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER)
 		{
-			// TODO Cuando colisiona con el player se cambia a isPicked true
+			
 			pickUp[i]->isPicked = true;
-
 			pickUp[i]->OnCollision(c2);
+			App->audio->PlayFx(pickUpAudio);
 			
 			break;
 		}

@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 
 Enemy_Car::Enemy_Car(int x, int y) : Enemy(x, y) {
 
@@ -81,7 +82,7 @@ void Enemy_Car::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
         health--;
         if (health == 0) {
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->tankDestroyed);
             SetToDelete();
         }
     }

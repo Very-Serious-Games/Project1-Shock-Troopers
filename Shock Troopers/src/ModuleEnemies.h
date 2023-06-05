@@ -110,6 +110,11 @@ public:
 
 	uint flyingBattleshipShot = 0;
 	uint flyingBattleshipMissile = 0;
+
+	uint bridgeDestroyed = 0;
+	uint bridgeDamaged = 0;
+	uint crateDestroyed = 0;
+	uint landmineExplosion = 0;
 };
 
 #endif // __MODULE_ENEMIES_H__

@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 
 Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
 
@@ -122,8 +123,9 @@ void Enemy_Bridge::StateMachine() {
 void Enemy_Bridge::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
         health--;
+        App->audio->PlayFx(App->enemies->bridgeDamaged);
         if (health == 0) {
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->bridgeDestroyed);
             SetToDelete();
         }
     }

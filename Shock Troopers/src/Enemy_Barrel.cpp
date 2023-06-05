@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 
 Enemy_Barrel::Enemy_Barrel(int x, int y) : Enemy(x, y) {
 
@@ -93,7 +94,7 @@ void Enemy_Barrel::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
         health--;
         if (health == 0) {
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->landmineExplosion);
             SetToDelete();
         }
     }

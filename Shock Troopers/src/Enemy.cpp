@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include <cmath>
 
 Enemy::Enemy(int x, int y) : position(x, y)
 {
@@ -39,8 +40,6 @@ void Enemy::Update() {
 
     StateMachine();
 }
-
-#include <cmath>
 
 int Enemy::GetPlayerDirection() {
     // Get the player position

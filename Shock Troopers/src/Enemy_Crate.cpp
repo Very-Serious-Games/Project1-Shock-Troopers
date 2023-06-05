@@ -23,8 +23,11 @@ Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
 
     deathAnim.speed = 0.1f;
 
+    //path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
+    //path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
     path.PushBack({ 0.0f, 0.0f }, 80, &deathAnim);
 
+    // TODO cambiar tama�o collider
     collider = App->collisions->AddCollider({ 0, 0, 27, 36 }, Collider::Type::OBJECT, (Module*)App->enemies);
     collider->SetPos(position.x + 20, position.y + 13);
     health = 1;
@@ -34,6 +37,7 @@ void Enemy_Crate::Update() {
 
     path.Update();
     position = spawnPos + path.GetRelativePosition();
+    //currentAnim = &spawnAnim;
 
     // Call to the base class. It must be called at the end
     // It will update the collider depending on the position

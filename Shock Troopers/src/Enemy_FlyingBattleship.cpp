@@ -19,11 +19,13 @@ Enemy_FlyingBattleship::Enemy_FlyingBattleship(int x, int y) : Enemy(x, y) {
 
 	deathAnim.PushBack({384, 0, 121, 124});
 
-
+	//path.PushBack({ 0.0f, 0.0f }, 500, &spawnAnim);
 	path.PushBack({ 1.0f, 0.0f }, 150, &idleAnim);
 	path.PushBack({ -1.0f, 0.0f }, 150, &idleAnim);
+	//path.PushBack({ 0.0f, 0.0f }, 100, &deathAnim);
 	
 
+	// TODO cambiar tamaño collider
 	collider = App->collisions->AddCollider({ 0, 0, 121, 124 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
     this->health = 300;
@@ -33,6 +35,7 @@ void Enemy_FlyingBattleship::Update() {
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
+	//currentAnim = path.GetCurrentAnimation();
 	currentAnim = &spawnAnim;
 
 	// Call to the base class. It must be called at the end

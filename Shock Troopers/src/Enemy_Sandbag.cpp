@@ -33,6 +33,7 @@ Enemy_Sandbag::Enemy_Sandbag(int x, int y) : Enemy(x, y) {
 
     path.PushBack({ 0.0f, 0.0f }, 480, &deathAnim);
 
+    // TODO cambiar tama�o collider
     collider = App->collisions->AddCollider({ 0, 0, 94, 42 }, Collider::Type::OBJECT, (Module*)App->enemies);
     collider->SetPos(position.x + 4, position.y + 66);
     health = 10;

@@ -56,7 +56,7 @@ bool ModuleEnemies::Start() {
 	flyingBattleshipShot = 0;
 	flyingBattleshipMissile = 0;
 
-	// Ccargar texturas y fx enemigos
+	// TODO cargar texturas y fx enemigos
 	textureTankBoss = App->textures->Load("Assets/Sprites/characters/tank_boss.png");
 	textureTank = App->textures->Load("Assets/Sprites/characters/tank_spritesheet.png");
 	textureFlyingBattleship = App->textures->Load("Assets/Sprites/characters/jet_boss.png");
@@ -264,6 +264,7 @@ void ModuleEnemies::HandleEnemiesSpawn()
 
 void ModuleEnemies::HandleEnemiesDespawn()
 {
+	// TODO despawn enemies
 	
 	// Iterate existing enemies
 	for (uint i = 0; i < MAX_ENEMIES; ++i)

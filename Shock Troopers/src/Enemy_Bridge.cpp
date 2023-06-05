@@ -46,6 +46,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
+    // TODO cambiar tama�o collider
     collider = App->collisions->AddCollider({ 0, 0, 224, 86 }, Collider::Type::BRIDGE, (Module*)App->enemies);
     health = 2;
 }

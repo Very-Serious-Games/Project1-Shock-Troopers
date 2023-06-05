@@ -52,7 +52,7 @@ void Enemy_Tank::OnCollision(Collider* collider) {
         isHitted = true;
     }
 
-    this->health = health - 10;
+    this->health = health - 10; // TODO : change this to the damage of the bullet
 
     if (health <= 0) {
         App->particles->AddParticle(App->particles->explosion, position.x, position.y, 0);

@@ -264,6 +264,7 @@ void Enemy_InfantrySoldier::Update() {
 
 	path.Update();
 	position = spawnPos + relativePosition;
+	//currentAnim = &upBossSoldierAnim;
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
@@ -272,8 +273,15 @@ void Enemy_InfantrySoldier::Update() {
 
 bool Enemy_InfantrySoldier::PlayerIsNear() {
 
-	int detectionDistance = 150;
+	int detectionDistance = 150; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
 	int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
+
+
+	// TODO print debug mode detection zone
+	/*
+	SDL_Rect rect = { position.x, position.y, detectionDistance, detectionDistance };
+	App->collisions->AddCollider(rect, Collider::Type::DETECTION_ZONE);
+	*/
 
 	if (distance <= detectionDistance) {
 		return true;
@@ -284,7 +292,7 @@ bool Enemy_InfantrySoldier::PlayerIsNear() {
 
 bool Enemy_InfantrySoldier::PlayerIsAttackRange() {
 
-	int detectionDistance = 120;
+	int detectionDistance = 120; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
 	int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
 
 	if (distance <= detectionDistance) {
@@ -329,42 +337,40 @@ void Enemy_InfantrySoldier::idleAnimation(int direction) {
 }
 
 int Enemy_InfantrySoldier::spawnAnimation(int direction) {
-
-	switch (direction) {
-	case 1: //UR
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 3: //DR
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 5: //R
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 7: //R
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 8: //R
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 2: //UL
-		currentAnim = &fallLeftAnim;
-		return 2;
-		break;
-	case 4: //DL
-		currentAnim = &fallLeftAnim;
-		return 2;
-		break;
-	case 6: //L
-		currentAnim = &fallLeftAnim;
-		return 2;
-		break;
-	}
-	
+		switch (direction) {
+		case 1: //UR
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 3: //DR
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 5: //R
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 7: //R
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 8: //R
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 2: //UL
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 4: //DL
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 6: //L
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		}
 }
 
 void Enemy_InfantrySoldier::moveAnimation(int direction) {
@@ -664,8 +670,15 @@ void Enemy_InfantrySoldier::Knife() {
 			knifeWidth,
 			knifeHeight
 		},
-		Collider::Type::KNIFE,
+		Collider::Type::KNIFE, // TODO: KNIFE
 		NULL);
+
+	// TODO logica para borrar el collider dependiendo de la animacion
+	/*
+	if (knifeUpAnim.HasFinished()) {
+		App->collisions->RemoveCollider(knife);
+	}
+	*/
 
 }
 
@@ -695,9 +708,9 @@ void Enemy_InfantrySoldier::move() {
 }
 
 void Enemy_InfantrySoldier::OnCollision(Collider* collider) {
-	if (state == Enemy_State::SPAWN) {
+	if (state != Enemy_State::SPAWN) {
 		if (collider->type == Collider::Type::PLAYER_SHOT) {
-			health--;
+			health -= 10;
 			if (health == 0) {
 				SetToDelete();
 			}

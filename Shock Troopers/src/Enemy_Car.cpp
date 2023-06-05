@@ -21,6 +21,7 @@ Enemy_Car::Enemy_Car(int x, int y) : Enemy(x, y) {
 
     path.PushBack({ 0.0f, 0.0f }, 600, &deathAnim);
 
+    // TODO cambiar tamaño collider//
     collider = App->collisions->AddCollider({ 0, 0, 92, 61 }, Collider::Type::OBJECT, (Module*)App->enemies);
     collider->SetPos(position.x + 14, position.y + 39);
     health = 7;

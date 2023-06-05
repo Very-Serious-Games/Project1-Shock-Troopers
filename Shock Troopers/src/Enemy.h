@@ -11,6 +11,7 @@
 struct SDL_Texture;
 struct Collider;
 
+// TODO revisar estados de enemigo
 enum class Enemy_State
 {
 	SPAWN,

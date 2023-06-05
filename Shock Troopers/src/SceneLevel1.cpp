@@ -55,7 +55,8 @@ bool SceneLevel1::Start() {
 
 	// Add colliders
 	App->collisions->AddCollider({ 0, 975, 486, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE);
-	App->collisions->AddCollider({ 838, 975, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
+	App->collisions->AddCollider({ 708, 975, SCREEN_WIDTH, SCREEN_HEIGHT }, Collider::Type::STOP_CAM_ZONE_2);
+	App->collisions->AddCollider({ 980, 1121, 13, 70 }, Collider::Type::TRIGGER_LEAVE_ZONE_2);
 	App->collisions->AddCollider({ 1255, 3, 366, 253 }, Collider::Type::STOP_CAM_ZONE_3);
 	App->collisions->AddCollider({ 100, 1078, 1170, 6 }, Collider::Type::PLAYER_WALL);
 	App->collisions->AddCollider({ 6, 1105, 100, 6 }, Collider::Type::PLAYER_WALL);
@@ -238,27 +239,38 @@ Update_Status SceneLevel1::Update() {
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 266, 1376, true);// pre 1st boss
 		wave++;
 	}
-	if (App->player->position.y <= 1510 and wave == 6) {
+	if (App->render->isInZone2 and wave == 6) {
+		App->collisions->AddCollider({ 760, 1010, 1, 1 }, Collider::Type::STOP_ENEMY);
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 760, 1010, true);// bridge
+		App->collisions->AddCollider({ 840, 1010, 1, 1 }, Collider::Type::STOP_ENEMY);
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 840, 1010, true);// bridge
+		App->collisions->AddCollider({ 945, 1010, 1, 1 }, Collider::Type::STOP_ENEMY);
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 945, 1010, true);// bridge
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 760, 1120, true);// bridge
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 950, 1120);// bridge
+		wave++;
+	}
+	if (App->player->position.y <= 1510 and wave == 7) {
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1364, 1080, true);// post 1st boss
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1320, 1077, true);// post 1st boss
 		wave++;
 	}
-	if (App->player->position.y <= 970 and wave == 7) {
+	if (App->player->position.y <= 970 and wave == 8) {
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1603, 846, true);// pre 2nd miniboss
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1506, 846, true);// pre 2nd miniboss
 		wave++;
 	}
-	if (App->player->position.y <= 840 and wave == 8) {
+	if (App->player->position.y <= 840 and wave == 9) {
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1641, 719, true);// pre 2nd miniboss
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1514, 719, true);// pre 2nd miniboss
 		wave++;
 	}
-	if (App->player->position.y <= 700 and wave == 9) {
+	if (App->player->position.y <= 700 and wave == 10) {
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1411, 467, true);// pre 3rd miniboss
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1490, 538, true);// pre 3rd miniboss
 		wave++;
 	}
-	if (App->player->position.y <= 560 and wave == 10) {
+	if (App->player->position.y <= 560 and wave == 11) {
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1493, 444, true);// pre 3rd miniboss
 		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1543, 498, true);// pre 3rd miniboss
 		wave++;

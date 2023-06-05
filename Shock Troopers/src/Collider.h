@@ -34,6 +34,8 @@ struct Collider
 		LANDMINE,
 		BRIDGE,
 		CAMERA_LIMIT,
+		TRIGGER_LEAVE_ZONE_2,
+		STOP_ENEMY,
 
 		MAX
 	};

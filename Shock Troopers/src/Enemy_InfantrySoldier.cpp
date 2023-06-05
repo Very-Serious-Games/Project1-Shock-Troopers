@@ -292,7 +292,7 @@ bool Enemy_InfantrySoldier::PlayerIsNear() {
 
 bool Enemy_InfantrySoldier::PlayerIsAttackRange() {
 
-	int detectionDistance = 100; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+	int detectionDistance = 120; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
 	int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
 
 	if (distance <= detectionDistance) {
@@ -488,7 +488,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 				state = Enemy_State::ATTACK;
 			}
 
-			if (PlayerIsNear()) {
+			if (PlayerIsNear() and canMove) {
 				state = Enemy_State::MOVE;
 			}
 
@@ -533,10 +533,11 @@ void Enemy_InfantrySoldier::StateMachine() {
 			break;
 
 		case Enemy_State::MOVE:
+			if (canMove) {
+				moveAnimation(GetPlayerDirection());
 
-			moveAnimation(GetPlayerDirection());
-
-			move();
+				move();
+			}
 
 			if (PlayerIsAttackRange()) {
 				state = Enemy_State::ATTACK;
@@ -553,17 +554,7 @@ void Enemy_InfantrySoldier::StateMachine() {
 }
 
 void Enemy_InfantrySoldier::Attack() {
-	/*
-	if (PlayerIsMele()) {
-		delayKnife--;
-		if (delayKnife == 0) {
-			Knife();
-			delayKnife = 500;
-		}
-	} else {
-		Shoot();
-	}
-	*/
+     
 	Shoot();
 	
 }
@@ -708,7 +699,9 @@ void Enemy_InfantrySoldier::move() {
 
 	// Update the enemy's position based on the direction and movement speed
 	float speed = 0.1f; // Adjust the movement speed as needed
-	relativePosition.x += (float)direction.x * speed;
-	relativePosition.y += (float)direction.y * speed;
+	if (canMove) {
+		relativePosition.x += (float)direction.x * speed;
+		relativePosition.y += (float)direction.y * speed;
+	}
 	
 }

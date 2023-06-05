@@ -114,7 +114,6 @@ Update_Status ModuleRender::Update()
 	if (camera.y + camera.h > 2999) camera.y = 2999 - camera.h;
 
 
-	if (App->input->keys[SDL_SCANCODE_M] == KEY_DOWN) leaveZone = !leaveZone;
 
 	blockLeft = false;
 	blockRight = false;

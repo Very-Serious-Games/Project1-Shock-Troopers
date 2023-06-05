@@ -104,6 +104,7 @@ public:
 	int delayMissileRain = 700;
 	int delayKnife = 500;
 	int deathAnimDelay = 50;
+	bool canMove = true;
 
 protected:
 	// A ptr to the current animation

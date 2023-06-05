@@ -236,7 +236,7 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {   
-    if (collider->type != Collider::Type::PLAYER) {
+    if (collider->type != Collider::Type::PLAYER and collider->type != Collider::Type::STOP_ENEMY) {
 
         this->health = health - 10; // TODO : change this to the damage of the bullet
    
@@ -246,6 +246,9 @@ void Enemy::OnCollision(Collider* collider)
         }
 
     }
+    if (collider->type == Collider::Type::STOP_ENEMY) {
+        canMove = false;
+	}
 }
 
 void Enemy::SetToDelete()

@@ -398,7 +398,6 @@ ModulePlayer::~ModulePlayer() {
 void ModulePlayer::updateHp() {
 		
 	if (!isInvulnerable) {
-		// TODO revisar esta invulnerabilidad
 		invulnerabilityTimer = 0.0f;
 		
 	}

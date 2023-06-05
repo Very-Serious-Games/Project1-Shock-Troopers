@@ -11,8 +11,6 @@
 Enemy::Enemy(int x, int y) : position(x, y)
 {
 	spawnPos = position;
-    // TODO revisar añadir triggerArea a enemy
-    //triggerArea = App->collisions->AddCollider({ position.x, position.y, 1, 1 }, Collider::Type::TRIGGERAREA);
 }
 
 Enemy::~Enemy()
@@ -238,7 +236,7 @@ void Enemy::OnCollision(Collider* collider)
 {   
     if (collider->type != Collider::Type::PLAYER and collider->type != Collider::Type::STOP_ENEMY) {
 
-        this->health = health - 10; // TODO : change this to the damage of the bullet
+        this->health = health - 10;
    
         if (health <= 0) {
             App->particles->AddParticle(App->particles->explosion, position.x, position.y,0);
@@ -255,21 +253,14 @@ void Enemy::SetToDelete()
 {
     this->state = Enemy_State::DEATH;
 	if (collider != nullptr)
-		collider->pendingToDelete = true; // TODO : colliders doesn't have an state machine
+		collider->pendingToDelete = true;
 }
 
 bool Enemy::PlayerIsNear() {
 
-    int detectionDistance = 200; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+    int detectionDistance = 200;
     int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
     
-
-    // TODO print debug mode detection zone
-    /*
-    SDL_Rect rect = { position.x, position.y, detectionDistance, detectionDistance };
-    App->collisions->AddCollider(rect, Collider::Type::DETECTION_ZONE);
-    */
-
     if (distance <= detectionDistance) {
         return true;
     }
@@ -279,7 +270,7 @@ bool Enemy::PlayerIsNear() {
 
 bool Enemy::PlayerIsAttackRange() {
 
-    int detectionDistance = 150; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+    int detectionDistance = 150;
     int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
 
     if (distance <= detectionDistance) {
@@ -291,15 +282,8 @@ bool Enemy::PlayerIsAttackRange() {
 
 bool Enemy::PlayerIsMele() {
 
-    int detectionDistance = 50; // TODO : change this to the detection distance of the enemy (maybe a variable in the enemy class)
+    int detectionDistance = 50;
     int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
-
-
-    // TODO print debug mode detection zone
-    /*
-    SDL_Rect rect = { position.x, position.y, detectionDistance, detectionDistance };
-    App->collisions->AddCollider(rect, Collider::Type::DETECTION_ZONE);
-    */
 
     if (distance <= detectionDistance) {
         return true;

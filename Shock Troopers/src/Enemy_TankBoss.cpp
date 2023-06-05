@@ -96,13 +96,9 @@ Enemy_TankBoss::Enemy_TankBoss(int x, int y) : Enemy(x, y) {
     soldierGrenadeRightAnim.speed = 0.1f;
     soldierUpAnim.speed = 0.1f;
 
-    // TODO cambiar tama�o collider
     collider = App->collisions->AddCollider({ 0, 0, 109, 163 }, Collider::Type::ENEMY, (Module*)App->enemies);
 
     path.PushBack({0,0}, 200, &botAnimMoving);
-    //path.PushBack({0,100}, 200, &botAnimMoving);
-    //path.PushBack({0,0}, 200, &botAnimMoving);
-    //path.PushBack({0,-100}, 200, &botAnimMoving);
 
     this->health = 2000;
 
@@ -127,7 +123,7 @@ void Enemy_TankBoss::OnCollision(Collider* collider) {
         isHitted = true;
     }
 
-    this->health = health - 10; // TODO : change this to the damage of the bullet
+    this->health = health - 10;
 
     if (health <= 0) {
         App->particles->AddParticle(App->particles->explosion, position.x, position.y, 0);

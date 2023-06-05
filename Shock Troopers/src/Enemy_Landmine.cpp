@@ -18,7 +18,6 @@ Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
     
     path.PushBack({ 0.0f, 0.0f }, 150, &idleAnim);
 
-    // TODO cambiar tama�o collider
     collider = App->collisions->AddCollider({ 0, 0, 28, 16 }, Collider::Type::LANDMINE, (Module*)App->enemies);
 
     health = 1;

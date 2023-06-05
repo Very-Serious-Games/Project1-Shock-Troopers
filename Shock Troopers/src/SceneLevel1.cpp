@@ -44,6 +44,8 @@ bool SceneLevel1::Start() {
 
 	bool ret = true;
 
+	wave = 0;
+
 	App->render->leaveZone = false;
 
 	// Load textures and fx
@@ -77,49 +79,27 @@ bool SceneLevel1::Start() {
 	// Soldier
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1323, 351);// pre 3rd miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1510, 351);// pre 3rd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1493, 444);// pre 3rd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1543, 498);// pre 3rd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1411, 467);// pre 3rd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1490, 538);// pre 3rd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1641, 719);// pre 2nd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1514, 719);// pre 2nd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1603, 846);// pre 2nd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1506, 846);// pre 2nd miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1526, 909);// pre 2nd miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1436, 981);// post 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1516, 1111);// post 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1393, 1014);// post 1st boss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1364, 1080);// post 1st boss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1320, 1077);// post 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1278, 1092);// post 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1287, 1117);// post 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1066, 1117);// post 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 266, 1280);// pre 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 119, 1328);// pre 1st boss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 266, 1376);// pre 1st boss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 237, 1449);// post 2nd miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 193, 1488);// post 2nd miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 157, 1534);// post 2nd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 319, 1580);// pre 2nd miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 319, 1681);// pre 2nd miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 295, 1781);// pre 2nd miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 223, 2015);// post 1st miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 237, 2028);// post 1st miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 307, 2075);// post 1st miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 171, 2075);// post 1st miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 300, 2250);// pre 1st miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 266, 2323);// pre 1st miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 233, 2382);// pre 1st miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 333, 2232);// pre 1st miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 201, 2271);// pre 1st miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 268, 2271);// pre 1st miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 121, 2327);// pre 1st miniboss
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 57, 2361);// pre 1st miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 262, 2421);// pre 1st miniboss
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 211, 2491);// post stone bridge
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 91, 2491);// post stone bridge
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 202, 2526);// post stone bridge
-	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 91, 2526);// post stone bridge
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 173, 2618);// spawn
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 158, 2726);// spawn
 	App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 173, 2710);// spawn
@@ -227,6 +207,61 @@ Update_Status SceneLevel1::Update() {
 	if (App->render->isInZone3 and musicPlayOnce < 1) {
 		musicPlayOnce++;
 		App->audio->PlayMusic("Assets/Music/04_Shock_Troopers_boss.ogg", 0.5f);
+	}
+	// Add falling enemies
+	if (App->player->position.y <= 2600 and wave == 0){
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 202, 2526, true);// post stone bridge
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 91, 2526, true);// post stone bridge
+		wave++;
+	}
+	if (App->player->position.y <= 2560 and wave == 1) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 211, 2491, true);// post stone bridge
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 91, 2491, true);// post stone bridge
+		wave++;
+	}
+	if (App->player->position.y <= 2510 and wave == 2) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 262, 2421, true);// pre 1st miniboss
+		wave++;
+	}
+	if (App->player->position.y <= 2315 and wave == 3) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 300, 2250, true);// pre 1st miniboss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 266, 2323, true);// pre 1st miniboss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 233, 2382, true);// pre 1st miniboss
+		wave++;
+	}
+	if (App->player->position.y <= 1750 and wave == 4) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 319, 1580, true);// pre 2nd miniboss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 319, 1681, true);// pre 2nd miniboss
+		wave++;
+	}
+	if (App->player->position.y <= 1510 and wave == 5) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 266, 1376, true);// pre 1st boss
+		wave++;
+	}
+	if (App->player->position.y <= 1510 and wave == 6) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1364, 1080, true);// post 1st boss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1320, 1077, true);// post 1st boss
+		wave++;
+	}
+	if (App->player->position.y <= 970 and wave == 7) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1603, 846, true);// pre 2nd miniboss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1506, 846, true);// pre 2nd miniboss
+		wave++;
+	}
+	if (App->player->position.y <= 840 and wave == 8) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1641, 719, true);// pre 2nd miniboss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1514, 719, true);// pre 2nd miniboss
+		wave++;
+	}
+	if (App->player->position.y <= 700 and wave == 9) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1411, 467, true);// pre 3rd miniboss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1490, 538, true);// pre 3rd miniboss
+		wave++;
+	}
+	if (App->player->position.y <= 560 and wave == 10) {
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1493, 444, true);// pre 3rd miniboss
+		App->enemies->AddEnemy(Enemy_Type::INFANTRY_SOLDIER, 1543, 498, true);// pre 3rd miniboss
+		wave++;
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

@@ -42,6 +42,8 @@ public:
 
 	int musicPlayOnce = 0;
 	int playStageClearOnce = 0;
+
+	int wave = 0;
 };
 
 #endif

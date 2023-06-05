@@ -21,7 +21,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
         brokenAnim.PushBack({ disX, disY, 224, 220 });
         disX += 304;
     }
-    brokenAnim.speed = 0.5f;
+    brokenAnim.speed = 0.7f;
     brokenAnim.loop = false;
 
     idlebrokenAnim.PushBack({ 0, 444, 224, 220 });
@@ -38,7 +38,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
         deathAnim.PushBack({ disX, disY, 224, 220 });
         disX += 304;
     }
-    deathAnim.speed = 0.5f;
+    deathAnim.speed = 0.7f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 150, &brokenAnim);

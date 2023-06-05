@@ -655,6 +655,9 @@ void ModuleCollisions::DebugDraw()
 			case Collider::Type::CAMERA_LIMIT: // red
 				App->render->DrawQuad(colliders[i]->rect, 255, 0, 0, alpha);
 				break;
+			case Collider::Type::MISSILE: // cian
+				App->render->DrawQuad(colliders[i]->rect, 0, 255, 255, alpha);
+				break;
 			default:
 				break;
 		}

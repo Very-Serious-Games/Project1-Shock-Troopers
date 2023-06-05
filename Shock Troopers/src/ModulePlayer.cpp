@@ -1541,6 +1541,20 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		}
 
 	}
+	if (!hitIsInvulnerable && !isInvulnerable) {
+		// Ignore collision while invulnerable
+		if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && isRolling == false && !isGodMode) {
+
+			if (hp > 0) {
+				hp -= 20;
+				App->audio->PlayFx(playerDamaged);
+			}
+
+			isHitted = true;
+
+		}
+
+	}
 
 	if (c1 == colliderR && destroyed == false && (c2->type == Collider::Type::WALL || c2->type == Collider::Type::PLAYER_WALL || c2->type == Collider::Type::OBJECT) && !isGodMode) {
 		lockR = true;
@@ -1594,7 +1608,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 		App->ui->updateScore(300);
 	}
 
-	if (!isRolling) {
+	/*if (!isRolling) {
 		if (c1 == collider && destroyed == false && c2->type == Collider::Type::LANDMINE && !isGodMode) {
 
 			if (hp < 0) {
@@ -1604,6 +1618,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2) {
 			isHitted = true;
 
 		}
-	}
+	}*/
 
 }

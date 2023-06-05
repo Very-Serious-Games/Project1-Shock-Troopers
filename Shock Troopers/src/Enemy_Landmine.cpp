@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "Particle.h"
+#include "ModuleEnemies.h"
 
 Enemy_Landmine::Enemy_Landmine(int x, int y) : Enemy(x, y) {
 
@@ -82,7 +83,7 @@ void Enemy_Landmine::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER) {
         health--;
         if (health == 0) {
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->landmineExplosion);
             Particle* newParticle = nullptr;
             newParticle = App->particles->AddParticle(App->particles->landmineExplosion, this->position.x - 14, this->position.y - 24, Collider::Type::NONE);
             SetToDelete();

@@ -25,6 +25,7 @@ struct EnemySpawnpoint
 {
 	Enemy_Type type = Enemy_Type::NO_TYPE;
 	int x, y;
+	bool isFalling;
 };
 
 class Enemy;
@@ -65,6 +66,8 @@ public:
 
 	// Add an enemy into the queue to be spawned later
 	bool AddEnemy(Enemy_Type type, int x, int y);
+
+	bool AddEnemy(Enemy_Type type, int x, int y, bool isFalling);
 
 	// Iterates the queue and checks for camera position
 	void HandleEnemiesSpawn();
@@ -111,6 +114,11 @@ public:
 
 	uint flyingBattleshipShot = 0;
 	uint flyingBattleshipMissile = 0;
+
+	uint bridgeDestroyed = 0;
+	uint bridgeDamaged = 0;
+	uint crateDestroyed = 0;
+	uint landmineExplosion = 0;
 };
 
 #endif // __MODULE_ENEMIES_H__

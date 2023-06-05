@@ -9,7 +9,7 @@
 #include "ModuleEnemies.h"
 
 
-Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
+Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y, bool isFalling) : Enemy(x, y) {
 	
 	//falling soldiers spawn
 	fallRightAnim.PushBack({ 50, 33, 62, 67 });
@@ -29,6 +29,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallRightAnim.PushBack({ 932, 33, 62, 67 });
 	fallRightAnim.PushBack({ 995, 33, 62, 67 });
 
+	fallRightAnim.loop = false;
+
 	fallLeftAnim.PushBack({ 50, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 113, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 176, 103, 62, 67 });
@@ -46,12 +48,14 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallLeftAnim.PushBack({ 932, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 995, 103, 62, 67 });
 
+	fallLeftAnim.loop = false;
+
 	//Death Animation
-	deathAnim.PushBack({436, 828, 42, 53}); //41x53?
+	deathAnim.PushBack({436, 828, 42, 53}); 
 	deathAnim.PushBack({478, 828, 42, 53});
 	deathAnim.PushBack({520, 828, 42, 53});
 	deathAnim.PushBack({562, 828, 42, 53});
-	deathAnim.PushBack({604, 828, 42, 53});  //604?
+	deathAnim.PushBack({604, 828, 42, 53});  
 	deathAnim.PushBack({646, 828, 42, 53});
 	deathAnim.PushBack({688, 828, 42, 53});
 
@@ -67,16 +71,16 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	rightDeathAnim.PushBack({795, 827, 54, 54});
 	rightDeathAnim.PushBack({850, 827, 54, 54});
 	rightDeathAnim.PushBack({905, 827, 54, 54});
-	rightDeathAnim.PushBack({960, 827, 54, 54});   //54+1 o 54 entre x i x
+	rightDeathAnim.PushBack({960, 827, 54, 54});   
 	rightDeathAnim.PushBack({1015, 827, 54, 54});
 	rightDeathAnim.PushBack({1070, 827, 54, 54});
 
 	//Gun
 	//Gun movement
-	gunUpAnim.PushBack({702, 227, 35, 50});  //35x50
-	gunUpAnim.PushBack({738, 227, 35, 50});
-	gunUpAnim.PushBack({774, 227, 35, 50});
-	gunUpAnim.PushBack({810, 227, 35, 50});
+	gunUpAnim.PushBack({702, 228, 35, 50});  //35x50
+	gunUpAnim.PushBack({738, 228, 35, 50});
+	gunUpAnim.PushBack({774, 228, 35, 50});
+	gunUpAnim.PushBack({810, 228, 35, 50});
 
 	gunDownAnim.PushBack({50, 179, 29, 47});
 	gunDownAnim.PushBack({80, 179, 29, 47});
@@ -87,25 +91,25 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunDownAnim.PushBack({230, 179, 29, 47});
 	gunDownAnim.PushBack({260, 179, 29, 47});
 
-	gunLeftAnim.PushBack({50, 230, 41, 47});
-	gunLeftAnim.PushBack({91, 230, 41, 47});
-	gunLeftAnim.PushBack({132, 230, 41, 47});
-	gunLeftAnim.PushBack({173, 230, 41, 47});
-	gunLeftAnim.PushBack({214, 230, 41, 47});
-	gunLeftAnim.PushBack({255, 230, 41, 47});
-	gunLeftAnim.PushBack({296, 230, 41, 47});
-	gunLeftAnim.PushBack({337, 230, 41, 47});
+	gunLeftAnim.PushBack({ 49, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 90, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 131, 230, 41, 48 });
+	gunLeftAnim.PushBack({ 172, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 213, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 254, 230, 40, 47 });
+	gunLeftAnim.PushBack({ 295, 230, 41, 48 });
+	gunLeftAnim.PushBack({ 336, 230, 41, 47 });
 
-	gunRightAnim.PushBack({370, 230, 41, 47}); //puede ser que haya que cambiarlos
-	gunRightAnim.PushBack({411, 230, 41, 47}); //410?
-	gunRightAnim.PushBack({452, 230, 41, 47});
-	gunRightAnim.PushBack({493, 230, 41, 47});
-	gunRightAnim.PushBack({534, 230, 41, 47});
-	gunRightAnim.PushBack({575, 230, 41, 47});
-	gunRightAnim.PushBack({616, 230, 41, 47});
 	gunRightAnim.PushBack({657, 230, 41, 47});
+	gunRightAnim.PushBack({ 616, 230, 41, 47 }); 
+	gunRightAnim.PushBack({ 575, 230, 41, 47 });
+	gunRightAnim.PushBack({ 534, 230, 41, 47 });
+	gunRightAnim.PushBack({ 493, 230, 41, 47 });
+	gunRightAnim.PushBack({ 452, 230, 41, 47 });
+	gunRightAnim.PushBack({ 411, 230, 41, 47 });
+	gunRightAnim.PushBack({ 370, 230, 41, 47 });
 
-	gunUpLeftAnim.PushBack({295, 176, 34, 50}); // check
+	gunUpLeftAnim.PushBack({295, 176, 34, 50}); 
 	gunUpLeftAnim.PushBack({329, 176, 34, 50});
 	gunUpLeftAnim.PushBack({363, 176, 34, 50});
 	gunUpLeftAnim.PushBack({397, 176, 34, 50});
@@ -115,33 +119,33 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunUpRightAnim.PushBack({505, 176, 34, 50});
 	gunUpRightAnim.PushBack({539, 176, 34, 50});
 
-	gunDownLeftAnim.PushBack({854, 176, 33, 50}); //check. 34? if not right fix spritesheet
-	gunDownLeftAnim.PushBack({887, 176, 33, 50});
-	gunDownLeftAnim.PushBack({920, 176, 33, 50});
-	gunDownLeftAnim.PushBack({953, 176, 33, 50});
-	gunDownLeftAnim.PushBack({986, 176, 33, 50});
-	gunDownLeftAnim.PushBack({1019, 176, 33, 50});
-	gunDownLeftAnim.PushBack({1052, 176, 33, 50});
-	gunDownLeftAnim.PushBack({1085, 176, 33, 50});
+	gunDownLeftAnim.PushBack({ 1084, 177, 33, 50 }); 
+	gunDownLeftAnim.PushBack({ 1051, 177, 33, 50 });
+	gunDownLeftAnim.PushBack({ 1019, 177, 33, 50 });
+	gunDownLeftAnim.PushBack({ 986, 177, 33, 50 });
+	gunDownLeftAnim.PushBack({ 953, 177, 33, 51 });
+	gunDownLeftAnim.PushBack({ 920, 177, 33, 51 });
+	gunDownLeftAnim.PushBack({ 887, 177, 33, 50 });
+	gunDownLeftAnim.PushBack({ 854, 177, 33, 50 });
 
-	gunDownRightAnim.PushBack({ 576, 176, 33, 50 });
-	gunDownRightAnim.PushBack({ 609, 176, 33, 50 });
-	gunDownRightAnim.PushBack({ 642, 176, 33, 50 });
-	gunDownRightAnim.PushBack({ 675, 176, 33, 50 });
-	gunDownRightAnim.PushBack({ 708, 176, 33, 50 });
-	gunDownRightAnim.PushBack({ 741, 176, 33, 50 });
-	gunDownRightAnim.PushBack({ 774, 176, 33, 50 });
-	gunDownRightAnim.PushBack({ 810, 176, 33, 50 });
+	gunDownRightAnim.PushBack({ 576, 177, 33, 50 });
+	gunDownRightAnim.PushBack({ 609, 177, 33, 50 });
+	gunDownRightAnim.PushBack({ 642, 177, 33, 50 });
+	gunDownRightAnim.PushBack({ 675, 177, 33, 50 });
+	gunDownRightAnim.PushBack({ 708, 177, 33, 50 });
+	gunDownRightAnim.PushBack({ 741, 177, 33, 50 });
+	gunDownRightAnim.PushBack({ 774, 177, 33, 50 });
+	gunDownRightAnim.PushBack({ 810, 177, 33, 50 });
 
 	//Gun Idle
-	gunIdleUpAnim.PushBack({1107, 295, 29, 46}); //ok
-	gunIdleDownAnim.PushBack({ 1171, 296, 29, 45 }); //ok
-	gunIdleLeftAnim.PushBack({1022, 231, 43, 47 }); //ok
-	gunIdleRightAnim.PushBack({ 1066, 231, 43, 47 }); //ok
-	gunIdleUpLeftAnim.PushBack({942, 232, 38, 46}); //ok
-	gunIdleUpRightAnim.PushBack({981, 232, 38, 46}); //ok
-	gunIdleDownLeftAnim.PushBack({915, 232, 38, 46}); //ok
-	gunIdleDownRightAnim.PushBack({ 887, 231, 26, 46 });  //ok
+	gunIdleUpAnim.PushBack({1107, 295, 29, 46}); 
+	gunIdleDownAnim.PushBack({ 1171, 296, 29, 45 }); 
+	gunIdleLeftAnim.PushBack({1022, 231, 43, 47 }); 
+	gunIdleRightAnim.PushBack({ 1066, 231, 43, 47 }); 
+	gunIdleUpLeftAnim.PushBack({942, 232, 38, 46}); 
+	gunIdleUpRightAnim.PushBack({981, 232, 38, 46}); 
+	gunIdleDownLeftAnim.PushBack({915, 232, 26, 46}); 
+	gunIdleDownRightAnim.PushBack({ 887, 231, 26, 46 });  
 
 	//gun idle pointing
 	gunPointUp.PushBack({1141, 232, 28, 46});
@@ -227,9 +231,9 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallLeftAnim.speed = 0.1f;
 
 	//Death
-	deathAnim.speed = 0.1f;
-	leftDeathAnim.speed = 0.1f;
-	rightDeathAnim.speed = 0.1f;
+	deathAnim.speed = 0.2f;
+	leftDeathAnim.speed = 0.2f;
+	rightDeathAnim.speed = 0.2f;
 
 	//gun movement
 	gunUpAnim.speed = 0.1f;
@@ -332,14 +336,40 @@ void Enemy_InfantrySoldier::idleAnimation(int direction) {
 
 }
 
-void Enemy_InfantrySoldier::spawnAnimation(int direction) {
+int Enemy_InfantrySoldier::spawnAnimation(int direction) {
 
 	switch (direction) {
-	case 1: //L
-		currentAnim = &fallLeftAnim;
-		break;
-	case 2: //R
+	case 1: //UR
 		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 3: //DR
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 5: //R
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 7: //R
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 8: //R
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 2: //UL
+		currentAnim = &fallLeftAnim;
+		return 2;
+		break;
+	case 4: //DL
+		currentAnim = &fallLeftAnim;
+		return 2;
+		break;
+	case 6: //L
+		currentAnim = &fallLeftAnim;
+		return 2;
 		break;
 	}
 	
@@ -435,10 +465,17 @@ void Enemy_InfantrySoldier::attackMeleAnimation(int direction) {
 void Enemy_InfantrySoldier::StateMachine() {
 	switch (state) {
 		case Enemy_State::SPAWN:
-
-			spawnAnimation(GetPlayerDirection());
-			if (true) {
-				state = Enemy_State::IDLE;
+			direction = spawnAnimation(GetPlayerDirection());
+			if (direction == 1) {
+				if (fallRightAnim.HasFinished())
+				{
+					state = Enemy_State::IDLE;
+				}
+			}else if (direction == 2) {
+				if (fallLeftAnim.HasFinished())
+				{
+					state = Enemy_State::IDLE;
+				}
 			}
 
 			break;
@@ -485,7 +522,9 @@ void Enemy_InfantrySoldier::StateMachine() {
 			
 
 			if (deathAnimDelay == 0) {
-				App->pickUps->SpawnPickUp({ PickUp_Type::DIAMOND, (int)position.x, (int)position.y });
+				if ((rand() % 10) <= 3) { // 30% chance to drop a diamond
+					App->pickUps->SpawnPickUp({ PickUp_Type::DIAMOND, (int)position.x, (int)position.y });
+				}
 				pendingToDelete = true;
 				
 				LOG("pendingToDelete enemy");

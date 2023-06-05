@@ -48,6 +48,11 @@ bool ModuleEnemies::Start() {
 	tankShot = 0;
 	tankDestroyed = 0;
 
+	bridgeDestroyed = 0;
+	bridgeDamaged = 0;
+	crateDestroyed = 0;
+	landmineExplosion = 0;
+
 	flyingBattleshipShot = 0;
 	flyingBattleshipMissile = 0;
 
@@ -111,6 +116,30 @@ bool ModuleEnemies::Start() {
 	if (flyingBattleshipMissile == -1)
 	{
 		LOG("Failed to load flyingbattleship_shot.wav sound effect");
+	}
+
+	bridgeDestroyed = App->audio->LoadFx("Assets/fx/bridge_destroyed.wav");
+	if (bridgeDestroyed == -1)
+	{
+		LOG("Failed to load bridge_destroyed.wav sound effect");
+	}
+
+	bridgeDamaged = App->audio->LoadFx("Assets/fx/bridge_damaged.wav");
+	if (bridgeDamaged == -1)
+	{
+		LOG("Failed to load bridge_damaged.wav sound effect");
+	}
+
+	crateDestroyed = App->audio->LoadFx("Assets/fx/crate_destroyed.wav");
+	if (crateDestroyed == -1)
+	{
+		LOG("Failed to load crate_destroyed.wav sound effect");
+	}
+
+	landmineExplosion = App->audio->LoadFx("Assets/fx/milky_grenade_explosion.wav");
+	if (landmineExplosion == -1)
+	{
+		LOG("Failed to load milky_grenade_explosion.wav sound effect");
 	}
 
 	return true;
@@ -193,6 +222,26 @@ bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y)
 	return ret;
 }
 
+bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y, bool isFalling)
+{
+	bool ret = false;
+
+	for(uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if(spawnQueue[i].type == Enemy_Type::NO_TYPE)
+		{
+			spawnQueue[i].type = type;
+			spawnQueue[i].x = x;
+			spawnQueue[i].y = y;
+			spawnQueue[i].isFalling = isFalling;
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
+}
+
 void ModuleEnemies::HandleEnemiesSpawn()
 {
 	// Iterate all the enemies queue
@@ -242,8 +291,14 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			switch (info.type)
 			{
 				case Enemy_Type::INFANTRY_SOLDIER:
-					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y, info.isFalling);
+					if (info.isFalling)
+					{
+						enemies[i]->state = Enemy_State::SPAWN;
+					}
+					else {
+						enemies[i]->state = Enemy_State::IDLE;
+					}
 					enemies[i]->texture = textureInfantrySoldier;
 					break;
 				case Enemy_Type::FLYING_BATTLESHIP:

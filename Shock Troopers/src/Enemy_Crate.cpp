@@ -4,6 +4,7 @@
 #include "ModuleCollisions.h"
 #include "Particle.h"
 #include "ModulePickUp.h"
+#include "ModuleEnemies.h"
 
 Enemy_Crate::Enemy_Crate(int x, int y) : Enemy(x, y) {
 
@@ -97,7 +98,7 @@ void Enemy_Crate::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
 		health--;
         if (health == 0) {
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->crateDestroyed);
             SetToDelete();
 		}
 	}

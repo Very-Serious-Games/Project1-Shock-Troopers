@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleEnemies.h"
 
 Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
 
@@ -21,7 +22,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
         brokenAnim.PushBack({ disX, disY, 224, 220 });
         disX += 304;
     }
-    brokenAnim.speed = 0.5f;
+    brokenAnim.speed = 0.7f;
     brokenAnim.loop = false;
 
     idlebrokenAnim.PushBack({ 0, 444, 224, 220 });
@@ -38,7 +39,7 @@ Enemy_Bridge::Enemy_Bridge(int x, int y) : Enemy(x, y) {
         deathAnim.PushBack({ disX, disY, 224, 220 });
         disX += 304;
     }
-    deathAnim.speed = 0.5f;
+    deathAnim.speed = 0.7f;
     deathAnim.loop = false;
 
     path.PushBack({ 0.0f, 0.0f }, 150, &brokenAnim);
@@ -122,8 +123,9 @@ void Enemy_Bridge::StateMachine() {
 void Enemy_Bridge::OnCollision(Collider* collider) {
     if (collider->type == Collider::Type::PLAYER_SHOT) {
         health--;
+        App->audio->PlayFx(App->enemies->bridgeDamaged);
         if (health == 0) {
-            App->audio->PlayFx(NULL);
+            App->audio->PlayFx(App->enemies->bridgeDestroyed);
             SetToDelete();
         }
     }

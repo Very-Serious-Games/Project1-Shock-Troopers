@@ -88,7 +88,7 @@ bool ModulePickUp::Start()
 	{
 		LOG("Failed to load infantry_soldier_shot.wav sound effect");
 	}
-
+	
 	return true;
 }
 
@@ -273,10 +273,11 @@ void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 	{
 		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER)
 		{
+			
 			pickUp[i]->isPicked = true;
-			App->audio->PlayFx(pickUpAudio);
 			pickUp[i]->OnCollision(c2);
-
+			App->audio->PlayFx(pickUpAudio);
+			
 			break;
 		}
 	}

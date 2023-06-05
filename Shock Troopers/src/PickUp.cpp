@@ -67,4 +67,6 @@ void PickUp::OnCollision(Collider* collider)
 void PickUp::SetToDelete()
 {
 	pendingToDelete = true;
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
 }

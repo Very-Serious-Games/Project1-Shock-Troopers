@@ -34,7 +34,7 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled) {
 	}
 
 	vsgIntroAnimation.speed = 0.43f;
-	stAnimation.speed = 0.2f;
+	stAnimation.speed = 0.14f;
 	vsgIntroAnimation.loop = false;
 	stAnimation.loop = true;
 

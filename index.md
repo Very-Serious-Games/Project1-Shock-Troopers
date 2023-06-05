@@ -25,7 +25,7 @@ We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to th
 
 ## Shock Troopers Gameplay
 
-<iframe src="https://www.youtube.com/watch?v=dQw4w9WgXcQ"></iframe>
+<iframe src="https://youtu.be/DSSk5Oo9IO0"></iframe>
 
 ## Controls
 

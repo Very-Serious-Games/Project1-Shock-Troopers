@@ -318,7 +318,7 @@ Update_Status ModuleUI::PostUpdate() {
 
 	// Showing debug legend when godmode is on
 	if (App->player->isGodMode) {
-		App->render->Blit(textureDebugLegend, x, y, NULL);
+		App->render->Blit(textureDebugLegend, x + 132, y, NULL);
 	}
 
 	return Update_Status::UPDATE_CONTINUE;

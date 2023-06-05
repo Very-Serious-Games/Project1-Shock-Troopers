@@ -9,7 +9,7 @@
 #include "ModuleEnemies.h"
 
 
-Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
+Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y, bool isFalling) : Enemy(x, y) {
 	
 	//falling soldiers spawn
 	fallRightAnim.PushBack({ 50, 33, 62, 67 });
@@ -29,6 +29,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallRightAnim.PushBack({ 932, 33, 62, 67 });
 	fallRightAnim.PushBack({ 995, 33, 62, 67 });
 
+	fallRightAnim.loop = false;
+
 	fallLeftAnim.PushBack({ 50, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 113, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 176, 103, 62, 67 });
@@ -45,6 +47,8 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	fallLeftAnim.PushBack({ 869, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 932, 103, 62, 67 });
 	fallLeftAnim.PushBack({ 995, 103, 62, 67 });
+
+	fallLeftAnim.loop = false;
 
 	//Death Animation
 	deathAnim.PushBack({436, 828, 42, 53}); //41x53?
@@ -332,14 +336,40 @@ void Enemy_InfantrySoldier::idleAnimation(int direction) {
 
 }
 
-void Enemy_InfantrySoldier::spawnAnimation(int direction) {
+int Enemy_InfantrySoldier::spawnAnimation(int direction) {
 
 	switch (direction) {
-	case 1: //L
-		currentAnim = &fallLeftAnim;
-		break;
-	case 2: //R
+	case 1: //UR
 		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 3: //DR
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 5: //R
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 7: //R
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 8: //R
+		currentAnim = &fallRightAnim;
+		return 1;
+		break;
+	case 2: //UL
+		currentAnim = &fallLeftAnim;
+		return 2;
+		break;
+	case 4: //DL
+		currentAnim = &fallLeftAnim;
+		return 2;
+		break;
+	case 6: //L
+		currentAnim = &fallLeftAnim;
+		return 2;
 		break;
 	}
 	
@@ -435,10 +465,17 @@ void Enemy_InfantrySoldier::attackMeleAnimation(int direction) {
 void Enemy_InfantrySoldier::StateMachine() {
 	switch (state) {
 		case Enemy_State::SPAWN:
-
-			spawnAnimation(GetPlayerDirection());
-			if (true) {
-				state = Enemy_State::IDLE;
+			direction = spawnAnimation(GetPlayerDirection());
+			if (direction == 1) {
+				if (fallRightAnim.HasFinished())
+				{
+					state = Enemy_State::IDLE;
+				}
+			}else if (direction == 2) {
+				if (fallLeftAnim.HasFinished())
+				{
+					state = Enemy_State::IDLE;
+				}
 			}
 
 			break;

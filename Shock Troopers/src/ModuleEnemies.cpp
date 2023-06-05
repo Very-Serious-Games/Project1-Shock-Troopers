@@ -140,6 +140,26 @@ bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y)
 	return ret;
 }
 
+bool ModuleEnemies::AddEnemy(Enemy_Type type, int x, int y, bool isFalling)
+{
+	bool ret = false;
+
+	for(uint i = 0; i < MAX_ENEMIES; ++i)
+	{
+		if(spawnQueue[i].type == Enemy_Type::NO_TYPE)
+		{
+			spawnQueue[i].type = type;
+			spawnQueue[i].x = x;
+			spawnQueue[i].y = y;
+			spawnQueue[i].isFalling = isFalling;
+			ret = true;
+			break;
+		}
+	}
+
+	return ret;
+}
+
 void ModuleEnemies::HandleEnemiesSpawn()
 {
 	// Iterate all the enemies queue
@@ -189,8 +209,14 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			switch (info.type)
 			{
 				case Enemy_Type::INFANTRY_SOLDIER:
-					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y);
-					enemies[i]->state = Enemy_State::SPAWN;
+					enemies[i] = new Enemy_InfantrySoldier(info.x, info.y, info.isFalling);
+					if (info.isFalling)
+					{
+						enemies[i]->state = Enemy_State::SPAWN;
+					}
+					else {
+						enemies[i]->state = Enemy_State::IDLE;
+					}
 					enemies[i]->texture = textureInfantrySoldier;
 					break;
 				case Enemy_Type::FLYING_BATTLESHIP:

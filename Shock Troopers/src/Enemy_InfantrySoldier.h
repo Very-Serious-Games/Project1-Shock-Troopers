@@ -9,7 +9,7 @@ class Enemy_InfantrySoldier : public Enemy {
 public:
 	// Constructor (x y coordinates in the world)
 	// Creates animation and movement data and the collider
-	Enemy_InfantrySoldier(int x, int y);
+	Enemy_InfantrySoldier(int x, int y, bool isFalling);
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
@@ -19,7 +19,7 @@ public:
 
 	void idleAnimation(int direction);
 
-	void spawnAnimation(int direction);
+	int spawnAnimation(int direction);
 
 	void moveAnimation(int direction);
 
@@ -102,6 +102,8 @@ private:
 	//falling soldiers
 	Animation fallRightAnim;
 	Animation fallLeftAnim;
+
+	int direction;
 };
 
 #endif // __ENEMY_INFANTRYSOLDIER_H__

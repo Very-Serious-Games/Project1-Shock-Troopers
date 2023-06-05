@@ -256,7 +256,7 @@ Update_Status ModulePickUp::PreUpdate()
 	// Remove all pickUp scheduled for deletion
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete && pickUp[i]->currentAnim->HasFinished())
+		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete)
 		{
 			pickUp[i]->currentAnim->Reset();			
 			delete pickUp[i];
@@ -271,14 +271,13 @@ void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER)
-		{
-			
+		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER) {
+
 			pickUp[i]->isPicked = true;
 			pickUp[i]->OnCollision(c2);
 			App->audio->PlayFx(pickUpAudio);
-			
 			break;
+
 		}
 	}
 }

@@ -1489,14 +1489,6 @@ Update_Status ModulePlayer::Update() {
 	App->render->cameraUpCollider->SetPos(App->render->camera.x, App->render->camera.y);
 	App->render->stopCameraCollider->SetPos(App->render->camera.x + SCREEN_WIDTH / 2, App->render->camera.y + SCREEN_HEIGHT / 2);
 
-	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-	if (App->input->keys[SDL_SCANCODE_G] == Key_State::KEY_REPEAT)
-	{
-		App->pickUps->SpawnPickUp({PickUp_Type::INVENCIBILITY, (int)position.x + 10, (int)position.y + 10 });
-	}
-	//-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-
 	//Reset variables
 	lockR = false;
 	lockU = false;

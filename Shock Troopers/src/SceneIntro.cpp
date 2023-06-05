@@ -19,6 +19,10 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled) {
 		}
 	}
 
+	for (int i = 0; i < 40; i++) {
+		vsgIntroAnimation.PushBack({ 0, 0, 0, 0 });		
+	}
+
 	// Shock Troopers Intro
 	// iterate the animation, that have 23 frames per row and 5 rows
 	for (int row = 0; row < 5; row++) {
@@ -29,7 +33,7 @@ SceneIntro::SceneIntro(bool startEnabled) : Module(startEnabled) {
 		}
 	}
 
-	vsgIntroAnimation.speed = 0.5f;
+	vsgIntroAnimation.speed = 0.43f;
 	stAnimation.speed = 0.2f;
 	vsgIntroAnimation.loop = false;
 	stAnimation.loop = true;

@@ -466,12 +466,13 @@ void Enemy_InfantrySoldier::StateMachine() {
 	switch (state) {
 		case Enemy_State::SPAWN:
 			direction = spawnAnimation(GetPlayerDirection());
+
 			if (direction == 1) {
 				if (fallRightAnim.HasFinished())
 				{
 					state = Enemy_State::IDLE;
 				}
-			}else if (direction == 2) {
+			} else if (direction == 2) {
 				if (fallLeftAnim.HasFinished())
 				{
 					state = Enemy_State::IDLE;
@@ -706,4 +707,15 @@ void Enemy_InfantrySoldier::move() {
 		relativePosition.y += (float)direction.y * speed;
 	}
 	
+}
+
+void Enemy_InfantrySoldier::OnCollision(Collider* collider) {
+	if (state != Enemy_State::SPAWN) {
+		if (collider->type == Collider::Type::PLAYER_SHOT) {
+			health -= 10;
+			if (health == 0) {
+				SetToDelete();
+			}
+		}
+	}
 }

@@ -97,6 +97,7 @@ public:
 	int lastDirection;
 
 	int delay = 10;
+	int delayAudio = 3;
 
 	int hp = 100;
 

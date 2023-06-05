@@ -60,15 +60,15 @@ ModulePickUp::ModulePickUp(bool startEnabled) : Module(startEnabled)
 	PickedNoDamage.PushBack({ 10 * 32, 16, 32, 16 });
 
 	Medkit.speed = 0.08f;
-	PickedMedkit.speed = 0.17;
+	PickedMedkit.speed = 0.17f;
 	PickedMedkit.loop = false;
 
 	Diamond.speed = 0.08f;
-	PickedDiamond.speed = 0.14;
+	PickedDiamond.speed = 0.14f;
 	PickedDiamond.loop = false;
 
 	NoDamage.speed = 0.08f;
-	PickedNoDamage.speed = 0.12;
+	PickedNoDamage.speed = 0.12f;
 	PickedNoDamage.loop = false;
 }
 

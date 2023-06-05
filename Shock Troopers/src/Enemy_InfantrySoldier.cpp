@@ -337,42 +337,40 @@ void Enemy_InfantrySoldier::idleAnimation(int direction) {
 }
 
 int Enemy_InfantrySoldier::spawnAnimation(int direction) {
-
-	switch (direction) {
-	case 1: //UR
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 3: //DR
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 5: //R
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 7: //R
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 8: //R
-		currentAnim = &fallRightAnim;
-		return 1;
-		break;
-	case 2: //UL
-		currentAnim = &fallLeftAnim;
-		return 2;
-		break;
-	case 4: //DL
-		currentAnim = &fallLeftAnim;
-		return 2;
-		break;
-	case 6: //L
-		currentAnim = &fallLeftAnim;
-		return 2;
-		break;
-	}
-	
+		switch (direction) {
+		case 1: //UR
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 3: //DR
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 5: //R
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 7: //R
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 8: //R
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 2: //UL
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 4: //DL
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		case 6: //L
+			currentAnim = &fallRightAnim;
+			return 1;
+			break;
+		}
 }
 
 void Enemy_InfantrySoldier::moveAnimation(int direction) {

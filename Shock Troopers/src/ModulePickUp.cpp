@@ -60,15 +60,15 @@ ModulePickUp::ModulePickUp(bool startEnabled) : Module(startEnabled)
 	PickedNoDamage.PushBack({ 10 * 32, 16, 32, 16 });
 
 	Medkit.speed = 0.08f;
-	PickedMedkit.speed = 0.17f;
+	PickedMedkit.speed = 0.17;
 	PickedMedkit.loop = false;
 
 	Diamond.speed = 0.08f;
-	PickedDiamond.speed = 0.14f;
+	PickedDiamond.speed = 0.14;
 	PickedDiamond.loop = false;
 
 	NoDamage.speed = 0.08f;
-	PickedNoDamage.speed = 0.12f;
+	PickedNoDamage.speed = 0.12;
 	PickedNoDamage.loop = false;
 }
 
@@ -79,21 +79,48 @@ ModulePickUp::~ModulePickUp()
 
 bool ModulePickUp::Start()
 {
+	pickUpAudio = 0;
+
 	texture = App->textures->Load("Assets/sprites/pickups/pickups_spritesheet.png");
+
+	pickUpAudio = App->audio->LoadFx("Assets/audio/fx/pickup_diamond.wav");
+	if (pickUpAudio == -1)
+	{
+		LOG("Failed to load infantry_soldier_shot.wav sound effect");
+	}
 
 	return true;
 }
 
 Update_Status ModulePickUp::Update()
 {
-	HandlePickUpSpawn();
-
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
 		if (pickUp[i] != nullptr) {
+
+			if (pickUp[i]->isPicked && pickUp[i]->type == PickUpType::HP)
+			{
+				PickedMedkit.Update();
+			}
+
+			if (pickUp[i]->isPicked && pickUp[i]->type == PickUpType::DIAMOND)
+			{
+				PickedDiamond.Update();
+			}
+
+			if (pickUp[i]->isPicked && pickUp[i]->type == PickUpType::INVENCIBILITY)
+			{
+				PickedNoDamage.Update();
+			}
+
 			pickUp[i]->Update();
 		}
+
 	}
+
+	Medkit.Update();
+	Diamond.Update();
+	NoDamage.Update();
 
 	HandlePickUpDespawn();
 
@@ -105,21 +132,19 @@ Update_Status ModulePickUp::PostUpdate()
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
 		if (pickUp[i] != nullptr)
-		{ 		
+		{
 			if (pickUp[i]->isPicked)
 			{
 				switch (pickUp[i]->type)
 				{
 				case PickUpType::HP:
-					pickUp[i]->currentAnim = &PickedMedkit;					
+					pickUp[i]->currentAnim = &PickedMedkit;
 					break;
 				case PickUpType::DIAMOND:
-					
 					pickUp[i]->currentAnim = &PickedDiamond;
 					break;
 				case PickUpType::INVENCIBILITY:
-					
-					pickUp[i]->currentAnim = &PickedNoDamage;					
+					pickUp[i]->currentAnim = &PickedNoDamage;
 					break;
 				case PickUpType::NO_TYPE:
 					pickUp[i]->currentAnim = nullptr;
@@ -173,11 +198,11 @@ void ModulePickUp::HandlePickUpDespawn()
 		if (pickUp[i] != nullptr)
 		{
 			if ((abs(pickUp[i]->position.x - App->player->position.x) > 400 || abs(pickUp[i]->position.y - App->player->position.y) > 200))
-				{
-					LOG("DeSpawning pickUp at %d", pickUp[i]->position.x * SCREEN_SIZE);
+			{
+				LOG("DeSpawning pickUp at %d", pickUp[i]->position.x * SCREEN_SIZE);
 
-					pickUp[i]->SetToDelete();
-				}
+				pickUp[i]->SetToDelete();
+			}
 		}
 	}
 }
@@ -191,36 +216,36 @@ void ModulePickUp::SpawnPickUp(const PickUpSpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case PickUp_Type::HP:
-					pickUp[i] = new PickUp(PickUpType::HP, info.x, info.y);
+			case PickUp_Type::HP:
+				pickUp[i] = new PickUp(PickUpType::HP, info.x, info.y);
 
-					pickUp[i]->texture = texture;
-					pickUp[i]->currentAnim = &Medkit;
+				pickUp[i]->texture = texture;
+				pickUp[i]->currentAnim = &Medkit;
 
-					pickUp[i]->DrawColider(PickUpType::HP);
-					
-					break;
+				pickUp[i]->DrawColider(PickUpType::HP);
 
-				case PickUp_Type::DIAMOND:
-					pickUp[i] = new PickUp(PickUpType::DIAMOND, info.x, info.y);
+				break;
 
-					pickUp[i]->texture = texture;
-					pickUp[i]->currentAnim = &Diamond;
+			case PickUp_Type::DIAMOND:
+				pickUp[i] = new PickUp(PickUpType::DIAMOND, info.x, info.y);
 
-      					pickUp[i]->DrawColider(PickUpType::DIAMOND);
+				pickUp[i]->texture = texture;
+				pickUp[i]->currentAnim = &Diamond;
 
-					break;
-				case PickUp_Type::INVENCIBILITY:
-					pickUp[i] = new PickUp(PickUpType::INVENCIBILITY, info.x, info.y);
+				pickUp[i]->DrawColider(PickUpType::DIAMOND);
 
-					pickUp[i]->texture = texture;
-					pickUp[i]->currentAnim = &NoDamage;
+				break;
+			case PickUp_Type::INVENCIBILITY:
+				pickUp[i] = new PickUp(PickUpType::INVENCIBILITY, info.x, info.y);
 
-					pickUp[i]->DrawColider(PickUpType::INVENCIBILITY);
+				pickUp[i]->texture = texture;
+				pickUp[i]->currentAnim = &NoDamage;
 
-					break;
+				pickUp[i]->DrawColider(PickUpType::INVENCIBILITY);
+
+				break;
 			}
-			
+
 			break;
 		}
 	}
@@ -233,7 +258,7 @@ Update_Status ModulePickUp::PreUpdate()
 	{
 		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete && pickUp[i]->currentAnim->HasFinished())
 		{
-			pickUp[i]->currentAnim->Reset();
+			pickUp[i]->currentAnim->Reset();			
 			delete pickUp[i];
 			pickUp[i] = nullptr;
 		}
@@ -242,17 +267,16 @@ Update_Status ModulePickUp::PreUpdate()
 	return Update_Status::UPDATE_CONTINUE;
 }
 
-void ModulePickUp::OnCollision(Collider* c1, Collider* c2) 
+void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 {
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
 		if (pickUp[i] != nullptr && pickUp[i]->GetCollider() == c1 && c2->type == Collider::Type::PLAYER)
 		{
-			// TODO Cuando colisiona con el player se cambia a isPicked true
 			pickUp[i]->isPicked = true;
+			App->audio->PlayFx(pickUpAudio);
+			pickUp[i]->OnCollision(c2);
 
-			pickUp[i]->OnCollision(c2);				
-				
 			break;
 		}
 	}

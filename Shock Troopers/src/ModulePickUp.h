@@ -14,6 +14,7 @@ enum class PickUp_Type
 	INVENCIBILITY
 };
 
+
 struct PickUpSpawnpoint
 {
 	PickUp_Type type = PickUp_Type::NO_TYPE;
@@ -73,17 +74,18 @@ private:
 	// All spawned PickUp in the scene
 	PickUp* pickUp[MAX_PICKUP] = { nullptr };
 
+	uint pickUpAudio = 0;
+
+	Animation Medkit;
+	Animation PickedMedkit;
+	Animation Diamond;
+	Animation PickedDiamond;
+	Animation NoDamage;
+	Animation PickedNoDamage;
+
 public:
 	// The PickUp sprite sheet
 	SDL_Texture* texture = nullptr;
-
-	Animation PickedMedkit;
-	Animation PickedDiamond;
-	Animation PickedNoDamage;
-
-	Animation Medkit;
-	Animation Diamond;
-	Animation NoDamage;
 };
 
 #endif // __MODULE_PickUp_H__

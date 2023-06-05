@@ -14,7 +14,8 @@ PickUp::PickUp(PickUpType type1, int x, int y) : position(x, y)
 
 PickUp::~PickUp()
 {
-	
+	if (collider != nullptr)
+		collider->pendingToDelete = true;
 }
 
 const Collider* PickUp::GetCollider() const
@@ -25,21 +26,18 @@ const Collider* PickUp::GetCollider() const
 void PickUp::Update()
 {
 	if (collider != nullptr)
-	{
 		collider->SetPos(position.x, position.y);
-		currentAnim->Update();
-	}
 }
 
 void PickUp::Draw()
 {
-	
+
 	App->render->Blit(texture, position.x, position.y, &currentAnim->GetCurrentFrame());
 }
 
 void PickUp::DrawColider(PickUpType type)
 {
-	
+
 
 	switch (type)
 	{
@@ -69,8 +67,4 @@ void PickUp::OnCollision(Collider* collider)
 void PickUp::SetToDelete()
 {
 	pendingToDelete = true;
-	if (collider != nullptr)
-	{
-		collider->pendingToDelete = true;
-	}
 }

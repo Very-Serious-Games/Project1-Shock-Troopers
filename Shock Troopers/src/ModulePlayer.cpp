@@ -950,7 +950,12 @@ void ModulePlayer::shoot() {
 		}
 		newParticle->collider->AddListener(this);
 		newParticleMuzzle->collider->AddListener(this);
-		App->audio->PlayFx(playerShot);
+
+		delayAudio--;
+		if (delayAudio == 0) {
+			App->audio->PlayFx(playerShot);
+			delayAudio = 3;
+		}
 
 		delay = 10;
 	}
@@ -1022,7 +1027,12 @@ void ModulePlayer::shootMoving() {
 			newParticleMuzzle->collider->AddListener(this);
 			break;
 		}
-		App->audio->PlayFx(playerShot);
+
+		delayAudio--;
+		if (delayAudio == 0) {
+			App->audio->PlayFx(playerShot);
+			delayAudio = 3;
+		}
 
 		delay = 10;
 	}

@@ -86,12 +86,14 @@ Update_Status SceneIntro::Update()
 
 	if (App->input->keys[SDL_SCANCODE_SPACE] == Key_State::KEY_DOWN || pad.a == true)
 	{
-		App->fade->FadeToBlack(this, (Module*)App->sceneMenu, 45);
+		App->fade->FadeToBlack(this, (Module*)App->sceneMenu, 90);
 	}
 
 	// update resources
 	vsgIntroAnimation.Update();
-	stAnimation.Update();
+	if (vsgIntroAnimation.HasFinished()) {
+		stAnimation.Update();
+	}
 
 	return Update_Status::UPDATE_CONTINUE;
 }

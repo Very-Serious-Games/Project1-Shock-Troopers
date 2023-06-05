@@ -180,7 +180,7 @@ void ModulePickUp::HandlePickUpDespawn()
 	{
 		if (pickUp[i] != nullptr)
 		{
-			if ((abs(pickUp[i]->position.x - App->player->position.x) > 200 || abs(pickUp[i]->position.y - App->player->position.y) > 200) && pickUp[i]->despawn)
+			if ((abs(pickUp[i]->position.x - App->player->position.x) > 400 || abs(pickUp[i]->position.y - App->player->position.y) > 200))
 				{
 					LOG("DeSpawning pickUp at %d", pickUp[i]->position.x * SCREEN_SIZE);
 

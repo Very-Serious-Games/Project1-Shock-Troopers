@@ -208,29 +208,6 @@ bool ModuleCollisions::Start()
 	matrix[Collider::Type::LASER][Collider::Type::PICKUP_NODAMAGE] = false;
 	matrix[Collider::Type::LASER][Collider::Type::CAMERA_LIMIT] = false;
 
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::WALL] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::PLAYER_WALL] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::LASER] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::PLAYER] = true;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::ENEMY] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::PLAYER_SHOT] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::ENEMY_SHOT] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::PICKUP_HP] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::OBJECT] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::DETECTION_ZONE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE_2] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_ZONE_3] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::STOP_CAM_TRIGGER] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::KNIFE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::MISSILE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::MUZZLE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::BRIDGE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::LANDMINE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::PICKUP_DIAMOND] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::PICKUP_NODAMAGE] = false;
-	matrix[Collider::Type::PICKUP_HP][Collider::Type::CAMERA_LIMIT] = false;
-
 	matrix[Collider::Type::OBJECT][Collider::Type::WALL] = false;
 	matrix[Collider::Type::OBJECT][Collider::Type::PLAYER_WALL] = false;
 	matrix[Collider::Type::OBJECT][Collider::Type::LASER] = true;

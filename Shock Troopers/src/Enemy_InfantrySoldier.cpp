@@ -87,23 +87,23 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunDownAnim.PushBack({230, 179, 29, 47});
 	gunDownAnim.PushBack({260, 179, 29, 47});
 
-	gunLeftAnim.PushBack({50, 230, 41, 47});
-	gunLeftAnim.PushBack({91, 230, 41, 47});
-	gunLeftAnim.PushBack({132, 230, 41, 47});
-	gunLeftAnim.PushBack({173, 230, 41, 47});
-	gunLeftAnim.PushBack({214, 230, 41, 47});
-	gunLeftAnim.PushBack({255, 230, 41, 47});
-	gunLeftAnim.PushBack({296, 230, 41, 47});
-	gunLeftAnim.PushBack({337, 230, 41, 47});
+	gunLeftAnim.PushBack({ 49, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 90, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 131, 230, 41, 48 });
+	gunLeftAnim.PushBack({ 172, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 213, 230, 41, 47 });
+	gunLeftAnim.PushBack({ 254, 230, 40, 47 });
+	gunLeftAnim.PushBack({ 295, 230, 41, 48 });
+	gunLeftAnim.PushBack({ 336, 230, 41, 47 });
 
-	gunRightAnim.PushBack({370, 230, 41, 47}); //puede ser que haya que cambiarlos
-	gunRightAnim.PushBack({411, 230, 41, 47}); //410?
-	gunRightAnim.PushBack({452, 230, 41, 47});
-	gunRightAnim.PushBack({493, 230, 41, 47});
-	gunRightAnim.PushBack({534, 230, 41, 47});
-	gunRightAnim.PushBack({575, 230, 41, 47});
-	gunRightAnim.PushBack({616, 230, 41, 47});
 	gunRightAnim.PushBack({657, 230, 41, 47});
+	gunRightAnim.PushBack({ 616, 230, 41, 47 }); 
+	gunRightAnim.PushBack({ 575, 230, 41, 47 });
+	gunRightAnim.PushBack({ 534, 230, 41, 47 });
+	gunRightAnim.PushBack({ 493, 230, 41, 47 });
+	gunRightAnim.PushBack({ 452, 230, 41, 47 });
+	gunRightAnim.PushBack({ 411, 230, 41, 47 });
+	gunRightAnim.PushBack({ 370, 230, 41, 47 });
 
 	gunUpLeftAnim.PushBack({295, 176, 34, 50}); // check
 	gunUpLeftAnim.PushBack({329, 176, 34, 50});
@@ -115,14 +115,14 @@ Enemy_InfantrySoldier::Enemy_InfantrySoldier(int x, int y) : Enemy(x, y) {
 	gunUpRightAnim.PushBack({505, 176, 34, 50});
 	gunUpRightAnim.PushBack({539, 176, 34, 50});
 
-	gunDownLeftAnim.PushBack({854, 176, 33, 50}); //check. 34? if not right fix spritesheet
-	gunDownLeftAnim.PushBack({887, 176, 33, 50});
-	gunDownLeftAnim.PushBack({920, 176, 33, 50});
-	gunDownLeftAnim.PushBack({953, 176, 33, 50});
-	gunDownLeftAnim.PushBack({986, 176, 33, 50});
-	gunDownLeftAnim.PushBack({1019, 176, 33, 50});
-	gunDownLeftAnim.PushBack({1052, 176, 33, 50});
-	gunDownLeftAnim.PushBack({1085, 176, 33, 50});
+	gunDownLeftAnim.PushBack({ 1085, 176, 33, 50 }); //check. 34? if not right fix spritesheet
+	gunDownLeftAnim.PushBack({ 1052, 176, 33, 50 });
+	gunDownLeftAnim.PushBack({ 1019, 176, 33, 50 });
+	gunDownLeftAnim.PushBack({ 986, 176, 33, 50 });
+	gunDownLeftAnim.PushBack({ 953, 176, 33, 50 });
+	gunDownLeftAnim.PushBack({ 920, 176, 33, 50 });
+	gunDownLeftAnim.PushBack({ 887, 176, 33, 50 });
+	gunDownLeftAnim.PushBack({ 854, 176, 33, 50 });
 
 	gunDownRightAnim.PushBack({ 576, 176, 33, 50 });
 	gunDownRightAnim.PushBack({ 609, 176, 33, 50 });

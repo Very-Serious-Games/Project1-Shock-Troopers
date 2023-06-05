@@ -284,7 +284,7 @@ void Enemy_TankBoss::missileRain() {
     if (delayMissileRain == 0) {
         for (int i = 0; i < numMissiles; ++i) {
             
-            Particle* missile = App->particles->AddParticle(App->particles->tankMissileUp, position.x + (rand() % SCREEN_WIDTH), position.y + 10 + (rand() % (SCREEN_WIDTH/2)), 7, Collider::Type::MISSILE);
+            Particle* missile = App->particles->AddParticle(App->particles->tankMissileDown, position.x - 120 + (rand() % SCREEN_WIDTH), position.y + 10 + (rand() % (SCREEN_WIDTH/2)), 7, Collider::Type::MISSILE);
             missile->collider->AddListener(NULL);
             missile->speed.y = 1;
             App->audio->PlayFx(App->enemies->flyingBattleshipMissile);

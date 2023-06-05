@@ -25,7 +25,7 @@ We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to th
 
 ## Shock Troopers Gameplay
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/DSSk5Oo9IO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe width="760" height="515" src="https://www.youtube.com/embed/DSSk5Oo9IO0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 ## Controls
 
@@ -33,6 +33,8 @@ We are recreating the 1997 Shock Troopers Game Arcade version as a tribute to th
     W, A, S, D To move the player
     SPACE to shot
     SHIFT to roll
+    Debug Tools F1
+    Debug Menu Info F2
 ```
 
 ## Team Photo

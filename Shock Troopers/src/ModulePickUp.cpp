@@ -60,15 +60,15 @@ ModulePickUp::ModulePickUp(bool startEnabled) : Module(startEnabled)
 	PickedNoDamage.PushBack({ 10 * 32, 16, 32, 16 });
 
 	Medkit.speed = 0.08f;
-	PickedMedkit.speed = 0.05;
+	PickedMedkit.speed = 0.17f;
 	PickedMedkit.loop = false;
 
 	Diamond.speed = 0.08f;
-	PickedDiamond.speed = 0.05;
+	PickedDiamond.speed = 0.14f;
 	PickedDiamond.loop = false;
 
 	NoDamage.speed = 0.08f;
-	PickedNoDamage.speed = 0.05;
+	PickedNoDamage.speed = 0.12f;
 	PickedNoDamage.loop = false;
 }
 
@@ -76,8 +76,6 @@ ModulePickUp::~ModulePickUp()
 {
 
 }
-
-
 
 bool ModulePickUp::Start()
 {
@@ -92,18 +90,10 @@ Update_Status ModulePickUp::Update()
 
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr){
+		if (pickUp[i] != nullptr) {
 			pickUp[i]->Update();
 		}
 	}
-
-	Medkit.Update();
-	Diamond.Update();
-	NoDamage.Update();
-
-	PickedMedkit.Update();
-	PickedDiamond.Update();
-	PickedNoDamage.Update();
 
 	HandlePickUpDespawn();
 
@@ -121,13 +111,15 @@ Update_Status ModulePickUp::PostUpdate()
 				switch (pickUp[i]->type)
 				{
 				case PickUpType::HP:
-					pickUp[i]->currentAnim = &PickedMedkit;
+					pickUp[i]->currentAnim = &PickedMedkit;					
 					break;
 				case PickUpType::DIAMOND:
+					
 					pickUp[i]->currentAnim = &PickedDiamond;
 					break;
 				case PickUpType::INVENCIBILITY:
-					pickUp[i]->currentAnim = &PickedNoDamage;
+					
+					pickUp[i]->currentAnim = &PickedNoDamage;					
 					break;
 				case PickUpType::NO_TYPE:
 					pickUp[i]->currentAnim = nullptr;
@@ -239,8 +231,9 @@ Update_Status ModulePickUp::PreUpdate()
 	// Remove all pickUp scheduled for deletion
 	for (uint i = 0; i < MAX_PICKUP; ++i)
 	{
-		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete)
+		if (pickUp[i] != nullptr && pickUp[i]->pendingToDelete && pickUp[i]->currentAnim->HasFinished())
 		{
+			pickUp[i]->currentAnim->Reset();
 			delete pickUp[i];
 			pickUp[i] = nullptr;
 		}
@@ -258,8 +251,8 @@ void ModulePickUp::OnCollision(Collider* c1, Collider* c2)
 			// TODO Cuando colisiona con el player se cambia a isPicked true
 			pickUp[i]->isPicked = true;
 
-			pickUp[i]->OnCollision(c2);
-			
+			pickUp[i]->OnCollision(c2);				
+				
 			break;
 		}
 	}

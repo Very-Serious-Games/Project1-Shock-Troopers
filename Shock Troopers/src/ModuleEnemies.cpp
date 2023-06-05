@@ -38,6 +38,7 @@ bool ModuleEnemies::Start() {
 
 	// Reset win condition
 	winCondition = false;
+	miniBossKilled = false;
 
 	soldierShot = 0;
 	soldierKnife = 0;

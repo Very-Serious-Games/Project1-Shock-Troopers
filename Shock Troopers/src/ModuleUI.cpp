@@ -46,6 +46,7 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	endStage.speed = 0.5f;
 	endStage.loop = false;
 	
+	// Loading HP Bar animation
 	hp100.PushBack({ 2, 2, 7, 131 });
 	hp90.PushBack({ 14, 2, 7, 131 });
 	hp80.PushBack({ 26, 2, 7, 131 });
@@ -57,6 +58,51 @@ ModuleUI::ModuleUI(bool startEnabled) : Module(startEnabled)
 	hp20.PushBack({ 98, 2, 7, 131 });
 	hp10.PushBack({ 110, 2, 7, 131 });
 	hp0.PushBack({ 122, 2, 7, 131 });
+
+	// Loading GO Anims
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+	goUP.PushBack({ 0, 0, 47, 40 });
+	goUP.PushBack({ 47, 0, 47, 40 });
+
+
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+	goRIGTH.PushBack({ 0, 0, 47, 40 });
+	goRIGTH.PushBack({ 0, 47, 47, 40 });
+
+	goUP.speed = 0.03f;
+	goRIGTH.speed = 0.03f;
+	goUP.loop = false;
+	goRIGTH.loop = false;
 
 	// iterate the start stage animation, that has 48 frames per row and 8 rows
 	for (int i = 0; i < 20; i++) {
@@ -186,6 +232,7 @@ Update_Status ModuleUI::Update() {
 
 	startStage.Update();
 
+
 	if (App->enemies->winCondition) {
 		endStage.Update();
 	}
@@ -196,6 +243,16 @@ Update_Status ModuleUI::Update() {
 			App->audio->PlayFx(gameOverSound);
 			playOnce = true;
 		}
+	}
+
+	if (App->enemies->miniBossKilled)
+	{
+		goRIGTH.Update();
+	}
+
+	if (startStage.HasFinished())
+	{
+		goUP.Update();
 	}
 
 	currentAnim->Update();
@@ -229,6 +286,18 @@ Update_Status ModuleUI::PostUpdate() {
 	if (App->player->deathAnim.HasFinished()) {
 		App->render->Blit(textureGameOver, x-2, y-2, &(gameOver.GetCurrentFrame()), 1.0f);
 	}
+
+	if (startStage.HasFinished() && !App->render->isInZone && !App->render->isInZone2 && !App->render->isInZone3)
+	{
+		App->render->Blit(textureGoUP, x + 120, y + 30, &(goUP.GetCurrentFrame()));
+	}
+
+	if (App->enemies->miniBossKilled)
+	{
+		App->render->Blit(textureGoRIGTH, x + 240, y + 100, &(goRIGTH.GetCurrentFrame()));
+	}
+	
+	
 
 	// Showing score
 	sprintf_s(scoreText, 10, "%08d", score);

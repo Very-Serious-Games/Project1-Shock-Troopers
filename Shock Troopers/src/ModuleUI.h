@@ -9,6 +9,7 @@
 #include "p2Point.h"
 #include "Path.h"
 
+
 using namespace std;
 
 struct SDL_Texture;
@@ -86,6 +87,9 @@ public:
 	Animation hp20;
 	Animation hp10;
 	Animation hp0;
+
+	Animation goUP;
+	Animation goRIGTH;
 };
 
 #endif //!__MODULE_UI_H__

@@ -204,7 +204,7 @@ void Enemy_TankBoss::canon() {
 			break;
         }
         App->audio->PlayFx(App->enemies->tankShot);
-        delayCanon = 700;
+        delayCanon = 600;
     }
 }
 
@@ -361,8 +361,20 @@ void Enemy_TankBoss::missileLaunch() {
             break;
         }
         App->audio->PlayFx(App->enemies->flyingBattleshipMissile);
-        delayMissile = 700;
+        delayMissile = 800;
     }
+}
+
+bool Enemy_TankBoss::PlayerIsAttackRange()
+{
+    int detectionDistance = 350;
+    int distance = sqrt(pow(App->player->position.x - position.x, 2) + pow(App->player->position.y - position.y, 2)); // pythagoras
+
+    if (distance <= detectionDistance) {
+        return true;
+    }
+
+    return false;
 }
 
 void Enemy_TankBoss::Attack() {
@@ -494,7 +506,7 @@ void Enemy_TankBoss::StateMachine() {
         break;
     case Enemy_State::IDLE:
         idleAnimation(GetPlayerDirection(), GetPlayerDirectionBelow());
-        if (PlayerIsNear()) {
+        if (PlayerIsAttackRange()) {
             state = Enemy_State::ATTACK;
         }
 

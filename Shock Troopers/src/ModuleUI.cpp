@@ -174,6 +174,9 @@ void ModuleUI::updateScore(int points)
 
 bool ModuleUI::Start() {
 
+	goRIGTH.Reset();
+	goUP.Reset();
+
 	gameOverSound = 0;
 	// Load sound effects
 	gameOverSound = App->audio->LoadFx("Assets/fx/ui_game_over.wav");

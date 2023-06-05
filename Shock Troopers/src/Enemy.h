@@ -99,8 +99,8 @@ public:
 
 	int delay = 15;
 	int delayShoot = 100;
-	int delayCanon = 700;
-	int delayMissile = 700;
+	int delayCanon = 600;
+	int delayMissile = 800;
 	int delayMissileRain = 700;
 	int delayKnife = 500;
 	int deathAnimDelay = 50;
